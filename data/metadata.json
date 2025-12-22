@@ -141,14 +141,14 @@
       "slug": "uncategorized-ja"
     },
     {
-      "id": 108,
-      "name": "vercel",
-      "slug": "vercel-web%e5%88%b6%e4%bd%9c"
-    },
-    {
       "id": 103,
       "name": "vercel",
       "slug": "vercel"
+    },
+    {
+      "id": 108,
+      "name": "vercel",
+      "slug": "vercel-web%e5%88%b6%e4%bd%9c"
     },
     {
       "id": 107,
@@ -216,14 +216,14 @@
       "slug": "%e3%82%ac%e3%82%b8%e3%82%a7%e3%83%83%e3%83%88"
     },
     {
-      "id": 14,
-      "name": "そのほか",
-      "slug": "%e3%81%9d%e3%81%ae%e3%81%bb%e3%81%8b"
-    },
-    {
       "id": 81,
       "name": "そのほか",
       "slug": "%e3%81%9d%e3%81%ae%e3%81%bb%e3%81%8b-errors"
+    },
+    {
+      "id": 14,
+      "name": "そのほか",
+      "slug": "%e3%81%9d%e3%81%ae%e3%81%bb%e3%81%8b"
     },
     {
       "id": 129,
@@ -283,6 +283,11 @@
   ],
   "tags": [
     {
+      "id": 196,
+      "name": "403 Forbidden",
+      "slug": "403-forbidden"
+    },
+    {
       "id": 165,
       "name": "414 Error",
       "slug": "414-error"
@@ -291,6 +296,11 @@
       "id": 149,
       "name": "500 Error",
       "slug": "500-error"
+    },
+    {
+      "id": 195,
+      "name": "Access Denied",
+      "slug": "access-denied"
     },
     {
       "id": 158,
@@ -653,6 +663,11 @@
       "slug": "vscode"
     },
     {
+      "id": 197,
+      "name": "WAF",
+      "slug": "waf"
+    },
+    {
       "id": 191,
       "name": "Web Development",
       "slug": "web-development"
@@ -743,5 +758,5 @@
       "slug": "%e7%a4%be%e5%86%85%e7%9f%a5%e8%ad%98"
     }
   ],
-  "lastUpdated": "2025-12-22T09:30:42.226Z"
+  "lastUpdated": "2025-12-22T10:13:19.612Z"
 }
