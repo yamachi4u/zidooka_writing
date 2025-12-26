@@ -131,19 +131,25 @@ export class PostService {
       date: frontmatter.date,
       categories: categoryIds,
       tags: tagIds,
-      featured_media: featuredMediaId
+      featured_media: featuredMediaId,
+      id: frontmatter.id
     };
   }
 
   async post(filePath) {
     const postData = await this.processFile(filePath);
     
-    const existingPost = await this.wp.getPostBySlug(postData.slug);
+    let existingPost = null;
+    if (postData.id) {
+      existingPost = { id: postData.id };
+    } else {
+      existingPost = await this.wp.getPostBySlug(postData.slug);
+    }
+
     let result;
 
     if (existingPost) {
       console.log(`Updating existing post: ${postData.slug} (ID: ${existingPost.id})`);
-      // For updates, we might want to preserve status if not explicitly set, but here we follow frontmatter
       result = await this.wp.updatePost(existingPost.id, postData);
     } else {
       console.log(`Creating new post: ${postData.slug}`);
