@@ -12,7 +12,7 @@ tags:
   - Error
   - Permission
 status: publish
-featured_image: ../images/gas-permission-error.png
+featured_image: ../images/2025/gas-permission-error.png
 ---
 
 Google Apps Script（GAS）を使っていると、

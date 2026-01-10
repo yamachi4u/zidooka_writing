@@ -10,7 +10,7 @@ tags:
   - JSON
   - Error
 status: publish
-featured_image: ../images/gas-invalid-json.png
+featured_image: ../images/2025/gas-invalid-json.png
 ---
 
 Google Apps Script（GAS）や JavaScript で API 連携やデータ処理を行っていると、

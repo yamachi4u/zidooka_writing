@@ -2,7 +2,7 @@
 id: 2838
 title: "【超丁寧解説】GASで出てきた「Rhino 非推奨・2026/1/31サポート終了」とは何か？"
 date: 2025-12-23
-thumbnail: images/gas-rhino-deprecation-warning.png
+thumbnail: images/2025/gas-rhino-deprecation-warning.png
 categories: 
   - GAS Tips
 slug: "【超丁寧觬】gasで出てきた「rhino-非推奨・2026-1-31サポー"

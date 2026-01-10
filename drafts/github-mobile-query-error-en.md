@@ -10,7 +10,7 @@ tags:
   - "GitHub Mobile"
   - "Error"
   - "Troubleshooting"
-featured_image: "../images/github-mobile-query-error.png"
+featured_image: "../images/2025/github-mobile-query-error.png"
 ---
 
 ## Introduction
@@ -26,7 +26,7 @@ Despite the alarming message, **the content usually appears normally after a spl
 You might wonder, "Is my internet connection bad?" or "Is the repository broken?"
 The short answer is: **No. This is a known bug (or quirk) in the GitHub app, and you can safely ignore it.**
 
-![GitHub Mobile Error](../images/github-mobile-query-error.png)
+![GitHub Mobile Error](../images/2025/github-mobile-query-error.png)
 
 ## The Cause: GraphQL Timeouts and Optimistic UI
 

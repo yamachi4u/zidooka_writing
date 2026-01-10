@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: copilot-server-error-502-en
-featured_image: ../images/image copy 37.png
+featured_image: ../images/2025/image copy 37.png
 ---
 
 When using GitHub Copilot in VS Code, you may suddenly encounter the following error and the chat stops responding:

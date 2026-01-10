@@ -8,12 +8,12 @@ categories:
 tags: 
   - "Access Analysis"
   - "Google Analytics"
-featured_image: "../images/analytics-country-growth.png"
+featured_image: "../images/2025/analytics-country-growth.png"
 ---
 
 I took a look at the traffic by country in Google Analytics, and noticed some interesting trends.
 
-![Country-specific Access Analysis](../images/analytics-country-growth.png)
+![Country-specific Access Analysis](../images/2025/analytics-country-growth.png)
 
 First, access from Japan continues to account for the majority of the total, but it is showing solid growth of **+22%** year-over-year. Engagement time has also increased from **16 seconds to 25 seconds**, giving the impression that more readers are taking the time to read technical articles carefully.
 

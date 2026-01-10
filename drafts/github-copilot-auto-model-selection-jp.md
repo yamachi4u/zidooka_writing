@@ -10,12 +10,12 @@ tags:
   - "AI"
   - "生産性"
   - "コスト最適化"
-featured_image: "../images/image copy 16.png"
+featured_image: "../images/2025/image copy 16.png"
 ---
 
 # GitHub Copilot の「Auto」モデル選択が地味に革命だった話 — 無料枠を使い切って課金している今だからこそ、刺さる
 
-![Claude Sonnet 4.5が0.9x（10%割引）で表示されている](../images/image%20copy%2016.png)
+![Claude Sonnet 4.5が0.9x（10%割引）で表示されている](../images/2025/image%20copy%2016.png)
 
 最近、VS Code の Copilot に **「Auto」モデル選択**が追加された。
 正直、最初は「また便利そうに見せた設定が増えただけでしょ」と思っていた。
@@ -36,7 +36,7 @@ featured_image: "../images/image copy 16.png"
 
 これ、地味だけど確実に**思考コストを食う**。
 
-![VS Codeでモデル選択している画面](../images/image%20copy%2017.png)
+![VS Codeでモデル選択している画面](../images/2025/image%20copy%2017.png)
 
 ## Auto がやっていることは、実はかなり本質的
 

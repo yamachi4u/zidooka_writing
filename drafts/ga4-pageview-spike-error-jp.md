@@ -11,7 +11,7 @@ tags:
   - "Analytics"
   - "Troubleshooting"
   - "WordPress"
-featured_image: "../images/ga4-pageview-spike-error.png"
+featured_image: "../images/2025/ga4-pageview-spike-error.png"
 ---
 
 # アクセス急増？いいえ、設定ミスです

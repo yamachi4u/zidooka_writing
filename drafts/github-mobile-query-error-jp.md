@@ -10,7 +10,7 @@ tags:
   - "GitHub Mobile"
   - "エラー"
   - "トラブルシューティング"
-featured_image: "../images/github-mobile-query-error.png"
+featured_image: "../images/2025/github-mobile-query-error.png"
 ---
 
 ## はじめに
@@ -29,7 +29,7 @@ GitHub Mobileアプリ（iOS / Android）でリポジトリのフォルダ階層
 結論から言うと**これはGitHubアプリの既知のバグ（仕様に近い挙動）であり、無視してOKです**。
 :::
 
-![GitHub Mobile Error](../images/github-mobile-query-error.png)
+![GitHub Mobile Error](../images/2025/github-mobile-query-error.png)
 
 ## 原因：GraphQLのタイムアウトと楽観的UI
 

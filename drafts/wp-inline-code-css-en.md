@@ -12,7 +12,7 @@ tags:
   - Design
   - Accessibility
 status: publish
-featured_image: ../images/wp-inline-code-visibility-thumb.png
+featured_image: ../images/2025/wp-inline-code-visibility-thumb.png
 parent: wp-inline-code-css-jp
 ---
 
@@ -55,7 +55,7 @@ td code {
 
 That's it.
 
-![Inline code after improvement](../images/wp-inline-code-visibility-fixed.png)
+![Inline code after improvement](../images/2025/wp-inline-code-visibility-fixed.png)
 
 ## Why bold works best
 

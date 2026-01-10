@@ -10,12 +10,12 @@ tags:
   - "Lolipop"
   - "Backup"
   - "Comparison"
-featured_image: "../images/lolipop-waf-domain-settings.png"
+featured_image: "../images/2025/lolipop-waf-domain-settings.png"
 ---
 
 # The Unexpected Downside I Found Using Lolipop: How Xserver Looks Different When You Include Backup Costs
 
-![Thumbnail](../images/lolipop-waf-domain-settings.png)
+![Thumbnail](../images/2025/lolipop-waf-domain-settings.png)
 
 When choosing a web hosting service, it's easy to focus solely on the monthly price tag.
 I initially thought, "Lolipop should be enough for a personal site."

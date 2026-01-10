@@ -10,7 +10,7 @@ tags:
   - Hobby Plan
 status: publish
 slug: vercel-hobby-cron-limit-daily-error-en
-featured_image: ../images/vercel-hobby-cron-limit.png
+featured_image: ../images/2025/vercel-hobby-cron-limit.png
 ---
 
 When setting up Cron Jobs on Vercel, you might encounter the following error during deployment:

@@ -12,7 +12,7 @@ tags:
   - Internal Linking
   - Node.js
 status: publish
-featured_image: ../images/ai-seo-workflow-01.png
+featured_image: ../images/2025/ai-seo-workflow-01.png
 ---
 
 「記事が増えすぎて、過去記事が埋もれている…」
@@ -23,7 +23,7 @@ ZIDOOKA!では、**AIエージェントと自作CLIツール**を組み合わせ
 
 今回は、**「全記事をJSON化してAIに投げ、自動でまとめ記事（ハブ）を作って公開する」** という、次世代のSEOワークフローを公開します。
 
-![AI SEO Workflow](../images/ai-seo-workflow-01.png)
+![AI SEO Workflow](../images/2025/ai-seo-workflow-01.png)
 
 ## これまでの「まとめ記事作成」の地獄
 
@@ -48,7 +48,7 @@ ZIDOOKA!では、**AIエージェントと自作CLIツール**を組み合わせ
 人間がやったのは「指示出し」だけ。
 **所要時間は、4記事（日英×2テーマ）でわずか数分です。**
 
-![Workflow Diagram](../images/ai-seo-workflow-02.png)
+![Workflow Diagram](../images/2025/ai-seo-workflow-02.png)
 
 ### Step 1: 全記事をJSON化する
 

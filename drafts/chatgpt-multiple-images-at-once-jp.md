@@ -9,12 +9,12 @@ tags:
   - "画像生成"
   - "DALL-E"
   - "新機能"
-featured_image: "../images/スクリーンショット 2025-12-16 133951.png"
+featured_image: "../images/2025/スクリーンショット 2025-12-16 133951.png"
 ---
 
 # ChatGPT「複数の画像を同時に作れるようになりました」— エラーじゃなくて新機能の案内だった
 
-![You can now ask ChatGPT to make multiple images at a time.](../images/スクリーンショット%202025-12-16%20133951.png)
+![You can now ask ChatGPT to make multiple images at a time.](../images/2025/スクリーンショット%202025-12-16%20133951.png)
 
 ChatGPTで画像を生成していたら、突然こんなメッセージが表示された。
 
@@ -40,7 +40,7 @@ ChatGPTで画像を生成していたら、突然こんなメッセージが表�
 
 ようになった。
 
-![2つの画像が同時に生成されている様子](../images/image%20copy%2018.png)
+![2つの画像が同時に生成されている様子](../images/2025/image%20copy%2018.png)
 
 ## 具体的にどう使えるのか
 

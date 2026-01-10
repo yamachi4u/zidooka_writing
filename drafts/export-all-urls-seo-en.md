@@ -12,7 +12,7 @@ tags:
   - "Site Architecture"
   - "Data Analysis"
   - "Blog Strategy"
-featured_image: "../images/export-all-urls-screen.png"
+featured_image: "../images/2025/export-all-urls-screen.png"
 ---
 
 # Conclusion: Hire AI as Your Editor-in-Chief
@@ -28,7 +28,7 @@ With over 340 articles on ZIDOOKA!, I faced structural issues:
 To solve this, I used the **"Export All URLs" plugin to extract all data and had ChatGPT perform an SEO diagnosis.**
 The results were eye-opening. Here is how I did it.
 
-![Export All URLs Screen](../images/export-all-urls-screen.png)
+![Export All URLs Screen](../images/2025/export-all-urls-screen.png)
 
 # 1. What is "Export All URLs"?
 
@@ -57,7 +57,7 @@ I asked ChatGPT: "Analyze the strengths and weaknesses of this site based on the
 
 It objectively verbalized strengths I hadn't fully realized myself.
 
-![ChatGPT Analysis](../images/chatgpt-seo-analysis.png)
+![ChatGPT Analysis](../images/2025/chatgpt-seo-analysis.png)
 
 ## Step 2: Mapping Search Intent
 
@@ -83,7 +83,7 @@ Based on this, I created a prioritized "Rewrite List."
 
 After implementing the fixes suggested by the audit:
 
-![SEO Results](../images/seo-results.png)
+![SEO Results](../images/2025/seo-results.png)
 
 1.  **Faster Indexing:** Internal linking of isolated articles improved crawler efficiency.
 2.  **Site Consistency:** Clarified the site's theme, improving pages per session.

@@ -2,7 +2,7 @@
 id: 2849
 title: "How to Switch GAS from Rhino to V8 and Verify the Migration"
 date: 2025-12-23
-thumbnail: images/gas-rhino-deprecation-warning.png
+thumbnail: images/2025/gas-rhino-deprecation-warning.png
 categories: 
   - GAS Tips
 slug: how-to-switch-gas-from-rhino-to-v8-and-verify-the-migration
@@ -53,7 +53,7 @@ The steps are very simple.
 4.  Check (Enable) **"Enable Chrome V8 runtime"**.
 :::
 
-![](../images/gas-v8-setting-toggle.png)
+![](../images/2025/gas-v8-setting-toggle.png)
 
 That's it.
 *If it's already checked, you have already switched.*

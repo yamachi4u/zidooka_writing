@@ -11,14 +11,14 @@ tags:
   - dns_probe_finished_no_internet
 status: publish
 slug: dns-probe-finished-no-internet-en
-featured_image: ../images/dns-probe-finished-no-internet.webp
+featured_image: ../images/2025/dns-probe-finished-no-internet.webp
 ---
 
 dns_probe_finished_no_internet
 
 This error suddenly appears in Google Chrome, and you might find yourself in a situation where "Wi-Fi is connected, but I can't browse the internet."
 
-![dns_probe_finished_no_internet](../images/dns-probe-finished-no-internet.webp)
+![dns_probe_finished_no_internet](../images/2025/dns-probe-finished-no-internet.webp)
 
 In this article, I will explain the causes and solutions for this error.
 

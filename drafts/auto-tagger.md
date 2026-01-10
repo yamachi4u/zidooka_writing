@@ -10,7 +10,7 @@ tags:
   - "Node.js"
   - "WordPress REST API"
   - "Efficiency"
-featured_image: "../images/task-scheduler.png"
+featured_image: "../images/2025/task-scheduler.png"
 ---
 
 # タグ付け、サボってませんか？
@@ -50,7 +50,7 @@ for (const tag of allTags) {
 このスクリプトを Windows の **タスクスケジューラ** に登録しておけば、
 「寝ている間に勝手にサイトが整理整頓される」という夢のような環境が構築できます。
 
-![タスクスケジューラの設定](../images/task-scheduler.png)
+![タスクスケジューラの設定](../images/2025/task-scheduler.png)
 
 ## まとめ
 

@@ -12,7 +12,7 @@ tags:
   - Error
   - まとめ
 status: publish
-featured_image: ../images/gas-timeout-error.png
+featured_image: ../images/2025/gas-timeout-error.png
 ---
 
 Google Apps Script (GAS) を書いていると、様々なエラーに遭遇します。

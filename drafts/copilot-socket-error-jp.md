@@ -11,7 +11,7 @@ VS Code で GitHub Copilot（特に Copilot Agent / Chat）を使っていると
 
 `net::ERR_SOCKET_NOT_CONNECTED`
 
-![net::ERR_SOCKET_NOT_CONNECTED error in VS Code](../images/copilot-socket-error/copilot-socket-error.png)
+![net::ERR_SOCKET_NOT_CONNECTED error in VS Code](../images/2025/copilot-socket-error/copilot-socket-error.png)
 
 一見するとコードや拡張機能の不具合に見えますが、このエラーはほぼ確実に通信レイヤーの問題です。この記事では、実際の利用経験を踏まえて、原因と現実的な対処法を整理します。
 

@@ -10,7 +10,7 @@ tags:
   - トラブルシューティング
 status: publish
 slug: gemini-api-billing-cap-limit-jp
-featured_image: ../images/gemini-api-billing-cap-limit/gcp-budget-alert-settings.png
+featured_image: ../images/2025/gemini-api-billing-cap-limit/gcp-budget-alert-settings.png
 ---
 
 Gemini API を使い始めてしばらくすると、
@@ -46,7 +46,7 @@ Google Cloud の Billing 画面や Budgets 設定まで確認した上で、
 
 ## よくある誤解①：レート制限＝課金キャップではない
 
-![Google AI Studio API Keys](../images/gemini-api-billing-cap-limit/google-ai-studio-api-keys.png)
+![Google AI Studio API Keys](../images/2025/gemini-api-billing-cap-limit/google-ai-studio-api-keys.png)
 ※ Gemini API の「Google AI Studio」の画面。ここではアラートもキャップもかけられない
 
 Gemini API の管理画面には、
@@ -72,7 +72,7 @@ Gemini API の管理画面には、
 
 ## よくある誤解②：IAM や APIキー設定にキャップ項目はない
 
-![GCP Sidebar Billing](../images/gemini-api-billing-cap-limit/gcp-sidebar-billing.png)
+![GCP Sidebar Billing](../images/2025/gemini-api-billing-cap-limit/gcp-sidebar-billing.png)
 ※ GCP側のサイドバー。ここのBillingをクリックする必要がある
 
 「APIキー単位で制限できるのでは？」と思って
@@ -90,13 +90,13 @@ IAM や APIキーの設定を探しても、**課金上限に関する項目は�
 
 ## できるのはここまで：Budgets（予算）によるアラート設定
 
-![GCP Billing Selection](../images/gemini-api-billing-cap-limit/gcp-billing-selection.png)
+![GCP Billing Selection](../images/2025/gemini-api-billing-cap-limit/gcp-billing-selection.png)
 ※ Billingを選択しているところ
 
 Gemini API の課金を管理できる唯一の場所が、
 **Google Cloud の Billing → Budgets & alerts（予算とアラート）** です。
 
-![GCP Budget Alert Settings](../images/gemini-api-billing-cap-limit/gcp-budget-alert-settings.png)
+![GCP Budget Alert Settings](../images/2025/gemini-api-billing-cap-limit/gcp-budget-alert-settings.png)
 ※ Budgetアラートをかけている画面。4000円で設定している。
 
 ここでは、

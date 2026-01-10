@@ -7,7 +7,7 @@ categories:
   - "Blog"
 tags: 
   - "Test"
-featured_image: "../images/lolipop-waf-domain-settings.png"
+featured_image: "../images/2025/lolipop-waf-domain-settings.png"
 ---
 
 # Connection Test

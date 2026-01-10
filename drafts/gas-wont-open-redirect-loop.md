@@ -11,7 +11,7 @@ tags:
   - 初心者向け
 status: publish
 slug: gas-wont-open-redirect-loop
-featured_image: ../images/gas-timeout-error.png
+featured_image: ../images/2025/gas-timeout-error.png
 ---
 
 「Google Apps Scriptが開けない」「画面が真っ白になる」というトラブルに遭遇しました。

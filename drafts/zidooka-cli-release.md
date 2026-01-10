@@ -9,7 +9,7 @@ tags:
   - "VS Code"
   - "Node.js"
   - "Automation"
-featured_image: "../images/image.png"
+featured_image: "../images/2025/image.png"
 ---
 
 # VS Codeから出たくない！
@@ -25,7 +25,7 @@ featured_image: "../images/image.png"
 このツールを使うと、以下のフローで記事投稿が完了します。
 
 1. VS CodeでMarkdownを書く
-2. 画像はローカルのパスを指定するだけ（`![img](../images/pic.png)`）
+2. 画像はローカルのパスを指定するだけ（`![img](../images/2025/pic.png)`）
 3. ターミナルで `node src/index.js post drafts/article.md` を叩く
 4. **完了！**
 

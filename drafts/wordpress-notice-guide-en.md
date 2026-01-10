@@ -9,7 +9,7 @@ tags:
   - Troubleshooting
   - Notice
 status: publish
-thumbnail: images/image copy 22.png
+thumbnail: images/2025/image copy 22.png
 ---
 
 When working with WordPress, you may encounter a display like this one day.

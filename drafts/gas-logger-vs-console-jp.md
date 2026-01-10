@@ -1,7 +1,7 @@
 ---
 title: "Logger.log と console.log の違いとは？GAS実務ではどちらを使うべきか"
 date: 2025-12-23
-thumbnail: images/gas-logger-vs-console.png
+thumbnail: images/2025/gas-logger-vs-console.png
 categories: 
   - GAS Tips
 ---

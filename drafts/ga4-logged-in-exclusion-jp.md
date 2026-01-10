@@ -1,7 +1,7 @@
 ---
 title: "【GA4】WordPressログイン中に自分のアクセスが計測されない？原因と確認方法"
 date: 2025-12-23
-thumbnail: images/ga4-realtime-logged-in-zero.png
+thumbnail: images/2025/ga4-realtime-logged-in-zero.png
 ---
 
 WordPressでサイトを運営していて、ふとこんな疑問を持ったことはありませんか？
@@ -23,7 +23,7 @@ WordPressでサイトを運営していて、ふとこんな疑問を持った�
 *   **ログイン状態** でサイトを見る
     *   → 管理画面はもちろん、**表側の記事ページを見ても一切反応しない**
 
-![](../images/ga4-realtime-logged-in-zero.png)
+![](../images/2025/ga4-realtime-logged-in-zero.png)
 
 これは「バグ」や「不具合」ではありません。
 多くの場合、**意図的にそのように設定されている** 正常な挙動です。

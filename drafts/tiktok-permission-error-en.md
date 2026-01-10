@@ -12,7 +12,7 @@ On December 23, 2025, while accessing the TikTok Ads Manager, the following erro
 
 `You don't have permission to operate this`
 
-![TikTok Ads Permission Error](../images/tiktok-permission-error/tiktok-permission-error.png)
+![TikTok Ads Permission Error](../images/2025/tiktok-permission-error/tiktok-permission-error.png)
 
 This was not just a simple warning; the behavior escalated instantly from **operation blocked → session terminated (logout)**, even though no specific action was taken by the user. This article summarizes the conditions under which this error occurred, along with potential causes and solutions.
 

@@ -15,7 +15,7 @@ tags:
   - OAuth
   - Error
 status: publish
-featured_image: ../images/gas-authorization-error.png
+featured_image: ../images/2025/gas-authorization-error.png
 parent: gas-authorization-error-jp
 ---
 

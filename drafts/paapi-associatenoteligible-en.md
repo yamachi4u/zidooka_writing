@@ -4,7 +4,7 @@ slug: paapi-associatenoteligible-en
 categories: [AmazonAssociate]
 tags: [Amazon Product Advertising API, Error, Eligibility, AssociateNotEligible]
 date: 2025-12-21
-thumbnail: ../images/image copy 33.png
+thumbnail: ../images/2025/image copy 33.png
 status: publish
 ---
 

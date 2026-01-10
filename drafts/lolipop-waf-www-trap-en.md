@@ -11,7 +11,7 @@ tags:
   - "Lolipop"
   - "WAF"
   - "Troubleshooting"
-featured_image: "../images/lolipop-waf-domain-settings.png"
+featured_image: "../images/2025/lolipop-waf-domain-settings.png"
 ---
 
 # Check Your Domain Settings When 403 Errors Persist
@@ -40,7 +40,7 @@ However, the REST API endpoint I was actually hitting was `zidooka.com` (without
 
 In Lolipop's specification, the "www" and "non-www" versions of a custom domain are listed as **separate domains** in the settings screen.
 
-![Lolipop WAF Settings](../images/lolipop-waf-domain-settings.png)
+![Lolipop WAF Settings](../images/2025/lolipop-waf-domain-settings.png)
 
 As shown in the image above, I didn't realize the settings were separated, and I was frantically adjusting the settings for the domain I wasn't even using.
 Naturally, changing settings on the wrong domain had no effect on the actual endpoint.

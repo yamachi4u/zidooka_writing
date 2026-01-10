@@ -11,7 +11,7 @@ tags:
   - "Android"
   - "iOS"
   - "Error"
-featured_image: "../images/chatgpt-mobile-error.png"
+featured_image: "../images/2025/chatgpt-mobile-error.png"
 ---
 
 # 結論：まずは「再読み込み」か「モデル切り替え」を試そう
@@ -19,7 +19,7 @@ featured_image: "../images/chatgpt-mobile-error.png"
 こんにちは、ZIDOOKA! です。
 2025年12月現在、Android/iOS版のChatGPTアプリを使っていると、会話の途中で突然 **「問題が発生しました。↻」** というエラーが表示される現象が多発しています。
 
-![ChatGPTアプリのエラー画面](../images/chatgpt-mobile-error.png)
+![ChatGPTアプリのエラー画面](../images/2025/chatgpt-mobile-error.png)
 
 結論から言うと、これは **「通信の一瞬の途切れ」** や **「サーバー側の混雑」** が主な原因です。
 深刻なバグではないことが多いので、まずは落ち着いて以下の対処法を試してください。

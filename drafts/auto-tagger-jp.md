@@ -10,7 +10,7 @@ tags:
   - "Node.js"
   - "WordPress REST API"
   - "Efficiency"
-featured_image: "../images/task-scheduler.png"
+featured_image: "../images/2025/task-scheduler.png"
 ---
 
 # 結論：タグ付けは人間がやる仕事じゃない
@@ -54,7 +54,7 @@ for (const tag of allTags) {
 さらに、このスクリプトを Windows の **タスクスケジューラ** に登録しました。
 これで、私が寝ている間でも、PCが勝手にサイトを巡回してタグを整理してくれます。
 
-![タスクスケジューラの設定画面](../images/task-scheduler.png)
+![タスクスケジューラの設定画面](../images/2025/task-scheduler.png)
 
 この画像のように、PowerShell経由でスクリプトを定期的に叩くだけです。
 

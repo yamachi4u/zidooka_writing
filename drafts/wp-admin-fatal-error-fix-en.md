@@ -9,12 +9,12 @@ tags:
   - "Troubleshooting"
   - "wp-config.php"
   - "Fatal Error"
-featured_image: "../images/image copy 15.png"
+featured_image: "../images/2025/image copy 15.png"
 ---
 
 # "Critical Error" Only in WordPress Admin? Fixing it via wp-config.php
 
-![Thumbnail](../images/image%20copy%2015.png)
+![Thumbnail](../images/2025/image%20copy%2015.png)
 
 One day, when I tried to access the WordPress admin dashboard, I was greeted with the despairing message: **"There has been a critical error on this website."**
 

@@ -21,7 +21,7 @@ tags:
 
 将来的にコードを公開する可能性もあるので、その予告編としてお読みください。
 
-![Gutenbergブロックとして認識されている様子](../images/cli-demo-2.png)
+![Gutenbergブロックとして認識されている様子](../images/2025/cli-demo-2.png)
 
 ## 1. なぜ「REST API」×「CLI」なのか？
 

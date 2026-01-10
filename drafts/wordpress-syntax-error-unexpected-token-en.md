@@ -10,7 +10,7 @@ tags:
   - Syntax Error
 status: publish
 slug: wordpress-syntax-error-unexpected-token-en
-featured_image: ../images/image copy 29.png
+featured_image: ../images/2025/image copy 29.png
 ---
 
 Have you ever been customizing WordPress, hit save, and suddenly faced a white screen with this error?

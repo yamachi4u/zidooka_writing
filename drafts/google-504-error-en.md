@@ -12,7 +12,7 @@ When using Google services like Gmail, Google Classroom, or Google Drive, you mi
 "**504. That’s an error.**"
 "The server encountered a temporary error and could not complete your request."
 
-![Google 504 error screen](../images/google-504-error/google-504-error.png)
+![Google 504 error screen](../images/2025/google-504-error/google-504-error.png)
 
 This error indicates a communication issue between servers, not a mistake on your part. This article explains what this error means and what you can do about it.
 

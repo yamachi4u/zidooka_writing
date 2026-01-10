@@ -11,7 +11,7 @@ tags:
   - DriveApp
 status: publish
 slug: gas-server-error-occurred-en
-featured_image: ../images/image copy 35.png
+featured_image: ../images/2025/image copy 35.png
 ---
 
 When executing Google Apps Script (GAS), you may encounter the following error message in the execution log, causing your script to stop.

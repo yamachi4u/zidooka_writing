@@ -9,12 +9,12 @@ tags:
   - "Troubleshooting"
   - "wp-config.php"
   - "Fatal Error"
-featured_image: "../images/image copy 15.png"
+featured_image: "../images/2025/image copy 15.png"
 ---
 
 # WordPress管理画面だけ「重大なエラー」で入れない！wp-config.phpから原因特定して直した話
 
-![サムネイル](../images/image%20copy%2015.png)
+![サムネイル](../images/2025/image%20copy%2015.png)
 
 ある日突然、WordPressの管理画面に入ろうとしたら**「このWebサイトで重大なエラーが発生しました」**という絶望的なメッセージが表示されました。
 

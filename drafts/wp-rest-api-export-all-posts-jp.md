@@ -12,7 +12,7 @@ tags:
   - WordPress
   - Automation
 status: publish
-featured_image: ../images/wp-rest-api-export-01.png
+featured_image: ../images/2025/wp-rest-api-export-01.png
 ---
 
 「記事が増えすぎて管理画面が重い…」
@@ -25,7 +25,7 @@ ZIDOOKA!も記事数が300件近くになり、WordPressの管理画面だけで
 
 結論から言うと、**Node.js × REST API なら3秒で終わります。**
 
-![REST API実行結果](../images/wp-rest-api-export-01.png)
+![REST API実行結果](../images/2025/wp-rest-api-export-01.png)
 
 ## なぜ REST API なのか？
 
@@ -90,7 +90,7 @@ WordPress REST API の1回あたりの取得上限は `100` です。
 
 スクリプトを実行すると、あっという間に全記事データが `all_posts.json` に保存されました。
 
-![JSONデータ](../images/wp-rest-api-export-02.png)
+![JSONデータ](../images/2025/wp-rest-api-export-02.png)
 
 ### 389件あるはずが、294件？
 
@@ -107,7 +107,7 @@ REST API の `/wp/v2/posts` エンドポイントは、あくまで「投稿」�
 
 取得したJSONを見て気づいたのが、「`tags` が空配列 `[]` の記事が大量にある」こと。
 
-![タグが空](../images/wp-rest-api-export-03.png)
+![タグが空](../images/2025/wp-rest-api-export-03.png)
 
 管理画面で1記事ずつ見ていたら気づかなかったでしょう。
 JSON化したことで、「タグ付け忘れ」や「カテゴリ設計の甘さ」が一瞬で可視化されました。

@@ -10,13 +10,13 @@ tags:
   - 時短
   - 効率化
 status: publish
-featured_image: ../images/chrome-reading-mode-01.png
+featured_image: ../images/2025/chrome-reading-mode-01.png
 ---
 
 たまたまChromeをいじっていて「リーディングモード」なるものを見つけました。
 使ってみたら、これが記事を読むのにめちゃくちゃ便利だったのでシェアします。
 
-![Chromeリーディングモード](../images/chrome-reading-mode-01.png)
+![Chromeリーディングモード](../images/2025/chrome-reading-mode-01.png)
 
 ## Chromeの「リーディングモード」とは？
 
@@ -50,11 +50,11 @@ Chromeの**リーディングモード（Reading Mode）**は、Webページか�
 1.  何らかの方法（右クリックなど）でリーディングモードを開く
 2.  サイドパネル右上の「ピン（固定）」アイコンをクリック
 
-![サイドパネル固定](../images/chrome-reading-mode-04.png)
+![サイドパネル固定](../images/2025/chrome-reading-mode-04.png)
 
 これで、ツールバーに「リーディングモード」ボタンが常設されます。次回からはワンクリックで呼び出せます。
 
-![ツールバーに固定](../images/chrome-reading-mode-03.png)
+![ツールバーに固定](../images/2025/chrome-reading-mode-03.png)
 
 ※ 設定画面（`chrome://settings/appearance`）には項目がない場合が多いので、この方法が確実です。
 
@@ -70,7 +70,7 @@ Chromeの**リーディングモード（Reading Mode）**は、Webページか�
 *   **Aa（テキスト設定）**: フォントサイズ、フォント種類
 *   **背景色**: 白／セピア／ダーク
 
-![読み上げ機能](../images/chrome-reading-mode-05.png)
+![読み上げ機能](../images/2025/chrome-reading-mode-05.png)
 
 地味に便利なのが「読み上げ機能」です。
 長い記事をラジオ感覚で聞けるので、作業中の「ながら聴き」にも使えます。

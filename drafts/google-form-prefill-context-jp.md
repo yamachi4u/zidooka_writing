@@ -1,7 +1,7 @@
 ---
 title: "問い合わせ率が上がった理由：Googleフォームに記事文脈を自動注入する設計"
 date: 2025-12-23
-thumbnail: images/google-form-prefill-menu.png
+thumbnail: images/2025/google-form-prefill-menu.png
 ---
 
 技術ブログを運営していると、こんな悩みに直面することがあります。
@@ -51,9 +51,9 @@ thumbnail: images/google-form-prefill-menu.png
 Googleフォームには「回答を事前に入力する（prefill）」機能があります。
 この機能を使うと、URLパラメータ経由で特定の設問に値を渡せます。
 
-![](../images/google-form-prefill-menu.png)
+![](../images/2025/google-form-prefill-menu.png)
 
-![](../images/google-form-prefill-email.png)
+![](../images/2025/google-form-prefill-email.png)
 
 概念的には次のような仕組みです。
 

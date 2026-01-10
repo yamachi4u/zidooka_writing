@@ -11,7 +11,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: wordpress-ultimate-redirect-plugin-en
-featured_image: ../images/wordpress-ultimate-redirect-plugin.png
+featured_image: ../images/2025/wordpress-ultimate-redirect-plugin.png
 ---
 
 When managing a WordPress site with frequent content updates, changing URLs or consolidating articles is inevitable.

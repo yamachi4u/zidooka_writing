@@ -9,7 +9,7 @@ tags:
   - "Lolipop"
   - "SiteGuard"
   - "REST API"
-featured_image: "../images/403-error-1.png"
+featured_image: "../images/2025/403-error-1.png"
 ---
 
 # Point: Check "SiteGuard" Before Blaming WAF
@@ -38,7 +38,7 @@ Here is what happened:
 
 Then I checked the "SiteGuard" settings...
 
-![SiteGuard Settings](../images/403-error-2.png)
+![SiteGuard Settings](../images/2025/403-error-2.png)
 
 This was the culprit.
 Specifically, settings that **restrict REST API access for non-logged-in users** can sometimes block connections even if you are using Application Passwords.

@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: plotly-module-not-found-jp
-featured_image: ../images/image copy 36.png
+featured_image: ../images/2025/image copy 36.png
 ---
 
 Pythonでデータ可視化ライブラリの **plotly** を使おうとしたとき、以下のエラーが出て処理が止まってしまうことがあります。

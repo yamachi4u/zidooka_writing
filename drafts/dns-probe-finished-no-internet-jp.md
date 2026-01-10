@@ -11,7 +11,7 @@ tags:
   - dns_probe_finished_no_internet
 status: publish
 slug: dns-probe-finished-no-internet-jp
-featured_image: ../images/dns-probe-finished-no-internet.webp
+featured_image: ../images/2025/dns-probe-finished-no-internet.webp
 ---
 
 dns_probe_finished_no_internet
@@ -20,7 +20,7 @@ Google Chromeで突然このエラーが表示され、
 「Wi-Fiは繋がっているのにネットが見られない」
 という状態になることがあります。
 
-![dns_probe_finished_no_internet](../images/dns-probe-finished-no-internet.webp)
+![dns_probe_finished_no_internet](../images/2025/dns-probe-finished-no-internet.webp)
 
 この記事では、このエラーの原因と対処法を解説します。
 

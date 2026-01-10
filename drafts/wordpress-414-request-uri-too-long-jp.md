@@ -10,7 +10,7 @@ tags:
   - Server Config
 status: publish
 slug: wordpress-414-request-uri-too-long-jp
-featured_image: ../images/image copy 28.png
+featured_image: ../images/2025/image copy 28.png
 ---
 
 WordPressを運用していると、稀に **414 Error (Request-URI Too Long)** というエラーに遭遇することがあります。

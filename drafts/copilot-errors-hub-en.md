@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: copilot-errors-hub-en
-featured_image: ../images/image copy 37.png
+featured_image: ../images/2025/image copy 37.png
 ---
 
 GitHub Copilot is incredibly useful, but sometimes it stops working with "mysterious errors."

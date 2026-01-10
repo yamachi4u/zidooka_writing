@@ -8,12 +8,12 @@ categories:
 tags: 
   - "Access Analysis"
   - "Google Analytics"
-featured_image: "../images/analytics-country-growth.png"
+featured_image: "../images/2025/analytics-country-growth.png"
 ---
 
 Google アナリティクスで国別トラフィックを見てみたところ、ちょっと面白い動きが出ていました。
 
-![国別アクセスの分析データ](../images/analytics-country-growth.png)
+![国別アクセスの分析データ](../images/2025/analytics-country-growth.png)
 
 まず、日本からのアクセスは相変わらず全体の大半を占めつつも、
 前年比で **+22%** としっかり伸びている状態。エンゲージメント時間も **16秒 → 25秒** に増えていて、技術系の記事をじっくり読む読者が増えている印象です。

@@ -10,7 +10,7 @@ tags:
   - Syntax Error
 status: publish
 slug: wordpress-syntax-error-unexpected-token-jp
-featured_image: ../images/image copy 29.png
+featured_image: ../images/2025/image copy 29.png
 ---
 
 WordPressをカスタマイズしていて、保存した瞬間に画面が真っ白になり、こんなエラーが出たことはありませんか？

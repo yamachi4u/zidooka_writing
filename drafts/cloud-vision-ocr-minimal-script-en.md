@@ -11,7 +11,7 @@ tags:
   - Code Snippet
 status: publish
 slug: cloud-vision-ocr-minimal-script-en
-featured_image: ../images/image copy 25.png
+featured_image: ../images/2025/image copy 25.png
 ---
 
 When using Cloud Vision API's OCR in a practical setting, you often run into the issue where "the official documentation samples are too fragmented, and it's unclear how to connect them all together."

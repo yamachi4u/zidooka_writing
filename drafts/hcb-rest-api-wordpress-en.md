@@ -3,7 +3,7 @@ title: "How to Embed Highlighting Code Block (HCB) Correctly via the WordPress R
 date: 2025-12-20 20:00:00
 categories: 
   - wordpress
-featured_image: ../images/image copy 20.png
+featured_image: ../images/2025/image copy 20.png
 ---
 
 When writing technical articles on WordPress, code readability directly affects content quality. This is especially true for Google Apps Script (GAS) and JavaScript articles, where proper syntax highlighting significantly improves comprehension.

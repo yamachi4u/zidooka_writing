@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: gas-exceeded-maximum-execution-time-en
-featured_image: ../images/image copy 39.png
+featured_image: ../images/2025/image copy 39.png
 ---
 
 If you work with Google Apps Script (GAS), you have likely encountered this error notification in your inbox:

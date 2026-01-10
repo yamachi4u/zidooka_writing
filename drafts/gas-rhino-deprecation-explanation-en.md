@@ -2,7 +2,7 @@
 id: 2841
 title: "[Explained] What is GAS 'Rhino Deprecation' and why you must migrate to V8 by 2026"
 date: 2025-12-23
-thumbnail: images/gas-rhino-deprecation-warning.png
+thumbnail: images/2025/gas-rhino-deprecation-warning.png
 categories: 
   - GAS Tips
 slug: explained-what-is-gas-rhino-deprecation-and-why-you-must-migrate-to-v8-by-2026

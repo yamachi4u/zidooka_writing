@@ -10,7 +10,7 @@ tags:
   - git
 status: publish
 slug: git-push-rejected-remote-ahead-error-jp
-featured_image: ../images/git-push-rejected-remote-ahead.png
+featured_image: ../images/2025/git-push-rejected-remote-ahead.png
 ---
 
 GitHubにプッシュしようとしたとき、以下のようなエラーが出て拒否されることがあります。

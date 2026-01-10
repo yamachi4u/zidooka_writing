@@ -6,7 +6,7 @@ categories:
   - "AI"
 tags:
   - "Testing"
-featured_image: "../images/image copy 16.png"
+featured_image: "../images/2025/image copy 16.png"
 ---
 
 # コードブロック言語テスト - JavaScript

@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: gas-specified-permissions-error-en
-featured_image: ../images/image copy 34.png
+featured_image: ../images/2025/image copy 34.png
 ---
 
 When developing with Google Apps Script (GAS), you may encounter an error message like this:

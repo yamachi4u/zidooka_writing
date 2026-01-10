@@ -2,7 +2,7 @@
 id: 2874
 title: "Why Copy-Pasting Rhino-Era Code is Dangerous: 5 \"Old GAS Styles\" That Break in V8 [For Beginners]"
 date: 2025-12-23
-thumbnail: images/gas-rhino-deprecation-warning.png
+thumbnail: images/2025/gas-rhino-deprecation-warning.png
 categories: 
   - GAS Tips
 slug: "gas-rhino-dangerous-code-examples-en"

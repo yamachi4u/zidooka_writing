@@ -9,7 +9,7 @@ tags:
   - 思考ログ
 status: future
 slug: ai-spending-investment-jp
-featured_image: ../images/image copy 27.png
+featured_image: ../images/2025/image copy 27.png
 ---
 
 正直に言うと、少し使いすぎている自覚はある。

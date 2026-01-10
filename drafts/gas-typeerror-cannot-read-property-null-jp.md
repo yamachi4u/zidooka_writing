@@ -10,12 +10,12 @@ tags:
   - "Google Apps Script"
   - "TypeError"
   - "null"
-featured_image: "../images/image copy 19.png"
+featured_image: "../images/2025/image copy 19.png"
 ---
 
 # GASの「Cannot read property 'xxx' of null」エラー — nullとundefinedの違いから解決まで
 
-![GASのnullエラーガイド](../images/image%20copy%2019.png)
+![GASのnullエラーガイド](../images/2025/image%20copy%2019.png)
 
 このエラーは、Google Apps Script (GAS) で非常によく見かける実行時エラーの1つです：**TypeError: Cannot read property 'xxx' of null**
 

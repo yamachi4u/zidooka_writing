@@ -12,7 +12,7 @@ tags:
   - VS Code
 status: publish
 slug: cloud-vision-ocr-cli-best-practice-en
-featured_image: ../images/twitterposttool/cloud-vision-api-ocr.png
+featured_image: ../images/2025/twitterposttool/cloud-vision-api-ocr.png
 ---
 
 OCR using Google Cloud Vision API might look like a task where you just "configure it in the GUI, click a button, and you're done" at first glance.

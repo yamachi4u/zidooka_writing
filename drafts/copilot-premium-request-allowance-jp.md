@@ -9,7 +9,7 @@ status: publish
 
 ある日突然、VS Code の GitHub Copilot Chat でこんなエラーが表示されました。
 
-![VS Code Error](../images/fcb95a1c-7b34-4dc5-9579-ccf890e2129e.png)
+![VS Code Error](../images/2025/fcb95a1c-7b34-4dc5-9579-ccf890e2129e.png)
 
 > **You have exceeded your premium request allowance.**
 > We have automatically switched you to GPT-4.1.
@@ -38,29 +38,29 @@ status: publish
 1. GitHub の設定画面から **Billing and plans** > **Budgets and alerts** を開きます。
 2. **Edit monthly budget** をクリックします。
 
-![GitHub Budget Settings](../images/cd8f1655-af7e-4aa4-a96c-bf7a66438255.png)
+![GitHub Budget Settings](../images/2025/cd8f1655-af7e-4aa4-a96c-bf7a66438255.png)
 
 ここで「Payment method is missing」と出ている場合は、支払い方法を追加する必要があります。これが「GitHub側の話」である証拠ですね。
 
 3. 対象となる SKU は **Copilot premium requests** です。
 
-![SKU List](../images/17359006-ec19-441c-b501-2b953c15d369.png)
+![SKU List](../images/2025/17359006-ec19-441c-b501-2b953c15d369.png)
 
 4. 予算を設定します。私は **$5** に設定しました。
    そして重要なのが、**"Stop usage when budget limit is reached"** にチェックを入れること。これで5ドルを超えたら自動で止まるので、絶対に高額請求は来ません。
 
-![Set $5 Budget](../images/3ba7b6db-7593-4f84-8663-738e24147d77.png)
+![Set $5 Budget](../images/2025/3ba7b6db-7593-4f84-8663-738e24147d77.png)
 
 設定が完了すると、このように通知が出ます。
 
-![Success Toast](../images/01923e45-ea02-45d5-94c7-4a89313c9fa7.png)
+![Success Toast](../images/2025/01923e45-ea02-45d5-94c7-4a89313c9fa7.png)
 
 ## 実際の結果：Gemini 3 Pro を使っても...
 
 設定後、実際にガッツリ使ってみました。
 私の環境では **Gemini 3 Pro** がモデルとして選択されています。
 
-![Usage Dashboard](../images/0ddabc14-e908-4936-842f-b79af0418038.png)
+![Usage Dashboard](../images/2025/0ddabc14-e908-4936-842f-b79af0418038.png)
 
 結果を見て驚きました。
 **Gemini 3 Pro を 285回リクエストしても、請求額は $0.00 です。**

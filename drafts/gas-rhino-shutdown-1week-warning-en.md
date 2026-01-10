@@ -1,7 +1,7 @@
 ---
 title: "[URGENT] 1 Week Until GAS Rhino Runtime Shutdown! Migrate to V8 Now"
 date: 2026-01-24
-thumbnail: images/gas-rhino-deprecation-warning.png
+thumbnail: images/2025/gas-rhino-deprecation-warning.png
 categories: 
   - GAS Tips
 slug: "gas-rhino-shutdown-1week-warning-en"

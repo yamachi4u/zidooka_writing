@@ -11,7 +11,7 @@ tags:
   - "TypeScript"
   - "Copilot"
   - "Troubleshooting"
-featured_image: "../images/vscode-ts-service-crash.png"
+featured_image: "../images/2025/vscode-ts-service-crash.png"
 ---
 
 # 突然のエラー通知
@@ -19,7 +19,7 @@ featured_image: "../images/vscode-ts-service-crash.png"
 こんにちは、ZIDOOKAです。
 VS Codeで作業をしていたら、右下に黄色い警告が表示されました。
 
-![VS Code Error](../images/vscode-ts-service-crash.png)
+![VS Code Error](../images/2025/vscode-ts-service-crash.png)
 
 > The JS/TS language service crashed 5 times in the last 5 Minutes.
 > This may be caused by a plugin contributed by one of these extensions: GitHub.copilot-chat

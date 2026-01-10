@@ -11,7 +11,7 @@ tags:
   - Automation
 status: publish
 slug: ai-gas-form-generation-en
-featured_image: ../images/thumbnails.png
+featured_image: ../images/2025/thumbnails.png
 ---
 
 Are you still manually clicking the "+" button to add questions one by one in Google Forms?

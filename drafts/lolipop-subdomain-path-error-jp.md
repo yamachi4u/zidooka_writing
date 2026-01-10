@@ -10,7 +10,7 @@ tags:
   - "Lolipop"
   - "WordPress"
   - "Troubleshooting"
-featured_image: "../images/lolipop-subdomain-path-error-msg.png"
+featured_image: "../images/2025/lolipop-subdomain-path-error-msg.png"
 ---
 
 # 「パスの形式に誤りがあります。[path.1]」の原因はスラッシュでした
@@ -22,7 +22,7 @@ Lolipop!レンタルサーバーで新しいサブドメインを追加しよう
 
 ユーザー専用ページから「独自ドメイン設定」→「サブドメイン設定」と進み、新規作成を行おうとしたところ、以下のエラーが表示されました。
 
-![Error Message](../images/lolipop-subdomain-path-error-msg.png)
+![Error Message](../images/2025/lolipop-subdomain-path-error-msg.png)
 
 > パスの形式に誤りがあります。[path.1]
 
@@ -33,7 +33,7 @@ Lolipop!レンタルサーバーで新しいサブドメインを追加しよう
 原因は非常に単純で、フォルダパスの先頭に `/`（スラッシュ）を入れていたことでした。
 
 **× 間違い（スラッシュあり）**
-![Incorrect Path](../images/lolipop-subdomain-path-with-slash.png)
+![Incorrect Path](../images/2025/lolipop-subdomain-path-with-slash.png)
 
 Linuxなどのパス指定に慣れていると、ついルートを表す `/` を先頭につけたくなりますが、Lolipopの設定画面ではこれが「形式エラー」とみなされます。
 
@@ -42,7 +42,7 @@ Linuxなどのパス指定に慣れていると、ついルートを表す `/` �
 先頭のスラッシュを削除し、フォルダ名から書き始めることで無事に登録できました。
 
 **〇 正解（スラッシュなし）**
-![Correct Path](../images/lolipop-subdomain-path-no-slash.png)
+![Correct Path](../images/2025/lolipop-subdomain-path-no-slash.png)
 
 ## まとめ
 

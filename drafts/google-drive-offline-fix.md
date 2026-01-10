@@ -9,7 +9,7 @@ tags:
   - "トラブルシューティング"
   - "ネットワーク"
 status: publish
-thumbnail: ../images/image copy 23.png
+thumbnail: ../images/2025/image copy 23.png
 ---
 
 Googleドライブを開いたときに、突然「オフラインです」と表示されて戸惑うことがあります。特別なエラーコードも出ず、ファイルも見えない。この状態は、特別な操作をしていなくても発生する、かなり“あるある”なケースです。

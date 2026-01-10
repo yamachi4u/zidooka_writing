@@ -9,7 +9,7 @@ tags:
   - Productivity
 status: future
 slug: ai-spending-investment-en
-featured_image: ../images/image copy 26.png
+featured_image: ../images/2025/image copy 26.png
 ---
 
 To be honest, I'm aware I've been using it a bit too much.

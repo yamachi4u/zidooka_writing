@@ -11,7 +11,7 @@ tags:
   - "REST API"
   - "Lolipop"
   - "Security"
-featured_image: "../images/waf-bypass-subdomain.png"
+featured_image: "../images/2025/waf-bypass-subdomain.png"
 ---
 
 # Keep WAF Enabled While Using the API
@@ -91,7 +91,7 @@ This creates an ideal environment:
 *   **Attacks on the Web**: Blocked by the main site's WAF.
 *   **API Uploads**: Succeed via the subdomain, bypassing the WAF restrictions.
 
-![WAF Settings](../images/waf-bypass-subdomain.png)
+![WAF Settings](../images/2025/waf-bypass-subdomain.png)
 
 "Disabling WAF globally because of 403 errors" should be a last resort.
 By splitting the entry point (domain), you can minimize security risks while enjoying the benefits of automation.

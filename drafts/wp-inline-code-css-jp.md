@@ -12,7 +12,7 @@ tags:
   - Design
   - Accessibility
 status: publish
-featured_image: ../images/wp-inline-code-visibility-thumb.png
+featured_image: ../images/2025/wp-inline-code-visibility-thumb.png
 ---
 
 WordPressの記事内で `JSON.parse()` や `UrlFetchApp.fetch()` のようなインラインコードを使っていると、
@@ -56,7 +56,7 @@ td code {
 
 これだけです。
 
-![改善後のインラインコード](../images/wp-inline-code-visibility-fixed.png)
+![改善後のインラインコード](../images/2025/wp-inline-code-visibility-fixed.png)
 
 ## なぜ太字が一番効くのか
 

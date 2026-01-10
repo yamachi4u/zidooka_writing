@@ -2,7 +2,7 @@
 id: 2877
 title: "GAS Rhino廃止・V8移行完全ガイド：3つの記事で完璧に理解する"
 date: 2025-12-23
-thumbnail: images/gas-v8-setting-toggle.png
+thumbnail: images/2025/gas-v8-setting-toggle.png
 categories: 
   - GAS Tips
 slug: "gas-rhino-v8-migration-guide-jp"

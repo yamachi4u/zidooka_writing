@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: gemini-api-billing-cap-limit-en
-featured_image: ../images/gemini-api-billing-cap-limit/gcp-budget-alert-settings.png
+featured_image: ../images/2025/gemini-api-billing-cap-limit/gcp-budget-alert-settings.png
 ---
 
 After using the Gemini API for a while, many people start to worry:
@@ -42,7 +42,7 @@ There are few articles that clearly state this point, but if you actually follow
 
 ## Common Misconception 1: Rate Limits != Billing Caps
 
-![Google AI Studio API Keys](../images/gemini-api-billing-cap-limit/google-ai-studio-api-keys.png)
+![Google AI Studio API Keys](../images/2025/gemini-api-billing-cap-limit/google-ai-studio-api-keys.png)
 *The "Google AI Studio" screen for Gemini API. Neither alerts nor caps can be set here.*
 
 The Gemini API management screen has **rate limit** settings such as:
@@ -64,7 +64,7 @@ Please note that **this is not a mechanism to "stop at X dollars".**
 
 ## Common Misconception 2: There are No Cap Options in IAM or API Key Settings
 
-![GCP Sidebar Billing](../images/gemini-api-billing-cap-limit/gcp-sidebar-billing.png)
+![GCP Sidebar Billing](../images/2025/gemini-api-billing-cap-limit/gcp-sidebar-billing.png)
 *The GCP sidebar. You need to click Billing here.*
 
 Even if you search IAM or API key settings thinking "Can I limit it per API key?", **there are no items related to billing limits.**
@@ -79,12 +79,12 @@ Not by:
 
 ## What You Can Do: Alert Settings via Budgets
 
-![GCP Billing Selection](../images/gemini-api-billing-cap-limit/gcp-billing-selection.png)
+![GCP Billing Selection](../images/2025/gemini-api-billing-cap-limit/gcp-billing-selection.png)
 *Selecting Billing.*
 
 The only place where you can manage Gemini API billing is **Google Cloud Billing -> Budgets & alerts**.
 
-![GCP Budget Alert Settings](../images/gemini-api-billing-cap-limit/gcp-budget-alert-settings.png)
+![GCP Budget Alert Settings](../images/2025/gemini-api-billing-cap-limit/gcp-budget-alert-settings.png)
 *The screen where a Budget alert is set. It is set at 4000 yen.*
 
 Here, you can:

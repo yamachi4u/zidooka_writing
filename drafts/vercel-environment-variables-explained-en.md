@@ -11,7 +11,7 @@ tags:
   - Web Development
   - Beginners
 status: publish
-thumbnail: images/image copy 40.png
+thumbnail: images/2025/image copy 40.png
 ---
 
 ![Vercel Environment Variables Settings](images/image%20copy%2040.png)

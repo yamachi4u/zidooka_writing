@@ -11,7 +11,7 @@ tags:
   - "Android"
   - "iOS"
   - "Error"
-featured_image: "../images/chatgpt-mobile-error.png"
+featured_image: "../images/2025/chatgpt-mobile-error.png"
 ---
 
 # Point: Try Reloading or Switching Models First
@@ -19,7 +19,7 @@ featured_image: "../images/chatgpt-mobile-error.png"
 Hello, this is ZIDOOKA!
 As of December 2025, many users are encountering a **"Something went wrong. ↻"** error while using the ChatGPT app on Android/iOS.
 
-![ChatGPT App Error Screen](../images/chatgpt-mobile-error.png)
+![ChatGPT App Error Screen](../images/2025/chatgpt-mobile-error.png)
 
 In short, this is usually caused by **"momentary network interruptions"** or **"server congestion"**.
 It is rarely a critical bug, so please stay calm and try the following solutions.

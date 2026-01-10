@@ -10,13 +10,13 @@ tags:
   - 管理画面
   - 時短
 status: publish
-featured_image: ../images/wp-screen-options-01.png
+featured_image: ../images/2025/wp-screen-options-01.png
 ---
 
 「画像をアップロードしました」
 「WPのここさ、めっちゃくちゃありすぎてうざいんだけど減らせない？」
 
-![WordPressの投稿一覧がごちゃごちゃ](../images/wp-screen-options-01.png)
+![WordPressの投稿一覧がごちゃごちゃ](../images/2025/wp-screen-options-01.png)
 
 わかる。投稿一覧が「管理画面の墓場」になるやつですね。
 結論から言うと、ちゃんと減らせます。しかも「一時的」「恒久的」どっちも可能。
@@ -27,9 +27,9 @@ featured_image: ../images/wp-screen-options-01.png
 
 投稿一覧 右上 →「表示オプション」
 
-![表示オプション](../images/wp-screen-options-02.png)
+![表示オプション](../images/2025/wp-screen-options-02.png)
 
-![表示オプションを開く](../images/wp-screen-options-03.png)
+![表示オプションを開く](../images/2025/wp-screen-options-03.png)
 
 - ☑ TruSEO スコア
 - ☑ AIOSEO 詳細

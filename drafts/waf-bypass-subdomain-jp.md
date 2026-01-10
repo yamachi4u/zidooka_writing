@@ -11,7 +11,7 @@ tags:
   - "REST API"
   - "Lolipop"
   - "Security"
-featured_image: "../images/waf-bypass-subdomain.png"
+featured_image: "../images/2025/waf-bypass-subdomain.png"
 ---
 
 # WAFは切りたくない、でもAPIは使いたい
@@ -91,7 +91,7 @@ API用サブドメインをさらに安全にするために、以下の対策�
 *   **Webサイトへの攻撃**: メインサイトのWAFがブロックしてくれます。
 *   **API経由のアップロード**: サブドメイン経由で行われるため、WAFに邪魔されずに成功します。
 
-![WAF Settings](../images/waf-bypass-subdomain.png)
+![WAF Settings](../images/2025/waf-bypass-subdomain.png)
 
 「403エラーが出るからWAFを全解除する」というのは最終手段です。
 このように入り口（ドメイン）を分けることで、セキュリティリスクを最小限に抑えつつ、自動化のメリットを享受できます。

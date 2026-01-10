@@ -2,7 +2,7 @@
 title: "ReferenceError: xxx is not defined – Causes and Fixes [GAS / JavaScript]"
 categories:
   - gastips
-featured_image: ../images/image copy 21.png
+featured_image: ../images/2025/image copy 21.png
 ---
 
 When writing JavaScript or Google Apps Script (GAS), you may encounter an error like this:

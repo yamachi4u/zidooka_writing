@@ -2,7 +2,7 @@
 id: 2880
 title: "Complete Guide to GAS Rhino Deprecation & V8 Migration"
 date: 2025-12-23
-thumbnail: images/gas-v8-setting-toggle.png
+thumbnail: images/2025/gas-v8-setting-toggle.png
 categories: 
   - GAS Tips
 slug: "gas-rhino-v8-migration-guide-en"

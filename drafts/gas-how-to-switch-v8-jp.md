@@ -2,7 +2,7 @@
 id: 2845
 title: "GASをRhinoからV8に切り替える手順と「切り替わったか」の確認方法"
 date: 2025-12-23
-thumbnail: images/gas-rhino-deprecation-warning.png
+thumbnail: images/2025/gas-rhino-deprecation-warning.png
 categories: 
   - GAS Tips
 slug: "gasをrhinoからv8に切り替える手順と「切り替わったか」"
@@ -53,7 +53,7 @@ Googleのサーバー上で実行
 4.  **「V8 ランタイムを有効にする」** にチェックを入れる（ONにする）
 :::
 
-![](../images/gas-v8-setting-toggle.png)
+![](../images/2025/gas-v8-setting-toggle.png)
 
 これだけです。
 ※ すでにチェックが入っているなら、もう切り替わっています。

@@ -12,7 +12,7 @@ tags:
   - VS Code
 status: publish
 slug: cloud-vision-ocr-cli-best-practice-jp
-featured_image: ../images/twitterposttool/cloud-vision-api-ocr.png
+featured_image: ../images/2025/twitterposttool/cloud-vision-api-ocr.png
 ---
 
 Google Cloud Vision API を使った OCR は、

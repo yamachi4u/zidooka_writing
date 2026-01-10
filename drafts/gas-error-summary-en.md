@@ -12,7 +12,7 @@ tags:
   - Error
   - Summary
 status: publish
-featured_image: ../images/gas-timeout-error.png
+featured_image: ../images/2025/gas-timeout-error.png
 parent: gas-error-summary-jp
 ---
 

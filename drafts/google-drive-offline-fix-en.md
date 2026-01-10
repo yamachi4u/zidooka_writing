@@ -9,7 +9,7 @@ tags:
   - "Troubleshooting"
   - "Network"
 status: publish
-thumbnail: ../images/image copy 23.png
+thumbnail: ../images/2025/image copy 23.png
 ---
 
 When you open Google Drive and see the message “Offline,” it can be confusing—especially when no error code is shown and your files don’t appear.

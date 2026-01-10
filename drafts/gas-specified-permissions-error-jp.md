@@ -10,7 +10,7 @@ tags:
   - トラブルシューティング
 status: publish
 slug: gas-specified-permissions-error-jp
-featured_image: ../images/image copy 34.png
+featured_image: ../images/2025/image copy 34.png
 ---
 
 Google Apps Script（GAS）で開発をしていると、以下のようなエラーメッセージに遭遇することがあります。

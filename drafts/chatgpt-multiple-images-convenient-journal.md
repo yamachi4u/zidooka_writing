@@ -8,13 +8,13 @@ tags:
   - "ChatGPT"
   - "画像生成"
   - "AI"
-featured_image: "../images/image copy 18.png"
+featured_image: "../images/2025/image copy 18.png"
 publish_date: "2025-12-23 12:00:00"
 ---
 
 # ChatGPTで画像が2枚同時生成できるようになって、結構便利だった話
 
-![2つの画像が同時に生成されている様子](../images/image%20copy%2018.png)
+![2つの画像が同時に生成されている様子](../images/2025/image%20copy%2018.png)
 
 最近、ChatGPTの画像生成で地味に便利なアップデートがあった。
 

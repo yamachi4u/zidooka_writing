@@ -10,14 +10,14 @@ tags:
   - Admin
   - Productivity
 status: publish
-featured_image: ../images/wp-screen-options-01.png
+featured_image: ../images/2025/wp-screen-options-01.png
 parent: wp-screen-options-cleanup-jp
 ---
 
 "I uploaded the images."
 "This part of WP... there's just too much stuff here, it's annoying. Can't I reduce it?"
 
-![Cluttered WordPress Post List](../images/wp-screen-options-01.png)
+![Cluttered WordPress Post List](../images/2025/wp-screen-options-01.png)
 
 I know. It's the classic "Post List becomes the Graveyard of the Admin Panel" situation.
 The conclusion is: yes, you can reduce it. And you can do it either "temporarily" or "permanently".
@@ -28,9 +28,9 @@ Start with this.
 
 Post List Top Right → "Screen Options"
 
-![Screen Options](../images/wp-screen-options-02.png)
+![Screen Options](../images/2025/wp-screen-options-02.png)
 
-![Opening Screen Options](../images/wp-screen-options-03.png)
+![Opening Screen Options](../images/2025/wp-screen-options-03.png)
 
 - ☑ TruSEO Score
 - ☑ AIOSEO Details

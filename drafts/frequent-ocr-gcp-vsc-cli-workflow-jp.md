@@ -12,7 +12,7 @@ tags:
   - Workflow
 status: publish
 slug: frequent-ocr-gcp-vsc-cli-workflow-jp
-featured_image: ../images/twitterposttool/cloud-vision-api-ocr.png
+featured_image: ../images/2025/twitterposttool/cloud-vision-api-ocr.png
 ---
 
 OCR（文字起こし）を単発ではなく、**継続的・高頻度**に行うようになると、ツール選定の基準は一気に変わります。

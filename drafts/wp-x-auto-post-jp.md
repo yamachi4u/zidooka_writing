@@ -81,7 +81,7 @@ WordPressからX（旧Twitter）への自動投稿。
 *   E列: `status`
 *   F列: `error`
 
-![スプレッドシートの準備](../images/wp-x-tool-03.png)
+![スプレッドシートの準備](../images/2025/wp-x-tool-03.png)
 
 このスプレッドシートのURLに含まれる `ID` 部分（`/d/` と `/edit` の間の文字列）を後で使うので、メモしておきます。
 
@@ -102,7 +102,7 @@ WordPressからX（旧Twitter）への自動投稿。
 
 ※ Access Token を生成する際は、必ず **「Read and Write」** 権限が付与されていることを確認してください。
 
-![X Developer Portal](../images/wp-x-tool-02.png)
+![X Developer Portal](../images/2025/wp-x-tool-02.png)
 
 ### 手順4：スクリプトプロパティの設定
 
@@ -117,14 +117,14 @@ GASのエディタに戻り、左側の歯車アイコン（プロジェクト�
 | `X_ACCESS_SECRET` | (取得したAccess Token Secret) |
 | `LOG_SHEET_ID` | (スプレッドシートのID) |
 
-![スクリプトプロパティの設定](../images/wp-x-tool-01.png)
+![スクリプトプロパティの設定](../images/2025/wp-x-tool-01.png)
 
 ### 手順5：コードの貼り付け
 
 左側の「エディタ（`<>`アイコン）」に戻り、`Code.gs` の中身を以下のコードにすべて書き換えます。
 外部ライブラリは一切不要です。
 
-![コードの貼り付け](../images/wp-x-tool-07.png)
+![コードの貼り付け](../images/2025/wp-x-tool-07.png)
 
 ```javascript
 function doPost(e) {
@@ -250,7 +250,7 @@ function json(obj) {
 3.  **次のユーザーとして実行**: `自分` (Me)。
 4.  **アクセスできるユーザー**: **`全員` (Anyone)** ← **ここ重要！**
 
-![デプロイ設定](../images/wp-x-tool-05.png)
+![デプロイ設定](../images/2025/wp-x-tool-05.png)
 
 「デプロイ」ボタンを押すと、URL（ウェブアプリURL）が発行されます。
 このURLをコピーしておきます（WordPressの設定で使います）。
@@ -327,7 +327,7 @@ add_action('transition_post_status', function ($new_status, $old_status, $post) 
 2.  **再送が簡単**: 失敗しても、GASを叩き直すだけで再送できます。
 3.  **拡張性が高い**: 「カテゴリによってハッシュタグを変える」「Blueskyにも同時に投げる」といった拡張が、GAS側だけで完結します。
 
-![ログ画面](../images/wp-x-tool-06.png)
+![ログ画面](../images/2025/wp-x-tool-06.png)
 
 ## まとめ
 

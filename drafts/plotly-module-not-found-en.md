@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: plotly-module-not-found-en
-featured_image: ../images/image copy 36.png
+featured_image: ../images/2025/image copy 36.png
 ---
 
 When trying to use the **plotly** data visualization library in Python, you might encounter the following error that stops your script:

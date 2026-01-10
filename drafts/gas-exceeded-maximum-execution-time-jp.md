@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: gas-exceeded-maximum-execution-time-jp
-featured_image: ../images/image copy 39.png
+featured_image: ../images/2025/image copy 39.png
 ---
 
 Google Apps Script（GAS）を使っていると、ある日突然、トリガー実行の失敗通知とともに次のエラーに遭遇することがあります。

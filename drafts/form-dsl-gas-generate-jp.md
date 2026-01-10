@@ -11,7 +11,7 @@ tags:
   - 業務効率化
 status: publish
 slug: ai-gas-form-generation-jp
-featured_image: ../images/thumbnails.png
+featured_image: ../images/2025/thumbnails.png
 ---
 
 Googleフォームを作るとき、まだ画面で「＋」ボタンをポチポチ押して、質問文を手打ちしていませんか？

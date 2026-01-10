@@ -11,7 +11,7 @@ tags:
   - "Lolipop"
   - "WAF"
   - "Troubleshooting"
-featured_image: "../images/lolipop-waf-domain-settings.png"
+featured_image: "../images/2025/lolipop-waf-domain-settings.png"
 ---
 
 # 403エラーが解決しない時はドメイン設定を確認しよう
@@ -40,7 +40,7 @@ Lolipopのユーザー専用ページでサーバーの設定を確認し、ロ�
 
 Lolipopの仕様では、独自ドメインの「wwwあり」と「wwwなし」は、設定画面において**別のドメイン**としてリストアップされます。
 
-![Lolipop WAF Settings](../images/lolipop-waf-domain-settings.png)
+![Lolipop WAF Settings](../images/2025/lolipop-waf-domain-settings.png)
 
 上の画像のように、設定項目が分かれていることに気づかず、使っていない方のドメイン設定を一生懸命調整していたのです。
 これではいくら設定を変えても、実際のエンドポイントには何の影響もありません。

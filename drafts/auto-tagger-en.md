@@ -10,7 +10,7 @@ tags:
   - "Node.js"
   - "WordPress REST API"
   - "Efficiency"
-featured_image: "../images/task-scheduler.png"
+featured_image: "../images/2025/task-scheduler.png"
 ---
 
 # Point: Tagging Should Be Automated
@@ -54,7 +54,7 @@ for (const tag of allTags) {
 Furthermore, I registered this script with the **Windows Task Scheduler**.
 Now, even while I sleep, my PC automatically patrols the site and organizes the tags.
 
-![Task Scheduler Settings](../images/task-scheduler.png)
+![Task Scheduler Settings](../images/2025/task-scheduler.png)
 
 As shown in the image, it simply triggers the script via PowerShell periodically.
 

@@ -24,13 +24,13 @@ This article explains the steps to bypass this warning screen and execute your s
 When you run the script, you will first see this dialog.
 Click **"Review permissions"**.
 
-![Authorization required](../images/gas-auth-01-required.png)
+![Authorization required](../images/2025/gas-auth-01-required.png)
 
 ## Step 2: Choose an Account
 
 Select the Google account you want to use to run the script.
 
-![Choose an account](../images/gas-auth-02-choose-account.png)
+![Choose an account](../images/2025/gas-auth-02-choose-account.png)
 
 ## Step 3: Bypass the Warning Screen (Important)
 
@@ -39,7 +39,7 @@ You might be tempted to click the blue "Back to safety" button, but **do not cli
 
 Instead, click the **"Advanced"** link in the bottom left corner.
 
-![Click Advanced](../images/gas-auth-03-advanced.png)
+![Click Advanced](../images/2025/gas-auth-03-advanced.png)
 
 ## Step 4: Go to the "Unsafe" Page
 
@@ -48,14 +48,14 @@ Click **"Go to [Project Name] (unsafe)"**.
 
 *Note: It says "unsafe", but this just means it hasn't been verified by Google. If it's your own script, it is safe to proceed.*
 
-![Go to unsafe page](../images/gas-auth-04-unsafe.png)
+![Go to unsafe page](../images/2025/gas-auth-04-unsafe.png)
 
 ## Step 5: Allow Access
 
 Finally, you will see what the script is requesting access to (e.g., Edit access to Spreadsheets).
 Review the permissions and click **"Allow"** at the bottom.
 
-![Click Allow](../images/gas-auth-05-allow.png)
+![Click Allow](../images/2025/gas-auth-05-allow.png)
 
 ## Done
 

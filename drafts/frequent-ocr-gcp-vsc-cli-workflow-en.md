@@ -12,7 +12,7 @@ tags:
   - Workflow
 status: publish
 slug: frequent-ocr-gcp-vsc-cli-workflow-en
-featured_image: ../images/twitterposttool/cloud-vision-api-ocr.png
+featured_image: ../images/2025/twitterposttool/cloud-vision-api-ocr.png
 ---
 
 When you start performing OCR (Optical Character Recognition) **continuously and frequently** rather than as a one-off task, the criteria for selecting tools changes dramatically.

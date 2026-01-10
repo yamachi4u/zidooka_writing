@@ -11,7 +11,7 @@ tags:
   - "HN-300T2"
   - "Review"
   - "Diet"
-featured_image: "../images/omron-app-home.png"
+featured_image: "../images/2025/omron-app-home.png"
 ---
 
 # 3000円台で買える「生活を変える」ガジェット
@@ -22,7 +22,7 @@ featured_image: "../images/omron-app-home.png"
 私はこれまで「記録するのが面倒くさい」という理由で何度も挫折してきました。
 しかし、**オムロンの体重計「HN-300T2」** に買い替えてから、半年以上も記録が続いています。しかも、**体重が確実に減っています。**
 
-![Omron App Home](../images/omron-app-home.png)
+![Omron App Home](../images/2025/omron-app-home.png)
 
 今回は、私が実際に愛用しているこの体重計について、**「なぜ3000円台の安いモデルで十分なのか」「どうやって習慣化したのか」**をレビューします。
 
@@ -34,7 +34,7 @@ featured_image: "../images/omron-app-home.png"
 Amazonや楽天で探すと、謎のメーカーの激安体重計もたくさん出てきます。しかし、接続が不安定だったり、アプリが怪しかったりするのは避けたかった。
 その点、オムロン製で3000円〜4000円台というのは驚異的なコスパでした。
 
-![Device List](../images/omron-device-list.png)
+![Device List](../images/2025/omron-device-list.png)
 
 # ここが凄い1：乗るだけで勝手に記録される
 
@@ -47,7 +47,7 @@ Amazonや楽天で探すと、謎のメーカーの激安体重計もたくさ�
 これだけです。
 同期されると、スマホにこんな通知が静かに届きます。
 
-![Notification](../images/omron-notification.png)
+![Notification](../images/2025/omron-notification.png)
 
 「OMRON connect - メッセージを受信しました」
 この通知を見ると、「あ、ちゃんと記録されたな」と安心できます。アプリをわざわざ開いて同期ボタンを押す必要すらありません。
@@ -58,10 +58,10 @@ Amazonや楽天で探すと、謎のメーカーの激安体重計もたくさ�
 安い体重計のアプリはグラフが見にくかったりしますが、これはさすが医療機器メーカー。
 
 ## 月間グラフ：日々の増減がわかる
-![Monthly Graph](../images/omron-graph-monthly.png)
+![Monthly Graph](../images/2025/omron-graph-monthly.png)
 
 ## 年間グラフ：長期トレンドが見える
-![Yearly Graph](../images/omron-graph-yearly.png)
+![Yearly Graph](../images/2025/omron-graph-yearly.png)
 
 見てください、この**綺麗な右肩下がり**（自画自賛）。
 9月〜10月の平均が **73.28kg** でしたが、現在は **71.80kg** まで落ちています。

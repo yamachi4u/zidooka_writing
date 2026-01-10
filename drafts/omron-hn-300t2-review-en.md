@@ -11,7 +11,7 @@ tags:
   - "HN-300T2"
   - "Review"
   - "Diet"
-featured_image: "../images/omron-app-home.png"
+featured_image: "../images/2025/omron-app-home.png"
 ---
 
 # A $30 Gadget That Changed My Life
@@ -22,7 +22,7 @@ Let me ask you: Are you keeping up with your weight management?
 I used to fail constantly because "recording it manually is a pain."
 However, since I switched to the **Omron HN-300T2**, I've been keeping records for over six months. And more importantly, **my weight is definitely going down.**
 
-![Omron App Home](../images/omron-app-home.png)
+![Omron App Home](../images/2025/omron-app-home.png)
 
 In this review, I'll explain **why this cheap model (around $30-$40) is more than enough** and **how it helped me build a habit.**
 
@@ -33,7 +33,7 @@ I chose the **HN-300T2** for a simple reason: **"It was the cheapest reliable op
 If you search on Amazon, you'll find tons of super-cheap scales from unknown brands. But I wanted to avoid unstable connections or shady apps.
 In that regard, getting an Omron product for this price range was an incredible value.
 
-![Device List](../images/omron-device-list.png)
+![Device List](../images/2025/omron-device-list.png)
 
 # Killer Feature 1: Just Step On, It Records Automatically
 
@@ -46,7 +46,7 @@ The biggest benefit of this scale is that **you don't need to take out your phon
 That's it.
 When it syncs, you get a quiet notification on your phone like this:
 
-![Notification](../images/omron-notification.png)
+![Notification](../images/2025/omron-notification.png)
 
 "OMRON connect - Message received."
 Seeing this notification gives me peace of mind, knowing "Okay, it's recorded." You don't even need to open the app and press a sync button.
@@ -57,10 +57,10 @@ The dedicated app "OMRON connect" is excellent.
 Cheap scales often have terrible apps, but this is from a medical equipment manufacturer, so it's solid.
 
 ## Monthly Graph: See Daily Fluctuations
-![Monthly Graph](../images/omron-graph-monthly.png)
+![Monthly Graph](../images/2025/omron-graph-monthly.png)
 
 ## Yearly Graph: See Long-Term Trends
-![Yearly Graph](../images/omron-graph-yearly.png)
+![Yearly Graph](../images/2025/omron-graph-yearly.png)
 
 Look at this **beautiful downward trend** (if I do say so myself).
 My average in September-October was **73.28kg**, but now it's down to **71.80kg**.

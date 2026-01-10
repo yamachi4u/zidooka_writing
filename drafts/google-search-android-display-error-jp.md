@@ -11,7 +11,7 @@ tags:
   - "Chrome"
   - "エラー"
   - "トラブルシューティング"
-featured_image: "../images/google-search-error-android.png"
+featured_image: "../images/2025/google-search-error-android.png"
 ---
 
 ## はじめに
@@ -25,7 +25,7 @@ AndroidスマートフォンでGoogle検索（search.google.com）を開いた�
 
 この記事では、**実際に多く報告されている原因**と、**上から順に試せばほぼ解決する対処法**を整理します。
 
-![Google検索エラー](../images/google-search-error-android.png)
+![Google検索エラー](../images/2025/google-search-error-android.png)
 
 ---
 

@@ -12,7 +12,7 @@ tags:
   - "Site Architecture"
   - "Data Analysis"
   - "Blog Strategy"
-featured_image: "../images/export-all-urls-screen.png"
+featured_image: "../images/2025/export-all-urls-screen.png"
 ---
 
 # 結論：記事数が増えたら「AI編集長」に相談せよ
@@ -30,7 +30,7 @@ featured_image: "../images/export-all-urls-screen.png"
 この状況を打開するために実施したのが、**「Export All URLs」プラグインで全データを抜き出し、ChatGPTにSEO診断させる** という手法です。
 これが驚くほど効果的だったので、その具体的な手順と成果を共有します。
 
-![Export All URLsの画面](../images/export-all-urls-screen.png)
+![Export All URLsの画面](../images/2025/export-all-urls-screen.png)
 
 # 1. 「Export All URLs」とは？
 
@@ -59,7 +59,7 @@ WordPressのプラグインで、サイト内の全記事のURL、タイトル�
 
 自分では気づかなかった「客観的な強み」が言語化されました。
 
-![ChatGPTによる分析の様子](../images/chatgpt-seo-analysis.png)
+![ChatGPTによる分析の様子](../images/2025/chatgpt-seo-analysis.png)
 
 ## Step 2: 検索意図のマッピング
 
@@ -85,7 +85,7 @@ WordPressのプラグインで、サイト内の全記事のURL、タイトル�
 
 この「棚卸し」を実施し、指摘されたポイントを修正した結果、以下のような変化がありました。
 
-![SEO成果のイメージ](../images/seo-results.png)
+![SEO成果のイメージ](../images/2025/seo-results.png)
 
 1.  **インデックス速度の向上:** 孤立していた記事に内部リンクを通したことで、クローラーの回遊率が上がりました。
 2.  **メディアとしての一貫性:** サイト全体のテーマが明確になり、回遊率（PV/セッション）が改善しました。

@@ -10,7 +10,7 @@ tags:
   - Child Theme
 status: publish
 slug: wordpress-featured-image-troubleshoot-en
-featured_image: ../images/thumbnails.png
+featured_image: ../images/2025/thumbnails.png
 ---
 
 In WordPress, you may encounter a frustrating situation where your featured image never appears, no matter what you try. You check functions.php, review single.php, adjust Gutenberg settings, and yet nothing changes. 

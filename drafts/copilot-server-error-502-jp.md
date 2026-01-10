@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: copilot-server-error-502-jp
-featured_image: ../images/image copy 37.png
+featured_image: ../images/2025/image copy 37.png
 ---
 
 VS Code で GitHub Copilot を使っていると、突然以下のエラーが出てチャットが応答しなくなることがあります。

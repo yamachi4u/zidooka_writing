@@ -10,12 +10,12 @@ tags:
   - "Google Apps Script"
   - "TypeError"
   - "null"
-featured_image: "../images/image copy 19.png"
+featured_image: "../images/2025/image copy 19.png"
 ---
 
 # TypeError: Cannot read property 'xxx' of null in Google Apps Script - Prevention Guide
 
-![GAS Null Error Guide](../images/image%20copy%2019.png)
+![GAS Null Error Guide](../images/2025/image%20copy%2019.png)
 
 This article explains another common runtime error in Google Apps Script (GAS): **TypeError: Cannot read property 'xxx' of null**. Although it looks similar to the undefined error, its cause and debugging approach are slightly different. Understanding this distinction is essential for stable GAS development.
 

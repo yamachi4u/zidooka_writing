@@ -10,7 +10,7 @@ tags:
   - 子テーマ
 status: publish
 slug: wordpress-featured-image-troubleshoot-jp
-featured_image: ../images/thumbnails.png
+featured_image: ../images/2025/thumbnails.png
 ---
 
 WordPressでサムネイル（アイキャッチ画像）が表示されない問題は、とにかく混乱しやすいトラブルです。functions.php を直しても、single.php を見直しても、何も変わらない。結果として「もう意味がわからない」状態になります。

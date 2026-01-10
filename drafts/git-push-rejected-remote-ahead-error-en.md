@@ -10,7 +10,7 @@ tags:
   - git
 status: publish
 slug: git-push-rejected-remote-ahead-error-en
-featured_image: ../images/git-push-rejected-remote-ahead.png
+featured_image: ../images/2025/git-push-rejected-remote-ahead.png
 ---
 
 When trying to push to GitHub, you might encounter the following error message:

@@ -12,7 +12,7 @@ categories:
 
 `You don't have permission to operate this`
 
-![TikTok Ads Permission Error](../images/tiktok-permission-error/tiktok-permission-error.png)
+![TikTok Ads Permission Error](../images/2025/tiktok-permission-error/tiktok-permission-error.png)
 
 単なる警告表示ではなく、**操作不能 → セッション切断（ログアウト）** まで一気に進む挙動であり、ユーザー側では何も操作していない状態でした。この記事では、実際に発生したこのエラーの状況と、考えられる原因・対処法を整理します。
 

@@ -11,7 +11,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: wordpress-ultimate-redirect-plugin-jp
-featured_image: ../images/wordpress-ultimate-redirect-plugin.png
+featured_image: ../images/2025/wordpress-ultimate-redirect-plugin.png
 ---
 
 WordPressで記事を量産していると、URLの変更や記事統合は避けて通れません。

@@ -2,7 +2,7 @@
 id: 2871
 title: "Rhino時代のコピペコードが危険な理由：V8では壊れる「古いGASの書き方」5選【初心者向け】"
 date: 2025-12-23
-thumbnail: images/gas-rhino-deprecation-warning.png
+thumbnail: images/2025/gas-rhino-deprecation-warning.png
 categories: 
   - GAS Tips
 slug: "gas-rhino-dangerous-code-examples-jp"

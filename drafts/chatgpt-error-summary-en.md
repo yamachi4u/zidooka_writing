@@ -12,7 +12,7 @@ tags:
   - Error
   - Summary
 status: publish
-featured_image: ../images/chatgpt-mobile-error.png
+featured_image: ../images/2025/chatgpt-mobile-error.png
 parent: chatgpt-error-summary-jp
 ---
 

@@ -10,14 +10,14 @@ tags:
   - Productivity
   - Tools
 status: publish
-featured_image: ../images/chrome-reading-mode-01.png
+featured_image: ../images/2025/chrome-reading-mode-01.png
 parent: chrome-reading-mode-review-jp
 ---
 
 I stumbled upon "Reading Mode" while messing around with Chrome.
 I tried it out, and it was incredibly convenient for reading articles, so I'm sharing it.
 
-![Chrome Reading Mode](../images/chrome-reading-mode-01.png)
+![Chrome Reading Mode](../images/2025/chrome-reading-mode-01.png)
 
 ## What is Chrome's "Reading Mode"?
 
@@ -51,11 +51,11 @@ Once you have Reading Mode open, you can pin it to your toolbar for easy access.
 1.  Open Reading Mode (via right-click or address bar).
 2.  Click the **"Pin" icon** in the top right of the side panel.
 
-![Pin Side Panel](../images/chrome-reading-mode-04.png)
+![Pin Side Panel](../images/2025/chrome-reading-mode-04.png)
 
 Now, the "Reading Mode" button will stay on your toolbar. You can toggle it with a single click.
 
-![Pin to Toolbar](../images/chrome-reading-mode-03.png)
+![Pin to Toolbar](../images/2025/chrome-reading-mode-03.png)
 
 *Note: The option often doesn't appear in the Chrome Settings menu, so this method is more reliable.*
 
@@ -71,7 +71,7 @@ You can customize it to your liking with the toolbar at the top of the screen.
 *   **Aa (Text Settings)**: Font size, Font type
 *   **Background Color**: White / Sepia / Dark
 
-![Read Aloud Feature](../images/chrome-reading-mode-05.png)
+![Read Aloud Feature](../images/2025/chrome-reading-mode-05.png)
 
 The "Read Aloud" feature is surprisingly useful.
 You can listen to long articles like a radio, making it great for "listening while working".

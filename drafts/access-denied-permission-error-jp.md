@@ -11,7 +11,7 @@ tags:
   - WAF
   - Troubleshooting
 status: publish
-thumbnail: images/403-error-1.png
+thumbnail: images/2025/403-error-1.png
 ---
 
 ![Access Denied Error](images/403-error-1.png)

@@ -15,7 +15,7 @@ tags:
   - OAuth
   - Error
 status: publish
-featured_image: ../images/gas-authorization-error.png
+featured_image: ../images/2025/gas-authorization-error.png
 ---
 
 Google Apps Script（GAS）や各種 API を使った処理で、

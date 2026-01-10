@@ -11,7 +11,7 @@ Google のサービスや Gmail、Google Classroom などを使っていると�
 
 「**504 エラーが発生しました。しばらくしてからもう一度お試しください。**」
 
-![Google 504 error screen](../images/google-504-error/google-504-error.png)
+![Google 504 error screen](../images/2025/google-504-error/google-504-error.png)
 
 このエラーは、ユーザー側の操作ミスではなく、サーバー間の通信トラブルを示しています。この記事では、このエラーの正体と、ユーザーができる対処法を整理します。
 

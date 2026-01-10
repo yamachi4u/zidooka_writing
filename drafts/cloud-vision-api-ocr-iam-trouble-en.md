@@ -11,7 +11,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: cloud-vision-api-ocr-iam-trouble-en
-featured_image: ../images/twitterposttool/cloud-vision-api-ocr.png
+featured_image: ../images/2025/twitterposttool/cloud-vision-api-ocr.png
 ---
 
 When attempting to execute OCR using the Cloud Vision API, I faced a situation where the process would not proceed at all due to IAM settings.

@@ -1,7 +1,7 @@
 ---
 title: "【緊急】GAS Rhinoランタイム完全終了まであと1週間！今すぐV8へ移行してください"
 date: 2026-01-24
-thumbnail: images/gas-rhino-deprecation-warning.png
+thumbnail: images/2025/gas-rhino-deprecation-warning.png
 categories: 
   - GAS Tips
 slug: "gas-rhino-shutdown-1week-warning-jp"

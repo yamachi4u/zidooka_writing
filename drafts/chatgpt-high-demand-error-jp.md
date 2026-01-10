@@ -10,7 +10,7 @@ tags:
   - AI
   - Troubleshooting
 status: publish
-thumbnail: images/image copy 41.png
+thumbnail: images/2025/image copy 41.png
 ---
 
 ![ChatGPT High Demand Error](images/image%20copy%2041.png)

@@ -10,7 +10,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: copilot-errors-hub-jp
-featured_image: ../images/image copy 37.png
+featured_image: ../images/2025/image copy 37.png
 ---
 
 GitHub Copilot は非常に便利ですが、時折「謎のエラー」で動かなくなることがあります。

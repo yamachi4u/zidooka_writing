@@ -3,7 +3,7 @@ title: '"プレミアム要求の許容量を超えました" と表示された
 date: 2025-12-21
 categories: [AI, Copilot &amp; VS Code Errors]
 tags: [GitHub Copilot, VS Code, Error, Troubleshooting]
-thumbnail: ../images/image copy 32.png
+thumbnail: ../images/2025/image copy 32.png
 ---
 
 VS Code で GitHub Copilot を使っていると、突然チャット欄に以下のようなメッセージが表示されることがあります。

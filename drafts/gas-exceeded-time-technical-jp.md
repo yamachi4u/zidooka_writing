@@ -10,7 +10,7 @@ tags:
   - Code Snippet
 status: publish
 slug: gas-exceeded-time-technical-jp
-featured_image: ../images/image copy 39.png
+featured_image: ../images/2025/image copy 39.png
 ---
 
 Google Apps Script (GAS) で最も厄介なエラーの一つである `Exceeded maximum execution time` について、技術的な発生条件と、それを回避するための**汎用的なコードパターン（テンプレート）**を解説します。

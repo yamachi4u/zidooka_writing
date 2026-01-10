@@ -11,7 +11,7 @@ tags:
   - "Chrome"
   - "Error"
   - "Troubleshooting"
-featured_image: "../images/google-search-error-android.png"
+featured_image: "../images/2025/google-search-error-android.png"
 ---
 
 ## Introduction
@@ -25,7 +25,7 @@ This error often persists even after reloading the page. It is particularly comm
 
 This article outlines the **most common causes reported by users** and provides a **step-by-step troubleshooting guide** that resolves the issue in most cases.
 
-![Google Search Error](../images/google-search-error-android.png)
+![Google Search Error](../images/2025/google-search-error-android.png)
 
 ---
 

@@ -24,13 +24,13 @@ Google Apps Script (GAS) を初めて実行する際、または新しい権限�
 スクリプトを実行すると、最初に以下のダイアログが出ます。
 「権限を確認」をクリックします。
 
-![承認が必要です](../images/gas-auth-01-required.png)
+![承認が必要です](../images/2025/gas-auth-01-required.png)
 
 ## 手順2：アカウントの選択
 
 実行するGoogleアカウントを選択します。
 
-![アカウントの選択](../images/gas-auth-02-choose-account.png)
+![アカウントの選択](../images/2025/gas-auth-02-choose-account.png)
 
 ## 手順3：警告画面の突破（ここが重要）
 
@@ -39,7 +39,7 @@ Google Apps Script (GAS) を初めて実行する際、または新しい権限�
 
 左下にある **「詳細 (Advanced)」** というリンクをクリックしてください。
 
-![詳細リンクをクリック](../images/gas-auth-03-advanced.png)
+![詳細リンクをクリック](../images/2025/gas-auth-03-advanced.png)
 
 ## 手順4：安全ではないページへ移動
 
@@ -48,14 +48,14 @@ Google Apps Script (GAS) を初めて実行する際、または新しい権限�
 
 ※「安全ではない」と書かれていますが、これは「Googleの審査を受けていない」という意味です。自作スクリプトならそのまま進んでOKです。
 
-![安全ではないページへ移動](../images/gas-auth-04-unsafe.png)
+![安全ではないページへ移動](../images/2025/gas-auth-04-unsafe.png)
 
 ## 手順5：アクセスの許可
 
 最後に、スクリプトが何にアクセスしようとしているか（スプレッドシートの編集権限など）が表示されます。
 内容を確認し、一番下の **「許可 (Allow)」** をクリックします。
 
-![許可をクリック](../images/gas-auth-05-allow.png)
+![許可をクリック](../images/2025/gas-auth-05-allow.png)
 
 ## 完了
 

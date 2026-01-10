@@ -12,7 +12,7 @@ tags:
   - Internal Linking
   - Node.js
 status: publish
-featured_image: ../images/ai-seo-workflow-01.png
+featured_image: ../images/2025/ai-seo-workflow-01.png
 parent: ai-seo-automation-workflow-jp
 ---
 
@@ -24,7 +24,7 @@ At ZIDOOKA!, we dramatically streamlined this "muddy SEO work" by combining **AI
 
 Today, I'm sharing a next-generation SEO workflow: **"Export all posts to JSON, feed it to AI, and automatically generate & publish summary (hub) articles."**
 
-![AI SEO Workflow](../images/ai-seo-workflow-01.png)
+![AI SEO Workflow](../images/2025/ai-seo-workflow-01.png)
 
 ## The Hell of Manual "Summary Creation"
 
@@ -49,7 +49,7 @@ Here is the flow we implemented:
 All the human did was "give instructions".
 **Total time for 4 articles (JP/EN × 2 themes) was just a few minutes.**
 
-![Workflow Diagram](../images/ai-seo-workflow-02.png)
+![Workflow Diagram](../images/2025/ai-seo-workflow-02.png)
 
 ### Step 1: JSON-ify All Articles
 

@@ -11,7 +11,7 @@ tags:
   - トラブルシューティング
 status: publish
 slug: gas-err-too-many-redirects
-featured_image: ../images/gas-timeout-error.png
+featured_image: ../images/2025/gas-timeout-error.png
 ---
 
 Google Apps Script（GAS）の管理画面を開こうとしたところ、以下のエラーが表示されてアクセスできない現象に遭遇しました。

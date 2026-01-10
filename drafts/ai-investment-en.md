@@ -9,7 +9,7 @@ tags:
   - Productivity
 status: future
 slug: ai-spending-investment-en
-featured_image: ../images/image copy 26.png
+featured_image: ../images/2025/image copy 26.png
 ---
 
 To be honest, I realized I might be using it a bit too much. A few dollars a month turned into about $20. Looking only at the numbers, that’s a decent amount.

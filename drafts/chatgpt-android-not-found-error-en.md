@@ -11,7 +11,7 @@ tags:
   - Troubleshooting
 status: publish
 slug: chatgpt-android-not-found-error-en
-featured_image: ../images/image copy 38.png
+featured_image: ../images/2025/image copy 38.png
 ---
 
 When using the ChatGPT Android app, you may sometimes see “Message failed to send” followed by a “Not Found” error. Although it looks serious, this issue is usually not caused by your message or account.

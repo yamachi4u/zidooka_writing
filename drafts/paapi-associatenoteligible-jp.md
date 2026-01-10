@@ -4,7 +4,7 @@ slug: paapi-associatenoteligible-jp
 categories: [AmazonAssociate]
 tags: [Amazon Product Advertising API, エラー, 利用要件, AssociateNotEligible]
 date: 2025-12-21
-thumbnail: ../images/image copy 33.png
+thumbnail: ../images/2025/image copy 33.png
 status: publish
 ---
 

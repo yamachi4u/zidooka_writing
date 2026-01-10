@@ -9,7 +9,7 @@ tags:
   - "Lolipop"
   - "SiteGuard"
   - "REST API"
-featured_image: "../images/403-error-1.png"
+featured_image: "../images/2025/403-error-1.png"
 ---
 
 # 結論：WAFを疑う前に「SiteGuard」を見ろ
@@ -38,7 +38,7 @@ WordPressのREST APIを使って画像をアップロードしようとしたら
 
 そこで「SiteGuard」の設定画面を確認したところ……。
 
-![SiteGuardの設定](../images/403-error-2.png)
+![SiteGuardの設定](../images/2025/403-error-2.png)
 
 こいつです。
 特に **「ログインしていないユーザーのREST APIアクセスを制限する」** といった設定がONになっていると、Application Passwordsを使っていても弾かれることがあります。

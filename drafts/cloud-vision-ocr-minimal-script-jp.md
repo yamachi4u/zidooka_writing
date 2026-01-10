@@ -11,7 +11,7 @@ tags:
   - Code Snippet
 status: publish
 slug: cloud-vision-ocr-minimal-script-jp
-featured_image: ../images/image copy 25.png
+featured_image: ../images/2025/image copy 25.png
 ---
 
 Cloud Vision API の OCR を実務で使う際、

@@ -11,7 +11,7 @@ tags:
   - Tooling
 status: publish
 slug: cloud-vision-ocr-cli-tool-en
-featured_image: ../images/twitterposttool/cloud-vision-api-ocr.png
+featured_image: ../images/2025/twitterposttool/cloud-vision-api-ocr.png
 ---
 
 The Cloud Vision API's OCR is highly accurate and excellent for processing entire PDFs at once. However, using the official samples as-is is a bit lacking for continuous practical use.

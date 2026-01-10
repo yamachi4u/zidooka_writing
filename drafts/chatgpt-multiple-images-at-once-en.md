@@ -9,12 +9,12 @@ tags:
   - "Image Generation"
   - "DALL-E"
   - "New Feature"
-featured_image: "../images/スクリーンショット 2025-12-16 133951.png"
+featured_image: "../images/2025/スクリーンショット 2025-12-16 133951.png"
 ---
 
 # ChatGPT "You can now make multiple images at a time" — It's Not an Error, It's a Feature Announcement
 
-![You can now ask ChatGPT to make multiple images at a time.](../images/スクリーンショット%202025-12-16%20133951.png)
+![You can now ask ChatGPT to make multiple images at a time.](../images/2025/スクリーンショット%202025-12-16%20133951.png)
 
 While generating images in ChatGPT, this message suddenly appeared:
 
@@ -38,7 +38,7 @@ But with this update,
 
 **You can now request the next image even while one is generating**
 
-![Two images being generated simultaneously](../images/image%20copy%2018.png)
+![Two images being generated simultaneously](../images/2025/image%20copy%2018.png)
 
 ## How Can You Use This?
 

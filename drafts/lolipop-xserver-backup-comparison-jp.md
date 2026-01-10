@@ -10,12 +10,12 @@ tags:
   - "ロリポップ"
   - "バックアップ"
   - "比較"
-featured_image: "../images/lolipop-waf-domain-settings.png"
+featured_image: "../images/2025/lolipop-waf-domain-settings.png"
 ---
 
 # ロリポップを使ってみて気づいた「意外なデメリット」バックアップ込みで比較すると、エックスサーバーの見え方が変わった
 
-![サムネイル](../images/lolipop-waf-domain-settings.png)
+![サムネイル](../images/2025/lolipop-waf-domain-settings.png)
 
 レンタルサーバー選びでは、どうしても月額料金の安さに目が行きがちです。
 私自身も最初は、「個人サイトならロリポップで十分だろう」と思っていました。

@@ -10,7 +10,7 @@ tags:
   - Hobby Plan
 status: publish
 slug: vercel-hobby-cron-limit-daily-error-jp
-featured_image: ../images/vercel-hobby-cron-limit.png
+featured_image: ../images/2025/vercel-hobby-cron-limit.png
 ---
 
 VercelでCron Jobsを設定したところ、以下のようなエラーが表示されてデプロイに失敗することがあります。

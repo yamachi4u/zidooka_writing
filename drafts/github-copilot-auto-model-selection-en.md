@@ -10,12 +10,12 @@ tags:
   - "AI"
   - "Productivity"
   - "Cost Optimization"
-featured_image: "../images/image copy 16.png"
+featured_image: "../images/2025/image copy 16.png"
 ---
 
 # GitHub Copilot's "Auto" Model Selection is Quietly Revolutionary — Especially When You're Paying After Using Up Free Tier
 
-![Claude Sonnet 4.5 showing 0.9x (10% discount)](../images/image%20copy%2016.png)
+![Claude Sonnet 4.5 showing 0.9x (10% discount)](../images/2025/image%20copy%2016.png)
 
 Recently, **"Auto" model selection** was added to Copilot in VS Code.
 Honestly, at first I thought, "Oh, just another convenient-looking setting they added."
@@ -36,7 +36,7 @@ These thoughts **constantly lingered somewhere in my mind**.
 
 This is subtle, but it definitely **consumes mental resources**.
 
-![Screen showing model selection in VS Code](../images/image%20copy%2017.png)
+![Screen showing model selection in VS Code](../images/2025/image%20copy%2017.png)
 
 ## What Auto Does is Actually Quite Fundamental
 

@@ -81,7 +81,7 @@ Enter the following headers in the first row:
 *   Column E: `status`
 *   Column F: `error`
 
-![Spreadsheet Preparation](../images/wp-x-tool-03.png)
+![Spreadsheet Preparation](../images/2025/wp-x-tool-03.png)
 
 Note down the `ID` part of this spreadsheet's URL (the string between `/d/` and `/edit`), as you will need it later.
 
@@ -102,7 +102,7 @@ From the **"Keys and tokens"** tab, get the following 4 pieces of information:
 
 *Note: When generating the Access Token, make sure to grant **"Read and Write"** permissions.*
 
-![X Developer Portal](../images/wp-x-tool-02.png)
+![X Developer Portal](../images/2025/wp-x-tool-02.png)
 
 ### Step 4: Set Script Properties
 
@@ -117,14 +117,14 @@ In the **"Script Properties"** section at the bottom, set the keys you just obta
 | `X_ACCESS_SECRET` | (Your Access Token Secret) |
 | `LOG_SHEET_ID` | (Your Spreadsheet ID) |
 
-![Script Properties](../images/wp-x-tool-01.png)
+![Script Properties](../images/2025/wp-x-tool-01.png)
 
 ### Step 5: Paste the Code
 
 Go back to the "Editor (`<>` icon)" on the left and replace the entire content of `Code.gs` with the following code.
 No external libraries are required.
 
-![Paste Code](../images/wp-x-tool-07.png)
+![Paste Code](../images/2025/wp-x-tool-07.png)
 
 ```javascript
 function doPost(e) {
@@ -250,7 +250,7 @@ Click **"Deploy" -> "New deployment"** in the top right.
 3.  **Execute as**: `Me`.
 4.  **Who has access**: **`Anyone`** ← **Important!**
 
-![Deployment Settings](../images/wp-x-tool-05.png)
+![Deployment Settings](../images/2025/wp-x-tool-05.png)
 
 Click "Deploy" to generate a URL (Web App URL).
 Copy this URL (you will use it in the WordPress settings).
@@ -327,7 +327,7 @@ I've started using this setup, and the **stability is on another level**.
 2.  **Easy Retry**: Even if it fails, you can retry just by hitting the GAS endpoint again.
 3.  **High Extensibility**: Extensions like "changing hashtags by category" or "posting to Bluesky simultaneously" can be done entirely within GAS.
 
-![Log Screen](../images/wp-x-tool-06.png)
+![Log Screen](../images/2025/wp-x-tool-06.png)
 
 ## Summary
 

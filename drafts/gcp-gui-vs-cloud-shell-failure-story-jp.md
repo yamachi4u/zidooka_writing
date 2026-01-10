@@ -11,7 +11,7 @@ tags:
   - Security
 status: publish
 slug: gcp-gui-vs-cloud-shell-failure-story-jp
-featured_image: ../images/image copy 24.png
+featured_image: ../images/2025/image copy 24.png
 ---
 
 正直に言うと、

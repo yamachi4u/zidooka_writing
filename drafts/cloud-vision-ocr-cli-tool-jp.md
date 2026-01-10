@@ -11,7 +11,7 @@ tags:
   - Tooling
 status: publish
 slug: cloud-vision-ocr-cli-tool-jp
-featured_image: ../images/twitterposttool/cloud-vision-api-ocr.png
+featured_image: ../images/2025/twitterposttool/cloud-vision-api-ocr.png
 ---
 
 Cloud Vision API の OCR は精度が高く、PDF 全体をまとめて処理できる点でも非常に優秀です。ただし、公式サンプルをそのまま使うだけでは、実務で継続的に使うには少し物足りません。

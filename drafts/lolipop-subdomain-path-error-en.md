@@ -10,7 +10,7 @@ tags:
   - "Lolipop"
   - "WordPress"
   - "Troubleshooting"
-featured_image: "../images/lolipop-subdomain-path-error-msg.png"
+featured_image: "../images/2025/lolipop-subdomain-path-error-msg.png"
 ---
 
 # The Cause of "Invalid Path Format [path.1]" Was a Slash
@@ -22,7 +22,7 @@ I encountered a slightly confusing error when trying to add a new subdomain on L
 
 When I went to "Custom Domain Settings" -> "Subdomain Settings" in the user dashboard and tried to create a new one, I got the following error:
 
-![Error Message](../images/lolipop-subdomain-path-error-msg.png)
+![Error Message](../images/2025/lolipop-subdomain-path-error-msg.png)
 
 > パスの形式に誤りがあります。[path.1] (Invalid path format)
 
@@ -33,7 +33,7 @@ It seemed to be an error with the "Public (Upload) Folder" specification.
 The cause was very simple: I had put a `/` (slash) at the beginning of the folder path.
 
 **× Incorrect (With Slash)**
-![Incorrect Path](../images/lolipop-subdomain-path-with-slash.png)
+![Incorrect Path](../images/2025/lolipop-subdomain-path-with-slash.png)
 
 If you are used to specifying paths in Linux, you might instinctively add a `/` to represent the root, but in the Lolipop settings screen, this is considered a "format error".
 
@@ -42,7 +42,7 @@ If you are used to specifying paths in Linux, you might instinctively add a `/` 
 I was able to register successfully by removing the leading slash and starting directly with the folder name.
 
 **〇 Correct (No Slash)**
-![Correct Path](../images/lolipop-subdomain-path-no-slash.png)
+![Correct Path](../images/2025/lolipop-subdomain-path-no-slash.png)
 
 ## Summary
 

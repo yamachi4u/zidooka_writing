@@ -9,7 +9,7 @@ tags:
   - "Kindle"
   - "トラブルシューティング"
   - "エラー"
-featured_image: "../images/kdp-error-screen.png"
+featured_image: "../images/2025/kdp-error-screen.png"
 ---
 
 # KDPセレクトに登録したのに無料キャンペーンが設定できない！
@@ -17,7 +17,7 @@ featured_image: "../images/kdp-error-screen.png"
 「KDPセレクトに登録した！よし、無料キャンペーンを設定して販促だ！」
 と意気込んで設定画面を開くと、こんなエラーが出ることがあります。
 
-![KDP無料キャンペーンエラー](../images/kdp-error-screen.png)
+![KDP無料キャンペーンエラー](../images/2025/kdp-error-screen.png)
 
 > **現在、この本は無料キャンペーンに登録できません（何故ですか？）**
 
@@ -35,7 +35,7 @@ featured_image: "../images/kdp-error-screen.png"
 
 まず、KDPセレクトの登録状況を確認してみましょう。
 
-![KDPセレクト登録状況](../images/kdp-select-status.png)
+![KDPセレクト登録状況](../images/2025/kdp-select-status.png)
 
 このように「KDPセレクトへの登録状況」が「登録済み」になっており、登録期間中であるにもかかわらず、キャンペーン設定画面では弾かれてしまう。
 これが今回のトラブルの典型的なパターンです。

@@ -10,7 +10,7 @@ tags:
   - Server Config
 status: publish
 slug: wordpress-414-request-uri-too-long-en
-featured_image: ../images/image copy 28.png
+featured_image: ../images/2025/image copy 28.png
 ---
 
 When running a WordPress site, you may occasionally encounter a **414 Error (Request-URI Too Long)**.
