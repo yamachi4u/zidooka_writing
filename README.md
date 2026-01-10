@@ -1,5 +1,9 @@
 # ZIDOOKA-Writer (Agent CLI Mode)
 
+【必読】以下のドキュメントを必ず先に参照してください：
+- `PIPELINE_MANUAL.md`
+- `docs/snippets/emphasis.md`
+
 ## 概要
 チャット上のAIエージェント（GitHub Copilot）がコマンドラインツールを操作して、記事の執筆・画像処理・WordPress投稿を行う。
 ユーザーはチャットで指示を出し、エージェントが裏でNode.jsスクリプトを実行する。
