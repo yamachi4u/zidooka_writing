@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "post": "node src/index.js"
+    "post": "node src/index.js",
+    "remote:agent": "node scripts/remote-agent/index.js"
   },
   "dependencies": {
     "axios": "^1.6.2",
+    "basic-ftp": "^5.0.5",
     "dotenv": "^16.3.1",
     "glob": "^10.3.10",
     "gray-matter": "^4.0.3",
     "marked": "^11.1.0",
     "openai": "^4.24.1",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "ssh2-sftp-client": "^10.0.3"
   }
 }

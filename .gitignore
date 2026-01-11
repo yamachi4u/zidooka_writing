@@ -1,3 +1,5 @@
+/.env
+/tmp_remote_agent/
+
 node_modules/
-.env
-.DS_Store
+
