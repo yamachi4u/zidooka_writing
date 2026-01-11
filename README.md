@@ -1,36 +1,64 @@
-# ZIDOOKA-Writer (Agent CLI Mode)
+# ZIDOOKA Writing (Agent CLI)
 
-【必読】以下のドキュメントを必ず先に参照してください：
-- `PIPELINE_MANUAL.md`
-- `docs/snippets/emphasis.md`
+まず読むもの（Must-Read）
+- `PIPELINE_MANUAL.md`（全体ワークフロー）
+- `docs/snippets/emphasis.md`（強調表現ルール）
 
 ## 概要
-チャット上のAIエージェント（GitHub Copilot）がコマンドラインツールを操作して、記事の執筆・画像処理・WordPress投稿を行う。
-ユーザーはチャットで指示を出し、エージェントが裏でNode.jsスクリプトを実行する。
+CLI 経由で記事の作成・校正・画像処理・WordPress 投稿を行うためのワークスペースです。AI アシスタントが指示に従って Node.js スクリプトを実行します。
 
-## ワークフロー
-1. **執筆**: ユーザーがテーマを指定 → エージェントが `src/writer.js` を実行 → `drafts/` にMarkdown生成。
-2. **確認**: エージェントがMarkdownを表示 → ユーザーが承認。
-3. **投稿**: エージェントが `src/poster.js` を実行 → WordPressに投稿完了。
+## ワークフロー（概要）
+1. メタデータ同期: `node src/index.js sync`（カテゴリ/タグのローカル更新）
+2. 下書き作成: `drafts/` に Markdown を作成（Frontmatter ルールは `PIPELINE_MANUAL.md`）
+3. 投稿/更新: `node src/index.js post drafts/xxx.md`
 
 ## ディレクトリ構成
 ```
-/zidooka-writing
-  ├── drafts/           # 生成された記事 (Markdown)
-  ├── images/           # 画像素材置き場
-  ├── src/
-  │   ├── index.js      # メインエントリ
-  │   ├── writer.js     # 記事生成ロジック (OpenAI)
-  │   ├── vision.js     # 画像解析ロジック (OpenAI Vision)
-  │   ├── wp.js         # WordPress APIクライアント
-  │   └── utils.js      # ユーティリティ
+zidooka-writing/
   ├── data/
-  │   └── metadata.json # カテゴリ・タグのキャッシュ
-  ├── .env              # APIキー
+  │   └── metadata.json
+  ├── drafts/
+  ├── images/
+  ├── scripts/
+  │   └── remote-agent/   # リモート編集用ユーティリティ
+  ├── src/
+  │   ├── index.js
+  │   ├── writer.js
+  │   ├── vision.js
+  │   ├── wp.js
+  │   └── utils.js
+  ├── docs/
+  │   └── REMOTE_UPLOAD.md
+  ├── .env
   └── package.json
 ```
 
-## コマンド (エージェント用)
-- `node src/index.js write "テーマ" --images ./images` : 記事を作成
-- `node src/index.js post drafts/article.md` : 記事を投稿
-- `node src/index.js sync-tags` : WordPressからタグ・カテゴリを取得してキャッシュ
+## コマンド（主要）
+- カテゴリ/タグ同期: `node src/index.js sync`
+- 投稿: `node src/index.js post drafts/article.md`
+
+## リモートアップロード（テーマファイル）
+リモートの WordPress テーマに対し、安全にファイルをアップロードするためのスクリプトを同梱（バックアップ自動作成・許可パス制限あり）。
+
+前提
+- Node.js 18+
+- 依存のインストール: `npm install`
+- `.env` に接続情報と許可パスを設定（例は同梱）
+  - `REMOTE_PROTOCOL=WEBDAV`（または `SFTP` / `FTPS`）
+  - `WEBDAV_URL`, `WEBDAV_USER`, `WEBDAV_PASS`（またはプロトコル別の認証情報）
+  - `REMOTE_BASES="zidooka/wp-content/themes/picostrap5/,zidooka/wp-content/themes/picostrap5-child/,zidooka/wp-content/themes/picostrap5-child-base/"`
+
+接続チェック
+- 許可パス全体: `node scripts/remote-agent/index.js check`
+- ディレクトリ一覧: `node scripts/remote-agent/index.js ls --dir="zidooka/wp-content/themes/picostrap5-child-base/"`
+
+アップロード（リモートに `<file>.bak.<timestamp>` を自動作成）
+- `single.php` を更新:
+  - `node scripts/remote-agent/index.js push --file="zidooka/wp-content/themes/picostrap5-child-base/single.php" --src="C:\\Users\\user\\Documents\\zidooka_writing\\downloads\\picostrap5-child-base\\single.php"`
+- `functions.php` を更新:
+  - `node scripts/remote-agent/index.js push --file="zidooka/wp-content/themes/picostrap5-child-base/functions.php" --src="C:\\Users\\user\\Documents\\zidooka_writing\\downloads\\picostrap5-child-base\\functions.php"`
+
+補足
+- `npm run remote:agent -- <cmd>` でも実行できます。
+- ロールバックは作成された `.bak.<timestamp>` を元ファイル名へ戻すか、ホストのファイルマネージャで復元してください。
+

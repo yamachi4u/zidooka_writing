@@ -11,9 +11,10 @@ Install
 - Run: `npm install`
 
 Environment
-- `REMOTE_PROTOCOL` = `SFTP` | `FTPS` (default `SFTP`)
+- `REMOTE_PROTOCOL` = `SFTP` | `FTPS` | `WEBDAV` (default `SFTP`)
 - If SFTP: `SFTP_HOST`, `SFTP_USER`, `SFTP_PASS` (optional `SFTP_PORT=22`)
 - If FTPS: `FTPS_HOST`, `FTPS_USER`, `FTPS_PASS` (optional `FTPS_PORT=21`)
+- If WEBDAV: `WEBDAV_URL`, `WEBDAV_USER`, `WEBDAV_PASS`
 - `REMOTE_BASES` or `REMOTE_BASE` (comma-separated allowed prefixes)
   - Example for your site: `REMOTE_BASES="zidooka/wp-content/themes/picostrap/,zidooka/wp-content/themes/picostrap-child/"`
 
@@ -41,3 +42,4 @@ Safety
 Notes
 - Uses POSIX-like remote paths (forward slashes) as is typical for shared hosts.
 - Keep edits focused to theme files under `wp-content/themes/<theme>/`.
+- On Lolipop, WebDAV often succeeds when SFTP is unavailable. Use `REMOTE_PROTOCOL=WEBDAV` with `WEBDAV_URL=https://ciao-yamakazu.webdav-lolipop.jp/`.
