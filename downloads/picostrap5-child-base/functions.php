@@ -153,6 +153,35 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment) {
     $attr['decoding'] = 'async';
     return $attr;
 }, 10, 2);
+// 2.1) Front page LCP: preload hero (static front page) and set high priority
+add_action('wp_head', function(){
+    if (!is_front_page()) return;
+     = (int) get_option('page_on_front');
+    if ( <= 0) return; // only when a static front page is set
+     = get_post_thumbnail_id();
+    if (!) return;
+     = wp_get_attachment_image_url(, 'full');
+       = wp_get_attachment_image_srcset(, 'full');
+        = '(min-width: 1024px) 1200px, 100vw';
+    if ( && ) {
+        printf(
+            "<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
+            esc_url(), esc_attr(), esc_attr()
+        );
+    }
+}, 6);
+
+// 2.2) Inline critical CSS on front page if present
+add_action('wp_head', function(){
+    if (!is_front_page()) return;
+    C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php = get_stylesheet_directory() . '/css/critical-home.css';
+    if (file_exists(C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php)) {
+         = file_get_contents(C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php);
+        if ( !== false &&  !== '') {
+            echo "<style id=\"zdk-critical-home\">{}</style>\n";
+        }
+    }
+}, 7);
 
 // 3) Comments: mark user links as UGC/nofollow
 add_filter('comment_text', function ($comment_text) {
