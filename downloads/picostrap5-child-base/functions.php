@@ -184,11 +184,14 @@ add_action('wp_head', function(){
 }, 7);
 
 // 2.3) Force eager/high priority for the front-page featured image
+// 2.3) Force eager/high priority for the front-page featured image
 add_filter('post_thumbnail_html', function(
   $html, $post_id, $post_thumbnail_id, $size, $attr
 ){
   if (!is_front_page()) return $html;
+  // only target the front page's own thumbnail
   if ((int) get_option('page_on_front') !== (int) $post_id) return $html;
+  // inject loading and fetchpriority attributes if missing
   if (strpos($html, 'loading=') === false) {
     $html = str_replace('<img', '<img loading="eager"', $html);
   } else {
@@ -914,22 +917,23 @@ function zidooka_category_list_shortcode($atts) {
 add_shortcode('zidooka_cat_list', 'zidooka_category_list_shortcode');
 
 // 2.3) Force eager/high priority for the front-page featured image
+// 2.3) Force eager/high priority for the front-page featured image
 add_filter('post_thumbnail_html', function(
-  , , , , 
+  $html, $post_id, $post_thumbnail_id, $size, $attr
 ){
-  if (!is_front_page()) return ;
+  if (!is_front_page()) return $html;
   // only target the front page's own thumbnail
-  if ((int) get_option('page_on_front') !== (int) ) return ;
+  if ((int) get_option('page_on_front') !== (int) $post_id) return $html;
   // inject loading and fetchpriority attributes if missing
-  if (strpos(, 'loading=') === false) {
-     = str_replace('<img', '<img loading="eager"', );
+  if (strpos($html, 'loading=') === false) {
+    $html = str_replace('<img', '<img loading="eager"', $html);
   } else {
-     = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=', , 1);
+    $html = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $html, 1);
   }
-  if (strpos(, 'fetchpriority=') === false) {
-     = str_replace('<img', '<img fetchpriority="high"', );
+  if (strpos($html, 'fetchpriority=') === false) {
+    $html = str_replace('<img', '<img fetchpriority="high"', $html);
   } else {
-     = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=', , 1);
+    $html = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $html, 1);
   }
-  return ;
+  return $html;
 }, 10, 5);

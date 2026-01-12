@@ -14,7 +14,7 @@ get_header();
 <div class="container content-area">
     <div class="row g-4">
         <!-- メインコンテンツエリア -->
-        <main class="col-lg-8">
+        <main class="col-lg-8">            <h1 class="h2 site-title mb-3"><?php echo esc_html(get_bloginfo('name')); ?></h1>
             <!-- 検索フォーム -->
             <div class="mb-5">
                 <form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
