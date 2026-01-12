@@ -1,0 +1,11 @@
+# Security headers (start conservatively; adjust per site needs)
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # CSP: start in Report-Only to avoid breakage; switch to enforce after validation
+  Header set Content-Security-Policy-Report-Only "default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://www.zidooka.com; style-src 'self' 'unsafe-inline' https:; font-src 'self' data: https:; connect-src 'self' https:; frame-src https://www.youtube.com https://ads.google.com https://tpc.googlesyndication.com https://*.doubleclick.net; report-uri /csp-report"
+</IfModule>
+

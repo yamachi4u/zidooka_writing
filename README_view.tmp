@@ -1,0 +1,36 @@
+﻿# ZIDOOKA-Writer (Agent CLI Mode)
+
+縲仙ｿ・ｪｭ縲台ｻ･荳九・繝峨く繝･繝｡繝ｳ繝医ｒ蠢・★蜈医↓蜿ら・縺励※縺上□縺輔＞・・- `PIPELINE_MANUAL.md`
+- `docs/snippets/emphasis.md`
+
+## 讎りｦ・
+繝√Ε繝・ヨ荳翫・AI繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝茨ｼ・itHub Copilot・峨′繧ｳ繝槭Φ繝峨Λ繧､繝ｳ繝・・繝ｫ繧呈桃菴懊＠縺ｦ縲∬ｨ倅ｺ九・蝓ｷ遲・・逕ｻ蜒丞・逅・・WordPress謚慕ｨｿ繧定｡後≧縲・
+繝ｦ繝ｼ繧ｶ繝ｼ縺ｯ繝√Ε繝・ヨ縺ｧ謖・､ｺ繧貞・縺励√お繝ｼ繧ｸ繧ｧ繝ｳ繝医′陬上〒Node.js繧ｹ繧ｯ繝ｪ繝励ヨ繧貞ｮ溯｡後☆繧九・
+
+## 繝ｯ繝ｼ繧ｯ繝輔Ο繝ｼ
+1. **蝓ｷ遲・*: 繝ｦ繝ｼ繧ｶ繝ｼ縺後ユ繝ｼ繝槭ｒ謖・ｮ・竊・繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝医′ `src/writer.js` 繧貞ｮ溯｡・竊・`drafts/` 縺ｫMarkdown逕滓・縲・
+2. **遒ｺ隱・*: 繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝医′Markdown繧定｡ｨ遉ｺ 竊・繝ｦ繝ｼ繧ｶ繝ｼ縺梧価隱阪・
+3. **謚慕ｨｿ**: 繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝医′ `src/poster.js` 繧貞ｮ溯｡・竊・WordPress縺ｫ謚慕ｨｿ螳御ｺ・・
+
+## 繝・ぅ繝ｬ繧ｯ繝医Μ讒区・
+```
+/zidooka-writing
+  笏懌楳笏 drafts/           # 逕滓・縺輔ｌ縺溯ｨ倅ｺ・(Markdown)
+  笏懌楳笏 images/           # 逕ｻ蜒冗ｴ譚千ｽｮ縺榊ｴ
+  笏懌楳笏 src/
+  笏・  笏懌楳笏 index.js      # 繝｡繧､繝ｳ繧ｨ繝ｳ繝医Μ
+  笏・  笏懌楳笏 writer.js     # 險倅ｺ狗函謌舌Ο繧ｸ繝・け (OpenAI)
+  笏・  笏懌楳笏 vision.js     # 逕ｻ蜒剰ｧ｣譫舌Ο繧ｸ繝・け (OpenAI Vision)
+  笏・  笏懌楳笏 wp.js         # WordPress API繧ｯ繝ｩ繧､繧｢繝ｳ繝・
+  笏・  笏披楳笏 utils.js      # 繝ｦ繝ｼ繝・ぅ繝ｪ繝・ぅ
+  笏懌楳笏 data/
+  笏・  笏披楳笏 metadata.json # 繧ｫ繝・ざ繝ｪ繝ｻ繧ｿ繧ｰ縺ｮ繧ｭ繝｣繝・す繝･
+  笏懌楳笏 .env              # API繧ｭ繝ｼ
+  笏披楳笏 package.json
+```
+
+## 繧ｳ繝槭Φ繝・(繧ｨ繝ｼ繧ｸ繧ｧ繝ｳ繝育畑)
+- `node src/index.js write "繝・・繝・ --images ./images` : 險倅ｺ九ｒ菴懈・
+- `node src/index.js post drafts/article.md` : 險倅ｺ九ｒ謚慕ｨｿ
+- `node src/index.js sync-tags` : WordPress縺九ｉ繧ｿ繧ｰ繝ｻ繧ｫ繝・ざ繝ｪ繧貞叙蠕励＠縺ｦ繧ｭ繝｣繝・す繝･
+

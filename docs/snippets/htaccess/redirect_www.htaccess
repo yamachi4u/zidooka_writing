@@ -1,0 +1,7 @@
+# Force www redirect (non-www -> www)
+# Place in site root .htaccess on Apache with mod_rewrite enabled
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\.zidooka\.com$ [NC]
+RewriteRule ^(.*)$ https://www.zidooka.com/$1 [L,R=301]
+

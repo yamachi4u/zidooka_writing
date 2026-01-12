@@ -43,3 +43,8 @@ Notes
 - Uses POSIX-like remote paths (forward slashes) as is typical for shared hosts.
 - Keep edits focused to theme files under `wp-content/themes/<theme>/`.
 - On Lolipop, WebDAV often succeeds when SFTP is unavailable. Use `REMOTE_PROTOCOL=WEBDAV` with `WEBDAV_URL=https://ciao-yamakazu.webdav-lolipop.jp/`.
+
+## Upload Log
+- Pushed fixed `single.php` to remote (picostrap5-child-base).
+- Command: `node scripts/remote-agent/index.js push --file=zidooka/wp-content/themes/picostrap5-child-base/single.php --src=downloads/picostrap5-child-base/single.php`
+- A remote backup was created automatically with `.bak.<timestamp>`.
