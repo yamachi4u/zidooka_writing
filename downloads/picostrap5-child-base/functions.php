@@ -968,3 +968,10 @@ add_filter('comment_form_fields', function($fields){
     if (isset($fields['url'])) unset($fields['url']);
     return $fields;
 }, 99);
+// 2.7) Normalize content URLs: convert ../wp-content/... to /wp-content/...
+add_filter('the_content', function($content){
+    // Fix src/href attributes that mistakenly start with ../wp-content
+    $pattern = '/\b(src|href)=(\"|\')\.\.\/wp-content\//i';
+    $replace = '$1=$2/wp-content/';
+    return preg_replace($pattern, $replace, $content);
+}, 20);
