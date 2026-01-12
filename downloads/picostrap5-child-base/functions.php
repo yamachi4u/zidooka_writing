@@ -963,4 +963,8 @@ add_filter('pre_option_require_name_email', function($value){ return '0'; });
 add_filter('comment_form_default_fields', function($fields){
     if (isset($fields['url'])) unset($fields['url']);
     return $fields;
-});
+});// Ensure website field is removed at fields stage as well
+add_filter('comment_form_fields', function($fields){
+    if (isset($fields['url'])) unset($fields['url']);
+    return $fields;
+}, 99);
