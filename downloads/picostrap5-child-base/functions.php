@@ -156,17 +156,17 @@ add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment) {
 // 2.1) Front page LCP: preload hero (static front page) and set high priority
 add_action('wp_head', function(){
     if (!is_front_page()) return;
-     = (int) get_option('page_on_front');
-    if ( <= 0) return; // only when a static front page is set
-     = get_post_thumbnail_id();
-    if (!) return;
-     = wp_get_attachment_image_url(, 'full');
-       = wp_get_attachment_image_srcset(, 'full');
-        = '(min-width: 1024px) 1200px, 100vw';
-    if ( && ) {
+    $front_id = (int) get_option('page_on_front');
+    if ($front_id <= 0) return; // only when a static front page is set
+    $hero_id = get_post_thumbnail_id($front_id);
+    if (!$hero_id) return;
+    $src_full = wp_get_attachment_image_url($hero_id, 'full');
+    $srcset   = wp_get_attachment_image_srcset($hero_id, 'full');
+    $sizes    = '(min-width: 1024px) 1200px, 100vw';
+    if ($src_full && $srcset) {
         printf(
             "<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
-            esc_url(), esc_attr(), esc_attr()
+            esc_url($src_full), esc_attr($srcset), esc_attr($sizes)
         );
     }
 }, 6);
@@ -174,30 +174,33 @@ add_action('wp_head', function(){
 // 2.2) Inline critical CSS on front page if present
 add_action('wp_head', function(){
     if (!is_front_page()) return;
-    C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php = get_stylesheet_directory() . '/css-output/critical-home.css';
-    if (file_exists(C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php)) {
-         = file_get_contents(C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php);
-        if ( !== false &&  !== '') {
-            echo "<style id=\"zdk-critical-home\">{}</style>\n";
+    $path = get_stylesheet_directory() . '/css-output/critical-home.css';
+    if (file_exists($path)) {
+        $css = file_get_contents($path);
+        if ($css !== false && $css !== '') {
+            echo "<style id=\"zdk-critical-home\">{$css}</style>\n";
         }
     }
 }, 7);
 
-// 3) Comments: mark user links as UGC/nofollow
-add_filter('comment_text', function ($comment_text) {
-    $comment_text = preg_replace_callback('/<a\s+[^>]*>.*?<\/a>/is', function ($m) {
-        $a = $m[0];
-        if (stripos($a, 'rel=') === false) {
-            $a = preg_replace('/<a\s+/i', '<a rel="ugc nofollow" ', $a, 1);
-        } else {
-            $a = preg_replace('/rel=(["\'])([^"\']*)(["\'])/i', 'rel=$1$2 ugc nofollow$3', $a, 1);
-        }
-        return $a;
-    }, $comment_text);
-    return $comment_text;
-}, 20);
-
-add_action('wp_footer', function(){ 
+// 2.3) Force eager/high priority for the front-page featured image
+add_filter('post_thumbnail_html', function(
+  $html, $post_id, $post_thumbnail_id, $size, $attr
+){
+  if (!is_front_page()) return $html;
+  if ((int) get_option('page_on_front') !== (int) $post_id) return $html;
+  if (strpos($html, 'loading=') === false) {
+    $html = str_replace('<img', '<img loading="eager"', $html);
+  } else {
+    $html = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $html, 1);
+  }
+  if (strpos($html, 'fetchpriority=') === false) {
+    $html = str_replace('<img', '<img fetchpriority="high"', $html);
+  } else {
+    $html = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $html, 1);
+  }
+  return $html;
+}, 10, 5);add_action('wp_footer', function(){ 
   return;
     // 現在のURLが/lpを含む場合はバナーを表示しない
     if (strpos($_SERVER['REQUEST_URI'], '/lp') !== false) {
