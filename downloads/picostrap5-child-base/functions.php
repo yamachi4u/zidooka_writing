@@ -944,3 +944,15 @@ add_action('wp_head', function(){
     $desc = 'AI活用と業務自動化、ノーコード/ローコードの実験記録と実務ノウハウを発信。設定・運用のつまずきを最短で解決し、成果に直結する手順と判断基準をまとめます。';
     echo '<meta name="description" content="' . esc_attr($desc) . '" />' . "\n";
 }, 7);
+// 2.5) Preconnect hints for external hosts (front page only)
+add_action('wp_head', function(){
+    if (!is_front_page()) return;
+    $hosts = [
+      'https://www.googletagmanager.com',
+      'https://pagead2.googlesyndication.com',
+    ];
+    foreach ($hosts as $h) {
+      echo '<link rel="preconnect" href="' . esc_url($h) . '" crossorigin />' . "\n";
+      echo '<link rel="dns-prefetch" href="' . esc_url($h) . '" />' . "\n";
+    }
+}, 3);
