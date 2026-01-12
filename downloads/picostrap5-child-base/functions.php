@@ -174,7 +174,7 @@ add_action('wp_head', function(){
 // 2.2) Inline critical CSS on front page if present
 add_action('wp_head', function(){
     if (!is_front_page()) return;
-    C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php = get_stylesheet_directory() . '/css/critical-home.css';
+    C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php = get_stylesheet_directory() . '/css-output/critical-home.css';
     if (file_exists(C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php)) {
          = file_get_contents(C:\Users\user\Documents\zidooka_writing\downloads\picostrap5-child-base\functions.php);
         if ( !== false &&  !== '') {
@@ -909,3 +909,24 @@ function zidooka_category_list_shortcode($atts) {
     return $output;
 }
 add_shortcode('zidooka_cat_list', 'zidooka_category_list_shortcode');
+
+// 2.3) Force eager/high priority for the front-page featured image
+add_filter('post_thumbnail_html', function(
+  , , , , 
+){
+  if (!is_front_page()) return ;
+  // only target the front page's own thumbnail
+  if ((int) get_option('page_on_front') !== (int) ) return ;
+  // inject loading and fetchpriority attributes if missing
+  if (strpos(, 'loading=') === false) {
+     = str_replace('<img', '<img loading="eager"', );
+  } else {
+     = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=', , 1);
+  }
+  if (strpos(, 'fetchpriority=') === false) {
+     = str_replace('<img', '<img fetchpriority="high"', );
+  } else {
+     = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=', , 1);
+  }
+  return ;
+}, 10, 5);
