@@ -956,3 +956,11 @@ add_action('wp_head', function(){
       echo '<link rel="dns-prefetch" href="' . esc_url($h) . '" />' . "\n";
     }
 }, 3);
+// 2.6) Comments: make name/email optional and remove website field
+// Do not require name and email
+add_filter('pre_option_require_name_email', function($value){ return '0'; });
+// Remove the website (URL) field from the front-end form
+add_filter('comment_form_default_fields', function($fields){
+    if (isset($fields['url'])) unset($fields['url']);
+    return $fields;
+});
