@@ -937,3 +937,10 @@ add_filter('post_thumbnail_html', function(
   }
   return $html;
 }, 10, 5);
+// 2.4) Home meta description fallback (only if no major SEO plugin)
+add_action('wp_head', function(){
+    if (!is_front_page()) return;
+    if (function_exists('aioseo') || function_exists('wpseo_head') || defined('RANK_MATH_VERSION')) return;
+    $desc = 'AI活用と業務自動化、ノーコード/ローコードの実験記録と実務ノウハウを発信。設定・運用のつまずきを最短で解決し、成果に直結する手順と判断基準をまとめます。';
+    echo '<meta name="description" content="' . esc_attr($desc) . '" />' . "\n";
+}, 7);
