@@ -975,3 +975,167 @@ add_filter('the_content', function($content){
     $replace = '$1=$2/wp-content/';
     return preg_replace($pattern, $replace, $content);
 }, 20);
+// === LCP improvements for single posts ===
+// Preload first content image or featured image in <head>
+add_action('wp_head', function(){
+  if (!is_single()) return;
+  global $post; if (!$post) return;
+  $content = get_post_field('post_content', $post->ID);
+  $img_id = 0;
+  if ($content) {
+    if (preg_match('/wp-image-(\d+)/', $content, $m)) {
+      $img_id = (int)$m[1];
+    }
+    if (!$img_id && preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $m2)) {
+      $href = esc_url($m2[1]);
+      printf("<link rel=\"preload\" as=\"image\" href=\"%s\">\n", $href);
+    }
+  }
+  if ($img_id) {
+    $src = wp_get_attachment_image_url($img_id, 'full');
+    $srcset = wp_get_attachment_image_srcset($img_id, 'full');
+    $sizes = '(min-width: 1024px) 1200px, 100vw';
+    if ($src && $srcset) {
+      printf("<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
+        esc_url($src), esc_attr($srcset), esc_attr($sizes)
+      );
+    }
+  } elseif (has_post_thumbnail($post)) {
+    $thumb_id = get_post_thumbnail_id($post);
+    $src = wp_get_attachment_image_url($thumb_id, 'full');
+    $srcset = wp_get_attachment_image_srcset($thumb_id, 'full');
+    $sizes = '(min-width: 1024px) 1200px, 100vw';
+    if ($src && $srcset) {
+      printf("<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
+        esc_url($src), esc_attr($srcset), esc_attr($sizes)
+      );
+    }
+  }
+}, 4);
+
+// Mark first content image eager/high priority
+add_filter('the_content', function($content){
+  if (!is_single() || empty($content)) return $content;
+  $replaced = false;
+  $content = preg_replace_callback('/<img[^>]*>/i', function($m) use (&$replaced){
+    if ($replaced) return $m[0];
+    $img = $m[0];
+    if (stripos($img, 'loading=') !== false) {
+      $img = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $img, 1);
+    } else {
+      $img = preg_replace('/<img/i', '<img loading="eager"', $img, 1);
+    }
+    if (stripos($img, 'fetchpriority=') !== false) {
+      $img = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $img, 1);
+    } else {
+      $img = preg_replace('/<img/i', '<img fetchpriority="high"', $img, 1);
+    }
+    if (stripos($img, 'decoding=') === false) {
+      $img = preg_replace('/<img/i', '<img decoding="async"', $img, 1);
+    }
+    $replaced = true;
+    return $img;
+  }, $content, 1);
+  return $content;
+}, 12);
+
+// Ensure featured image on single has eager/high priority (when used)
+add_filter('post_thumbnail_html', function($html){
+  if (!is_single()) return $html;
+  if (strpos($html, 'loading=') === false) {
+    $html = str_replace('<img', '<img loading="eager"', $html);
+  } else {
+    $html = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $html, 1);
+  }
+  if (strpos($html, 'fetchpriority=') === false) {
+    $html = str_replace('<img', '<img fetchpriority="high"', $html);
+  } else {
+    $html = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $html, 1);
+  }
+  return $html;
+}, 11);
+
+// === LCP improvements for single posts ===
+add_action('wp_head', function(){
+    if (!is_single()) return;
+    $path = get_stylesheet_directory() . '/css-output/critical-single.css';
+    if (file_exists($path)) {
+        $css = file_get_contents($path);
+        if ($css !== false && $css !== '') {
+            echo "<style id=\"zdk-critical-single\">{$css}</style>\n";
+        }
+    }
+}, 7);
+
+add_action('wp_head', function(){
+    if (!is_single()) return;
+    global $post; if (!$post) return;
+    $content = get_post_field('post_content', $post->ID) ?: '';
+    $img_id = 0;
+    if (preg_match('/wp-image-(\d+)/', $content, $m)) {
+        $img_id = (int)$m[1];
+    }
+    $printed = false;
+    if ($img_id) {
+        $src = wp_get_attachment_image_url($img_id, 'full');
+        $srcset = wp_get_attachment_image_srcset($img_id, 'full');
+        $sizes = '(min-width: 1024px) 1200px, 100vw';
+        if ($src && $srcset) {
+            printf("<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
+                esc_url($src), esc_attr($srcset), esc_attr($sizes)
+            );
+            $printed = true;
+        }
+    }
+    if (!$printed) {
+        if (preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $m2)) {
+            $href = esc_url($m2[1]);
+            printf("<link rel=\"preload\" as=\"image\" href=\"%s\">\n", $href);
+            $printed = true;
+        }
+    }
+    if (!$printed && has_post_thumbnail($post)) {
+        $thumb_id = get_post_thumbnail_id($post);
+        $src = wp_get_attachment_image_url($thumb_id, 'full');
+        $srcset = wp_get_attachment_image_srcset($thumb_id, 'full');
+        $sizes = '(min-width: 1024px) 1200px, 100vw';
+        if ($src && $srcset) {
+            printf("<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
+                esc_url($src), esc_attr($srcset), esc_attr($sizes)
+            );
+            $printed = true;
+        }
+    }
+    if (preg_match('/<img[^>]+src=["\']([^"\']+)["\']/', $content, $m3)) {
+        $host = wp_parse_url($m3[1], PHP_URL_SCHEME) . '://' . wp_parse_url($m3[1], PHP_URL_HOST);
+        if ($host) {
+            printf("<link rel=\"preconnect\" href=\"%s\" crossorigin>\n", esc_url($host));
+            printf("<link rel=\"dns-prefetch\" href=\"%s\">\n", esc_url($host));
+        }
+    }
+}, 6);
+
+add_filter('the_content', function($content){
+    if (!is_single() || empty($content)) return $content;
+    $done = false;
+    $content = preg_replace_callback('/<img[^>]*>/i', function($m) use (&$done){
+        if ($done) return $m[0];
+        $img = $m[0];
+        if (stripos($img, 'loading=') !== false) {
+            $img = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $img, 1);
+        } else {
+            $img = preg_replace('/<img/i', '<img loading="eager"', $img, 1);
+        }
+        if (stripos($img, 'fetchpriority=') !== false) {
+            $img = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $img, 1);
+        } else {
+            $img = preg_replace('/<img/i', '<img fetchpriority="high"', $img, 1);
+        }
+        if (stripos($img, 'decoding=') === false) {
+            $img = preg_replace('/<img/i', '<img decoding="async"', $img, 1);
+        }
+        $done = true;
+        return $img;
+    }, $content, 1);
+    return $content;
+}, 12);

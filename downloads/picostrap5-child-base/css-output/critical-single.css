@@ -1,0 +1,8 @@
+/* Minimal critical CSS for single post above-the-fold */
+.zenn-article-header{margin-top:8px;margin-bottom:12px}
+.zenn-article-title{font-weight:800;line-height:1.25;color:#0f172a;margin:0 0 8px 0;font-size:clamp(1.5rem,3.5vw,2rem)}
+.zenn-meta-info-row{display:flex;align-items:center;gap:12px;border-bottom:1px solid #e5e7eb;padding-bottom:10px;margin-bottom:16px}
+.zenn-publish-date{color:#475569;font-size:.9rem}
+.zenn-article p{line-height:1.8;color:#111827}
+/* Defer offscreen sections rendering for faster initial paint */
+.zenn-author-section,.zenn-post-navigation{content-visibility:auto;contain-intrinsic-size:1px 400px}

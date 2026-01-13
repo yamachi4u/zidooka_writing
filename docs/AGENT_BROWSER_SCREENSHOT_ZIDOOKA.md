@@ -1,80 +1,131 @@
 ---
-title: "Zidooka! 向け — agent-browserで画面スクショを簡単取得"
+title: "「agent-Browser」でスクショの自動化したらブログ運営がめっちゃはかどるのでは！！！？"
+date: 2026-01-13 10:30:00
+categories:
+  - WEB制作
+tags:
+  - 自動化
+  - ブログ
+  - 効率化
+  - agent-browser
+status: publish
+slug: agent-browser-screenshot-workflow
+featured_image: ../images-agent-browser/zidooka-pc-viewport.png
 ---
 
-# Zidooka! 向け: agent-browser によるスクリーンショット取得（簡易ガイド）
+ブログ書いてると、スクリーンショット撮る作業、多くないですか？
 
-【結論】`agent-browser` を使えばAIエージェントから手早くブラウザ操作・スクショ取得ができるので、サイトの確認や自動レポートにめっちゃ便利です。
+「ここのボタンを押した後の画面を見せたい…」「毎回同じサイズで撮るの、地味にめんどくさい…」「手順書のスクショ、もう10枚目だよ…」
 
-## 概要
+そんなあなたのためのツール、見つけちゃいました。
+それが、Vercel Labsが作った **`agent-browser`** です！
 
-`agent-browser` は Rust バイナリ + Node.js フォールバックで動くブラウザ自動化 CLI です。エージェントから「ページを開く→スナップショット取得→要素操作」までをシンプルなコマンドで実行できます。
+これを使ったら、ブログ用のスクリーンショット作成が、驚くほど楽ちんになりました。マジで、ブログ運営がはかどりまくる予感しかしません！！！
 
-Zidooka の運用向けには、以下の2通りを用意しています:
+![agent-browserで撮った完璧なスクリーンショット！](../images-agent-browser/zidooka-pc-viewport.png)
 
-- 公式 CLI（`agent-browser`）を使った方法
-- Playwright を使うローカルスクリプト（フォールバック） — リポジトリに同梱済み
+## `agent-browser`って何者？
 
-## 1) 公式 CLI を使う（推奨）
+一言でいうと、「**コマンドでブラウザを操れるすごいやつ**」です。
 
-1. グローバルにインストール、または `npx` で利用します。
+[公式リポジトリはこちら (GitHub)](https://github.com/vercel-labs/agent-browser)
 
-```powershell
-npm install -g agent-browser
-# または（ローカル利用）
-npx agent-browser install
-```
+これまで手作業でやっていた、
 
-2. 初回はブラウザをダウンロードします。
+- ページを開いて…
+- マウスでカシャッと撮影して…
+- ファイルに名前をつけて保存…
 
-```powershell
-agent-browser install
-```
+みたいな一連の流れを、ぜーんぶコマンドで自動化できるんです。
 
-3. Zidooka のトップページを開いてスクショを保存します（PC向けフルまたはビューポート指定）。
+## まずは基本！これだけでも感動する
+
+使い方はめちゃくちゃシンプル。
 
 ```powershell
+# 1. 指定したページを開く
 agent-browser open https://www.zidooka.com
-agent-browser screenshot images-agent-browser/zidooka.png --full
+
+# 2. PCサイズのでっかい画面に設定して
+agent-browser set viewport 1920 900
+
+# 3. パシャリ！
+agent-browser screenshot "screenshot.png"
+
+# 4. ブラウザを閉じる
 agent-browser close
 ```
 
-## 2) フォールバック: Playwright スクリプト（リポジトリ付属）
+たったこれだけで、指定したサイズのきれいなスクリーンショットが手に入ります。もう手動でリサイズしたり、トリミングしたりする必要なし！
 
-リポジトリ内の `scripts/agent-browser-screenshot.mjs` は、Playwright を使って簡単にスクショを撮るためのスクリプトです。PC向けの初期表示（viewport）を模したデフォルト設定を含みます。
+## こんなことも！あんなことも！自由自在なスクショ撮影
 
-基本コマンド:
+`agent-browser`の真骨頂はここからです。ただ撮るだけじゃないんです。
 
-```powershell
-# 必要なパッケージとブラウザをインストール
-npm install playwright
-npx playwright install chromium
-
-# スクリプト実行（出力: images-agent-browser/zidooka-pc-viewport.png）
-node scripts/agent-browser-screenshot.mjs https://www.zidooka.com/ images-agent-browser/zidooka-pc-viewport.png
-```
-
-デフォルトのビューポートは `1920x900`（PC初期表示を想定）です。幅や高さを環境変数 `SCREEN_WIDTH` / `SCREEN_HEIGHT` か、コマンド引数で上書きできます。
-
-例: 幅1366、高さ768で撮る
+### ページの「全部」を撮りたい！
+Webページの上から下まで、長〜いページ全体を1枚の画像にしたいこと、ありますよね？
+`--full`オプションを付けるだけ！
 
 ```powershell
-SCREEN_WIDTH=1366 SCREEN_HEIGHT=768 node scripts/agent-browser-screenshot.mjs https://www.zidooka.com/ images-agent-browser/zidooka-1366x768.png
+agent-browser screenshot "long-page.png" --full
 ```
 
-（Windows PowerShell では `env:SCREEN_WIDTH=1366; env:SCREEN_HEIGHT=768; node ...` のように設定してください）
+### スマホ画面のスクショが欲しい！
+スマホでの見え方を紹介したい時も、ビューポートを変えるだけ。
 
-## 使いどころ / メリット
+```powershell
+# iPhone 13 Pro Maxのサイズに設定
+agent-browser set viewport 428 926
+agent-browser screenshot "iphone-view.png"
+```
 
-- サイト更新チェックやレイアウト確認を自動化できる
-- 記事作成やQA時に、画面の変化を自動的に保存して履歴比較が可能
-- AI エージェントと組み合わせて「操作→スクショ→解析」のワークフローが容易になる
+## 【激アツ】操作後の画面も撮れる！これが最強すぎる
 
-## 備考
+`agent-browser`は、ただページを開くだけじゃありません。**クリックしたり、文字を入力したり**、人間みたいな操作ができるんです！
 
-- 既に `PIPELINE_MANUAL.md` にスクショ手順を追記済みです。
-- `images-agent-browser/` に生成される画像はリポジトリ内で管理できます（必要に応じて .gitignore を調整してください）。
+例えば、「検索ボックスに文字を入れて、検索ボタンを押した後の結果画面」を撮りたい場合…
 
----
+```powershell
+# 1. ページを開く
+agent-browser open https://www.google.com
 
-もっとインフォーマルに紹介文を作るか、社内向けの短いREADMEにまとめることもできます。どうしましょう？
+# 2. 「#APjFqb」っていうIDの要素（検索ボックス）に文字を入力
+agent-browser type "#APjFqb" "agent-browser 最高"
+
+# 3. 「input[name='btnK']」っていう要素（検索ボタン）をクリック
+agent-browser click "input[name='btnK']"
+
+# 4. 表示が安定するまでちょっと待って…
+agent-browser sleep 1000
+
+# 5. 検索結果画面をパシャリ！
+agent-browser screenshot "search-result.png"
+```
+
+やばくないですか？
+これ、つまり**ログイン後の会員ページ**とか、**ECサイトで商品をカートに入れた後の画面**とか、これまで手作業じゃないと無理だったスクリーンショットが、ぜんぶ自動で撮れるってことです。
+
+## どうやって始めるの？
+
+始めるのは簡単です。Node.jsが入っているPCなら、以下のコマンドを叩くだけ。
+
+```powershell
+# 1. agent-browserをインストール（最初の一回だけ）
+npm install -g agent-browser
+
+# 2. 操作用のブラウザをインストール（最初の一回だけ）
+agent-browser install
+```
+
+あとはもう、あなたのアイデア次第でどんなスクリーンショットでも撮り放題です！
+
+## まとめ：これはブログ運営の革命では…？
+
+`agent-browser`は、ブログやWebサイト運営におけるスクリーンショット作成の手間を劇的に削減してくれる、まさに神ツールでした。
+
+- **単純作業からの解放**
+- **品質の均一化**
+- **複雑な手順の自動化**
+
+これだけのことがコマンド一つでできるなら、使わない手はないですよね。
+さあ、`agent-browser`で面倒なスクショ作業を自動化して、もっと価値のあるコンテンツ作りに時間を使いましょう！

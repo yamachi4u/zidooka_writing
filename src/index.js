@@ -12,9 +12,9 @@ async function main() {
         console.log('Checking authentication...');
         const authResult = await wp.checkAuth();
         if (authResult.success) {
-          console.log(`✅ Authenticated as: ${authResult.user.name} (ID: ${authResult.user.id})`);
+          console.log(`Authenticated: ${authResult.user.name} (ID: ${authResult.user.id})`);
         } else {
-          console.error('❌ Authentication Failed:', authResult.error);
+          console.error('Authentication failed:', authResult.error);
         }
         break;
 

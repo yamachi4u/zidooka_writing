@@ -7,6 +7,8 @@
 
 get_header(); ?>
 
+
+
 <!-- wp:social-links --><ul class="wp-block-social-links"><!-- wp:social-link {"url":"https://gravatar.com/testnewstsukuba","service":"gravatar","rel":"me"} /--></ul><!-- /wp:social-links -->
 
 <!-- スタイルは style.css に移動しました -->

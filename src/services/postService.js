@@ -5,6 +5,7 @@ import { WpClient } from './wpClient.js';
 import { ImageProcessor } from './imageProcessor.js';
 import { MarkdownConverter } from './markdownConverter.js';
 import { config } from '../config/index.js';
+import { makeExcerpt, slugify } from '../utils/seo.js';
 
 export class PostService {
   constructor() {
@@ -35,6 +36,7 @@ export class PostService {
       lastUpdated: new Date().toISOString()
     };
 
+    await fs.mkdir(path.dirname(config.paths.metadata), { recursive: true });
     await fs.writeFile(config.paths.metadata, JSON.stringify(metadata, null, 2));
     return metadata;
   }
@@ -44,8 +46,11 @@ export class PostService {
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const { data: frontmatter, content: markdownBody } = matter(fileContent);
 
-    // 1. Handle Images
-    let updatedMarkdown = markdownBody.replace(/\*\*(.*?)\*\*/g, '$1'); // Remove bolding
+    // 1. Normalize emphasis and handle Images
+    // Convert Markdown bold to ZIDOOKA inline-strong syntax so the converter maps it properly
+    let updatedMarkdown = markdownBody
+      .replace(/\*\*(.*?)\*\*/g, '==$1==')
+      .replace(/__(.*?)__/g, '==$1==');
     const imageRegex = /!\[(.*?)\]\((.*?)\)/g;
     const matches = [...markdownBody.matchAll(imageRegex)];
     const imageMap = {};
@@ -76,7 +81,13 @@ export class PostService {
         if (media) {
           imageMap[media.source_url] = media.id;
           if (!firstUploadedImageId) firstUploadedImageId = media.id;
-          updatedMarkdown = updatedMarkdown.replace(localPath, media.source_url);
+          // Replace all occurrences of the local path with uploaded URL
+          if (updatedMarkdown.replaceAll) {
+            updatedMarkdown = updatedMarkdown.replaceAll(localPath, media.source_url);
+          } else {
+            const esc = localPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            updatedMarkdown = updatedMarkdown.replace(new RegExp(esc, 'g'), media.source_url);
+          }
         }
       }
     }
@@ -84,6 +95,7 @@ export class PostService {
     // 2. Convert to Gutenberg Blocks
     const converter = new MarkdownConverter(imageMap);
     const htmlContent = converter.convertToBlocks(updatedMarkdown);
+    const excerpt = frontmatter.excerpt ? makeExcerpt(String(frontmatter.excerpt), 160) : makeExcerpt(updatedMarkdown, 160);
 
     // 3. Resolve Metadata
     const metadata = await this.loadMetadata();
@@ -122,16 +134,38 @@ export class PostService {
       if (parentPost) parentId = parentPost.id;
     }
 
+    // 3.5. SEO: normalize slug
+    let finalSlug = frontmatter.slug;
+    const rawTitle = (frontmatter.title || '').toString();
+    if (!finalSlug && rawTitle) {
+      const normalized = slugify(rawTitle);
+      const hasNonAscii = /[^\x00-\x7F]/.test(rawTitle);
+      if (normalized && (!hasNonAscii ? normalized.length >= 3 : normalized.length >= 6)) {
+        finalSlug = normalized;
+      } else {
+        finalSlug = rawTitle.toLowerCase().trim().replace(/\s+/g, '-');
+      }
+    } else if (finalSlug) {
+      const normalized = slugify(finalSlug);
+      const hasNonAscii = /[^\x00-\x7F]/.test(finalSlug);
+      if (normalized && (!hasNonAscii ? normalized.length >= 3 : normalized.length >= 6)) {
+        finalSlug = normalized;
+      } else {
+        finalSlug = String(finalSlug).toLowerCase().trim().replace(/\s+/g, '-');
+      }
+    }
+
     return {
       title: frontmatter.title,
       content: htmlContent,
       status: frontmatter.status || 'publish',
-      slug: frontmatter.slug,
+      slug: finalSlug || frontmatter.slug,
       parent: parentId,
       date: frontmatter.date,
       categories: categoryIds,
       tags: tagIds,
       featured_media: featuredMediaId,
+      excerpt: excerpt,
       id: frontmatter.id
     };
   }
@@ -236,7 +270,7 @@ export class PostService {
     
     const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
-    console.log(`📅 Scheduled for: ${formattedDate}`);
+    console.log(`Scheduled for: ${formattedDate}`);
 
     // 3. Update file frontmatter
     let fileContent = await fs.readFile(filePath, 'utf-8');

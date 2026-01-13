@@ -7,6 +7,7 @@
     "remote:agent": "node scripts/remote-agent/index.js"
   },
   "dependencies": {
+    "agent-browser": "github:vercel-labs/agent-browser",
     "axios": "^1.6.2",
     "basic-ftp": "^5.0.5",
     "dotenv": "^16.3.1",
@@ -14,6 +15,7 @@
     "gray-matter": "^4.0.3",
     "marked": "^11.1.0",
     "openai": "^4.24.1",
+    "playwright": "^1.57.0",
     "sharp": "^0.34.5",
     "ssh2-sftp-client": "^10.0.3",
     "webdav": "^4.11.3"

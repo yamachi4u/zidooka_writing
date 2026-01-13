@@ -162,3 +162,50 @@ node src/export_all_posts.js
 - 出力先: `data/all_posts.json`
 - 含まれる情報: タイトル、日付、更新日、カテゴリ、スラグ、タグ
 
+
+## 8. スクリーンショット撮影（`agent-browser` / フォールバック）
+
+- 【結論】`agent-browser` が利用可能な場合はそれを使い、なければ付属の Playwright スクリプトでスクショを撮って `images-agent-browser` に保存します。
+
+### 推奨: `agent-browser` を使う（CLI）
+
+1. グローバルにインストールするかローカルで `npx` を使います。
+
+```powershell
+npm install -g agent-browser
+# または（ローカル）
+npx agent-browser install
+```
+
+2. Chromium をダウンロード（初回のみ）。
+
+```powershell
+agent-browser install
+```
+
+3. ページを開いてスクショを撮る。
+
+```powershell
+agent-browser open https://www.zidooka.com
+agent-browser screenshot images-agent-browser/zidooka.png --full
+agent-browser close
+```
+
+### フォールバック: Playwright スクリプトを使う（リポジトリ付属）
+
+1. 既に用意されているスクリプトを使うと簡単です（リポジトリに配置済み）。
+
+```powershell
+# 必要なパッケージとブラウザをインストール
+npm install playwright
+npx playwright install chromium
+
+# スクリプトを実行（保存先: images-agent-browser/zidooka.png）
+node scripts/agent-browser-screenshot.mjs
+```
+
+2. スクショの保存先は `images-agent-browser/zidooka.png` です（フォルダは自動作成されています）。
+
+---
+
+上記いずれかの手順でスクショを取得してください.

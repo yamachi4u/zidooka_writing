@@ -1,0 +1,35 @@
+/*
+Theme Name: Picostrap Child (ZIDOOKA)
+Template: picostrap5
+Description: Child theme customizations for ZIDOOKA.
+Version: 1.0.0
+*/
+
+/* Mobile padding tuning for single posts */
+:root { --zdk-sp-pad: 12px; --zdk-tab-pad: 16px; }
+@media (max-width: 480px) {
+  .zenn-flex-wrapper,
+  .zenn-main-column,
+  .zenn-container,
+  .zenn-wrapper,
+  .zenn-article,
+  .zenn-article-header,
+  .zenn-author-section,
+  .zenn-post-navigation {
+    padding-left: var(--zdk-sp-pad) !important;
+    padding-right: var(--zdk-sp-pad) !important;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .zenn-flex-wrapper,
+  .zenn-main-column,
+  .zenn-container,
+  .zenn-wrapper,
+  .zenn-article,
+  .zenn-article-header,
+  .zenn-author-section,
+  .zenn-post-navigation {
+    padding-left: var(--zdk-tab-pad) !important;
+    padding-right: var(--zdk-tab-pad) !important;
+  }
+}
