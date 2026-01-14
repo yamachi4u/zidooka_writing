@@ -163,48 +163,33 @@ node src/export_all_posts.js
 - 含まれる情報: タイトル、日付、更新日、カテゴリ、スラグ、タグ
 
 
-## 8. スクリーンショット撮影（`agent-browser` / フォールバック）
+## 8. スクリーンショット撮影
 
-- 【結論】`agent-browser` が利用可能な場合はそれを使い、なければ付属の Playwright スクリプトでスクショを撮って `images-agent-browser` に保存します。
+推奨の方法として、リポジトリに含まれる Playwright スクリプトを使用します。
 
-### 推奨: `agent-browser` を使う（CLI）
-
-1. グローバルにインストールするかローカルで `npx` を使います。
-
-```powershell
-npm install -g agent-browser
-# または（ローカル）
-npx agent-browser install
-```
-
-2. Chromium をダウンロード（初回のみ）。
+### 1. 単発スクリーンショット (PC Viewport)
+指定したURLのスクリーンショット（ファーストビュー）を撮影します。記事のアイキャッチや説明画像に最適です。
 
 ```powershell
-agent-browser install
+# 使用法: node scripts/agent-browser-screenshot.mjs <URL> <保存パス>
+node scripts/agent-browser-screenshot.mjs https://vercel.com/ images-agent-browser/vercel.png
 ```
 
-3. ページを開いてスクショを撮る。
+- デフォルト値:
+    - URL: `https://www.zidooka.com/`
+    - 出力: `images-agent-browser/zidooka-pc-viewport.png`
+    - サイズ: 1920x900 (PC基準)
+    - ※環境変数 `SCREEN_WIDTH`, `SCREEN_HEIGHT` でサイズ変更可能
+
+### 2. マルチデバイスギャラリー撮影
+トップページの PC(Full)、SP、Tablet 版をまとめて撮影します。
 
 ```powershell
-agent-browser open https://www.zidooka.com
-agent-browser screenshot images-agent-browser/zidooka.png --full
-agent-browser close
+node scripts/agent-browser-gallery.mjs
 ```
 
-### フォールバック: Playwright スクリプトを使う（リポジトリ付属）
-
-1. 既に用意されているスクリプトを使うと簡単です（リポジトリに配置済み）。
-
-```powershell
-# 必要なパッケージとブラウザをインストール
-npm install playwright
-npx playwright install chromium
-
-# スクリプトを実行（保存先: images-agent-browser/zidooka.png）
-node scripts/agent-browser-screenshot.mjs
-```
-
-2. スクショの保存先は `images-agent-browser/zidooka.png` です（フォルダは自動作成されています）。
+### 3. (参考) agent-browser CLI
+`npx agent-browser` が動作環境にある場合は、対話的に撮影することも可能です（Windows環境等で動作しない場合は上記スクリプトを使用してください）。
 
 ---
 
