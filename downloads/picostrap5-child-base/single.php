@@ -43,6 +43,9 @@ function zenn_get_ui_text($is_english_only) {
             'popular_title' => 'Popular',
             'toc_title' => 'Table of Contents',
             'no_toc' => 'No table of contents',
+            'sidebar_about_title' => 'About Zidooka',
+            'sidebar_about_body' => '“Zidooka” means automation in Japanese. We share practical automation solutions and real-world workflows. If you need help, we also accept consulting or implementation work.',
+            'sidebar_reco_title' => 'Recommended',
             'bio_title' => 'Need help with the content of this article?',
             'bio_desc' => 'I provide individual technical support related to the issues described in this article, as a freelance developer. If the problem is blocking your work or internal tasks, feel free to reach out.',
             'bio_price' => 'Support starts from $30 USD',
@@ -73,6 +76,9 @@ function zenn_get_ui_text($is_english_only) {
             'popular_title' => 'よく読まれている記事',
             'toc_title' => '目次',
             'no_toc' => '目次はありません',
+            'sidebar_about_title' => 'Zidookaについて',
+            'sidebar_about_body' => 'Zidookaは実務で使える自動化ソリューションや運用の工夫を実務者目線で共有するウェブサイトです。必要であれば、下記のフォーム・メールから個別相談・受託も可能です。フリーランスエンジニアとしても活動しております。',
+            'sidebar_reco_title' => 'おすすめの記事',
             'bio_title' => 'この記事の内容について、対応できます',
             'bio_desc' => 'この記事に関連する技術トラブルや開発上の問題について個別対応を行っています。',
             'bio_price' => '個別対応は3,000円〜',
@@ -91,14 +97,16 @@ function zenn_get_ui_text($is_english_only) {
  * @param bool $is_english_only Language flag
  * @return string Form URL with parameters
  */
-function zenn_get_form_url($is_english_only) {
+function zenn_get_form_url($is_english_only, $post_id = null) {
     $form_base_url = $is_english_only 
         ? 'https://docs.google.com/forms/d/e/1FAIpQLSclriT5KimZS5Qltib6-UbtCEHCRgJpODKkd--mSZJdIYYutg/viewform'
         : 'https://docs.google.com/forms/d/e/1FAIpQLSdsaBbQn208NuejNs3UPCx_AXsP0cImtvLStGAhQ2Ob92e23Q/viewform';
     
+    $title = $post_id ? get_the_title($post_id) : get_the_title();
+    $link = $post_id ? get_permalink($post_id) : get_permalink();
     $form_params = [
         'usp' => 'pp_url',
-        'entry.2087005549' => "Titole: " . get_the_title() . "\nURL: " . get_permalink()
+        'entry.2087005549' => "Titole: " . $title . "\nURL: " . $link
     ];
     return $form_base_url . '?' . http_build_query($form_params);
 }
@@ -312,7 +320,42 @@ get_header(); ?>
 
 <!-- スタイルは style.css に移動しました -->
 
+<?php
+$post_id = get_queried_object_id();
+$is_english_only = zenn_is_english_only(get_the_title($post_id));
+$ui_text = zenn_get_ui_text($is_english_only);
+$form_url = zenn_get_form_url($is_english_only, $post_id);
+?>
+
 <div class="zenn-flex-wrapper">
+    <aside class="zenn-left-column" aria-label="Article actions">
+        <div class="zenn-left-sticky">
+            <div class="zenn-left-actions">
+                <button type="button" class="zenn-like-btn zenn-like-btn-compact" data-post-id="<?php echo esc_attr($post_id); ?>" aria-label="<?php echo esc_attr($ui_text['helpful']); ?>">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 14.5l-1.5-1.37C3.6 10.36 1 7.28 1 5.5 1 3.5 2.5 2 4.5 2c1.54 0 3.04 1.33 3.5 2.36C8.46 3.33 9.96 2 11.5 2 13.5 2 15 3.5 15 5.5c0 1.78-2.6 4.86-5.5 7.63L8 14.5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    </svg>
+                    <span class="zenn-like-count"><?php echo (int)get_post_meta($post_id, '_post_like_count', true); ?></span>
+                </button>
+                <a class="zenn-share-icon zenn-share-twitter" href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink($post_id) . '?utm_source=twitter&utm_medium=social&utm_campaign=zidooka_share'); ?>&text=<?php echo urlencode(get_the_title($post_id)); ?>" target="_blank" rel="noopener" aria-label="Share on Twitter">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                    </svg>
+                </a>
+                <a class="zenn-share-icon zenn-share-facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink($post_id) . '?utm_source=facebook&utm_medium=social&utm_campaign=zidooka_share'); ?>" target="_blank" rel="noopener" aria-label="Share on Facebook">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <button class="zenn-share-icon zenn-share-copy" onclick="copyToClipboard('<?php echo get_permalink($post_id) . '?utm_source=copy&utm_medium=social&utm_campaign=zidooka_share'; ?>')" aria-label="<?php echo esc_attr($ui_text['copy_link']); ?>">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </aside>
     <main class="zenn-main-column">
         <div class="zenn-container">
             <div class="zenn-wrapper">
@@ -385,7 +428,7 @@ get_header(); ?>
                             <!-- Actions -->
                             <div class="zenn-article-actions" style="margin: 0; display: flex; gap: 8px;">
                                 <div class="zenn-like-button">
-                                    <button class="zenn-like-btn" data-post-id="<?php the_ID(); ?>" style="padding: 4px 10px; font-size: 0.85rem; height: 32px; display: flex; align-items: center;">
+                                    <button type="button" class="zenn-like-btn" data-post-id="<?php the_ID(); ?>" style="padding: 4px 10px; font-size: 0.85rem; height: 32px; display: flex; align-items: center;">
                                         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 4px;">
                                             <path d="M8 14.5l-1.5-1.37C3.6 10.36 1 7.28 1 5.5 1 3.5 2.5 2 4.5 2c1.54 0 3.04 1.33 3.5 2.36C8.46 3.33 9.96 2 11.5 2 13.5 2 15 3.5 15 5.5c0 1.78-2.6 4.86-5.5 7.63L8 14.5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                         </svg>
@@ -458,7 +501,7 @@ get_header(); ?>
                 <footer class="zenn-article-footer">
                     <div class="zenn-article-actions-footer">
                         <div class="zenn-like-section">
-                            <button class="zenn-like-btn-large" data-post-id="<?php the_ID(); ?>">
+                            <button type="button" class="zenn-like-btn-large" data-post-id="<?php the_ID(); ?>">
                                 <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8 14.5l-1.5-1.37C3.6 10.36 1 7.28 1 5.5 1 3.5 2.5 2 4.5 2c1.54 0 3.04 1.33 3.5 2.36C8.46 3.33 9.96 2 11.5 2 13.5 2 15 3.5 15 5.5c0 1.78-2.6 4.86-5.5 7.63L8 14.5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                 </svg>
@@ -498,130 +541,15 @@ get_header(); ?>
                 </footer>
             </article>
 
-            <!-- Author Bio -->
-            <section class="zenn-author-section">
-                <div class="zenn-author-card">
-                    <div class="zenn-author-info-large">
-                        <h3 class="zenn-author-name-large">
-                            <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>">
-                                <?php the_author(); ?>
-                            </a>
-                        </h3>
-                        <div class="zenn-author-bio">
-                            <div class="bio-content text-muted small mt-2" style="font-size: 0.95rem; line-height: 1.7;">
-                                <p class="mb-2" style="font-weight: 700; color: #334155;"><?php echo esc_html($ui_text['bio_title']); ?></p>
-                                <p class="mb-3">
-                                    <?php echo $ui_text['bio_desc']; ?>
-                                </p>
-                                
-                                <div class="bio-price mb-3" style="font-size: 0.9rem; color: #334155;">
-                                    <strong><?php echo esc_html($ui_text['bio_price']); ?></strong>
-                                    <span style="font-size: 0.85rem; color: #64748b;"><?php echo esc_html($ui_text['bio_price_note']); ?></span>
-                                </div>
-
-                                <div class="bio-actions" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                    <a href="<?php echo esc_url($form_url); ?>" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; background: #2563eb; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; flex: 1; min-width: 200px; text-align: center;">
-                                        <?php echo esc_html($ui_text['bio_btn_form']); ?>
-                                    </a>
-                                    <a href="mailto:main@zidooka.com" style="display: inline-flex; align-items: center; justify-content: center; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; flex: 1; min-width: 160px; text-align: center;">
-                                        <?php echo esc_html($ui_text['bio_btn_mail']); ?>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Navigation -->
-            <nav class="zenn-post-navigation">
-                <?php
-                $prev_post = zenn_get_smart_adjacent_post(true, $is_english_only);
-                $next_post = zenn_get_smart_adjacent_post(false, $is_english_only);
-                ?>
-                
-                <?php if ($prev_post) : ?>
-                    <div class="zenn-nav-prev">
-                        <a href="<?php echo get_permalink($prev_post->ID); ?>" class="zenn-nav-link" rel="prev">
-                            <div class="zenn-nav-direction"><?php echo esc_html($ui_text['prev_direction']); ?></div>
-                            <div class="zenn-nav-title"><?php echo get_the_title($prev_post->ID); ?></div>
-                        </a>
-                    </div>
-                <?php endif; ?>
-                
-                <?php if ($next_post) : ?>
-                    <div class="zenn-nav-next">
-                        <a href="<?php echo get_permalink($next_post->ID); ?>" class="zenn-nav-link" rel="next">
-                            <div class="zenn-nav-direction"><?php echo esc_html($ui_text['next_direction']); ?></div>
-                            <div class="zenn-nav-title"><?php echo get_the_title($next_post->ID); ?></div>
-                        </a>
-                    </div>
-                <?php endif; ?>
-            </nav>
-
-            <!-- CTA Section & Next Read -->
-            <div class="zenn-separator-heading">
-                <?php echo esc_html($ui_text['thank_you']); ?>
-            </div>
-
-            <!-- CTA Section Removed as per spec -->
-
-            <!-- Next Read -->
-            <?php 
+            <?php
             $related_posts = zenn_get_related_posts($is_english_only);
-            if ($related_posts) : 
-                $next_read = $related_posts[0]; 
             ?>
-                <div class="zenn-next-read">
-                    <div class="zenn-next-read-label"><?php echo esc_html($ui_text['next_read_label']); ?></div>
-                    <a href="<?php echo get_permalink($next_read->ID); ?>" class="zenn-next-read-link">
-                        <?php echo get_the_title($next_read->ID); ?>
-                    </a>
-                </div>
-            <?php endif; ?>
-
             <!-- Comments -->
             <?php if (comments_open() || get_comments_number()) : ?>
                 <section class="zenn-comments-section">
                     <?php comments_template(); ?>
                 </section>
             <?php endif; ?>
-
-            <!-- Related Posts Grid -->
-            <?php if ($related_posts) : ?>
-                <section class="zenn-related-posts">
-                    <h3 class="zenn-related-title"><?php echo esc_html($ui_text['related_posts_title']); ?></h3>
-                    <div class="zenn-related-grid">
-                        <?php foreach ($related_posts as $post) : setup_postdata($post); ?>
-                            <article class="zenn-related-item">
-                                <a href="<?php the_permalink(); ?>" class="zenn-related-link">
-                                    <?php if (has_post_thumbnail()) : ?>
-                                        <div class="zenn-related-thumbnail">
-                                            <?php the_post_thumbnail('medium', array('class' => 'zenn-related-image')); ?>
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="zenn-related-content">
-                                        <h4 class="zenn-related-post-title"><?php the_title(); ?></h4>
-                                        <div class="zenn-related-meta">
-                                            <time datetime="<?php echo get_the_date('c'); ?>">
-                                                <?php echo get_the_date('Y.m.d'); ?>
-                                            </time>
-                                        </div>
-                                    </div>
-                                </a>
-                            </article>
-                        <?php endforeach; wp_reset_postdata(); ?>
-                    </div>
-                </section>
-            <?php endif; ?>
-
-            <!-- AI Policy Disclaimer -->
-            <div class="zenn-ai-policy" style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.75rem; color: #999; line-height: 1.5;">
-                <p style="margin-bottom: 5px;"><strong><?php echo esc_html($ui_text['ai_policy_title']); ?></strong></p>
-                <p style="margin: 0;">
-                    <?php echo esc_html($ui_text['ai_policy_text']); ?>
-                </p>
-            </div>
 
         <?php endwhile; endif; ?>
             </div> <!-- .zenn-wrapper -->
@@ -631,72 +559,29 @@ get_header(); ?>
     <aside class="zenn-sidebar-column">
         <div class="zenn-sidebar-sticky">
             <div class="zenn-sidebar-inner">
-            <!-- Category Latest -->
-            <?php
-            $cats = get_the_category(get_the_ID());
-            if (!empty($cats)) {
-                $cat = $cats[0];
-                $cat_posts = get_posts(array(
-                    'category' => $cat->term_id,
-                    'numberposts' => 5,
-                    'post__not_in' => array(get_the_ID())
-                ));
-                if ($cat_posts) {
-                    echo '<div class="zenn-sidebar-widget widget-category">';
-                    echo '<h4 class="zenn-sidebar-title">' . esc_html($cat->name) . esc_html($ui_text['latest_suffix']) . '</h4>';
-                    echo '<ul class="zenn-sidebar-list">';
-                    foreach ($cat_posts as $p) {
-                        echo '<li><a href="' . get_permalink($p->ID) . '">' . get_the_title($p->ID) . '</a></li>';
-                    }
-                    echo '</ul>';
-                    echo '</div>';
-                }
-            }
-            ?>
-            <!-- Tag Match -->
-            <?php
-            // Re-fetch tags for sidebar to ensure availability outside the loop
-            $sidebar_tags = get_the_tags(get_the_ID());
-            if (!empty($sidebar_tags)) {
-                $sidebar_tag_ids = array();
-                foreach ($sidebar_tags as $t) $sidebar_tag_ids[] = $t->term_id;
-
-                $tag_posts = get_posts(array(
-                    'tag__in' => $sidebar_tag_ids,
-                    'numberposts' => 5,
-                    'post__not_in' => array(get_the_ID())
-                ));
-                if ($tag_posts) {
-                    echo '<div class="zenn-sidebar-widget widget-tag">';
-                    echo '<h4 class="zenn-sidebar-title">' . esc_html($ui_text['sidebar_related_title']) . '</h4>';
-                    echo '<ul class="zenn-sidebar-list">';
-                    foreach ($tag_posts as $p) {
-                        echo '<li><a href="' . get_permalink($p->ID) . '">' . get_the_title($p->ID) . '</a></li>';
-                    }
-                    echo '</ul>';
-                    echo '</div>';
-                }
-            }
-            ?>
-            
-            <!-- CTA Widget Removed as per spec -->
-
-            <!-- Popular/Random Posts -->
-            <div class="zenn-sidebar-widget widget-popular">
-                <h4 class="zenn-sidebar-title"><?php echo esc_html($ui_text['popular_title']); ?></h4>
-                <ul class="zenn-sidebar-list">
-                    <?php
-                    $popular_posts = get_posts(array(
-                        'numberposts' => 3,
-                        'orderby' => 'rand',
-                        'post__not_in' => array(get_the_ID())
-                    ));
-                    foreach ($popular_posts as $p) {
-                        echo '<li><a href="' . get_permalink($p->ID) . '">' . get_the_title($p->ID) . '</a></li>';
-                    }
-                    ?>
-                </ul>
+            <div class="zenn-sidebar-widget widget-about">
+                <h4 class="zenn-sidebar-title"><?php echo esc_html($ui_text['sidebar_about_title']); ?></h4>
+                <p class="zenn-sidebar-text"><?php echo esc_html($ui_text['sidebar_about_body']); ?></p>
+                <div class="zenn-sidebar-actions">
+                    <a class="zenn-sidebar-btn zenn-sidebar-btn-primary" href="<?php echo esc_url($form_url); ?>" target="_blank" rel="noopener">
+                        <?php echo esc_html($ui_text['bio_btn_form']); ?>
+                    </a>
+                    <a class="zenn-sidebar-btn" href="mailto:main@zidooka.com">
+                        <?php echo esc_html($ui_text['bio_btn_mail']); ?>
+                    </a>
+                </div>
             </div>
+
+            <?php if (!empty($related_posts)) : ?>
+                <?php $sidebar_rec = $related_posts[0]; ?>
+                <div class="zenn-sidebar-widget widget-reco">
+                    <h4 class="zenn-sidebar-title"><?php echo esc_html($ui_text['sidebar_reco_title']); ?></h4>
+                    <a class="zenn-sidebar-reco-link" href="<?php echo get_permalink($sidebar_rec->ID); ?>">
+                        <span class="zenn-sidebar-reco-title"><?php echo get_the_title($sidebar_rec->ID); ?></span>
+                        <span class="zenn-sidebar-reco-date"><?php echo get_the_date('Y.m.d', $sidebar_rec->ID); ?></span>
+                    </a>
+                </div>
+            <?php endif; ?>
             </div>
         </div>
     </aside>
@@ -718,32 +603,102 @@ get_header(); ?>
 .zenn-flex-wrapper {
     width: 100%;
     box-sizing: border-box;
+    display: block;
 }
 
 /* Mobile Default (Inline TOC visible, Sidebar TOC hidden) */
 .zenn-toc-placeholder { display: block; }
 .widget-toc { display: none; }
 
+/* Left Column Actions */
+.zenn-left-column {
+    width: 64px;
+    flex-shrink: 0;
+}
+.zenn-left-sticky {
+    position: sticky;
+    top: 96px;
+}
+.zenn-left-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.zenn-like-btn-compact,
+.zenn-share-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f172a;
+    background: #fff;
+    text-decoration: none;
+    gap: 6px;
+    padding: 0;
+}
+.zenn-like-btn-compact .zenn-like-count {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.zenn-share-icon:hover,
+.zenn-like-btn-compact:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+}
+
+/* Mobile/Tablet Stack */
+@media (max-width: 991.98px) {
+    .zenn-left-column {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+    .zenn-left-sticky {
+        position: static;
+    }
+    .zenn-left-actions {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .zenn-main-column,
+    .zenn-sidebar-column {
+        width: 100%;
+        max-width: 100%;
+    }
+    .zenn-sidebar-column {
+        margin-top: 32px;
+    }
+}
+
 /* Desktop Layout (PC) */
 @media (min-width: 992px) {
     .zenn-flex-wrapper {
-        display: flex;
+        display: flex !important;
+        flex-direction: row !important;
         justify-content: center;
-        align-items: stretch;
+        align-items: stretch !important;
         gap: 40px;
         max-width: 1200px;
         margin: 0 auto;
         padding: 40px 20px;
     }
     .zenn-main-column {
-        flex: 1;
+        flex: 1 1 0 !important;
         max-width: 760px; /* Main content width */
         min-width: 0; /* Prevent flex overflow */
+        width: auto !important;
     }
     .zenn-sidebar-column {
-        width: 300px;
-        flex-shrink: 0;
+        width: 300px !important;
+        max-width: 300px;
+        flex: 0 0 300px !important;
     }
+    .zenn-left-column { order: 1; }
+    .zenn-main-column { order: 2; }
+    .zenn-sidebar-column { order: 3; }
     .zenn-sidebar-sticky {
         position: sticky;
         top: 96px;
@@ -762,7 +717,7 @@ get_header(); ?>
 /* TOC Common Styles */
 .zenn-toc {
     background: #f8f9fa;
-    border: 1px solid #e5e7eb;
+    border: none;
     border-radius: 6px;
     padding: 12px 16px;
     font-size: 0.85rem;
@@ -835,6 +790,259 @@ get_header(); ?>
 .zenn-sidebar-list a:hover {
     text-decoration: underline;
     color: #0d6efd;
+}
+.zenn-sidebar-text {
+    font-size: 0.95rem;
+    color: #334155;
+    line-height: 1.7;
+    margin: 0 0 12px;
+}
+.zenn-sidebar-actions {
+    display: grid;
+    gap: 8px;
+}
+.zenn-sidebar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #334155;
+    text-decoration: none;
+    background: #f8fafc;
+}
+.zenn-sidebar-btn-primary {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+.zenn-sidebar-reco-link {
+    display: block;
+    text-decoration: none;
+    color: #0f172a;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px;
+    background: #fff;
+}
+.zenn-sidebar-reco-title {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.zenn-sidebar-reco-date {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+.zenn-sidebar-reco-link:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+}
+
+/* Article Typography (Tailwind-like) */
+.zenn-article {
+    color: #0f172a;
+}
+.zenn-article-header {
+    margin-bottom: 24px;
+}
+.zenn-article-title {
+    font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.6rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+.zenn-article-content {
+    background: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 32px;
+}
+.zenn-content {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #1f2937;
+}
+.zenn-content h2 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin: 40px 0 12px;
+    padding-top: 0;
+    border-top: none;
+}
+.zenn-content h3 {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 24px 0 8px;
+}
+.zenn-content p {
+    margin: 0 0 22px;
+}
+.zenn-content a {
+    color: #0f172a;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+.zenn-content ul,
+.zenn-content ol {
+    padding-left: 1.2rem;
+    margin: 0 0 18px;
+}
+.zenn-content ul { list-style: disc; }
+.zenn-content ol { list-style: decimal; }
+.zenn-content li + li {
+    margin-top: 6px;
+}
+.zenn-content blockquote {
+    border-left: none;
+    background: #f8fafc;
+    padding: 14px 18px;
+    margin: 20px 0;
+    color: #0f172a;
+}
+.zenn-content code {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 0.95em;
+}
+.zenn-content pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    overflow: auto;
+    margin: 20px 0;
+}
+.zenn-content pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+}
+.zenn-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95rem;
+}
+.zenn-content th,
+.zenn-content td {
+    border: 1px solid #e5e7eb;
+    padding: 10px 12px;
+    text-align: left;
+}
+.zenn-content th {
+    background: #f8fafc;
+    font-weight: 600;
+}
+.zenn-content img {
+    max-width: 100%;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+.zenn-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+.zenn-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #0f172a;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+.zenn-tag:hover {
+    border-color: #cbd5e1;
+    background: #eef2ff;
+}
+
+/* Article Footer Cleanup */
+.zenn-article-actions-footer {
+    display: grid;
+    gap: 16px;
+    padding: 20px 0;
+    border-top: none;
+}
+.zenn-like-section {
+    display: grid;
+    gap: 6px;
+}
+.zenn-share-section {
+    border-top: none;
+    padding-top: 0;
+}
+.zenn-share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.zenn-share-buttons a,
+.zenn-share-buttons button {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    background: #fff;
+}
+
+
+/* Comments Cleanup */
+.zenn-comments-section {
+    border-top: none;
+    padding-top: 24px;
+}
+.zenn-comments-section .comment-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+.zenn-comments-section .comment-body {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 16px 0;
+    margin: 0;
+    background: transparent;
+}
+.zenn-comments-section .children {
+    margin: 8px 0 0 16px;
+    padding-left: 16px;
+    border-left: 1px solid #e5e7eb;
+}
+.zenn-comments-section .comment-respond,
+.zenn-comments-section .comment-form {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+.zenn-comments-section .comment-form-comment textarea,
+.zenn-comments-section .comment-form input[type="text"],
+.zenn-comments-section .comment-form input[type="email"],
+.zenn-comments-section .comment-form input[type="url"] {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+}
+.zenn-comments-section .form-submit {
+    margin-top: 12px;
 }
 @media (min-width: 992px) { body.admin-bar .zenn-sidebar-sticky { top: 128px; } }
 </style>
@@ -940,11 +1148,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const ajaxUrl = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
     const nonce = '<?php echo esc_js(wp_create_nonce('simple-like-nonce')); ?>';
     
-    // Check local storage for liked posts
-    const likedPosts = JSON.parse(localStorage.getItem('liked_posts') || '[]');
+    // Check local storage for liked posts (safe)
+    let likedPosts = [];
+    try {
+        likedPosts = JSON.parse(localStorage.getItem('liked_posts') || '[]');
+    } catch (e) {
+        likedPosts = [];
+    }
     
     likeButtons.forEach(button => {
         const postId = button.dataset.postId;
+        if (!postId) return;
         
         // If already liked, add active class
         if (likedPosts.includes(postId)) {

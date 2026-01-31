@@ -1,0 +1,6 @@
+2026-01-20 23:51:34 ChatGPT一時的エラー
+- 現象: ChatGPTでエラー発生、リロードで解決
+- 通信状況: 問題なし
+- 環境: Windows / Chrome
+- 分類: 一過性のエラー
+- スクリーンショット: C:\Users\user\Pictures\screenshots\スクリーンショット 2026-01-20 235134.png

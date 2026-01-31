@@ -1,7 +1,6 @@
 <?php
 /**
- * Template Name: Tailwind Home
- * Description: Tailwind-first front page layout.
+ * Category Archive (Tailwind)
  */
 
 get_header();
@@ -11,38 +10,18 @@ get_header();
     <div class="mx-auto max-w-6xl px-6 py-12">
         <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <main>
-                <h1 class="mb-6 text-2xl font-semibold tracking-tight text-slate-900">
-                    <?php echo esc_html(get_bloginfo('name')); ?>
-                </h1>
+                <div class="mb-8">
+                    <h1 class="text-2xl font-semibold tracking-tight text-slate-900">
+                        <?php single_cat_title(); ?>
+                    </h1>
+                    <?php if (category_description()) : ?>
+                        <p class="mt-2 text-sm text-slate-600"><?php echo wp_kses_post(category_description()); ?></p>
+                    <?php endif; ?>
+                </div>
 
-                <form role="search" method="get" class="mb-10" action="<?php echo esc_url(home_url('/')); ?>">
-                    <div class="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 shadow-sm">
-                        <input
-                            type="search"
-                            class="flex-1 bg-transparent text-sm text-slate-700 placeholder-slate-400 focus:outline-none"
-                            placeholder="キーワードで記事を検索（例：エラー名、ツール名…）"
-                            value="<?php echo esc_attr(get_search_query()); ?>"
-                            name="s"
-                        />
-                        <button type="submit" class="rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold tracking-widest text-white">
-                            検索
-                        </button>
-                    </div>
-                </form>
-
-                <?php
-                $paged = (get_query_var('paged')) ? get_query_var('paged') : (get_query_var('page') ? get_query_var('page') : 1);
-                $args = array(
-                    'post_type'      => 'post',
-                    'posts_per_page' => 10,
-                    'paged'          => $paged,
-                    'orderby'        => 'date',
-                    'order'          => 'DESC'
-                );
-                $query = new WP_Query($args);
-                if ($query->have_posts()) : ?>
+                <?php if (have_posts()) : ?>
                     <div class="grid gap-6 md:grid-cols-2">
-                        <?php while ($query->have_posts()) : $query->the_post(); ?>
+                        <?php while (have_posts()) : the_post(); ?>
                             <article id="post-<?php the_ID(); ?>" <?php post_class('group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md'); ?>>
                                 <a href="<?php the_permalink(); ?>" class="block overflow-hidden">
                                     <?php
@@ -56,40 +35,15 @@ get_header();
                                     ?>
                                 </a>
                                 <div class="grid gap-3 p-5">
-                                    <?php if (has_category()) : ?>
-                                        <div class="flex flex-wrap gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-slate-500">
-                                            <?php
-                                            $categories = get_the_category();
-                                            if (!empty($categories)) {
-                                                foreach ($categories as $category) {
-                                                    echo '<a href="' . esc_url(get_category_link($category->term_id)) . '" class="rounded-full border border-slate-200 px-2 py-1 text-slate-600 hover:border-slate-400">' . esc_html($category->name) . '</a>';
-                                                }
-                                            }
-                                            ?>
-                                        </div>
-                                    <?php endif; ?>
-
                                     <h2 class="text-lg font-semibold leading-snug text-slate-900">
-                                        <?php if (get_post_meta(get_the_ID(), 'is_resolved', true) === 'true') : ?>
-                                            <span class="mr-2 inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-widest text-emerald-700">解決済み</span>
-                                        <?php endif; ?>
                                         <a href="<?php the_permalink(); ?>" class="hover:text-slate-700"><?php the_title(); ?></a>
                                     </h2>
-
                                     <div class="text-xs text-slate-500">
                                         <?php echo esc_html(get_the_date('Y.m.d')); ?>
                                     </div>
-
                                     <div class="text-sm leading-relaxed text-slate-600">
-                                        <?php
-                                        if (function_exists('jp_excerpt')) {
-                                            echo jp_excerpt(80);
-                                        } else {
-                                            echo wp_trim_words(get_the_excerpt(), 25, '...');
-                                        }
-                                        ?>
+                                        <?php echo wp_trim_words(get_the_excerpt(), 25, '...'); ?>
                                     </div>
-
                                     <div>
                                         <a href="<?php the_permalink(); ?>" class="inline-flex items-center text-xs font-semibold uppercase tracking-widest text-slate-900">
                                             続きを読む →
@@ -101,41 +55,32 @@ get_header();
                     </div>
 
                     <?php
-                    $pagination_args = array(
-                        'total'     => $query->max_num_pages,
-                        'current'   => max(1, $paged),
+                    $pagination = paginate_links(array(
                         'prev_text' => '«',
                         'next_text' => '»',
                         'type'      => 'list',
-                    );
-                    $pagination = paginate_links($pagination_args);
+                    ));
                     if ($pagination) :
                         $pagination = preg_replace('/class=\"page-numbers\"/', 'class="page-numbers inline-flex items-center justify-center min-w-[36px] h-9 rounded-full border border-slate-200 text-sm text-slate-600 hover:border-slate-400"', $pagination);
                         $pagination = preg_replace('/<ul class=[\"\']page-numbers[\"\']>/', '<ul class="page-numbers flex flex-wrap items-center justify-center gap-2">', $pagination);
                         $pagination = preg_replace('/class=\"page-numbers current\"/', 'class="page-numbers current inline-flex items-center justify-center min-w-[36px] h-9 rounded-full border border-slate-900 bg-slate-900 text-sm text-white"', $pagination);
                         ?>
-                        <nav class="mt-10 space-y-4">
-                            <div class="text-center">
-                                <?php echo wp_kses_post($pagination); ?>
-                            </div>
-                            <a href="/page/2/" class="block w-full rounded-full border border-slate-200 px-4 py-3 text-center text-xs font-semibold uppercase tracking-widest text-slate-700 hover:border-slate-400">
-                                全記事一覧を見る
-                            </a>
+                        <nav class="mt-10 text-center">
+                            <?php echo wp_kses_post($pagination); ?>
                         </nav>
                     <?php endif; ?>
                 <?php else : ?>
                     <div class="rounded-xl border border-slate-200 bg-white p-6 text-slate-600">
                         記事がありません。
                     </div>
-                <?php endif;
-                wp_reset_postdata(); ?>
+                <?php endif; ?>
             </main>
 
             <aside class="space-y-6">
                 <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                     <h3 class="text-sm font-semibold uppercase tracking-widest text-slate-700">ZIDOOKA!</h3>
                     <p class="mt-3 text-sm leading-relaxed text-slate-600">
-                        ZIDOOKA！は「自動化」ソリューションを皆様にお届けするウェブサイトです。最新の技術情報やトレンドをお届けします。
+                        Zidookaは実務で使える自動化ソリューションや運用の工夫を実務者目線で共有するウェブサイトです。必要であれば、下記のフォーム・メールから個別相談・受託も可能です。フリーランスエンジニアとしても活動しております。
                     </p>
                     <div class="mt-4 space-y-2">
                         <a href="https://www.zidooka.com/jigyo" class="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white">
@@ -149,20 +94,9 @@ get_header();
 
                 <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                     <h3 class="text-sm font-semibold uppercase tracking-widest text-slate-700">検索</h3>
-                    <form role="search" method="get" class="mt-3" action="<?php echo esc_url(home_url('/')); ?>">
-                        <div class="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 shadow-sm">
-                            <input
-                                type="search"
-                                class="flex-1 bg-transparent text-sm text-slate-700 placeholder-slate-400 focus:outline-none"
-                                placeholder="キーワードで記事を検索"
-                                value="<?php echo esc_attr(get_search_query()); ?>"
-                                name="s"
-                            />
-                            <button type="submit" class="rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold tracking-widest text-white">
-                                検索
-                            </button>
-                        </div>
-                    </form>
+                    <div class="mt-3">
+                        <?php get_search_form(); ?>
+                    </div>
                 </div>
 
                 <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

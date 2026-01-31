@@ -1,4 +1,5 @@
 import axios from 'axios';
+import FormData from 'form-data';
 import { config } from '../config/index.js';
 
 export class WpClient {
@@ -69,11 +70,17 @@ export class WpClient {
   }
 
   async uploadMedia(fileBuffer, filename, mimeType) {
-    const res = await this._requestWithRetry(() => axios.post(`${this.mediaBaseUrl}/wp/v2/media`, fileBuffer, {
+    // Use FormData (multipart/form-data) to avoid WAF blocking raw binary uploads
+    const formData = new FormData();
+    formData.append('file', fileBuffer, {
+      filename: filename,
+      contentType: mimeType
+    });
+
+    const res = await this._requestWithRetry(() => axios.post(`${this.mediaBaseUrl}/wp/v2/media`, formData, {
       headers: {
         ...this.authHeader,
-        'Content-Disposition': `attachment; filename="${filename}"`,
-        'Content-Type': mimeType
+        ...formData.getHeaders()
       },
       timeout: this.timeout
     }), 'POST upload media');

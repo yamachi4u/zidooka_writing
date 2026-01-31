@@ -46,6 +46,7 @@ export class PostService {
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const { data: frontmatter, content: markdownBody } = matter(fileContent);
 
+
     // 1. Normalize emphasis and handle Images
     // Convert Markdown bold to ZIDOOKA inline-strong syntax so the converter maps it properly
     let updatedMarkdown = markdownBody
@@ -204,10 +205,11 @@ export class PostService {
     if (!names || !Array.isArray(names)) return [];
     const ids = [];
     for (const name of names) {
+      const nameStr = String(name);
       const found = metadataList.find(m => 
-        m.name.toLowerCase() === name.toLowerCase() || 
-        m.slug.toLowerCase() === name.toLowerCase() ||
-        decodeURIComponent(m.slug).toLowerCase() === name.toLowerCase()
+        String(m.name).toLowerCase() === nameStr.toLowerCase() || 
+        String(m.slug).toLowerCase() === nameStr.toLowerCase() ||
+        decodeURIComponent(m.slug).toLowerCase() === nameStr.toLowerCase()
       );
       if (!found) {
         throw new Error(`Category '${name}' does not exist. Creating new categories is prohibited. Please use 'node src/index.js list categories' to see available options.`);
@@ -221,12 +223,13 @@ export class PostService {
     if (!names || !Array.isArray(names)) return [];
     const ids = [];
     for (const name of names) {
-      const found = metadataList.find(m => m.name.toLowerCase() === name.toLowerCase() || m.slug.toLowerCase() === name.toLowerCase());
+      const nameStr = String(name);
+      const found = metadataList.find(m => String(m.name).toLowerCase() === nameStr.toLowerCase() || String(m.slug).toLowerCase() === nameStr.toLowerCase());
       if (found) {
         ids.push(found.id);
       } else {
         console.log(`Tag '${name}' not found. Creating...`);
-        const newTag = await this.wp.createTag(name);
+        const newTag = await this.wp.createTag(nameStr);
         ids.push(newTag.id);
       }
     }

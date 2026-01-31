@@ -16,7 +16,7 @@ get_header(); ?>
 <div class="zenn-flex-wrapper">
     <main class="zenn-main-column px-4 sm:px-6 lg:px-0">
         <div class="zenn-container">
-            <div class="zenn-wrapper max-w-none">
+            <div class="zenn-wrapper">
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
             <?php
             // Determine if the title is English-only (no Japanese characters)
@@ -166,32 +166,32 @@ get_header(); ?>
 
             <!-- Article Header -->
             <article class="zenn-article">
-                <header class="zenn-article-header py-4 sm:py-6">
+                <header class="zenn-article-header mb-6">
                     <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight tracking-tight mb-4"><?php the_title(); ?></h1>
 
-                    <div class="text-sm text-slate-500 leading-relaxed mb-4 border-l-2 border-slate-200 pl-3">
+                    <div class="text-sm text-slate-500 leading-relaxed mb-4">
                         <?php echo esc_html($ui_text['cta_small_text']); ?>
                     </div>
                     
                     <?php if ($experience_note = get_post_meta(get_the_ID(), 'experience_note', true)) : ?>
-                        <div class="bg-slate-50 rounded-xl p-4 sm:p-5 mb-5">
+                        <div class="bg-slate-50 rounded-xl p-4 mb-4">
                             <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2"><?php echo esc_html($ui_text['context_label']); ?></div>
-                            <div class="text-sm sm:text-base text-slate-700 leading-relaxed">
+                            <div class="text-sm text-slate-700 leading-relaxed">
                                 <?php echo nl2br(esc_html($experience_note)); ?>
                             </div>
                         </div>
                     <?php endif; ?>
                     
-                    <div class="zenn-article-meta mb-5">
+                    <div class="zenn-article-meta mb-4">
                         <!-- Author Line -->
-                        <div class="font-semibold text-base sm:text-lg text-slate-800 mb-3">
-                            <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" class="no-underline hover:underline text-inherit">
+                        <div class="font-semibold text-base text-slate-800 mb-2">
+                            <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" class="no-underline hover:underline">
                                 <?php the_author(); ?>
                             </a>
                         </div>
 
                         <!-- Date & Actions Row -->
-                        <div class="flex flex-wrap items-center gap-3 sm:gap-4 pb-4 border-b border-slate-200">
+                        <div class="flex flex-wrap items-center gap-3 pb-4 border-b border-slate-200">
                             
                             <!-- Date -->
                             <time datetime="<?php echo esc_attr(get_the_date('c')); ?>" class="text-sm text-slate-500">
@@ -200,14 +200,14 @@ get_header(); ?>
                             
                             <!-- Actions -->
                             <div class="flex items-center gap-2">
-                                <button type="button" class="zenn-like-btn inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors" data-post-id="<?php the_ID(); ?>">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <button type="button" class="zenn-like-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors" data-post-id="<?php the_ID(); ?>">
+                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8 14.5l-1.5-1.37C3.6 10.36 1 7.28 1 5.5 1 3.5 2.5 2 4.5 2c1.54 0 3.04 1.33 3.5 2.36C8.46 3.33 9.96 2 11.5 2 13.5 2 15 3.5 15 5.5c0 1.78-2.6 4.86-5.5 7.63L8 14.5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                     </svg>
-                                    <span class="zenn-like-count font-medium"><?php echo (int)get_post_meta(get_the_ID(), '_post_like_count', true); ?></span>
+                                    <span class="zenn-like-count"><?php echo (int)get_post_meta(get_the_ID(), '_post_like_count', true); ?></span>
                                 </button>
-                                <button class="zenn-share-btn inline-flex items-center justify-center w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <button class="zenn-share-btn inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors">
+                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12 6l-2-2-2 2M10 4v8M4 10v2a2 2 0 002 2h4a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                     </svg>
                                 </button>
@@ -216,18 +216,18 @@ get_header(); ?>
                     </div>
                     
                     <!-- TOC inserted here (Full Width) -->
-                    <div class="zenn-toc-wrapper my-6">
+                    <div class="zenn-toc-wrapper my-5">
                         <div class="zenn-toc-placeholder w-full" aria-hidden="true"></div>
                     </div>
                     
                     <!-- Tags -->
                     <?php if (has_tag()) : ?>
-                        <div class="flex flex-wrap gap-2 mt-4">
+                        <div class="flex flex-wrap gap-2 mb-4">
                             <?php
                             $tags = get_the_tags();
                             if ($tags) {
                                 foreach ($tags as $tag) {
-                                    echo '<a href="' . get_tag_link($tag->term_id) . '" class="inline-flex items-center px-3 py-1.5 text-sm rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors no-underline">#' . $tag->name . '</a>';
+                                    echo '<a href="' . get_tag_link($tag->term_id) . '" class="inline-flex items-center px-3 py-1 text-sm rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors no-underline">#' . $tag->name . '</a>';
                                 }
                             }
                             ?>
@@ -236,18 +236,17 @@ get_header(); ?>
                 </header>
 
                 <!-- Article Content -->
-                <div class="bg-white rounded-2xl p-4 sm:p-6 lg:p-8">
+                <div class="zenn-article-content">
                     <?php 
                     // Featured Image
                     if (has_post_thumbnail()) : ?>
-                        <div class="mb-6 -mx-4 sm:mx-0">
-                            <?php the_post_thumbnail('large', array('class' => 'w-full h-auto rounded-none sm:rounded-xl')); ?>
+                        <div class="zenn-featured-image">
+                            <?php the_post_thumbnail('large', array('class' => 'zenn-thumbnail')); ?>
                         </div>
                     <?php endif; ?>
                     
-                    <div class="zenn-content prose prose-slate max-w-none text-base sm:text-lg leading-relaxed sm:leading-loose">
+                    <div class="zenn-content">
                         <?php the_content(); ?>
-                    </div>
                     </div>
                     
                     <!-- Pagination for multi-page posts -->
@@ -265,12 +264,12 @@ get_header(); ?>
                 </div>
 
                 <!-- Article Footer -->
-                <footer class="mt-8 pt-6 border-t border-slate-200">
-                    <div class="space-y-6">
+                <footer class="mt-6 pt-6 border-t border-slate-200">
+                    <div class="space-y-5">
                         <!-- Like Section -->
                         <div class="flex justify-center">
-                            <button type="button" class="zenn-like-btn-large inline-flex items-center gap-2 px-6 py-3 text-base font-medium rounded-full border-2 border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all" data-post-id="<?php the_ID(); ?>">
-                                <svg width="22" height="22" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <button type="button" class="zenn-like-btn-large inline-flex items-center gap-2 px-5 py-2.5 text-base font-medium rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors" data-post-id="<?php the_ID(); ?>">
+                                <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8 14.5l-1.5-1.37C3.6 10.36 1 7.28 1 5.5 1 3.5 2.5 2 4.5 2c1.54 0 3.04 1.33 3.5 2.36C8.46 3.33 9.96 2 11.5 2 13.5 2 15 3.5 15 5.5c0 1.78-2.6 4.86-5.5 7.63L8 14.5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
                                 </svg>
                                 <span class="zenn-like-count-large"><?php echo (int)get_post_meta(get_the_ID(), '_post_like_count', true); ?></span>
@@ -278,28 +277,38 @@ get_header(); ?>
                         </div>
                         
                         <!-- Share Section -->
-                        <div class="flex flex-wrap justify-center gap-3">
+                        <div class="flex flex-wrap justify-center gap-2">
                             <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink() . '?utm_source=twitter&utm_medium=social&utm_campaign=zidooka_share'); ?>&text=<?php echo urlencode(get_the_title()); ?>" 
-                               class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors no-underline" target="_blank" rel="noopener">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                               class="inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors no-underline" target="_blank" rel="noopener">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
                                 </svg>
                                 <span class="hidden sm:inline">Twitter</span>
                             </a>
                             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink() . '?utm_source=facebook&utm_medium=social&utm_campaign=zidooka_share'); ?>" 
-                               class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors no-underline" target="_blank" rel="noopener">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                               class="inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors no-underline" target="_blank" rel="noopener">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                                 </svg>
                                 <span class="hidden sm:inline">Facebook</span>
                             </a>
-                            <button class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors" onclick="copyToClipboard('<?php echo get_permalink() . '?utm_source=copy&utm_medium=social&utm_campaign=zidooka_share'; ?>')">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <button class="inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors" onclick="copyToClipboard('<?php echo get_permalink() . '?utm_source=copy&utm_medium=social&utm_campaign=zidooka_share'; ?>')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                     <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
                                 </svg>
                                 <span class="hidden sm:inline"><?php echo esc_html($ui_text['copy_link']); ?></span>
                             </button>
+                        </div>
+
+                        <!-- Buy Me a Coffee -->
+                        <div class="text-center">
+                            <a href="https://buymeacoffee.com/zidooka" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-indigo-600 transition-colors no-underline">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/>
+                                </svg>
+                                <?php echo $is_english_only ? 'If helpful, Buy Me a Coffee' : '役に立ったら Buy Me a Coffee'; ?>
+                            </a>
                         </div>
                     </div>
                 </footer>
@@ -311,7 +320,7 @@ get_header(); ?>
 
             <!-- Comments -->
             <?php if (comments_open() || get_comments_number()) : ?>
-                <section class="mt-8 pt-6 border-t border-slate-200">
+                <section class="zenn-comments-section">
                     <?php comments_template(); ?>
                 </section>
             <?php endif; ?>
@@ -326,43 +335,48 @@ get_header(); ?>
     <aside class="zenn-left-column hidden lg:block" aria-label="Article actions">
         <div class="zenn-left-sticky">
             <div class="flex flex-col items-center gap-3">
-                <button type="button" class="zenn-like-btn inline-flex flex-col items-center justify-center w-12 h-12 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-700" data-post-id="<?php echo esc_attr($post_id); ?>" aria-label="<?php echo esc_attr($ui_text['helpful']); ?>">
-                    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <button type="button" class="zenn-like-btn inline-flex flex-col items-center justify-center w-11 h-11 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-700" data-post-id="<?php echo esc_attr($post_id); ?>" aria-label="<?php echo esc_attr($ui_text['helpful']); ?>">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8 14.5l-1.5-1.37C3.6 10.36 1 7.28 1 5.5 1 3.5 2.5 2 4.5 2c1.54 0 3.04 1.33 3.5 2.36C8.46 3.33 9.96 2 11.5 2 13.5 2 15 3.5 15 5.5c0 1.78-2.6 4.86-5.5 7.63L8 14.5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
                     </svg>
-                    <span class="zenn-like-count text-xs font-semibold mt-0.5"><?php echo (int)get_post_meta($post_id, '_post_like_count', true); ?></span>
+                    <span class="zenn-like-count text-xs font-semibold"><?php echo (int)get_post_meta($post_id, '_post_like_count', true); ?></span>
                 </button>
-                <a class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink($post_id) . '?utm_source=twitter&utm_medium=social&utm_campaign=zidooka_share'); ?>&text=<?php echo urlencode(get_the_title($post_id)); ?>" target="_blank" rel="noopener" aria-label="Share on Twitter">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <a class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink($post_id) . '?utm_source=twitter&utm_medium=social&utm_campaign=zidooka_share'); ?>&text=<?php echo urlencode(get_the_title($post_id)); ?>" target="_blank" rel="noopener" aria-label="Share on Twitter">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
                     </svg>
                 </a>
-                <a class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink($post_id) . '?utm_source=facebook&utm_medium=social&utm_campaign=zidooka_share'); ?>" target="_blank" rel="noopener" aria-label="Share on Facebook">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <a class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink($post_id) . '?utm_source=facebook&utm_medium=social&utm_campaign=zidooka_share'); ?>" target="_blank" rel="noopener" aria-label="Share on Facebook">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                 </a>
-                <button class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" onclick="copyToClipboard('<?php echo get_permalink($post_id) . '?utm_source=copy&utm_medium=social&utm_campaign=zidooka_share'; ?>')" aria-label="<?php echo esc_attr($ui_text['copy_link']); ?>">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <button class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" onclick="copyToClipboard('<?php echo get_permalink($post_id) . '?utm_source=copy&utm_medium=social&utm_campaign=zidooka_share'; ?>')" aria-label="<?php echo esc_attr($ui_text['copy_link']); ?>">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                         <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
                     </svg>
                 </button>
+                <a class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-indigo-500" href="https://buymeacoffee.com/zidooka" target="_blank" rel="noopener" aria-label="Buy Me a Coffee">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </aside>
 
     <aside class="zenn-sidebar-column hidden lg:block">
-        <div class="zenn-sidebar-sticky sticky top-6">
-            <div class="space-y-6 max-h-[calc(100vh-48px)] overflow-y-auto">
-            <div class="bg-slate-50 rounded-xl p-5">
-                <h4 class="text-sm font-bold text-slate-800 mb-3 pb-2 border-b border-slate-200"><?php echo esc_html($ui_text['sidebar_about_title']); ?></h4>
-                <p class="text-sm text-slate-600 leading-relaxed mb-4"><?php echo esc_html($ui_text['sidebar_about_body']); ?></p>
+        <div class="sticky top-6">
+            <div class="space-y-5 max-h-[calc(100vh-48px)] overflow-y-auto">
+            <div class="bg-slate-50 rounded-xl p-4">
+                <h4 class="text-sm font-bold text-slate-800 mb-2 pb-2 border-b border-slate-200"><?php echo esc_html($ui_text['sidebar_about_title']); ?></h4>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3"><?php echo esc_html($ui_text['sidebar_about_body']); ?></p>
                 <div class="space-y-2">
-                    <a class="block w-full text-center px-4 py-2.5 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors no-underline" href="<?php echo esc_url($form_url); ?>" target="_blank" rel="noopener">
+                    <a class="block w-full text-center px-3 py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors no-underline" href="<?php echo esc_url($form_url); ?>" target="_blank" rel="noopener">
                         <?php echo esc_html($ui_text['bio_btn_form']); ?>
                     </a>
-                    <a class="block w-full text-center px-4 py-2.5 text-sm font-semibold rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-colors no-underline" href="mailto:main@zidooka.com">
+                    <a class="block w-full text-center px-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-colors no-underline" href="mailto:main@zidooka.com">
                         <?php echo esc_html($ui_text['bio_btn_mail']); ?>
                     </a>
                 </div>
@@ -371,13 +385,23 @@ get_header(); ?>
             <?php if (!empty($related_posts)) : ?>
                 <?php $sidebar_rec = $related_posts[0]; ?>
                 <div class="bg-white rounded-xl p-4 border border-slate-200">
-                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3"><?php echo esc_html($ui_text['sidebar_reco_title']); ?></h4>
+                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2"><?php echo esc_html($ui_text['sidebar_reco_title']); ?></h4>
                     <a class="block no-underline group" href="<?php echo get_permalink($sidebar_rec->ID); ?>">
-                        <span class="block text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors mb-1"><?php echo get_the_title($sidebar_rec->ID); ?></span>
+                        <span class="block text-sm font-semibold text-slate-800 group-hover:text-indigo-600 transition-colors mb-1"><?php echo get_the_title($sidebar_rec->ID); ?></span>
                         <span class="text-xs text-slate-500"><?php echo get_the_date('Y.m.d', $sidebar_rec->ID); ?></span>
                     </a>
                 </div>
             <?php endif; ?>
+
+            <!-- Buy Me a Coffee -->
+            <div class="pt-3 border-t border-slate-200">
+                <a href="https://buymeacoffee.com/zidooka" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-indigo-600 transition-colors no-underline">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/>
+                    </svg>
+                    Buy Me a Coffee
+                </a>
+            </div>
             </div>
         </div>
     </aside>
@@ -410,9 +434,9 @@ get_header(); ?>
         max-width: 760px;
         min-width: 0;
     }
-    .zenn-left-column { order: 1; width: 64px; flex-shrink: 0; }
+    .zenn-left-column { order: 1; width: 56px; flex-shrink: 0; }
     .zenn-main-column { order: 2; }
-    .zenn-sidebar-column { order: 3; width: 300px; flex: 0 0 300px; }
+    .zenn-sidebar-column { order: 3; width: 280px; flex: 0 0 280px; }
     .zenn-left-sticky { position: sticky; top: 96px; }
 }
 
@@ -420,15 +444,15 @@ get_header(); ?>
 .zenn-toc {
     background: #f8fafc;
     border-radius: 12px;
-    padding: 16px 20px;
+    padding: 14px 18px;
 }
 .zenn-toc-title {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: #64748b;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 .zenn-toc-list {
     list-style: none;
@@ -441,11 +465,11 @@ get_header(); ?>
 }
 .zenn-toc-h2 {
     font-weight: 600;
-    padding: 6px 0;
+    padding: 5px 0;
 }
 .zenn-toc-h3 {
-    padding: 4px 0 4px 16px;
-    font-size: 0.875rem;
+    padding: 3px 0 3px 14px;
+    font-size: 0.85rem;
     color: #64748b;
 }
 .zenn-toc-link {
@@ -455,61 +479,78 @@ get_header(); ?>
     transition: color 0.15s;
 }
 .zenn-toc-link:hover {
-    color: #2563eb;
+    color: #4f46e5;
 }
 
 /* Content Typography */
+.zenn-content {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #1f2937;
+}
+@media (min-width: 640px) {
+    .zenn-content {
+        font-size: 1.05rem;
+        line-height: 2;
+    }
+}
 .zenn-content h2 {
-    font-size: 1.375rem;
+    font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.4;
-    margin: 2.5rem 0 1rem;
-    padding-bottom: 0.5rem;
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.4rem;
     border-bottom: 1px solid #e2e8f0;
 }
+@media (min-width: 640px) {
+    .zenn-content h2 {
+        font-size: 1.4rem;
+        margin: 2.5rem 0 1rem;
+    }
+}
 .zenn-content h3 {
-    font-size: 1.125rem;
+    font-size: 1.1rem;
     font-weight: 600;
     line-height: 1.5;
-    margin: 1.5rem 0 0.75rem;
+    margin: 1.25rem 0 0.5rem;
 }
 .zenn-content p {
-    margin: 0 0 1.25rem;
+    margin: 0 0 1.1rem;
 }
 .zenn-content a {
-    color: #2563eb;
+    color: #4f46e5;
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 .zenn-content ul,
 .zenn-content ol {
-    padding-left: 1.5rem;
-    margin: 0 0 1.25rem;
+    padding-left: 1.25rem;
+    margin: 0 0 1.1rem;
 }
 .zenn-content ul { list-style: disc; }
 .zenn-content ol { list-style: decimal; }
-.zenn-content li + li { margin-top: 0.5rem; }
+.zenn-content li + li { margin-top: 0.4rem; }
 .zenn-content blockquote {
     background: #f8fafc;
-    border-left: 4px solid #e2e8f0;
-    padding: 1rem 1.25rem;
-    margin: 1.25rem 0;
+    border-left: 3px solid #cbd5e1;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
     color: #475569;
 }
 .zenn-content code {
     background: #f1f5f9;
     border-radius: 4px;
-    padding: 2px 6px;
-    font-size: 0.875em;
+    padding: 2px 5px;
+    font-size: 0.85em;
 }
 .zenn-content pre {
     background: #1e293b;
     color: #e2e8f0;
-    border-radius: 12px;
-    padding: 1rem;
+    border-radius: 10px;
+    padding: 0.875rem;
     overflow-x: auto;
-    margin: 1.25rem 0;
-    font-size: 0.875rem;
+    margin: 1rem 0;
+    font-size: 0.8rem;
 }
 .zenn-content pre code {
     background: transparent;
@@ -519,13 +560,13 @@ get_header(); ?>
 .zenn-content table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1.25rem 0;
-    font-size: 0.875rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
 }
 .zenn-content th,
 .zenn-content td {
     border: 1px solid #e2e8f0;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
     text-align: left;
 }
 .zenn-content th {
