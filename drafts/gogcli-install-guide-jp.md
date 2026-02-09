@@ -1,7 +1,7 @@
 ---
-title: "gog(gogcli)インストール完全ガイド：Homebrew・Windowsビルド・初期設定まで"
+title: "【超初心者向け】gog(gogcli)をWindows/Macにインストールする完全ガイド｜高校生でもできる"
 slug: gogcli-install-guide-2026
-date: 2026-01-31 12:00:00
+date: 2026-01-31 17:35:00
 categories:
   - PC
 tags:
@@ -15,161 +15,420 @@ tags:
   - Windows
   - macOS
   - Linux
-status: draft
+status: publish
+featured_image: ../images-agent-browser/powershell-search-2026-01-31.png
 ---
 
-Google Workspace の主要サービスを1つのCLIで操作できるのが `gog`（gogcli）です。Gmail/Calendar/Drive/Contacts/Tasks/Sheets/Docs/Slides/People に対応しており、`--json` 出力で自動化にも向きます。
+## この記事でわかること
 
-【結論】macOS/LinuxはHomebrewで導入し、WindowsはGoでソースビルドしてPATHに追加すれば使えます。
+gog（gogcli）というツールを使うと、黒い画面（ターミナル）からGmailやGoogleカレンダー、Driveを操作できます。
 
-この記事では、OS別のインストールから、OAuthクライアントの準備、初期認証、最初のコマンドまでを一気通貫でまとめます。
+:::conclusion
+【結論】この記事を読めば、パソコンに詳しくない人でも30分でgogを使い始められます。
+:::
 
-## 1. 先に把握しておくポイント
+![gogcli公式サイト](../images-agent-browser/gogcli-home.png)
 
-- gogは「OAuthクライアントJSON（Desktop app）」が必要です
-- 認証情報はOSのキーチェーン（WindowsはCredential Manager）に保存されます
-- `gog auth manage` と `GOG_ACCOUNT` を使うと複数アカウント運用が楽になります
+## gogって何？何ができるの？
 
-【注意】OAuthクライアントJSONは機密情報なので、共有フォルダやGit管理に置かないでください。
+### ざっくり言うと
 
-## 2. インストール（macOS / Linux）
+gogは「Googleのサービスを黒い画面から操作するツール」です。
 
-### 2-1. Homebrew（推奨）
+普段はブラウザ（ChromeとかSafari）でGmailを開いてメールをチェックしますよね？
+gogを使うと、黒い画面に文字を打つだけで同じことができます。
 
-Homebrewを使える環境なら、公式のタップから導入できます。
+### 具体的にできること
 
-```bash
-brew install steipete/tap/gogcli
+| やりたいこと | 普段の方法 | gogを使うと |
+|------------|----------|------------|
+| 未読メールを見る | Gmailを開いてクリック | `gog gmail labels list` |
+| 今日の予定を確認 | カレンダーを開く | `gog calendar agenda --today` |
+| Driveのファイルを探す | Driveを開いて検索 | `gog drive ls` |
+
+:::example
+【ポイント】ブラウザを開かなくても、コマンド1つで済むので作業が速くなります。
+:::
+
+## インストール前に知っておくこと
+
+### ターミナル（黒い画面）って何？
+
+ターミナルは「文字を打ってパソコンを操作する画面」のことです。
+
+- **Windows** → PowerShell（パワーシェル）
+- **Mac** → ターミナル
+
+:::note
+【ポイント】難しいプログラミングは不要です。コマンドをコピーして貼り付けるだけでOKです。
+:::
+
+![PowerShellの画面](../images-agent-browser/powershell-screenshot-2026-01-31.png)
+
+### よく出てくる用語（覚えておくとスムーズ）
+
+| 用語 | 簡単な説明 |
+|-----|----------|
+| **Go** | gogを「組み立てる」ための工具（Windowsの人だけ使います） |
+| **Git** | インターネットからファイルを「ダウンロードする」道具 |
+| **Homebrew** | Mac用のアプリストア（コマンドでアプリを入れられます） |
+| **PATH** | どのフォルダにいてもコマンドを使えるようにする設定 |
+| **OAuth** | Googleに「このアプリ使っていいですか？」と許可を取る仕組み |
+
+## 全体の流れ（4ステップ）
+
+```
+【ステップ1】準備（10分）
+   ↓
+【ステップ2】gogをインストール（10分）
+   ↓
+【ステップ3】Googleと連携する設定（10分）
+   ↓
+【ステップ4】実際に使ってみる（5分）
 ```
 
-### 2-2. ソースからビルド
+【ポイント】初めてでも35分あれば完了します。焦らず1つずつ進めましょう。
 
-Homebrewを使わない場合はソースビルドが確実です。
+---
 
-```bash
-git clone https://github.com/steipete/gogcli.git
-cd gogcli
-make
-./bin/gog --help
+## 【ステップ1】準備（Windows/Mac共通）
+
+### 1-1. ターミナルを開く
+
+**Windowsの場合：**
+1. キーボードの「Windowsキー」を押す
+2. 「PowerShell」と入力して検索
+3. 「Windows PowerShell」をクリックして開く
+
+![PowerShellの検索](../images-agent-browser/powershell-search-2026-01-31.png)
+
+**Macの場合：**
+1. 「Launchpad」（ロケットのアイコン）を開く
+2. 「ターミナル」を検索してクリック
+
+:::warning
+【注意】以降のコマンドは全部この黒い画面に貼り付けてEnterキーを押すだけです。
+:::
+
+### 1-2. 自分のパソコンに何が入っているか確認
+
+**Windowsの人はこれを打ってみてください：**
+
+```powershell
+winget --version
 ```
 
-【ポイント】`make` が使えない環境では、Windowsの手順（Go build）でビルドできます。
+数字が表示されたらOKです。何も表示されない場合は、Microsoft Storeで「App Installer」を検索してインストールしてください。
 
-## 3. インストール（Windows）
+**Macの人はこれを打ってみてください：**
 
-Windowsは公式のHomebrewが無いので、Goでビルドするのが最短です。
+```bash
+brew --version
+```
 
-### 3-1. 依存ツールを入れる
+数字が表示されたらOKです。何も表示されない場合は、後でHomebrewをインストールします。
+
+---
+
+## 【ステップ2】gogをインストールする
+
+公式サイトのInstallセクションでは、Homebrewかソースビルドの2択です。
+
+![gogcliインストールセクション](../images-agent-browser/gogcli-install.png)
+
+### Windowsの場合
+
+Windowsは「部品をダウンロードして、自分で組み立てる」感じです。
+
+#### 2-1. GoとGitをインストール
+
+PowerShellに以下をコピーして貼り付け、Enterを押します：
 
 ```powershell
 winget install -e --id GoLang.Go
+```
+
+完了したら次も貼り付け：
+
+```powershell
 winget install -e --id Git.Git
 ```
 
-### 3-2. ソース取得とビルド
+:::note
+【ポイント】Goは「工具」、Gitは「ダウンロード用の道具」です。1回入れたら次からは使えます。
+:::
+
+#### 2-2. パソコンを再起動（またはPowerShellを閉じて開き直す）
+
+インストールした工具を使えるようにするため、PowerShellを一度閉じて、もう一度開き直してください。
+
+#### 2-3. gogをダウンロードして組み立てる
+
+以下のコマンドを順番に貼り付けてEnterを押します：
+
+```powershell
+cd ~
+```
 
 ```powershell
 git clone https://github.com/steipete/gogcli.git
+```
+
+```powershell
 cd gogcli
+```
 
+```powershell
 go mod download
+```
 
+```powershell
 go build -o .\bin\gog.exe .\cmd\gog
+```
+
+:::step
+【ポイント】`go build` は「gog.exe という実行ファイルを作る作業」です。これができると、もうすぐ使えます。
+:::
+
+#### 2-4. 動作確認
+
+```powershell
 .\bin\gog.exe --help
 ```
 
-### 3-3. PATHに追加（ユーザー環境）
+英語の説明がたくさん表示されたら成功です！
+
+#### 2-5. どこからでも使えるように設定（PATH）
 
 ```powershell
 setx PATH "%USERPROFILE%\gogcli\bin;%PATH%"
 ```
 
-【対処】`gog` が見つからない場合は、ターミナルを再起動してPATH更新を反映します。
+:::warning
+【注意】この設定を反映するには、PowerShellを閉じてもう一度開き直す必要があります。
+:::
 
-## 4. 初期設定（OAuthクライアントの作成）
+PowerShellを閉じて、もう一度開き直したら、以下を試してみてください：
 
-Google Cloud Consoleで以下を作成します。
+```powershell
+gog --help
+```
 
-1. 新規プロジェクトを作成
-2. OAuth同意画面を設定
-3. 認証情報 → OAuthクライアントID を作成
-4. アプリの種類は **Desktop app** を選択
-5. JSONをダウンロード
+表示されたらインストール完了です！
 
-作成したJSONを指定して登録します。
+---
+
+### Macの場合
+
+Macは「アプリストアから入れる」感じで簡単です。
+
+#### 2-1. Homebrewをインストール（まだの人だけ）
+
+以下のコマンドをターミナルに貼り付けてEnter：
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+:::note
+【ポイント】HomebrewはMacでコマンドからアプリを入れるための「アプリストア」みたいなものです。
+:::
+
+#### 2-2. gogをインストール
+
+```bash
+brew install steipete/tap/gogcli
+```
+
+#### 2-3. 動作確認
+
+```bash
+gog --help
+```
+
+英語の説明が表示されたら成功です！
+
+---
+
+## 【ステップ3】Googleと連携する設定
+
+これは「Googleアカウントでログインする」ための設定です。
+
+### 3-1. Google Cloud Consoleで「鍵」を作る
+
+公式ドキュメントの案内ページも貼っておきます。画面遷移のイメージが掴みやすくなります。
+
+![Google Workspace OAuthクライアント作成](../images-agent-browser/google-workspace-create-credentials.png)
+![Google Cloud OAuth 2.0 公式ページ](../images-agent-browser/google-cloud-oauth.png)
+
+1. ブラウザで https://console.cloud.google.com/ を開く
+2. 右上の「プロジェクト選択」→「新しいプロジェクト」をクリック
+3. プロジェクト名に「gog-cli」（何でもOK）と入力→「作成」をクリック
+4. 左メニューから「APIとサービス」→「OAuth同意画面」をクリック
+5. 「外部」を選択→「作成」をクリック
+6. アプリ名に「gog」（何でもOK）、メールアドレスを入力→「保存して次へ」
+7. 「スコープを追加または削除」をクリック
+8. 以下を検索してチェックを入れる：
+   - `https://mail.google.com/`（Gmail）
+   - `https://www.googleapis.com/auth/calendar`（カレンダー）
+   - `https://www.googleapis.com/auth/drive`（Drive）
+9. 「更新」→「保存して次へ」→「保存して次へ」→「ダッシュボードに戻る」
+10. 左メニューから「認証情報」→「認証情報を作成」→「OAuthクライアントID」
+11. アプリケーションの種類で「デスクトップアプリ」を選択
+12. 名前に「gog-desktop」（何でもOK）と入力→「作成」
+13. 「JSONをダウンロード」をクリック
+
+:::warning
+【注意】ダウンロードしたJSONファイルは「鍵」です。絶対に他人に見せないでください。
+:::
+
+### 3-2. gogに「鍵」を登録する
+
+ダウンロードしたJSONファイルの場所を確認します。
+
+**Windowsの場合：**
+
+ダウンロードフォルダにあるはずなので、以下のコマンドを打ちます（`XXXX`の部分は実際のファイル名に合わせてください）：
+
+```powershell
+gog auth credentials ~/Downloads/client_secret_XXXX.json
+```
+
+**Macの場合：**
 
 ```bash
 gog auth credentials ~/Downloads/client_secret_XXXX.json
 ```
 
-【注意】JSONファイルは削除せず、保管場所だけ安全なローカルに固定してください。
-
-## 5. アカウント認証
+### 3-3. Googleアカウントを追加する
 
 ```bash
 gog auth add you@gmail.com
 ```
 
-ブラウザが開けない環境では `--manual` を使います。
+:::note
+【ポイント】`you@gmail.com`の部分は、実際に使いたいGmailアドレスに変更してください。
+:::
+
+ブラウザが開いて「このアプリにアクセスを許可しますか？」と聞かれるので、「許可」をクリックします。
+
+:::warning
+【対処】ブラウザが開かない場合は、以下のように `--manual` を付けてください：
 
 ```bash
 gog auth add you@gmail.com --manual
 ```
 
-【ポイント】スコープ追加後に更新トークンが返らない場合は `--force-consent` を使います。
-
-```bash
-gog auth add you@gmail.com --services sheets --force-consent
-```
-
-## 6. 最初のコマンド
-
-```bash
-# よく使うアカウントを固定
-export GOG_ACCOUNT=you@gmail.com
-
-# Gmail: ラベル一覧
-gog gmail labels list
-
-# Calendar: カレンダー一覧
-gog calendar calendars --max 5
-
-# Drive: PDFだけ検索
-gog drive ls --query "mimeType='application/pdf'" --max 3
-```
-
-JSONで扱いたい場合は `--json` を追加します。
-
-```bash
-gog gmail search 'newer_than:7d' --max 10 --json
-```
-
-## 7. よくあるつまずき
-
-### 7-1. `gog` が見つからない
-
-- Homebrewなら `brew --prefix` のbinがPATHに入っているか確認
-- Windowsなら `C:\Users\<user>\gogcli\bin` がPATHに入っているか確認
-- 変更後はターミナル再起動
-
-### 7-2. ブラウザが開かない
-
-`--manual` を使い、表示されたURLを手動で開いて認証します。
-
-### 7-3. 期待したサービスの権限が取れない
-
-`--services` と `--force-consent` を併用して再認証します。
-
-## 8. まとめ
-
-gogはインストールさえ通れば、日々のGoogle Workspace操作を一気に自動化できます。まずは `gog auth manage` と `GOG_ACCOUNT` を固定して、定番コマンドから使い始めるのが安全です。
-
-【結論】導入はHomebrewかGoビルドのどちらかでOK、あとはOAuthクライアント登録→認証で完了します。
+表示されたURLを手動でブラウザに貼り付けて開き、表示されたコードをターミナルに貼り付けます。
+:::
 
 ---
 
-References:
-- https://gogcli.sh/
-- https://github.com/steipete/gogcli
-- https://github.com/steipete/gogcli#quick-start
-- https://github.com/steipete/gogcli#installation
+## 【ステップ4】実際に使ってみる
+
+### 4-1. 使いたいアカウントを指定する
+
+**Windowsの場合：**
+
+```powershell
+$env:GOG_ACCOUNT = "you@gmail.com"
+```
+
+**Macの場合：**
+
+```bash
+export GOG_ACCOUNT=you@gmail.com
+```
+
+:::note
+【ポイント】`you@gmail.com`は実際のアドレスに変更してください。
+:::
+
+### 4-2. Gmailのラベル一覧を表示
+
+```bash
+gog gmail labels list
+```
+
+ラベル（受信トレイ、送信済み、ゴミ箱など）の一覧が表示されたら成功です！
+
+### 4-3. 他にも試せるコマンド
+
+```bash
+# 今日の予定を表示
+gog calendar agenda --today
+
+# Driveのファイルを3件だけ表示
+gog drive ls --max 3
+
+# 未読メールの件数を確認
+gog gmail labels list | grep UNREAD
+```
+
+---
+
+## よくある困りごとと解決法
+
+### 「gog」が見つからないと言われる
+
+**Windowsの場合：**
+1. PowerShellを閉じて、もう一度開き直す
+2. それでもダメなら、以下でPATHを確認：
+
+```powershell
+$env:PATH
+```
+
+`C:\Users\（ユーザー名）\gogcli\bin` が含まれているか確認してください。
+
+**Macの場合：**
+
+```bash
+echo $PATH
+```
+
+`/opt/homebrew/bin` または `/usr/local/bin` が含まれているか確認してください。
+
+### ブラウザ認証ができない
+
+`--manual` オプションを使います：
+
+```bash
+gog auth add you@gmail.com --manual
+```
+
+表示されたURLをコピーしてブラウザで開き、表示されたコードをターミナルに貼り付けます。
+
+### 権限が足りないと言われる
+
+以下のように `--force-consent` を付けて再認証：
+
+```bash
+gog auth add you@gmail.com --services gmail,calendar,drive --force-consent
+```
+
+---
+
+## まとめ
+
+お疲れさまでした！これでgogが使えるようになりました。
+
+:::conclusion
+【結論】
+1. WindowsはGoでビルド、MacはHomebrewでインストール
+2. Google Cloudで「鍵（JSON）」を作って登録
+3. `gog auth add` でアカウント連携
+4. `gog gmail labels list` で動作確認
+
+これで黒い画面からGmailやカレンダー、Driveを操作できるようになりました！
+:::
+
+慣れてくると、ブラウザを開く手間が省けて作業が速くなります。まずは毎朝のメールチェックや予定確認から試してみてください。
+
+---
+
+## 参考リンク
+
+- gog公式サイト：https://gogcli.sh/
+- GitHubリポジトリ：https://github.com/steipete/gogcli
+- Google Cloud Console：https://console.cloud.google.com/

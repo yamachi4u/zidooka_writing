@@ -68,6 +68,9 @@ Usage:
   node src/index.js post <file>    - Post markdown file to WP
   node src/index.js schedule <file> - Schedule post for next available morning
   node src/index.js auth           - Check authentication
+
+Frontmatter tips:
+  - Custom post types: set \`post_type: gas_script\` (and \`gas:\` meta) to publish GAS distribution posts.
         `);
     }
   } catch (error) {

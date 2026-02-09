@@ -15,6 +15,8 @@ Scope: Applies to the entire repository.
 - Use only the emphasis patterns defined in `docs/snippets/emphasis.md` for highlighting key takeaways, cautions, or conclusions.
 - Prefer concise, single-line emphasis where possible; avoid decorative emojis.
 - For code, use inline backticks for identifiers and fenced blocks for multi-line code.
+- When a key takeaway should stand out as a box, prefer Zidooka blocks (e.g. `:::conclusion`) rather than plain emphasis lines.
+- 【対応ブロック一覧】`:::note` / `:::warning` / `:::step` / `:::example` / `:::conclusion`
 
 ## Writing Style (記事の文体)
 - 日本語記事は原則「ですます調」で統一する。
@@ -189,6 +191,24 @@ node scripts/remote-agent/index.js pull --file="$remote" --out="$out"
 ```powershell
 $remote = "site/wp-content/themes/your-theme/path/to/file.php"
 $src    = "path/to/file.php"
+node scripts/remote-agent/index.js push --file="$remote" --src="$src"
+```
+
+### WEBDAV Example (ZIDOOKA)
+
+```powershell
+$env:REMOTE_PROTOCOL = "WEBDAV"
+$env:WEBDAV_URL  = "https://example.webdav-host.tld/"
+$env:WEBDAV_USER = "username"
+$env:WEBDAV_PASS = "password"
+$env:REMOTE_BASES = "zidooka/wp-content/themes/zidooka-tw/"
+node scripts/remote-agent/index.js check
+
+$remote = "zidooka/wp-content/themes/zidooka-tw/single.php"
+$out    = "tmp_remote_agent/zidooka-tw/single.php"
+node scripts/remote-agent/index.js pull --file="$remote" --out="$out"
+
+$src = "tmp_remote_agent/zidooka-tw/single.php"
 node scripts/remote-agent/index.js push --file="$remote" --src="$src"
 ```
 

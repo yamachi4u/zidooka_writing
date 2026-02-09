@@ -78,6 +78,42 @@ featured_image: ../images/thumbnail.png # または thumbnail: ...
 - `slug`: URLスラッグ（**重要**: これが既存記事と一致すると「更新」扱いになります）
 - `featured_image` (または `thumbnail`): アイキャッチ画像のローカルパス
 
+#### GAS配布（カスタム投稿 `gas_script`）
+GASの配布ページを投稿する場合は、`post_type: gas_script` を指定し、配布用メタデータを `gas:` に設定します。
+
+**例（複数ファイル + appsscript.json を ZIP 配布）**
+```markdown
+---
+title: "SpreadsheetからSlack通知するGAS"
+date: 2026-02-07 09:00:00
+post_type: gas_script
+categories:
+  - gas
+tags:
+  - Google Apps Script
+  - Slack
+status: publish
+slug: spreadsheet-slack-notifier
+gas:
+  version: "1.0.0"
+  filename: "spreadsheet-slack-notifier.zip" # 未指定なら <slug>.zip
+  files:
+    - name: "appsscript.json"
+      path: "../gas_examples/slack-notify/appsscript.json"
+    - name: "Code.gs"
+      path: "../gas_examples/slack-notify/Code.gs"
+    - name: "Utils.gs"
+      path: "../gas_examples/slack-notify/Utils.gs"
+---
+
+使い方や注意点をここに書きます。
+```
+
+**配布メタ（`gas:`）の要点**
+- `gas.files`: 複数ファイルを配布したい場合（ZIPになります）
+- `gas.code` / `gas.code_file`: 単体の `.gs` を配布したい場合
+- `gas.mode: bundle`: ファイルが1つでも ZIP にしたい場合に指定できます
+
 ### Step 3: 記事の投稿・更新
 作成したファイルを指定してコマンドを実行します。
 
@@ -128,6 +164,7 @@ Markdownも使えます。
 **注意点:**
 - 生のHTMLタグは使用しないでください（自動的にエスケープされます）。
 - ブロックのネスト（`:::`の中に`:::`）は現在サポートしていません。
+- **ブロック装飾（:::note, :::conclusion, :::example, :::warning, :::step）内では、ブロックの種類を示す前置き（【結論】【ポイント】【注意】等）を省略してください**。ブロック自体が役割を示しているため、前置きは冗長です。
 
 ## 5. ディレクトリ構造
 

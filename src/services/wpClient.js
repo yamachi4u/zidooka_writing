@@ -50,22 +50,32 @@ export class WpClient {
     return await this._fetchAllPages(`${this.baseUrl}/wp/v2/tags`, 100);
   }
 
-  async getPostBySlug(slug) {
+  async getPostBySlug(slug, postType = 'posts') {
     try {
-      const res = await this._requestWithRetry(() => axios.get(`${this.baseUrl}/wp/v2/posts?slug=${slug}&status=any`, { headers: this.authHeader, timeout: this.timeout }), 'GET post by slug');
+      const safeSlug = encodeURIComponent(String(slug));
+      const res = await this._requestWithRetry(
+        () => axios.get(`${this.baseUrl}/wp/v2/${postType}?slug=${safeSlug}&status=any`, { headers: this.authHeader, timeout: this.timeout }),
+        `GET ${postType} by slug`
+      );
       return res.data.length > 0 ? res.data[0] : null;
     } catch (error) {
       return null;
     }
   }
 
-  async createPost(data) {
-    const res = await this._requestWithRetry(() => axios.post(`${this.baseUrl}/wp/v2/posts`, data, { headers: this.authHeader, timeout: this.timeout }), 'POST create post');
+  async createPost(data, postType = 'posts') {
+    const res = await this._requestWithRetry(
+      () => axios.post(`${this.baseUrl}/wp/v2/${postType}`, data, { headers: this.authHeader, timeout: this.timeout }),
+      `POST create ${postType}`
+    );
     return res.data;
   }
 
-  async updatePost(id, data) {
-    const res = await this._requestWithRetry(() => axios.post(`${this.baseUrl}/wp/v2/posts/${id}`, data, { headers: this.authHeader, timeout: this.timeout }), 'POST update post');
+  async updatePost(id, data, postType = 'posts') {
+    const res = await this._requestWithRetry(
+      () => axios.post(`${this.baseUrl}/wp/v2/${postType}/${id}`, data, { headers: this.authHeader, timeout: this.timeout }),
+      `POST update ${postType}`
+    );
     return res.data;
   }
 
@@ -142,9 +152,9 @@ export class WpClient {
     return res.data;
   }
 
-  async getFuturePosts() {
+  async getFuturePosts(postType = 'posts') {
     try {
-      const all = await this._fetchAllPages(`${this.baseUrl}/wp/v2/posts?status=future`, 100);
+      const all = await this._fetchAllPages(`${this.baseUrl}/wp/v2/${postType}?status=future`, 100);
       return all;
     } catch (error) {
       console.error('Failed to fetch future posts:', error.message);

@@ -541,7 +541,7 @@ get_header(); ?>
     background: #f1f5f9;
     border-radius: 4px;
     padding: 2px 5px;
-    font-size: 0.85em;
+    font-size: 0.95em;
 }
 .zenn-content pre {
     background: #1e293b;
@@ -550,7 +550,7 @@ get_header(); ?>
     padding: 0.875rem;
     overflow-x: auto;
     margin: 1rem 0;
-    font-size: 0.8rem;
+    font-size: 0.95rem;
 }
 .zenn-content pre code {
     background: transparent;

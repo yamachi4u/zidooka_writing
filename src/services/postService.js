@@ -13,6 +13,128 @@ export class PostService {
     this.imageProcessor = new ImageProcessor(this.wp);
   }
 
+  resolvePostType(frontmatter) {
+    const raw = frontmatter?.post_type ?? frontmatter?.postType ?? frontmatter?.type ?? 'post';
+    const t = String(raw || '').trim();
+    if (!t) return 'posts';
+
+    const lower = t.toLowerCase();
+    if (lower === 'post' || lower === 'posts') return 'posts';
+    if (lower === 'page' || lower === 'pages') return 'pages';
+    return lower; // Custom post type REST base (e.g. "gas_script")
+  }
+
+  normalizeNewlines(text) {
+    return String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  }
+
+  async resolveTextPath(filePath, inputPath) {
+    let decoded = String(inputPath || '');
+    try {
+      decoded = decodeURIComponent(decoded);
+    } catch {
+      // keep as-is
+    }
+
+    let absolute = path.resolve(path.dirname(filePath), decoded);
+    try {
+      await fs.access(absolute);
+      return absolute;
+    } catch {
+      const rootPath = path.resolve(process.cwd(), decoded);
+      try {
+        await fs.access(rootPath);
+        return rootPath;
+      } catch {
+        return absolute;
+      }
+    }
+  }
+
+  async resolveGasFiles(files, filePath) {
+    const out = [];
+    for (const item of files) {
+      let fileRel = '';
+      let name = '';
+
+      if (typeof item === 'string') {
+        fileRel = item;
+        name = path.basename(fileRel);
+      } else if (item && typeof item === 'object') {
+        fileRel = item.path || item.file || item.src || item.source || '';
+        name = item.name || item.filename || item.target || '';
+        if (!name && fileRel) name = path.basename(String(fileRel));
+      }
+
+      if (!fileRel) continue;
+
+      const abs = await this.resolveTextPath(filePath, fileRel);
+      const content = await fs.readFile(abs, 'utf-8');
+      out.push({ name: String(name || 'Code.gs'), content: this.normalizeNewlines(content) });
+    }
+    return out;
+  }
+
+  buildBundleText(files) {
+    let out = '';
+    for (const f of files) {
+      const name = String(f?.name || 'Code.gs').trim() || 'Code.gs';
+      const content = this.normalizeNewlines(f?.content || '');
+      out += `--- file: ${name} ---\n${content}\n\n`;
+    }
+    return out.trimEnd();
+  }
+
+  async buildGasMeta(frontmatter, filePath) {
+    const gas = (frontmatter?.gas && typeof frontmatter.gas === 'object') ? frontmatter.gas : {};
+
+    const version = gas.version ?? frontmatter?.gas_version ?? frontmatter?.gasVersion ?? '';
+    let filename = gas.filename ?? gas.download_filename ?? frontmatter?.gas_filename ?? frontmatter?.gasFilename ?? '';
+
+    const modeRaw = gas.mode ?? frontmatter?.gas_mode ?? frontmatter?.gasMode ?? '';
+    const mode = String(modeRaw || '').trim().toLowerCase(); // "single" | "bundle" | ""
+
+    const bundleInline = gas.bundle ?? frontmatter?.gas_bundle ?? frontmatter?.gasBundle ?? '';
+    const codeInline = gas.code ?? frontmatter?.gas_code ?? frontmatter?.gasCode ?? '';
+    const files = gas.files ?? frontmatter?.gas_files ?? frontmatter?.gasFiles ?? null;
+    const codeFile = gas.code_file ?? gas.codeFile ?? frontmatter?.gas_code_file ?? frontmatter?.gasCodeFile ?? '';
+
+    let bundleText = '';
+    let codeText = '';
+
+    if (bundleInline) {
+      bundleText = this.normalizeNewlines(bundleInline);
+    } else if (Array.isArray(files) && files.length > 0) {
+      const resolved = await this.resolveGasFiles(files, filePath);
+      if (resolved.length === 1 && mode !== 'bundle') {
+        codeText = resolved[0].content;
+        if (!filename) filename = resolved[0].name;
+      } else {
+        bundleText = this.buildBundleText(resolved);
+      }
+    } else if (codeInline) {
+      codeText = this.normalizeNewlines(codeInline);
+    } else if (codeFile) {
+      const abs = await this.resolveTextPath(filePath, codeFile);
+      codeText = this.normalizeNewlines(await fs.readFile(abs, 'utf-8'));
+      if (!filename) filename = path.basename(String(codeFile));
+    }
+
+    const meta = {};
+    if (version) meta['_zdk_gas_version'] = String(version);
+    if (filename) meta['_zdk_gas_filename'] = String(filename);
+
+    if (bundleText && mode !== 'single') {
+      meta['_zdk_gas_bundle'] = bundleText;
+      meta['_zdk_gas_code'] = '';
+    } else if (codeText) {
+      meta['_zdk_gas_code'] = codeText;
+      meta['_zdk_gas_bundle'] = '';
+    }
+
+    return meta;
+  }
+
   async loadMetadata() {
     try {
       const data = await fs.readFile(config.paths.metadata, 'utf-8');
@@ -45,6 +167,7 @@ export class PostService {
     console.log(`Processing ${filePath}...`);
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const { data: frontmatter, content: markdownBody } = matter(fileContent);
+    const postType = this.resolvePostType(frontmatter);
 
 
     // 1. Normalize emphasis and handle Images
@@ -156,7 +279,7 @@ export class PostService {
       }
     }
 
-    return {
+    const data = {
       title: frontmatter.title,
       content: htmlContent,
       status: frontmatter.status || 'publish',
@@ -169,33 +292,45 @@ export class PostService {
       excerpt: excerpt,
       id: frontmatter.id
     };
+
+    if (postType === 'gas_script') {
+      const meta = await this.buildGasMeta(frontmatter, filePath);
+      const hasBundle = typeof meta?._zdk_gas_bundle === 'string' && meta._zdk_gas_bundle.trim() !== '';
+      const hasCode = typeof meta?._zdk_gas_code === 'string' && meta._zdk_gas_code.trim() !== '';
+      if (!hasBundle && !hasCode) {
+        throw new Error('gas_script requires GAS distribution data. Provide `gas.code`, `gas.code_file`, `gas.bundle`, or `gas.files` in frontmatter.');
+      }
+      data.meta = meta;
+    }
+
+    return { type: postType, data };
   }
 
   async post(filePath) {
-    const postData = await this.processFile(filePath);
+    const { type: postType, data: postData } = await this.processFile(filePath);
     
     let existingPost = null;
     if (postData.id) {
       existingPost = { id: postData.id };
     } else {
-      existingPost = await this.wp.getPostBySlug(postData.slug);
+      existingPost = await this.wp.getPostBySlug(postData.slug, postType);
     }
 
     let result;
 
     if (existingPost) {
       console.log(`Updating existing post: ${postData.slug} (ID: ${existingPost.id})`);
-      result = await this.wp.updatePost(existingPost.id, postData);
+      const { id: _ignore, ...payload } = postData;
+      result = await this.wp.updatePost(existingPost.id, payload, postType);
     } else {
       console.log(`Creating new post: ${postData.slug}`);
       // Create draft first strategy
-      const draftData = { ...postData, content: 'Temp content...', status: 'draft' };
-      const draft = await this.wp.createPost(draftData);
+      const { id: _ignore, meta: _metaIgnore, ...draftPayload } = postData;
+      const draftData = { ...draftPayload, content: 'Temp content...', status: 'draft' };
+      const draft = await this.wp.createPost(draftData, postType);
       console.log(`Draft created (ID: ${draft.id}). Uploading full content...`);
-      result = await this.wp.updatePost(draft.id, { 
-        content: postData.content, 
-        status: postData.status 
-      });
+      const { id: _ignore2, ...payload } = postData;
+      result = await this.wp.updatePost(draft.id, payload, postType);
     }
 
     return result;
