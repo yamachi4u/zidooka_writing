@@ -15,8 +15,28 @@ Scope: Applies to the entire repository.
 - Use only the emphasis patterns defined in `docs/snippets/emphasis.md` for highlighting key takeaways, cautions, or conclusions.
 - Prefer concise, single-line emphasis where possible; avoid decorative emojis.
 - For code, use inline backticks for identifiers and fenced blocks for multi-line code.
-- When a key takeaway should stand out as a box, prefer Zidooka blocks (e.g. `:::conclusion`) rather than plain emphasis lines.
-- 【対応ブロック一覧】`:::note` / `:::warning` / `:::step` / `:::example` / `:::conclusion`
+- **DO NOT use 【】bracket emphasis** (e.g., 【結論】, 【ポイント】, 【注意】, 【対処】).
+- **ALWAYS use Zidooka blocks instead** for key takeaways, cautions, steps, examples, and conclusions.
+- 【対応ブロック一覧】
+  - `:::conclusion` (結論・まとめ) - Use for conclusions and key takeaways
+  - `:::note` (補足・メモ・ポイント) - Use for notes and key points
+  - `:::warning` (注意・警告) - Use for cautions and warnings
+  - `:::step` (手順・ステップ・対処) - Use for action items and procedures
+  - `:::example` (具体例) - Use for specific examples
+
+## URL Formatting (WordPress Auto-Link Safety)
+
+WordPress (and some Markdown-to-block pipelines) may auto-link bare URLs. When a URL is immediately followed by Japanese punctuation/text (e.g. `）を開きます。`), the auto-linker can accidentally include that trailing text in the URL.
+
+Rules:
+- Prefer Markdown links: `[表示テキスト](https://example.com/path)` when you have link text.
+- If you must show a bare URL, wrap it in angle brackets: `<https://example.com/path>`.
+- Avoid writing `https://...` directly followed by `）` / `、` / `。` / Japanese text. Put the URL in `<...>` or use a Markdown link.
+
+Examples:
+- Bad: `UTM生成ツール（https://tools.zidooka.com/jp/utmtools/generator）を開く`
+- Good: `UTM生成ツール（<https://tools.zidooka.com/jp/utmtools/generator>）を開く`
+- Good: `[UTM生成ツール](https://tools.zidooka.com/jp/utmtools/generator)を開く`
 
 ## Writing Style (記事の文体)
 - 日本語記事は原則「ですます調」で統一する。
@@ -223,3 +243,82 @@ node scripts/remote-agent/index.js replace --file="$file" --from="old" --to="new
 - Operations are refused outside `REMOTE_BASES` for safety.
 - Local backups are stored under `tmp_remote_agent/`.
 - Prefer editing locally (pull → edit → push). Use `replace` for small, surgical changes.
+
+---
+
+## Thumbnail Generator
+
+Generate branded ZIDOOKA thumbnail images (SVG → PNG via sharp) for blog articles.
+
+### Usage
+
+```bash
+node src/index.js thumbnail --title "..." --output path/to/file.png [options]
+```
+
+Or directly:
+```bash
+node scripts/generate-thumbnail.cjs --title "..." --output path/to/file.png [options]
+```
+
+### Required Options
+
+| Option     | Description           |
+|------------|-----------------------|
+| `--title`  | Main title text       |
+| `--output` | Output file path (.png) |
+
+### Optional Options
+
+| Option       | Default              | Description                          |
+|--------------|----------------------|--------------------------------------|
+| `--subtitle` | (none)               | Subtitle text                        |
+| `--icon`     | `link`               | Icon type (see list below)           |
+| `--accent`   | `cyan` (#06b6d4)     | Accent color — name or hex           |
+| `--category` | `便利ツール`          | Category pill text                   |
+| `--badge`    | `tools.zidooka.com`  | Bottom badge text                    |
+| `--width`    | `1920`               | Image width in px                    |
+| `--height`   | `900`                | Image height in px                   |
+
+### Available Icons
+
+`link` | `plus` | `qr` | `search` | `chart` | `code` | `gear` | `book` | `pen` | `globe`
+
+### Accent Color Presets
+
+`cyan` | `green` | `purple` | `amber` | `red` | `blue` | `pink` | `orange` | `teal` | `indigo`
+
+Any hex color (e.g. `#ff6600`) is also accepted.
+
+### Examples
+
+```bash
+# UTM tool article thumbnail
+node src/index.js thumbnail \
+  --title "UTM生成ツールの使い方" \
+  --subtitle "入力候補・短縮URL・QRコードまで" \
+  --icon plus --accent green \
+  --output images/2026/utm-generator-thumbnail.png
+
+# GAS article with custom category and badge
+node src/index.js thumbnail \
+  --title "GASでメール自動送信" \
+  --icon code --accent indigo \
+  --category "GAS" --badge "www.zidooka.com" \
+  --output images/2026/gas-mail-thumbnail.png
+```
+
+### Output Spec
+- Format: PNG
+- Default size: 1920x900
+- Design: gradient background, accent bar top/bottom, decorative circles, icon area, ZIDOOKA.COM label, category pill, title/subtitle, badge
+- Output directories are created automatically if they don't exist
+
+### Frontmatter Integration
+
+Reference the generated thumbnail in article frontmatter:
+```yaml
+featured_image: ../images/2026/my-article-thumbnail.png
+```
+
+The CLI's `post` command will upload and attach it as the featured image automatically.
