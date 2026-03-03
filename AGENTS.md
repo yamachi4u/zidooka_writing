@@ -17,6 +17,7 @@ Scope: Applies to the entire repository.
 - Review: Self-check against AGENTS.md rules; peer review if available; verify with emphasis blocks.
 - Validate: Ensure changes align with Drat workflow and cross-links; run any tests if applicable.
 - Publish: Stage changes, create a PR, and, once approved, merge and optionally move Drat drafts to public docs.
+- Publish: Use the CLI post command to publish drafts (e.g. `node src/index.js post --draft drafts/claude-status-20260303-ja.md`). Confirm frontmatter and categories; attach featured image if applicable.
 - Trace: Link back to the corresponding Drat entry and the updated AGENTS.md section.
 
 ## Conventions
