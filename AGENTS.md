@@ -11,6 +11,14 @@ Scope: Applies to the entire repository.
 - Implement changes, then restate which sections you followed.
 - Self-check: confirm output conforms to emphasis snippet patterns.
 
+## Pipeline (How changes flow from idea to publication)
+- Plan: Define scope and gather requirements from Must-Read docs; capture tasks in a to-do list.
+- Implement: Make code/docs updates in a single logical unit.
+- Review: Self-check against AGENTS.md rules; peer review if available; verify with emphasis blocks.
+- Validate: Ensure changes align with Drat workflow and cross-links; run any tests if applicable.
+- Publish: Stage changes, create a PR, and, once approved, merge and optionally move Drat drafts to public docs.
+- Trace: Link back to the corresponding Drat entry and the updated AGENTS.md section.
+
 ## Conventions
 - Use only the emphasis patterns defined in `docs/snippets/emphasis.md` for highlighting key takeaways, cautions, or conclusions.
 - Prefer concise, single-line emphasis where possible; avoid decorative emojis.
@@ -322,3 +330,22 @@ featured_image: ../images/2026/my-article-thumbnail.png
 ```
 
 The CLI's `post` command will upload and attach it as the featured image automatically.
+
+---
+
+## AdSense Control
+
+To disable Google AdSense on a specific post (e.g. for policy compliance or landing pages), add the `affiliate` tag to the post.
+
+- **Tag:** `affiliate`
+- **Effect:** Prevents AdSense script injection in `header.php` / `functions.php`.
+
+---
+
+## Draft Area (Drat)
+
+- For drafting notes, experiments, and transient incident reports (not yet public), store files under the `drat/` directory at the repository root.
+- Naming convention: `drat/YYYYMMDD-description.md`, e.g. `drat/claude-status-20260303.md`.
+- Content should be markdown and can use Zidooka emphasis blocks (e.g. :::note, :::step, :::conclusion) when appropriate.
+- Process: create drafts in `drat/`, review, and when ready, move or copy to the public docs folder (eg. `docs/`), and update links accordingly.
+- Do not publish drafts directly; maintain them as drafts until approval.
