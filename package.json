@@ -7,7 +7,8 @@
     "remote:agent": "node scripts/remote-agent/index.js",
     "ga4": "node scripts/ga4-report.mjs",
     "gsc": "node scripts/gsc-query.mjs",
-    "seo:followup": "node scripts/seo-followup-report.mjs"
+    "seo:followup": "node scripts/seo-followup-report.mjs",
+    "ga4:admin-setup": "node scripts/ga4-admin-setup.mjs"
   },
   "dependencies": {
     "agent-browser": "github:vercel-labs/agent-browser",
