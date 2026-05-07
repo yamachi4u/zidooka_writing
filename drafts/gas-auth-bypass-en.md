@@ -1,5 +1,5 @@
 ---
-title: "[GAS] How to Fix \"Google hasn't verified this app\" (Authorization Guide)"
+title: "[GAS][Old UI] How to Fix \"Google hasn't verified this app\" when you see Advanced"
 date: 2025-12-13 10:00:00
 categories: 
   - GAStips
@@ -16,6 +16,8 @@ When you run a Google Apps Script (GAS) for the first time, or when you add new 
 As you proceed, you will encounter a scary warning screen saying **"Google hasn't verified this app"**, often labeling it as "unsafe". Many users stop here, fearing they've done something wrong.
 
 This simply means **"Google hasn't reviewed your script as an official app"**. If it's a script you wrote yourself, **it is safe to proceed**.
+
+This article covers the older UI where you still see **`Advanced`** and then **`Go to {app} (unsafe)`**. If you are seeing the newer `Continue / Back to safety` tester warning, that is a different flow.
 
 This article explains the steps to bypass this warning screen and execute your script, with screenshots.
 

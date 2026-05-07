@@ -1,0 +1,6 @@
+sessionDefaultChannelGroup,sessions_current,sessions_previous,sessions_delta,sessions_delta_pct,totalUsers_current,totalUsers_previous,totalUsers_delta,totalUsers_delta_pct,screenPageViews_current,screenPageViews_previous,screenPageViews_delta,screenPageViews_delta_pct,engagedSessions_current,engagedSessions_previous,engagedSessions_delta,engagedSessions_delta_pct
+Organic Search,2678,2358,320,13.57%,2235,1985,250,12.59%,3970,3463,507,14.64%,1530,1383,147,10.63%
+Direct,749,410,339,82.68%,731,395,336,85.06%,799,441,358,81.18%,76,78,-2,-2.56%
+Referral,54,56,-2,-3.57%,38,45,-7,-15.56%,81,172,-91,-52.91%,27,30,-3,-10%
+Organic Social,20,8,12,150%,16,7,9,128.57%,16,8,8,100%,4,5,-1,-20%
+Unassigned,19,22,-3,-13.64%,19,22,-3,-13.64%,36,53,-17,-32.08%,5,14,-9,-64.29%

@@ -8,6 +8,7 @@
  *   - Gradient title text (white → accent-light)
  *   - ZIDOOKA signature badge (bottom-left)
  *   - "M PLUS 1p" font with fallback stack
+ *   - Explicit line breaks: use "//" in title to force a break
  *
  * Usage:
  *   node scripts/generate-thumbnail.cjs --title "タイトル" --output path.png [options]
@@ -123,28 +124,52 @@ const TITLE_FONT = "'M PLUS 1p', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'B
 const UI_FONT = "'M PLUS 1p', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif";
 
 function calcTitleLayout(title, width, height, hasCat, hasSub) {
+  // Explicit break with "//"
+  if (title.includes("//")) {
+    const rawParts = title.split("//").map(s => s.trim());
+
+    // Calculate scaling based on longest part (using raw string for length)
+    const maxLineUnits = Math.max(...rawParts.map(line =>
+      [...line].reduce((s, ch) => s + (ch.charCodeAt(0) > 0x2e80 ? 2 : 1), 0)
+    ));
+
+    // Tighter factor for even bigger text
+    const cpf = 0.45;
+    let fontSize = Math.floor((width * 0.90) / (maxLineUnits * cpf));
+    fontSize = Math.min(fontSize, 180); // Increased max
+    fontSize = Math.max(fontSize, 80);
+
+    const lineH = fontSize * 1.25;
+    const totalTextH = rawParts.length * lineH;
+    const extra = (hasCat ? 60 : 0) + (hasSub ? 70 : 0);
+    const contentH = totalTextH + extra + 60;
+    const startY = Math.max(50, Math.round((height - contentH) / 2));
+
+    // Return escaped lines for rendering
+    return { lines: rawParts.map(escapeXml), fontSize, lineH, startY };
+  }
+
+  // Auto-wrap logic
   const titleEscaped = escapeXml(title);
   const wu = [...title].reduce((s, ch) => s + (ch.charCodeAt(0) > 0x2e80 ? 2 : 1), 0);
-  const maxPxW = width * 0.72;
-  const cpf = 0.52;
+  const maxPxW = width * 0.82; // Wider area
+  const cpf = 0.45;
 
   let fontSize = Math.floor(maxPxW / (wu * cpf));
-  fontSize = Math.min(fontSize, 120);
-  fontSize = Math.max(fontSize, 48);
+  fontSize = Math.min(fontSize, 160);
+  fontSize = Math.max(fontSize, 72);
 
   let cpl = Math.floor(maxPxW / (cpf * fontSize));
-  let lines = wrapText(titleEscaped, Math.max(cpl, 10));
+  let lines = wrapText(titleEscaped, Math.max(cpl, 8));
 
-  if (lines.length > 3) fontSize = Math.max(42, Math.floor(fontSize * 0.7));
-  else if (lines.length > 2) fontSize = Math.max(48, Math.floor(fontSize * 0.85));
+  if (lines.length > 3) fontSize = Math.max(60, Math.floor(fontSize * 0.7));
+  else if (lines.length > 2) fontSize = Math.max(70, Math.floor(fontSize * 0.85));
 
   cpl = Math.floor(maxPxW / (cpf * fontSize));
-  lines = wrapText(titleEscaped, Math.max(cpl, 10));
+  lines = wrapText(titleEscaped, Math.max(cpl, 8));
 
   const lineH = fontSize * 1.3;
-  const totalTextH = lines.length * lineH;
-  const extra = (hasCat ? 58 : 0) + (hasSub ? 65 : 0);
-  const contentH = totalTextH + extra + 50;
+  const contentH = lines.length * lineH + (hasCat ? 58 : 0) + (hasSub ? 65 : 0) + 50;
   const startY = Math.max(60, Math.round((height - contentH) / 2));
 
   return { lines, fontSize, lineH, startY };
@@ -247,6 +272,7 @@ function buildTextOverlaySvg(opts) {
   const { accent, width, height } = opts;
   const theme = deriveTheme(accent);
 
+  // Gradient is defined here so it has context
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -269,9 +295,9 @@ function buildDarkOverlaySvg(accent, width, height) {
 <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#000" stop-opacity="0.50"/>
-      <stop offset="50%" stop-color="#000" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#000" stop-opacity="0.60"/>
+      <stop offset="0%" stop-color="#000" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#000" stop-opacity="0.70"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.85"/>
     </linearGradient>
     <radialGradient id="wash" cx="0.5" cy="0.45" r="0.6">
       <stop offset="0%" stop-color="${accent}" stop-opacity="0.12"/>
@@ -414,25 +440,19 @@ Options:
   --width         Width in px (default: 1920)
   --height        Height in px (default: 900)
 
+Explicit Line Breaks:
+  Use "//" in title to force a newline.
+  Example: "spawn EPERM // 原因と対処法"
+
 Setup:
   --install-font  Download & install "M PLUS 1p" (run once)
 
 Examples:
-  # Random stock photo background
+  # Random stock photo background with explicit break
   node scripts/generate-thumbnail.cjs \\
-    --title "spawn EPERMエラーの原因と対処法" \\
+    --title "spawn EPERM // 原因と対処法" \\
     --bg --accent red --category "エラー解決" \\
     --output images/2026/spawn-eperm-thumbnail.png
-
-  # Specific background image
-  node scripts/generate-thumbnail.cjs \\
-    --title "My Article" --bg "images/bg-stock/laptop.png" \\
-    --output images/2026/my-thumbnail.png
-
-  # Solid background (no photo)
-  node scripts/generate-thumbnail.cjs \\
-    --title "GASでメール自動送信" --accent indigo \\
-    --output images/2026/gas-thumbnail.png
 `);
     process.exit(0);
   }

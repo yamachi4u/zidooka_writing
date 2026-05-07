@@ -1,5 +1,5 @@
 ---
-title: "ChatGPT・VS Code・GASのエラー解決まとめ（よくある原因と対処の入口）"
+title: "ChatGPT・Cursor・Copilot・VS CodeのAIエラー解決まとめ"
 slug: error-hub-20260205
 date: 2026-02-05 10:00:00
 categories:
@@ -21,7 +21,9 @@ ChatGPTやVS Code、GASのエラーは「原因が分からず困る」ことが
 
 ## まず最初にやること
 
-【ポイント】エラー文言は省略せず、そのまま検索に使うと解決が早くなります。
+:::note
+エラー文言は省略せず、そのまま検索に使うと解決が早くなります。
+:::
 
 :::step
 1. エラー文言をそのままコピーする（省略しない）
@@ -31,12 +33,22 @@ ChatGPTやVS Code、GASのエラーは「原因が分からず困る」ことが
 
 ## ChatGPT / AI系エラー
 
-- [【日本語訳・解決】“Something went wrong while generating the response.”の意味｜ChatGPTエラー解説](https://www.zidooka.com/archives/121)
+- [ChatGPTで「Something went wrong while generating the response.」が出る原因と対処法](https://www.zidooka.com/archives/121)
 - [ChatGPTで「files.oaiusercontent.com にアップロードできませんでした」と出る原因と対処法](https://www.zidooka.com/archives/185)
+- [ChatGPTで「You're generating images too quickly」と表示されたときの原因と対処法](https://www.zidooka.com/archives/2320)
+- [ChatGPT「オフラインになっているようです」の対処法](https://www.zidooka.com/archives/443)
 - [「ドキュメントの読み込みを中止しました」（ChatGPTのエラー）が多発しているようです。](https://www.zidooka.com/archives/471)
 - [ChatGPTがダウン？→503 Service Temporarily Unavailable](https://www.zidooka.com/archives/188)
 - [ChatGPTが「Network connection lost…」と出るとき — 原因と解決策](https://www.zidooka.com/archives/3645)
 - [Cloudflare 504 Gateway time-out エラーの記録](https://www.zidooka.com/archives/3504)
+
+## Cursor / Copilot / Gemini 系エラー
+
+- [Cursorで「We're experiencing high demand for Claude 3.7 Sonnet right now」と出たときの対処法](https://www.zidooka.com/archives/240)
+- [GitHub Copilotのプレミアムリクエストはいつリセットされる？](https://www.zidooka.com/archives/2750)
+- [Copilot token usage / rate_limited の対処](https://www.zidooka.com/archives/2755)
+- [VS Code Copilot エージェントモードのリクエスト制限について](https://www.zidooka.com/archives/411)
+- [Geminiで「エラーが発生しました。(5)」と出る原因と対処法](https://www.zidooka.com/archives/621)
 
 ## VS Code / Windows / デスクトップ系エラー
 
@@ -59,7 +71,11 @@ ChatGPTやVS Code、GASのエラーは「原因が分からず困る」ことが
 
 ## 解決しない場合
 
-【対処】自力で解決が難しい場合は、エラー文言と環境（OS/ブラウザ/アプリ名）を添えて相談すると早いです。
+:::step
+1. エラー文言をそのまま控える
+2. OS / ブラウザ / アプリ名 / 回線を一緒に残す
+3. 近い記事がなければ、その文言ごと相談する
+:::
 
 - 事業概要／連絡先（お問合せ）: https://www.zidooka.com/jigyo
 - 制作実績（制作単価）: https://www.zidooka.com/archives/46

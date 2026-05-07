@@ -1,0 +1,44 @@
+sessionSourceMedium,sessions_current,sessions_previous,sessions_delta,sessions_delta_pct,totalUsers_current,totalUsers_previous,totalUsers_delta,totalUsers_delta_pct,engagedSessions_current,engagedSessions_previous,engagedSessions_delta,engagedSessions_delta_pct,screenPageViews_current,screenPageViews_previous,screenPageViews_delta,screenPageViews_delta_pct
+bing / organic,1509,1383,126,9.11%,1275,1159,116,10.01%,882,819,63,7.69%,2650,2439,211,8.65%
+google / organic,965,828,137,16.55%,783,694,89,12.82%,524,479,45,9.39%,1005,839,166,19.79%
+(direct) / (none),749,410,339,82.68%,731,395,336,85.06%,76,78,-2,-2.56%,799,441,358,81.18%
+duckduckgo / organic,80,66,14,21.21%,66,58,8,13.79%,46,36,10,27.78%,173,83,90,108.43%
+yahoo / organic,75,48,27,56.25%,68,45,23,51.11%,54,26,28,107.69%,86,53,33,62.26%
+cn.bing.com / referral,23,14,9,64.29%,19,11,8,72.73%,11,9,2,22.22%,24,14,10,71.43%
+copilot.com / referral,23,3,20,666.67%,15,2,13,650%,7,1,6,600%,28,2,26,1300%
+t.co / referral,18,8,10,125%,15,7,8,114.29%,4,5,-1,-20%,15,8,7,87.5%
+chatgpt.com / referral,10,21,-11,-52.38%,8,18,-10,-55.56%,4,13,-9,-69.23%,10,140,-130,-92.86%
+(not set),8,5,3,60%,8,5,3,60%,0,0,0,,13,4,9,225%
+openai / organic,8,8,0,0%,8,8,0,0%,6,8,-2,-25%,8,21,-13,-61.9%
+doubao.com / referral,6,6,0,0%,4,6,-2,-33.33%,4,4,0,0%,7,6,1,16.67%
+ecosia.org / organic,6,5,1,20%,5,5,0,0%,1,3,-2,-66.67%,7,7,0,0%
+chatgpt.com / (not set),5,8,-3,-37.5%,5,8,-3,-37.5%,3,5,-2,-40%,13,8,5,62.5%
+copilot.com / (not set),4,0,4,,4,0,4,,1,0,1,,5,0,5,
+vercel.com / referral,4,1,3,300%,1,1,0,0%,4,0,4,,26,1,25,2500%
+websearch.rakuten.co.jp / referral,4,0,4,,2,0,2,,3,0,3,,7,0,7,
+perplexity.ai / referral,3,5,-2,-40%,2,4,-2,-50%,1,2,-1,-50%,2,5,-3,-60%
+b.hatena.ne.jp / referral,2,0,2,,1,0,1,,0,0,0,,1,0,1,
+br.search.yahoo.com / referral,2,0,2,,1,0,1,,2,0,2,,2,0,2,
+hitachigroup.okta.com / referral,2,2,0,0%,2,1,1,100%,2,0,2,,2,1,1,100%
+sp-search.jp / referral,2,0,2,,2,0,2,,1,0,1,,2,0,2,
+us.search.yahoo.com / referral,2,2,0,0%,2,1,1,100%,1,1,0,0%,2,2,0,0%
+10.53.240.17:6082 / referral,1,0,1,,1,0,1,,1,0,1,,1,0,1,
+co.search.yahoo.com / referral,1,0,1,,1,0,1,,0,0,0,,1,0,1,
+confluence.daj-net.daj.co.jp:8443 / referral,1,4,-3,-75%,1,2,-1,-50%,1,2,-1,-50%,1,3,-2,-66.67%
+es.search.yahoo.com / referral,1,1,0,0%,1,1,0,0%,1,1,0,0%,1,1,0,0%
+in.search.yahoo.com / referral,1,0,1,,1,0,1,,1,0,1,,1,0,1,
+it.search.yahoo.com / referral,1,0,1,,1,0,1,,0,0,0,,1,0,1,
+nl.search.yahoo.com / referral,1,0,1,,1,0,1,,1,0,1,,1,0,1,
+noai.duckduckgo.com / referral,1,0,1,,1,0,1,,1,0,1,,1,0,1,
+openai / (not set),1,7,-6,-85.71%,1,7,-6,-85.71%,1,7,-6,-85.71%,4,39,-35,-89.74%
+perplexity / (not set),1,1,0,0%,1,1,0,0%,0,1,-1,-100%,1,1,0,0%
+prisma-cp.paprisma:6082 / referral,1,1,0,0%,1,1,0,0%,1,1,0,0%,1,1,0,0%
+statics.teams.cdn.office.net / referral,1,3,-2,-66.67%,1,3,-2,-66.67%,1,2,-1,-50%,1,3,-2,-66.67%
+service.smt.docomo.ne.jp / referral,0,4,-4,-100%,0,3,-3,-100%,0,3,-3,-100%,0,5,-5,-100%
+github.com / referral,0,3,-3,-100%,0,1,-1,-100%,0,1,-1,-100%,0,2,-2,-100%
+search.portal.auone.jp / referral,0,2,-2,-100%,0,2,-2,-100%,0,2,-2,-100%,0,3,-3,-100%
+claude.ai / referral,0,1,-1,-100%,0,1,-1,-100%,0,0,0,,0,1,-1,-100%
+docs.google.com / referral,0,1,-1,-100%,0,1,-1,-100%,0,0,0,,0,1,-1,-100%
+rss / rss,0,1,-1,-100%,0,1,-1,-100%,0,1,-1,-100%,0,1,-1,-100%
+safe.menlosecurity.com / referral,0,1,-1,-100%,0,1,-1,-100%,0,1,-1,-100%,0,1,-1,-100%
+uk.search.yahoo.com / referral,0,1,-1,-100%,0,1,-1,-100%,0,0,0,,0,1,-1,-100%

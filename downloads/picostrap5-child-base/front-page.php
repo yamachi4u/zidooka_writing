@@ -15,6 +15,44 @@ get_header();
                     <?php echo esc_html(get_bloginfo('name')); ?>
                 </h1>
 
+                <section class="mb-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">Start Here</p>
+                            <h2 class="mt-2 text-xl font-semibold tracking-tight text-slate-900">よく読まれている入口</h2>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                                ChatGPT、Copilot、GAS、Access Denied 系の入口を先に置いています。検索から来た人が次に見たいページへ移りやすい導線です。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                        <a href="/archives/3716" class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 transition hover:border-slate-400 hover:bg-white">
+                            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Hub</div>
+                            <div class="mt-2 text-sm font-semibold leading-snug text-slate-900">AIエラー解決まとめ</div>
+                        </a>
+                        <a href="/archives/1965" class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 transition hover:border-slate-400 hover:bg-white">
+                            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">ChatGPT</div>
+                            <div class="mt-2 text-sm font-semibold leading-snug text-slate-900">ChatGPT エラー解決集</div>
+                        </a>
+                        <a href="/archives/2672" class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 transition hover:border-slate-400 hover:bg-white">
+                            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Copilot</div>
+                            <div class="mt-2 text-sm font-semibold leading-snug text-slate-900">Copilot エラー総合</div>
+                        </a>
+                        <a href="/archives/2877" class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 transition hover:border-slate-400 hover:bg-white">
+                            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">GAS</div>
+                            <div class="mt-2 text-sm font-semibold leading-snug text-slate-900">Rhino 廃止 / V8 移行ガイド</div>
+                        </a>
+                        <a href="/archives/105" class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 transition hover:border-slate-400 hover:bg-white">
+                            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Popular</div>
+                            <div class="mt-2 text-sm font-semibold leading-snug text-slate-900">PrinceXML エラー対処</div>
+                        </a>
+                        <a href="/archives/2590" class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 transition hover:border-slate-400 hover:bg-white">
+                            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Access Denied</div>
+                            <div class="mt-2 text-sm font-semibold leading-snug text-slate-900">errors.edgesuite.net の解説</div>
+                        </a>
+                    </div>
+                </section>
+
                 <form role="search" method="get" class="mb-10" action="<?php echo esc_url(home_url('/')); ?>">
                     <div class="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 shadow-sm">
                         <input

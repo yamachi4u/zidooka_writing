@@ -2,6 +2,10 @@
 
 Scope: Applies to the entire repository.
 
+## Default Workspace And Upload Requests
+- If the user says `zidookaでアップして`, treat this repository at `C:\Users\user\Documents\zidooka_writing` as the default working directory.
+- For that request, do not require Git staging, commits, or PR creation unless the user explicitly asks for Git handling.
+
 ## Must-Read
 - `PIPELINE_MANUAL.md` (overall workflow/pipeline manual)
 - `docs/snippets/emphasis.md` (standard emphasis patterns to use in outputs)
@@ -11,6 +15,14 @@ Scope: Applies to the entire repository.
 - Implement changes, then restate which sections you followed.
 - Self-check: confirm output conforms to emphasis snippet patterns.
 
+## GA4 / GSC Env Check
+- Before concluding that GA4 / GSC tooling is unavailable, check all of:
+  - repository `.env`
+  - process / user / machine environment variables
+  - explicit CLI overrides such as `--property` and `--key-file`
+- When verifying analytics credentials, never print secret values directly. Report only whether each required key is set or missing.
+- If `scripts/ga4-report.mjs` fails due to missing config, state which key category is missing (`GOOGLE_GA4_PROPERTY_ID`, `GOOGLE_SERVICE_ACCOUNT_KEY_PATH`, etc.) and only then treat the local GA4 CLI as unavailable.
+
 ## Pipeline (How changes flow from idea to publication)
 - Plan: Define scope and gather requirements from Must-Read docs; capture tasks in a to-do list.
 - Implement: Make code/docs updates in a single logical unit.
@@ -18,6 +30,7 @@ Scope: Applies to the entire repository.
 - Validate: Ensure changes align with Drat workflow and cross-links; run any tests if applicable.
 - Publish: Stage changes, create a PR, and, once approved, merge and optionally move Drat drafts to public docs.
 - Publish: Use the CLI post command to publish drafts (e.g. `node src/index.js post --draft drafts/claude-status-20260303-ja.md`). Confirm frontmatter and categories; attach featured image if applicable.
+- Publish: For immediate publication on ZIDOOKA, omit `date` from frontmatter. If `date` is set manually, the current REST path can create a `future` post due to timezone conversion.
 - Trace: Link back to the corresponding Drat entry and the updated AGENTS.md section.
 
 ## Conventions

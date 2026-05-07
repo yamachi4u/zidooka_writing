@@ -38,6 +38,7 @@ get_header(); ?>
                 'home' => 'Home',
                 'context_label' => 'Context:',
                 'cta_small_text' => '* If you need help with the content of this article for work or development, individual support is available.',
+                'read_time_format' => '%d min read',
                 'page_label' => 'Page:',
                 'helpful' => 'Helpful',
                 'rate_insight' => '* Rate as expert insight',
@@ -69,6 +70,7 @@ get_header(); ?>
                 'home' => 'ホーム',
                 'context_label' => 'この記事が生まれた背景',
                 'cta_small_text' => '※ この記事の内容について、業務・開発上お困りの場合は個別に対応できます（5,000円〜）。',
+                'read_time_format' => '読み終わるまで約%d分',
                 'page_label' => 'ページ',
                 'helpful' => '役に立った',
                 'rate_insight' => '※ 専門的な知見として評価する',
@@ -97,6 +99,14 @@ get_header(); ?>
                 'ai_policy_title' => 'AI活用に関するポリシー',
                 'ai_policy_text' => '当サイトでは、記事の執筆支援にAIを活用する場合があります。ただし、AIに記事作成を全面的に委任することはなく、あくまでライティングの補助として利用しています。「AIを活用することで生産性が向上し、より伝わりやすいコンテンツになるならば積極的に利用すべき」という方針のもと運営しています。',
             ];
+
+            // Estimate reading time for mixed Japanese/English content.
+            $plain_content = wp_strip_all_tags(strip_shortcodes(get_post_field('post_content', get_the_ID())));
+            $ja_char_count = preg_match_all('/[\x{3040}-\x{30FF}\x{3400}-\x{9FFF}\x{F900}-\x{FAFF}]/u', $plain_content, $ja_matches);
+            $en_word_count = preg_match_all('/[A-Za-z0-9_]+(?:[\'’-][A-Za-z0-9_]+)*/u', $plain_content, $en_matches);
+            $reading_units = (int)$ja_char_count + ((int)$en_word_count * 2);
+            $estimated_read_minutes = max(1, (int)ceil($reading_units / 500));
+            $read_time_label = sprintf($ui_text['read_time_format'], $estimated_read_minutes);
             ?>
             
             <!-- JSON-LD Structured Data -->
@@ -197,6 +207,7 @@ get_header(); ?>
                             <time datetime="<?php echo esc_attr(get_the_date('c')); ?>" class="text-sm text-slate-500">
                                 <?php echo esc_html(get_the_date('Y.m.d')); ?>
                             </time>
+                            <span class="text-sm text-slate-500">・<?php echo esc_html($read_time_label); ?></span>
                             
                             <!-- Actions -->
                             <div class="flex items-center gap-2">

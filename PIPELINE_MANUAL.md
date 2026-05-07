@@ -78,6 +78,11 @@ featured_image: ../images/thumbnail.png # または thumbnail: ...
 - `slug`: URLスラッグ（**重要**: これが既存記事と一致すると「更新」扱いになります）
 - `featured_image` (または `thumbnail`): アイキャッチ画像のローカルパス
 
+**ZIDOOKA運用メモ（重要）**
+- `status: publish` で**すぐ公開したい**場合は、`date` を入れないでください。
+- 現在の REST 投稿フローでは、`date` をローカル時刻のつもりで入れると、WordPress 側で `date_gmt` 扱いになって **9時間先の `future`** になることがあります。
+- **予約投稿したい**場合は、手書きで `date` を入れるより `node src/index.js schedule drafts/article.md` を優先してください。
+
 #### GAS配布（カスタム投稿 `gas_script`）
 GASの配布ページを投稿する場合は、`post_type: gas_script` を指定し、配布用メタデータを `gas:` に設定します。
 

@@ -1,0 +1,3009 @@
+
+> zidooka-cli@1.0.0 gsc
+> node scripts/gsc-query.mjs --site https://www.zidooka.com/ --key-file C:\Users\user\.secrets\google\codex-ga-gsc.json --preset top-queries --start-date 2026-03-14 --end-date 2026-03-31 --limit 300 --json
+
+{
+  "rows": [
+    {
+      "keys": [
+        "\"princexml\" is required to be installed.",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 32,
+      "impressions": 57,
+      "ctr": 0.5614035087719298,
+      "position": 2.052631578947368
+    },
+    {
+      "keys": [
+        "files.oaiusercontent.com にアップロードできませんでした。ネットワーク設定でこのサイトへのアクセスを許可するか、ネットワーク管理者に問い合わせてください。",
+        "https://www.zidooka.com/archives/185"
+      ],
+      "clicks": 31,
+      "impressions": 75,
+      "ctr": 0.41333333333333333,
+      "position": 2
+    },
+    {
+      "keys": [
+        "we're experiencing high demand for the selected model right now. please switch to auto, another model, or try again in a few moments.",
+        "https://www.zidooka.com/archives/240"
+      ],
+      "clicks": 26,
+      "impressions": 176,
+      "ctr": 0.14772727272727273,
+      "position": 5.4772727272727275
+    },
+    {
+      "keys": [
+        "princexml",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 19,
+      "impressions": 114,
+      "ctr": 0.16666666666666666,
+      "position": 3.517543859649123
+    },
+    {
+      "keys": [
+        "we're experiencing high demand for the selected model right now. please upgrade to pro, switch to auto, another model, or try again in a few moments.",
+        "https://www.zidooka.com/archives/240"
+      ],
+      "clicks": 19,
+      "impressions": 86,
+      "ctr": 0.22093023255813954,
+      "position": 5.651162790697675
+    },
+    {
+      "keys": [
+        "チャットgpt オフラインになっているようです",
+        "https://www.zidooka.com/archives/443"
+      ],
+      "clicks": 18,
+      "impressions": 44,
+      "ctr": 0.4090909090909091,
+      "position": 2.2954545454545454
+    },
+    {
+      "keys": [
+        "princexml is required to be installed",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 16,
+      "impressions": 44,
+      "ctr": 0.36363636363636365,
+      "position": 2.8181818181818183
+    },
+    {
+      "keys": [
+        "errors.edgesuite.net",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 9,
+      "impressions": 21,
+      "ctr": 0.42857142857142855,
+      "position": 2.380952380952381
+    },
+    {
+      "keys": [
+        "chatgpt オフラインになっているようです",
+        "https://www.zidooka.com/archives/443"
+      ],
+      "clicks": 8,
+      "impressions": 22,
+      "ctr": 0.36363636363636365,
+      "position": 1.4090909090909092
+    },
+    {
+      "keys": [
+        "something went wrong. try reloading.",
+        "https://www.zidooka.com/archives/3290"
+      ],
+      "clicks": 8,
+      "impressions": 148,
+      "ctr": 0.05405405405405406,
+      "position": 4.601351351351351
+    },
+    {
+      "keys": [
+        "sorry, you have been rate-limited. please wait a moment before trying again. learn more server error: sorry, you've exceeded your rate limits. please review our terms of service. error code: rate_limited",
+        "https://www.zidooka.com/archives/2755"
+      ],
+      "clicks": 8,
+      "impressions": 28,
+      "ctr": 0.2857142857142857,
+      "position": 4.857142857142858
+    },
+    {
+      "keys": [
+        "edgesuite.net とは",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 7,
+      "impressions": 22,
+      "ctr": 0.3181818181818182,
+      "position": 2.1818181818181817
+    },
+    {
+      "keys": [
+        "princexml vscode",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 7,
+      "impressions": 9,
+      "ctr": 0.7777777777777778,
+      "position": 1.1111111111111112
+    },
+    {
+      "keys": [
+        "copilot has been working on this problem for a while. it can continue to iterate, or you can send a new message to refine your prompt. configure max requests.",
+        "https://www.zidooka.com/archives/411"
+      ],
+      "clicks": 6,
+      "impressions": 19,
+      "ctr": 0.3157894736842105,
+      "position": 3.3684210526315788
+    },
+    {
+      "keys": [
+        "edgesuite.net",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 6,
+      "impressions": 19,
+      "ctr": 0.3157894736842105,
+      "position": 3.736842105263158
+    },
+    {
+      "keys": [
+        "vscode \"princexml\" is required to be installed.",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 6,
+      "impressions": 6,
+      "ctr": 1,
+      "position": 1
+    },
+    {
+      "keys": [
+        "you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images.",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 6,
+      "impressions": 1528,
+      "ctr": 0.003926701570680628,
+      "position": 8.049083769633508
+    },
+    {
+      "keys": [
+        "codex 残りのレート制限",
+        "https://www.zidooka.com/archives/4006"
+      ],
+      "clicks": 5,
+      "impressions": 21,
+      "ctr": 0.23809523809523808,
+      "position": 5.761904761904762
+    },
+    {
+      "keys": [
+        "cursor we're experiencing high demand for the selected model right now. please switch to auto, another model, or try again in a few moments.",
+        "https://www.zidooka.com/archives/240"
+      ],
+      "clicks": 5,
+      "impressions": 12,
+      "ctr": 0.4166666666666667,
+      "position": 5
+    },
+    {
+      "keys": [
+        "edgesuite",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 5,
+      "impressions": 77,
+      "ctr": 0.06493506493506493,
+      "position": 6.376623376623376
+    },
+    {
+      "keys": [
+        "http_403: your account does not currently meet the eligibility requirements.",
+        "https://www.zidooka.com/archives/2636"
+      ],
+      "clicks": 5,
+      "impressions": 13,
+      "ctr": 0.38461538461538464,
+      "position": 2.6923076923076925
+    },
+    {
+      "keys": [
+        "https //errors.edgesuite.net とは",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 5,
+      "impressions": 17,
+      "ctr": 0.29411764705882354,
+      "position": 1.5294117647058822
+    },
+    {
+      "keys": [
+        "個の画像を分析しています",
+        "https://www.zidooka.com/archives/1083"
+      ],
+      "clicks": 5,
+      "impressions": 16,
+      "ctr": 0.3125,
+      "position": 1.625
+    },
+    {
+      "keys": [
+        "現在ポストを取得できません",
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 5,
+      "impressions": 1304,
+      "ctr": 0.003834355828220859,
+      "position": 8.980061349693251
+    },
+    {
+      "keys": [
+        "raptor mini",
+        "https://www.zidooka.com/archives/492"
+      ],
+      "clicks": 4,
+      "impressions": 140,
+      "ctr": 0.02857142857142857,
+      "position": 8.207142857142857
+    },
+    {
+      "keys": [
+        "sorry, the upstream model provider is currently experiencing high demand. please try again later or consider switching to auto.",
+        "https://www.zidooka.com/archives/3273"
+      ],
+      "clicks": 4,
+      "impressions": 6,
+      "ctr": 0.6666666666666666,
+      "position": 4.333333333333334
+    },
+    {
+      "keys": [
+        "vscode princexml",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 4,
+      "impressions": 5,
+      "ctr": 0.8,
+      "position": 1
+    },
+    {
+      "keys": [
+        "your account does not currently meet the eligibility requirements.",
+        "https://www.zidooka.com/archives/2636"
+      ],
+      "clicks": 4,
+      "impressions": 15,
+      "ctr": 0.26666666666666666,
+      "position": 2.1333333333333333
+    },
+    {
+      "keys": [
+        "claude 通常より時間がかかっ てい ます まもなく 再試行 いたし ます",
+        "https://www.zidooka.com/archives/240"
+      ],
+      "clicks": 3,
+      "impressions": 14,
+      "ctr": 0.21428571428571427,
+      "position": 12.642857142857142
+    },
+    {
+      "keys": [
+        "codex your access token could not be refreshed because your refresh token was already used. please log out and sign in again.",
+        "https://www.zidooka.com/archives/3200"
+      ],
+      "clicks": 3,
+      "impressions": 31,
+      "ctr": 0.0967741935483871,
+      "position": 9.870967741935484
+    },
+    {
+      "keys": [
+        "errors.edgesuite.net とは",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 3,
+      "impressions": 18,
+      "ctr": 0.16666666666666666,
+      "position": 2.2222222222222223
+    },
+    {
+      "keys": [
+        "files.oaiusercontent.com にアップロードできませんでした。",
+        "https://www.zidooka.com/archives/185"
+      ],
+      "clicks": 3,
+      "impressions": 9,
+      "ctr": 0.3333333333333333,
+      "position": 1.8888888888888888
+    },
+    {
+      "keys": [
+        "github copilot 504",
+        "https://www.zidooka.com/archives/2672"
+      ],
+      "clicks": 3,
+      "impressions": 7,
+      "ctr": 0.42857142857142855,
+      "position": 2
+    },
+    {
+      "keys": [
+        "https://errors.edgesuite.net/",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 3,
+      "impressions": 19,
+      "ctr": 0.15789473684210525,
+      "position": 5.894736842105263
+    },
+    {
+      "keys": [
+        "something went wrong. try reloading",
+        "https://www.zidooka.com/archives/3290"
+      ],
+      "clicks": 3,
+      "impressions": 32,
+      "ctr": 0.09375,
+      "position": 4.84375
+    },
+    {
+      "keys": [
+        "your access token could not be refreshed because your refresh token was already used. please log out and sign in again.",
+        "https://www.zidooka.com/archives/3200"
+      ],
+      "clicks": 3,
+      "impressions": 90,
+      "ctr": 0.03333333333333333,
+      "position": 9.877777777777778
+    },
+    {
+      "keys": [
+        "プレミアム要求の許容量を超えました。お使いのプランに含まれている gpt-4.1 に自動的に切り替えました。さらなる有料プレミアム要求を可能にするには、組織の管理者にお問い合わせください。",
+        "https://www.zidooka.com/archives/2633"
+      ],
+      "clicks": 3,
+      "impressions": 20,
+      "ctr": 0.15,
+      "position": 5.4
+    },
+    {
+      "keys": [
+        "ポストを取得できません",
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 3,
+      "impressions": 339,
+      "ctr": 0.008849557522123894,
+      "position": 8.640117994100294
+    },
+    {
+      "keys": [
+        "申し訳ございません。レート制限が適用されています。a moment を待ってから、もう一度お試しください。",
+        "https://www.zidooka.com/archives/2755"
+      ],
+      "clicks": 3,
+      "impressions": 16,
+      "ctr": 0.1875,
+      "position": 3.1875
+    },
+    {
+      "keys": [
+        "access denied tiktok",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 2,
+      "impressions": 7,
+      "ctr": 0.2857142857142857,
+      "position": 3
+    },
+    {
+      "keys": [
+        "codex 5.4 extra high",
+        "https://www.zidooka.com/archives/4006"
+      ],
+      "clicks": 2,
+      "impressions": 2,
+      "ctr": 1,
+      "position": 3.5
+    },
+    {
+      "keys": [
+        "codex レートリミット",
+        "https://www.zidooka.com/archives/3997"
+      ],
+      "clicks": 2,
+      "impressions": 3,
+      "ctr": 0.6666666666666666,
+      "position": 20.666666666666668
+    },
+    {
+      "keys": [
+        "copilot 504",
+        "https://www.zidooka.com/archives/549"
+      ],
+      "clicks": 2,
+      "impressions": 5,
+      "ctr": 0.4,
+      "position": 2.2
+    },
+    {
+      "keys": [
+        "copilot has been working on this problem for a while. it can continue to iterate, or you can send a new message to refine your prompt.",
+        "https://www.zidooka.com/archives/411"
+      ],
+      "clicks": 2,
+      "impressions": 6,
+      "ctr": 0.3333333333333333,
+      "position": 3.6666666666666665
+    },
+    {
+      "keys": [
+        "files.oaiusercontent.com",
+        "https://www.zidooka.com/archives/185"
+      ],
+      "clicks": 2,
+      "impressions": 8,
+      "ctr": 0.25,
+      "position": 2.125
+    },
+    {
+      "keys": [
+        "github copilot server error 504",
+        "https://www.zidooka.com/archives/2672"
+      ],
+      "clicks": 2,
+      "impressions": 2,
+      "ctr": 1,
+      "position": 1
+    },
+    {
+      "keys": [
+        "github copilot リセット いつ",
+        "https://www.zidooka.com/archives/2750"
+      ],
+      "clicks": 2,
+      "impressions": 28,
+      "ctr": 0.07142857142857142,
+      "position": 6.571428571428571
+    },
+    {
+      "keys": [
+        "https://errors.edgesuite.net",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 2,
+      "impressions": 13,
+      "ctr": 0.15384615384615385,
+      "position": 5.461538461538462
+    },
+    {
+      "keys": [
+        "markdown preview enhanced princexml",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 2,
+      "impressions": 5,
+      "ctr": 0.4,
+      "position": 4.2
+    },
+    {
+      "keys": [
+        "npm warn deprecated inflight@1.0.6: this module is not supported",
+        "https://www.zidooka.com/archives/3301"
+      ],
+      "clicks": 2,
+      "impressions": 2,
+      "ctr": 1,
+      "position": 5
+    },
+    {
+      "keys": [
+        "oauth token refresh failed for openai-codex",
+        "https://www.zidooka.com/archives/3200"
+      ],
+      "clicks": 2,
+      "impressions": 7,
+      "ctr": 0.2857142857142857,
+      "position": 7.714285714285714
+    },
+    {
+      "keys": [
+        "pdf prince",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 2,
+      "impressions": 6,
+      "ctr": 0.3333333333333333,
+      "position": 3.3333333333333335
+    },
+    {
+      "keys": [
+        "princexml is required to be installed vs code",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 2,
+      "impressions": 3,
+      "ctr": 0.6666666666666666,
+      "position": 1
+    },
+    {
+      "keys": [
+        "princexml\" is required to be installed.",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 2,
+      "impressions": 3,
+      "ctr": 0.6666666666666666,
+      "position": 1
+    },
+    {
+      "keys": [
+        "raptor mini とは",
+        "https://www.zidooka.com/archives/492"
+      ],
+      "clicks": 2,
+      "impressions": 16,
+      "ctr": 0.125,
+      "position": 5.625
+    },
+    {
+      "keys": [
+        "sorry, you have been rate-limited. please wait a moment before trying again. learn more server error: sorry, you've exceeded your rate limits. please review our terms of service. error code: user_global_rate_limited:pro",
+        "https://www.zidooka.com/archives/2755"
+      ],
+      "clicks": 2,
+      "impressions": 8,
+      "ctr": 0.25,
+      "position": 4.25
+    },
+    {
+      "keys": [
+        "twitter something went wrong. try reloading",
+        "https://www.zidooka.com/archives/3290"
+      ],
+      "clicks": 2,
+      "impressions": 14,
+      "ctr": 0.14285714285714285,
+      "position": 5.428571428571429
+    },
+    {
+      "keys": [
+        "your account does not currently meet the eligibility requirements to access the product advertising api. associatenoteligible",
+        "https://www.zidooka.com/archives/2636"
+      ],
+      "clicks": 2,
+      "impressions": 34,
+      "ctr": 0.058823529411764705,
+      "position": 3.5294117647058822
+    },
+    {
+      "keys": [
+        "申し訳ございません。レート制限が適用されています。a moment を待ってから、もう一度お試しください。詳細情報 サーバー エラー: sorry, you've exceeded your rate limits. please review our terms of service. エラー コード: rate_limited",
+        "https://www.zidooka.com/archives/2755"
+      ],
+      "clicks": 2,
+      "impressions": 5,
+      "ctr": 0.4,
+      "position": 2.8
+    },
+    {
+      "keys": [
+        ".oaiusercontent.com",
+        "https://www.zidooka.com/archives/185"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 2
+    },
+    {
+      "keys": [
+        "5.4 extra high",
+        "https://www.zidooka.com/archives/4006"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 2
+    },
+    {
+      "keys": [
+        "access denied akamai",
+        "https://www.zidooka.com/archives/579"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 13.8
+    },
+    {
+      "keys": [
+        "akamai edgesuite",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 12
+    },
+    {
+      "keys": [
+        "amazon price api",
+        "https://www.zidooka.com/archives/197"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 19
+    },
+    {
+      "keys": [
+        "codex vscode your access token could not be refreshed because your refresh token was already used. please log out and sign in again.",
+        "https://www.zidooka.com/archives/3200"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 5
+    },
+    {
+      "keys": [
+        "codex レート制限",
+        "https://www.zidooka.com/archives/3997"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 19
+    },
+    {
+      "keys": [
+        "codex 重い",
+        "https://www.zidooka.com/archives/3999"
+      ],
+      "clicks": 1,
+      "impressions": 21,
+      "ctr": 0.047619047619047616,
+      "position": 7.809523809523809
+    },
+    {
+      "keys": [
+        "copilot reason: server error: 502",
+        "https://www.zidooka.com/archives/2668"
+      ],
+      "clicks": 1,
+      "impressions": 7,
+      "ctr": 0.14285714285714285,
+      "position": 9.857142857142858
+    },
+    {
+      "keys": [
+        "copilot server error 502",
+        "https://www.zidooka.com/archives/2668"
+      ],
+      "clicks": 1,
+      "impressions": 9,
+      "ctr": 0.1111111111111111,
+      "position": 9.222222222222221
+    },
+    {
+      "keys": [
+        "copilot プレミアムリクエスト 確認",
+        "https://www.zidooka.com/archives/2607"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 58
+    },
+    {
+      "keys": [
+        "copilot レート制限",
+        "https://www.zidooka.com/archives/2755"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 12
+    },
+    {
+      "keys": [
+        "cursor we're experiencing high demand for the selected model right now. please upgrade to pro, switch to auto, another model, or try again in a few moments.",
+        "https://www.zidooka.com/archives/240"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 4
+    },
+    {
+      "keys": [
+        "edgesuite",
+        "https://www.zidooka.com/archives/885"
+      ],
+      "clicks": 1,
+      "impressions": 21,
+      "ctr": 0.047619047619047616,
+      "position": 7.142857142857143
+    },
+    {
+      "keys": [
+        "edgesuite akamai",
+        "https://www.zidooka.com/archives/885"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 2
+    },
+    {
+      "keys": [
+        "edgesuite net",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 2.5
+    },
+    {
+      "keys": [
+        "edgesuite net access denied",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 1,
+      "impressions": 6,
+      "ctr": 0.16666666666666666,
+      "position": 8
+    },
+    {
+      "keys": [
+        "edgesuite.net access denied",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 10.333333333333334
+    },
+    {
+      "keys": [
+        "edgesuite.net access denied",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 8
+    },
+    {
+      "keys": [
+        "errors edgesuite",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 3
+    },
+    {
+      "keys": [
+        "errors edgesuite net",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 6.666666666666667
+    },
+    {
+      "keys": [
+        "errors edgesuite net akamai",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 2
+    },
+    {
+      "keys": [
+        "errors.edgesuite.net",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 1,
+      "impressions": 6,
+      "ctr": 0.16666666666666666,
+      "position": 10.5
+    },
+    {
+      "keys": [
+        "exception: invalid argument: id",
+        "https://www.zidooka.com/archives/2353"
+      ],
+      "clicks": 1,
+      "impressions": 7,
+      "ctr": 0.14285714285714285,
+      "position": 3
+    },
+    {
+      "keys": [
+        "exception: service error: drive",
+        "https://www.zidooka.com/3"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 10
+    },
+    {
+      "keys": [
+        "fast codex",
+        "https://www.zidooka.com/archives/4006"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 11
+    },
+    {
+      "keys": [
+        "files.oaiusercontent.com にアップロードできませんでした。",
+        "https://www.zidooka.com/archives/2581"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 7
+    },
+    {
+      "keys": [
+        "files.oaiusercontent.com にアップロードできませんでした。",
+        "https://www.zidooka.com/archives/586"
+      ],
+      "clicks": 1,
+      "impressions": 7,
+      "ctr": 0.14285714285714285,
+      "position": 6.285714285714286
+    },
+    {
+      "keys": [
+        "github copilot 504",
+        "https://www.zidooka.com/archives/549"
+      ],
+      "clicks": 1,
+      "impressions": 6,
+      "ctr": 0.16666666666666666,
+      "position": 3.1666666666666665
+    },
+    {
+      "keys": [
+        "github copilot auto model",
+        "https://www.zidooka.com/archives/2199"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 15
+    },
+    {
+      "keys": [
+        "github copilot education models",
+        "https://www.zidooka.com/archives/4025"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 5.5
+    },
+    {
+      "keys": [
+        "github copilot rate_limited",
+        "https://www.zidooka.com/archives/2755"
+      ],
+      "clicks": 1,
+      "impressions": 11,
+      "ctr": 0.09090909090909091,
+      "position": 7
+    },
+    {
+      "keys": [
+        "github copilot プレミアムリクエスト 確認",
+        "https://www.zidooka.com/archives/2750"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 23
+    },
+    {
+      "keys": [
+        "github copilot リセット",
+        "https://www.zidooka.com/archives/2750"
+      ],
+      "clicks": 1,
+      "impressions": 10,
+      "ctr": 0.1,
+      "position": 9
+    },
+    {
+      "keys": [
+        "gogcli install windows",
+        "https://www.zidooka.com/archives/3670"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 3
+    },
+    {
+      "keys": [
+        "googleドキュメント ルーラー 設定",
+        "https://www.zidooka.com/archives/342"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 11
+    },
+    {
+      "keys": [
+        "https //errors.edgesuite.net とは",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 11.5
+    },
+    {
+      "keys": [
+        "invalid json string",
+        "https://www.zidooka.com/archives/2401"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 5.5
+    },
+    {
+      "keys": [
+        "keepa python api",
+        "https://www.zidooka.com/archives/197"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 33
+    },
+    {
+      "keys": [
+        "markdown preview enhanced pdf prince",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 1,
+      "impressions": 6,
+      "ctr": 0.16666666666666666,
+      "position": 2.833333333333333
+    },
+    {
+      "keys": [
+        "markdown preview enhanced princexml",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 4.4
+    },
+    {
+      "keys": [
+        "npm warn deprecated glob@7.2.3: glob versions prior to v9 are no longer supported",
+        "https://www.zidooka.com/archives/3301"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 3
+    },
+    {
+      "keys": [
+        "npm warn deprecated inflight@1.0.6: this module is not supported, and leaks memory",
+        "https://www.zidooka.com/archives/3301"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 5
+    },
+    {
+      "keys": [
+        "oaiusercontent",
+        "https://www.zidooka.com/archives/185"
+      ],
+      "clicks": 1,
+      "impressions": 12,
+      "ctr": 0.08333333333333333,
+      "position": 3.5
+    },
+    {
+      "keys": [
+        "oaiusercontent",
+        "https://www.zidooka.com/archives/2581"
+      ],
+      "clicks": 1,
+      "impressions": 16,
+      "ctr": 0.0625,
+      "position": 5.5625
+    },
+    {
+      "keys": [
+        "oaiusercontent.com",
+        "https://www.zidooka.com/archives/185"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 3.8
+    },
+    {
+      "keys": [
+        "oaiusercontent.com とは",
+        "https://www.zidooka.com/archives/185"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 3.6
+    },
+    {
+      "keys": [
+        "opencode glm5",
+        "https://www.zidooka.com/archives/3991"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 12
+    },
+    {
+      "keys": [
+        "please ensure that the number of function response parts is equal to the number of function call parts of the function call turn",
+        "https://www.zidooka.com/archives/381"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 2
+    },
+    {
+      "keys": [
+        "please ensure that the number of function response parts is equal to the number of function call parts of the function call turn.",
+        "https://www.zidooka.com/archives/381"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 4
+    },
+    {
+      "keys": [
+        "pricexml",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 3
+    },
+    {
+      "keys": [
+        "princexml",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 1,
+      "impressions": 8,
+      "ctr": 0.125,
+      "position": 8.625
+    },
+    {
+      "keys": [
+        "princexml is required to be installed vscode",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 1
+    },
+    {
+      "keys": [
+        "princexml vs code",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 1
+    },
+    {
+      "keys": [
+        "reference #18",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 1,
+      "impressions": 10,
+      "ctr": 0.1,
+      "position": 10
+    },
+    {
+      "keys": [
+        "retrieving notebook summary.",
+        "https://www.zidooka.com/archives/3189"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 5
+    },
+    {
+      "keys": [
+        "slack インストールするボットユーザーがありません",
+        "https://www.zidooka.com/archives/333"
+      ],
+      "clicks": 1,
+      "impressions": 19,
+      "ctr": 0.05263157894736842,
+      "position": 7.578947368421052
+    },
+    {
+      "keys": [
+        "something went wrong try reloading 意味",
+        "https://www.zidooka.com/archives/3290"
+      ],
+      "clicks": 1,
+      "impressions": 112,
+      "ctr": 0.008928571428571428,
+      "position": 6.098214285714286
+    },
+    {
+      "keys": [
+        "something went wrong while generating the response. if this issue persists please contact us through our help center at help.openai.com.",
+        "https://www.zidooka.com/archives/121"
+      ],
+      "clicks": 1,
+      "impressions": 130,
+      "ctr": 0.007692307692307693,
+      "position": 8.376923076923077
+    },
+    {
+      "keys": [
+        "something went wrong ツイッター",
+        "https://www.zidooka.com/archives/3290"
+      ],
+      "clicks": 1,
+      "impressions": 19,
+      "ctr": 0.05263157894736842,
+      "position": 9.526315789473685
+    },
+    {
+      "keys": [
+        "something went wrong. try reloading. x",
+        "https://www.zidooka.com/archives/3290"
+      ],
+      "clicks": 1,
+      "impressions": 15,
+      "ctr": 0.06666666666666667,
+      "position": 4.8
+    },
+    {
+      "keys": [
+        "sorry, the upstream model provider is currently experiencing high demand. please try again later.",
+        "https://www.zidooka.com/archives/1112"
+      ],
+      "clicks": 1,
+      "impressions": 26,
+      "ctr": 0.038461538461538464,
+      "position": 5.1923076923076925
+    },
+    {
+      "keys": [
+        "sorry, the upstream model provider is currently experiencing high demand. please try again later.",
+        "https://www.zidooka.com/archives/3273"
+      ],
+      "clicks": 1,
+      "impressions": 4,
+      "ctr": 0.25,
+      "position": 4.75
+    },
+    {
+      "keys": [
+        "sorry, you have been rate-limited. please wait a moment before trying again. learn more server error: sorry, you've exceeded your rate limits. please review our terms of service. error code: user_global_rate_limited:edu",
+        "https://www.zidooka.com/archives/2755"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 3.6666666666666665
+    },
+    {
+      "keys": [
+        "sorry, you have been rate-limited. please wait a moment before trying again. learn more server error: sorry, you've exceeded your rate limits. please review our terms of service. error code: user_global_rate_limited:pro_plus",
+        "https://www.zidooka.com/archives/2755"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 3.5
+    },
+    {
+      "keys": [
+        "sorry, your request failed. please try again. copilot request id: reason: server error: 502",
+        "https://www.zidooka.com/archives/2668"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 5
+    },
+    {
+      "keys": [
+        "tiktok access denied",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 1,
+      "impressions": 8,
+      "ctr": 0.125,
+      "position": 3.375
+    },
+    {
+      "keys": [
+        "tiktok アクセス拒否",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 1,
+      "impressions": 7,
+      "ctr": 0.14285714285714285,
+      "position": 3.5714285714285716
+    },
+    {
+      "keys": [
+        "uncaught rangeerror: maximum call stack size exceeded.",
+        "https://www.zidooka.com/archives/2348"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 28
+    },
+    {
+      "keys": [
+        "x something went wrong",
+        "https://www.zidooka.com/archives/3290"
+      ],
+      "clicks": 1,
+      "impressions": 35,
+      "ctr": 0.02857142857142857,
+      "position": 7.742857142857143
+    },
+    {
+      "keys": [
+        "x something went wrong. try reloading.",
+        "https://www.zidooka.com/archives/3290"
+      ],
+      "clicks": 1,
+      "impressions": 8,
+      "ctr": 0.125,
+      "position": 3.875
+    },
+    {
+      "keys": [
+        "x ポスト 取得できない",
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 1,
+      "impressions": 42,
+      "ctr": 0.023809523809523808,
+      "position": 10.666666666666666
+    },
+    {
+      "keys": [
+        "x ポストを取得できません",
+        "https://www.zidooka.com/archives/4154"
+      ],
+      "clicks": 1,
+      "impressions": 46,
+      "ctr": 0.021739130434782608,
+      "position": 10.891304347826088
+    },
+    {
+      "keys": [
+        "x ポストを取得できません",
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 1,
+      "impressions": 387,
+      "ctr": 0.002583979328165375,
+      "position": 9.219638242894057
+    },
+    {
+      "keys": [
+        "you have exceeded your premium request allowance.",
+        "https://www.zidooka.com/archives/439"
+      ],
+      "clicks": 1,
+      "impressions": 4,
+      "ctr": 0.25,
+      "position": 11.5
+    },
+    {
+      "keys": [
+        "you have exceeded your premium request allowance. we have automatically switched you to gpt-4.1 which is included with your plan. to enable additional paid premium requests, contact your organization admin.",
+        "https://www.zidooka.com/archives/439"
+      ],
+      "clicks": 1,
+      "impressions": 20,
+      "ctr": 0.05,
+      "position": 5.75
+    },
+    {
+      "keys": [
+        "you're generating images too quickly.",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 4
+    },
+    {
+      "keys": [
+        "you're generating images too quickly. to ensure the best experience for everyone, we have rate limit",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 1,
+      "impressions": 13,
+      "ctr": 0.07692307692307693,
+      "position": 7.461538461538462
+    },
+    {
+      "keys": [
+        "you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for 20 minutes before generating more images.",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 1,
+      "impressions": 10,
+      "ctr": 0.1,
+      "position": 6.7
+    },
+    {
+      "keys": [
+        "you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images. 翻訳",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 1,
+      "impressions": 184,
+      "ctr": 0.005434782608695652,
+      "position": 6.663043478260869
+    },
+    {
+      "keys": [
+        "you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images.翻訳",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 1,
+      "impressions": 91,
+      "ctr": 0.01098901098901099,
+      "position": 6.5054945054945055
+    },
+    {
+      "keys": [
+        "you've hit your global rate limit. please upgrade your plan or wait for your limit to reset. github copilot",
+        "https://www.zidooka.com/archives/570"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 6
+    },
+    {
+      "keys": [
+        "your account does not currently meet the eligibility requirements to access the product advertising api.",
+        "https://www.zidooka.com/archives/2636"
+      ],
+      "clicks": 1,
+      "impressions": 11,
+      "ctr": 0.09090909090909091,
+      "position": 3.727272727272727
+    },
+    {
+      "keys": [
+        "your account does not currently meet the eligibility requirements to access the product advertising api.",
+        "https://www.zidooka.com/archives/2639"
+      ],
+      "clicks": 1,
+      "impressions": 9,
+      "ctr": 0.1111111111111111,
+      "position": 9.777777777777779
+    },
+    {
+      "keys": [
+        "⚠️ agent failed before reply: oauth token refresh failed for openai-codex: failed to refresh oauth token for openai-codex. please try again or re-authenticate. logs: openclaw logs --follow",
+        "https://www.zidooka.com/archives/3200"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 11.5
+    },
+    {
+      "keys": [
+        "【エラー】your account does not currently meet the eligibility requirements to access the product advertising api. associatenoteligible",
+        "https://www.zidooka.com/archives/2636"
+      ],
+      "clicks": 1,
+      "impressions": 6,
+      "ctr": 0.16666666666666666,
+      "position": 3
+    },
+    {
+      "keys": [
+        "このエラーは？",
+        "https://www.zidooka.com/archives/3011"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 3
+    },
+    {
+      "keys": [
+        "インストールするボットユーザーがありません",
+        "https://www.zidooka.com/archives/333"
+      ],
+      "clicks": 1,
+      "impressions": 41,
+      "ctr": 0.024390243902439025,
+      "position": 6.073170731707317
+    },
+    {
+      "keys": [
+        "ダイソー アルミニウムワイヤレスイヤホン",
+        "https://www.zidooka.com/archives/1060"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 17
+    },
+    {
+      "keys": [
+        "ダイソー ワイヤレスイヤホン 700円",
+        "https://www.zidooka.com/archives/1060"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 15
+    },
+    {
+      "keys": [
+        "ポスト取得できません",
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 1,
+      "impressions": 19,
+      "ctr": 0.05263157894736842,
+      "position": 9.263157894736842
+    },
+    {
+      "keys": [
+        "現在、ポストを取得できません",
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 1,
+      "impressions": 149,
+      "ctr": 0.006711409395973154,
+      "position": 9.671140939597315
+    },
+    {
+      "keys": [
+        "現在ポストを取得 できません 凍結",
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 1,
+      "impressions": 71,
+      "ctr": 0.014084507042253521,
+      "position": 7.816901408450704
+    },
+    {
+      "keys": [
+        "現在ポストを取得 できません 特定の人",
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 1,
+      "impressions": 138,
+      "ctr": 0.007246376811594203,
+      "position": 7.333333333333333
+    },
+    {
+      "keys": [
+        "現在ポストを取得できません 凍結",
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 1,
+      "impressions": 46,
+      "ctr": 0.021739130434782608,
+      "position": 7.891304347826087
+    },
+    {
+      "keys": [
+        "申し訳ございません。レート制限が適用されています。a moment を待ってから、もう一度お試しください。",
+        "https://www.zidooka.com/archives/category/errors/ai-error"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 7.333333333333333
+    },
+    {
+      "keys": [
+        "\"advanced google services\" \"business profile\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "\"business profile api\" \"advanced google services\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 22,
+      "ctr": 0,
+      "position": 1.7727272727272727
+    },
+    {
+      "keys": [
+        "\"business profile api\" \"advanced google services\" apps script",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 23,
+      "ctr": 0,
+      "position": 1.6956521739130435
+    },
+    {
+      "keys": [
+        "\"business profile api\" \"advanced service\" \"apps script\"",
+        "https://www.zidooka.com/archives/2424"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "\"business profile api\" \"apps script\"",
+        "https://www.zidooka.com/archives/tag/google-apps-script"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 7.222222222222222
+    },
+    {
+      "keys": [
+        "\"business profile api\" advanced service apps script",
+        "https://www.zidooka.com/archives/2424"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "\"business profile api\" advanced service apps script",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "\"business profile performance api\" \"advanced google services\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "\"business profile performance\" \"apps script\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 8.666666666666668
+    },
+    {
+      "keys": [
+        "\"business profile\" \"advanced google services\" apps script",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "\"business profile\" \"advanced service\" \"apps script\"",
+        "https://www.zidooka.com/archives/2424"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 7.333333333333333
+    },
+    {
+      "keys": [
+        "\"business profile\" advanced service apps script",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 10.333333333333334
+    },
+    {
+      "keys": [
+        "\"businessprofileperformance\" \"apps script\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 20,
+      "ctr": 0,
+      "position": 8.5
+    },
+    {
+      "keys": [
+        "\"cannot call spreadsheetapp.getui() from this context\"",
+        "https://www.zidooka.com/archives/category/errors/gas"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "\"cannot call spreadsheetapp.getui() from this context\" web app",
+        "https://www.zidooka.com/archives/category/errors/gas"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 3.7777777777777777
+    },
+    {
+      "keys": [
+        "\"chat took too long to get ready\" github copilot chat vs code",
+        "https://www.zidooka.com/archives/3250"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 9.75
+    },
+    {
+      "keys": [
+        "\"cloud vision api user (roles/vision.user)\"",
+        "https://www.zidooka.com/archives/2441"
+      ],
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 1.7
+    },
+    {
+      "keys": [
+        "\"cloud vision api user\" \"roles/vision\"",
+        "https://www.zidooka.com/archives/2441"
+      ],
+      "clicks": 0,
+      "impressions": 25,
+      "ctr": 0,
+      "position": 2.3200000000000003
+    },
+    {
+      "keys": [
+        "\"cloud vision api user\" \"roles/vision.user\"",
+        "https://www.zidooka.com/archives/2441"
+      ],
+      "clicks": 0,
+      "impressions": 53,
+      "ctr": 0,
+      "position": 2.490566037735849
+    },
+    {
+      "keys": [
+        "\"cloud vision api user\" iam role",
+        "https://www.zidooka.com/archives/2441"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 3
+    },
+    {
+      "keys": [
+        "\"edgesuite.net\"",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 2.5
+    },
+    {
+      "keys": [
+        "\"errors.edgesuite.net\"",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4
+    },
+    {
+      "keys": [
+        "\"errors.edgesuite.net\"",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "\"exception: cannot call spreadsheetapp.getui() from this context\"",
+        "https://www.zidooka.com/archives/category/errors/gas"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 5.666666666666667
+    },
+    {
+      "keys": [
+        "\"fatal error: call to undefined function\" -reply -the -next",
+        "https://www.zidooka.com/archives/2375"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "\"gogcli\" \"pip install\"",
+        "https://www.zidooka.com/archives/category/errors/python-errors"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "\"google business profile api\" \"advanced google services\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 1.5
+    },
+    {
+      "keys": [
+        "\"google business profile\" \"advanced google services\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3
+    },
+    {
+      "keys": [
+        "\"google business profile\" \"advanced service\" \"apps script\"",
+        "https://www.zidooka.com/archives/2424"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "\"google my business\" \"advanced google services\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 11.333333333333334
+    },
+    {
+      "keys": [
+        "\"markdown preview enhanced\" \"princepath\"",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 1.375
+    },
+    {
+      "keys": [
+        "\"markdown preview enhanced\" princepath",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 6.444444444444445
+    },
+    {
+      "keys": [
+        "\"markdown preview enhanced\" princepath setting",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 15,
+      "ctr": 0,
+      "position": 6.733333333333333
+    },
+    {
+      "keys": [
+        "\"markdown preview enhanced: export (prince)\"",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "\"markdown preview enhanced: export (prince)\"",
+        "https://www.zidooka.com/archives/105#toc-1"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "\"markdown preview enhanced: export (prince)\"",
+        "https://www.zidooka.com/archives/105#toc-4"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "\"markdown preview enhanced: export (prince)\"",
+        "https://www.zidooka.com/archives/105#toc-5"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "\"markdown-preview-enhanced\" \"princepath\"",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 11,
+      "ctr": 0,
+      "position": 1.6363636363636362
+    },
+    {
+      "keys": [
+        "\"markdown-preview-enhanced\" prince",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5
+    },
+    {
+      "keys": [
+        "\"markdown-preview-enhanced\" princepath",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 5.5
+    },
+    {
+      "keys": [
+        "\"markdown-preview-enhanced\" princepath setting",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 24,
+      "ctr": 0,
+      "position": 6.416666666666667
+    },
+    {
+      "keys": [
+        "\"markdown-preview-enhanced.enablescriptexecution\"",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "\"markdown-preview-enhanced.princepath\"",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "\"markdown-preview-enhanced.princepath\" github",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "\"mybusinessaccountmanagement.googleapis.com\" \"v1/accounts\"",
+        "https://www.zidooka.com/archives/3736"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "\"mybusinessbusinessinformation\" \"advanced google services\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 19,
+      "ctr": 0,
+      "position": 1.6842105263157894
+    },
+    {
+      "keys": [
+        "\"mybusinessbusinessinformation\" \"urlfetchapp\"",
+        "https://www.zidooka.com/archives/3736"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 4.75
+    },
+    {
+      "keys": [
+        "\"mybusinessbusinessinformation\" \"urlfetchapp\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 1.75
+    },
+    {
+      "keys": [
+        "\"mybusinessbusinessinformation.googleapis.com\" \"apps script\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 5
+    },
+    {
+      "keys": [
+        "\"mybusinessbusinessinformation.googleapis.com\" \"v1/accounts\"",
+        "https://www.zidooka.com/archives/3736"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "\"princepath\" \"markdown preview enhanced\"",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 124,
+      "ctr": 0,
+      "position": 1.4274193548387097
+    },
+    {
+      "keys": [
+        "\"princepath\" \"markdown\" \"prince\"",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "\"princepath\" \"markdown-preview-enhanced\"",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 174,
+      "ctr": 0,
+      "position": 1.4885057471264367
+    },
+    {
+      "keys": [
+        "\"princepath\" \"markdown-preview-enhanced\" github",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 22,
+      "ctr": 0,
+      "position": 1.9090909090909092
+    },
+    {
+      "keys": [
+        "\"princepath\" \"mume\"",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 74,
+      "ctr": 0,
+      "position": 1.810810810810811
+    },
+    {
+      "keys": [
+        "\"princepath\" \"mume\" prince",
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": 0,
+      "position": 1.75
+    },
+    {
+      "keys": [
+        "\"princexml\" \"visual studio code\"",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "\"princexml\" is required to be installed",
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "\"raptor mini\"",
+        "https://www.zidooka.com/archives/492"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "\"raptor mini\"",
+        "https://www.zidooka.com/archives/492#toc-1"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "\"raptor mini\"",
+        "https://www.zidooka.com/archives/492#toc-7"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "\"rimraf versions prior to v4 are no longer supported\"",
+        "https://www.zidooka.com/archives/3301"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4
+    },
+    {
+      "keys": [
+        "\"roles/vision\" \"cloud vision\"",
+        "https://www.zidooka.com/archives/2441"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "\"roles/vision\" \"cloud vision\"",
+        "https://www.zidooka.com/archives/2461"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "\"roles/vision\" iam",
+        "https://www.zidooka.com/archives/2461"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 10.4
+    },
+    {
+      "keys": [
+        "\"roles/vision.user\"",
+        "https://www.zidooka.com/archives/2441"
+      ],
+      "clicks": 0,
+      "impressions": 29,
+      "ctr": 0,
+      "position": 11.482758620689655
+    },
+    {
+      "keys": [
+        "\"roles/vision.user\"",
+        "https://www.zidooka.com/archives/2461"
+      ],
+      "clicks": 0,
+      "impressions": 46,
+      "ctr": 0,
+      "position": 8.847826086956522
+    },
+    {
+      "keys": [
+        "\"roles/vision.user\" \"cloud vision\"",
+        "https://www.zidooka.com/archives/2441"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "\"roles/vision.user\" \"cloud vision\"",
+        "https://www.zidooka.com/archives/2461"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "\"scriptapp.getoauthtoken\" \"business.manage\"",
+        "https://www.zidooka.com/archives/3736"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3
+    },
+    {
+      "keys": [
+        "\"scriptapp.getoauthtoken\" \"business.manage\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "\"scriptapp.getoauthtoken\" \"mybusinessbusinessinformation\"",
+        "https://www.zidooka.com/archives/3736"
+      ],
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 3.5714285714285716
+    },
+    {
+      "keys": [
+        "\"scriptapp.getoauthtoken\" \"mybusinessbusinessinformation\"",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 1.5714285714285714
+    },
+    {
+      "keys": [
+        "\"trinity large preview\"",
+        "https://www.zidooka.com/archives/3722"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "\"unexpected token: case\" \"cga\"",
+        "https://www.zidooka.com/archives/2262"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "\"xoxb-\" \"slack\" 2025 or 2026 not \"example\" not \"replace\"",
+        "https://www.zidooka.com/archives/3196"
+      ],
+      "clicks": 0,
+      "impressions": 21,
+      "ctr": 0,
+      "position": 105.71428571428571
+    },
+    {
+      "keys": [
+        "*.oaiusercontent.com",
+        "https://www.zidooka.com/archives/185"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "*.oaiusercontent.com",
+        "https://www.zidooka.com/archives/2581"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 5.5
+    },
+    {
+      "keys": [
+        ".oaiusercontent.com",
+        "https://www.zidooka.com/archives/2581"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5
+    },
+    {
+      "keys": [
+        "100 円 ショップ ワイヤレス イヤホン",
+        "https://www.zidooka.com/archives/1060"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 53.5
+    },
+    {
+      "keys": [
+        "2026年 一粒万倍日",
+        "https://www.zidooka.com/archives/3780"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 67
+    },
+    {
+      "keys": [
+        "2026年一粒万倍日",
+        "https://www.zidooka.com/archives/3780"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 62
+    },
+    {
+      "keys": [
+        "500 posts per month x api free tier 2025",
+        "https://www.zidooka.com/archives/3909"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "502 copilot",
+        "https://www.zidooka.com/archives/2668"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "502 github",
+        "https://www.zidooka.com/archives/2665"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "503 service temporarily unavailable chatgpt",
+        "https://www.zidooka.com/archives/188"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "[api error: [{ \"error\": { \"code\": 400, \"message\": \"please ensure that the number of function response parts is equal to the number of function call parts of the function call turn.\", \"errors\": [ { \"message\": \"please ensure that the number of function response parts is equal to the number of function call parts of the function call turn.\", \"domain\": \"global\", \"reason\": \"badrequest\" } ], \"status\": \"invalid_argument\" } } ]]",
+        "https://www.zidooka.com/archives/384"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 8.666666666666668
+    },
+    {
+      "keys": [
+        "[errno fetch http://image-gen-service.openai.svc.cluster.local:8081/chatgpt/worker_convo2im failed: 429: b {\\n error : {\\n message : you re generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images. ,\\n type : images ,\\n param : null,\\n code : rate_limit_exceeded \\n }\\n} ] b {\\n error : {\\n message : you re generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images. ,\\n type : images ,\\n param : null,\\n code : rate_limit_exceeded \\n }\\n}",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 7.75
+    },
+    {
+      "keys": [
+        "[errno fetch http://image-gen-service.openai.svc.cluster.local:8081/chatgpt/worker_convo2im failed: 429: b'{\\n \"error\": {\\n \"message\": \"you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images.\",\\n \"type\": \"images\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}'] b'{\\n \"error\": {\\n \"message\": \"you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images.\",\\n \"type\": \"images\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}'",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "[errno fetch http://image-gen-service.openai.svc.cluster.local:8081/chatgpt/worker_convo2im failed: 429: b’{\\n “error”: {\\n “message”: “you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images.”,\\n “type”: “images”,\\n “param”: null,\\n “code”: “rate_limit_exceeded”\\n }\\n}’] b’{\\n “error”: {\\n “message”: “you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images.”,\\n “type”: “images”,\\n “param”: null,\\n “code”: “rate_limit_exceeded”\\n }\\n}’",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 0,
+      "impressions": 13,
+      "ctr": 0,
+      "position": 7.538461538461538
+    },
+    {
+      "keys": [
+        "[errno fetch http://image-gen-service.openai.svc.cluster.local:8081/chatgpt/worker_convo2im⁠� failed: 429: b'{\\n \"error\": {\\n \"message\": \"you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images.\",\\n \"type\": \"images\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}'] b'{\\n \"error\": {\\n \"message\": \"you're generating images too quickly. to ensure the best experience for everyone, we have rate limits in place. please wait for an hour before generating more images.\",\\n \"type\": \"images\",\\n \"param\": null,\\n \"code\": \"rate_limit_exceeded\"\\n }\\n}'",
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "a new powershell stable release is available: v7.6.0 upgrade now, or check out the release page at: https://aka.ms/powershell-release?tag=v7.6.0",
+        "https://www.zidooka.com/archives/tag/windows-terminal"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "access denied",
+        "https://www.zidooka.com/archives/579"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 76.4
+    },
+    {
+      "keys": [
+        "access denied akamai",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 14
+    },
+    {
+      "keys": [
+        "access denied akamai",
+        "https://www.zidooka.com/archives/427"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 92
+    },
+    {
+      "keys": [
+        "access denied errors edgesuite net",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 27
+    },
+    {
+      "keys": [
+        "access denied reference #18",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "access denied tiktok",
+        "https://www.zidooka.com/archives/427"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 59
+    },
+    {
+      "keys": [
+        "access denied tiktok trend",
+        "https://www.zidooka.com/archives/427"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 45
+    },
+    {
+      "keys": [
+        "access denied you don't have permission to access \"http://www.tiktok.com",
+        "https://www.zidooka.com/archives/427"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "access denied なぜ",
+        "https://www.zidooka.com/archives/579"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 18.5
+    },
+    {
+      "keys": [
+        "access denied 対処法",
+        "https://www.zidooka.com/archives/579"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 28
+    },
+    {
+      "keys": [
+        "access denied 意味",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 26
+    },
+    {
+      "keys": [
+        "access denied 意味",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 13
+    },
+    {
+      "keys": [
+        "access denied 意味",
+        "https://www.zidooka.com/archives/579"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 30
+    },
+    {
+      "keys": [
+        "access to www.tiktok.com was denied",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "access to www.tiktok.com was denied",
+        "https://www.zidooka.com/archives/427"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 10.25
+    },
+    {
+      "keys": [
+        "access to www.tiktok.com was denied you don't have authorization to view this page.",
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "activexコンテンツはブロックされています",
+        "https://www.zidooka.com/archives/457"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 22
+    },
+    {
+      "keys": [
+        "additional premium requests approved.",
+        "https://www.zidooka.com/archives/570"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "additional premium requests approved. you can continue after the included premium requests limit reaches 100%.",
+        "https://www.zidooka.com/archives/570"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 11.5
+    },
+    {
+      "keys": [
+        "agent failed before reply: oauth token refresh failed for openai-codex: failed to refresh oauth token for openai-codex. please try again or re-authenticate.",
+        "https://www.zidooka.com/archives/3200"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "agent failed before reply: oauth token refresh failed for openai-codex: failed to refresh oauth token for openai-codex. please try again or re-authenticate. logs: openclaw logs --follow",
+        "https://www.zidooka.com/archives/3200"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "agent max requests",
+        "https://www.zidooka.com/archives/411"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "ai raptor mini",
+        "https://www.zidooka.com/archives/492"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "ai raptor mini",
+        "https://www.zidooka.com/archives/492#toc-1"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "ai raptor mini",
+        "https://www.zidooka.com/archives/492#toc-7"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "ai studio spend cap experiencing intermittent issues.",
+        "https://www.zidooka.com/archives/4108"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 10.8
+    },
+    {
+      "keys": [
+        "akamai access denied",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 24
+    },
+    {
+      "keys": [
+        "akamai access denied",
+        "https://www.zidooka.com/archives/579"
+      ],
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 11.857142857142858
+    },
+    {
+      "keys": [
+        "akamai edgesuite",
+        "https://www.zidooka.com/archives/885"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 3.5
+    },
+    {
+      "keys": [
+        "amazonassociate",
+        "https://www.zidooka.com/archives/category/%E5%BA%83%E5%91%8Atips/amazonassociate"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 8.5
+    },
+    {
+      "keys": [
+        "ampcode",
+        "https://www.zidooka.com/archives/tag/vs-code"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "ampcode free",
+        "https://www.zidooka.com/archives/3245"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 8.5
+    },
+    {
+      "keys": [
+        "antigravity claude opus 制限",
+        "https://www.zidooka.com/archives/3346"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 16
+    },
+    {
+      "keys": [
+        "antigravity opus 無料",
+        "https://www.zidooka.com/archives/3346"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 16
+    },
+    {
+      "keys": [
+        "antigravity opus4.5 制限",
+        "https://www.zidooka.com/archives/3346"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 16
+    },
+    {
+      "keys": [
+        "app script 開けない",
+        "https://www.zidooka.com/archives/2948"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 14.25
+    },
+    {
+      "keys": [
+        "approval_policy = \"never\"",
+        "https://www.zidooka.com/archives/tag/approval_policy"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "apps script advanced service business profile api",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "apps script business profile api advanced service",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "apps script console.log vs logger.log v8 runtime",
+        "https://www.zidooka.com/archives/2835"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "apps script scriptapp.getoauthtoken business profile api",
+        "https://www.zidooka.com/archives/3741"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 10.2
+    },
+    {
+      "keys": [
+        "apps script 開けない",
+        "https://www.zidooka.com/archives/2948"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 8.25
+    },
+    {
+      "keys": [
+        "associatenoteligible",
+        "https://www.zidooka.com/archives/2636"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "associatenoteligible: your account does not currently meet the eligibility requirements to access the product advertising api.",
+        "https://www.zidooka.com/archives/2636"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 4.333333333333334
+    },
+    {
+      "keys": [
+        "associatenoteligible: your account does not currently meet the eligibility requirements to access the product advertising api.",
+        "https://www.zidooka.com/archives/2639"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10.5
+    },
+    {
+      "keys": [
+        "audit-ci",
+        "https://www.zidooka.com/archives/3079"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "authorisation is required to perform that action.",
+        "https://www.zidooka.com/archives/2407"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "authorization is required to perform that action",
+        "https://www.zidooka.com/archives/2407"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 5.833333333333333
+    },
+    {
+      "keys": [
+        "authorization is required to perform that action.",
+        "https://www.zidooka.com/archives/2407"
+      ],
+      "clicks": 0,
+      "impressions": 13,
+      "ctr": 0,
+      "position": 5.538461538461538
+    },
+    {
+      "keys": [
+        "authorization is required to perform that action. google apps script",
+        "https://www.zidooka.com/archives/2407"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "authorization required 意味",
+        "https://www.zidooka.com/archives/2407"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "bancoestado access denied errors.edgesuite.net",
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "billing setup can't be completed",
+        "https://www.zidooka.com/archives/752"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 7.333333333333333
+    }
+  ],
+  "responseAggregationType": "byPage"
+}

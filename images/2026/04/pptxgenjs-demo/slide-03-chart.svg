@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F4F0E8"/>
+  <rect x="56" y="56" width="1168" height="608" rx="28" fill="#FFFDFC" stroke="#D6D3D1"/>
+  <text x="96" y="128" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="700" fill="#1F2937"><tspan x="96" dy="0">Weekly Metrics Snapshot</tspan></text>
+  <rect x="96" y="184" width="620" height="360" rx="22" fill="#F8FAFC" stroke="#D6D3D1"/>
+  <rect x="760" y="184" width="376" height="360" rx="22" fill="#F2FBF7" stroke="#C8EAD9"/>
+  <line x1="118" y1="498" x2="672" y2="498" stroke="#D6D3D1" stroke-width="2"/>
+  
+      <rect x="118" y="395" width="72" height="103" rx="16" fill="#0E7490"/>
+      <text x="138" y="536" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#6B7280">Mon</text>
+      <text x="134" y="381" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#1F2937">42</text>
+      <rect x="226" y="356" width="72" height="142" rx="16" fill="#0E7490"/>
+      <text x="246" y="536" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#6B7280">Tue</text>
+      <text x="242" y="342" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#1F2937">58</text>
+      <rect x="334" y="349" width="72" height="149" rx="16" fill="#0E7490"/>
+      <text x="354" y="536" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#6B7280">Wed</text>
+      <text x="350" y="335" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#1F2937">61</text>
+      <rect x="442" y="310" width="72" height="188" rx="16" fill="#0E7490"/>
+      <text x="462" y="536" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#6B7280">Thu</text>
+      <text x="458" y="296" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#1F2937">77</text>
+      <rect x="550" y="268" width="72" height="230" rx="16" fill="#E76F51"/>
+      <text x="570" y="536" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#6B7280">Fri</text>
+      <text x="566" y="254" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#1F2937">94</text>
+  <text x="792" y="236" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#2A9D8F"><tspan x="792" dy="0">What makes this useful</tspan></text>
+  
+      <circle cx="818" cy="252" r="7" fill="#2A9D8F"/>
+      <text x="842" y="262" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" fill="#1F2937"><tspan x="842" dy="0">問い合わせ初回返信率: 94%</tspan></text>
+      <circle cx="818" cy="344" r="7" fill="#2A9D8F"/>
+      <text x="842" y="354" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" fill="#1F2937"><tspan x="842" dy="0">英語版ドラフト所要時間: 18分</tspan></text>
+      <circle cx="818" cy="436" r="7" fill="#2A9D8F"/>
+      <text x="842" y="446" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" fill="#1F2937"><tspan x="842" dy="0">更新コストはテンプレ化でさらに下げやすい</tspan></text>
+</svg>

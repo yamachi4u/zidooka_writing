@@ -1,0 +1,194 @@
+.zdk-pf-page {
+    background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+    padding: 24px 0 72px;
+}
+
+.zdk-pf-shell {
+    width: min(980px, 100%);
+    margin: 0 auto;
+    padding: 0 16px;
+    color: #15263e;
+}
+
+.zdk-pf-hero {
+    background: #ffffff;
+    border: 1px solid #e5edf8;
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 14px 40px rgba(15, 45, 86, 0.08);
+}
+
+.zdk-pf-kicker {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #2c5b91;
+}
+
+.zdk-pf-title {
+    margin: 10px 0 0;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.2;
+}
+
+.zdk-pf-lead {
+    margin: 14px 0 0;
+    line-height: 1.8;
+    color: #2f4c70;
+}
+
+.zdk-pf-meta {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.zdk-pf-chip {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #edf4ff;
+    border: 1px solid #d6e5fb;
+    color: #24548b;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.zdk-pf-stack-wrap {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.zdk-pf-stack {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #f8fbff;
+    border: 1px solid #d8e7ff;
+    color: #1c4c82;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.zdk-pf-links {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.zdk-pf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    border-radius: 12px;
+    padding: 0 14px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform 0.16s ease, opacity 0.16s ease;
+}
+
+.zdk-pf-btn:hover {
+    transform: translateY(-1px);
+}
+
+.zdk-pf-btn-primary {
+    color: #ffffff;
+    background: linear-gradient(120deg, #1e5fae, #3f88e3);
+}
+
+.zdk-pf-btn-secondary {
+    color: #1e5fae;
+    border: 1px solid #cde1ff;
+    background: #ffffff;
+}
+
+.zdk-pf-cover {
+    margin: 18px 0 0;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #deebff;
+    background: #ffffff;
+}
+
+.zdk-pf-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.zdk-pf-grid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.zdk-pf-card {
+    background: #ffffff;
+    border: 1px solid #e5edf8;
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.zdk-pf-card h2 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+
+.zdk-pf-card p {
+    margin: 0;
+    line-height: 1.75;
+    font-size: 14px;
+    color: #2f4c70;
+}
+
+.zdk-pf-content {
+    margin-top: 18px;
+    background: #ffffff;
+    border: 1px solid #e5edf8;
+    border-radius: 20px;
+    padding: 22px;
+    line-height: 1.9;
+}
+
+.zdk-pf-content > :first-child {
+    margin-top: 0;
+}
+
+.zdk-pf-content > :last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+    .zdk-pf-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .zdk-pf-page {
+        padding: 12px 0 44px;
+    }
+
+    .zdk-pf-shell {
+        padding: 0 10px;
+    }
+
+    .zdk-pf-hero,
+    .zdk-pf-content {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .zdk-pf-cover {
+        border-radius: 14px;
+    }
+}

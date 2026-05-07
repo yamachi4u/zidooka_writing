@@ -1,0 +1,66 @@
+date,sessionDefaultChannelGroup,sessions,totalUsers,screenPageViews,engagedSessions
+20260427,Organic Search,314,279,433,199
+20260428,Organic Search,274,242,307,150
+20260421,Organic Search,268,238,516,159
+20260422,Organic Search,265,238,500,155
+20260424,Organic Search,240,213,338,140
+20260501,Organic Search,223,192,306,115
+20260430,Organic Search,217,193,270,124
+20260423,Organic Search,211,187,288,117
+20260504,Organic Search,130,109,188,61
+20260425,Organic Search,124,114,191,63
+20260429,Organic Search,111,102,146,66
+20260502,Organic Search,109,101,182,63
+20260426,Organic Search,97,88,133,61
+20260503,Organic Search,97,91,172,62
+20260504,Direct,91,91,96,4
+20260501,Direct,87,85,90,5
+20260503,Direct,75,75,76,3
+20260502,Direct,72,71,75,6
+20260422,Direct,58,56,62,8
+20260421,Direct,55,55,67,3
+20260427,Direct,51,51,52,6
+20260430,Direct,51,51,58,7
+20260424,Direct,43,42,43,5
+20260429,Direct,39,37,49,9
+20260426,Direct,34,34,36,8
+20260423,Direct,33,32,34,3
+20260428,Direct,33,32,34,7
+20260425,Direct,26,26,27,2
+20260427,Referral,13,11,15,5
+20260428,Referral,7,7,8,6
+20260424,Referral,6,6,6,3
+20260430,Referral,6,4,6,2
+20260430,Unassigned,4,4,5,2
+20260502,Referral,4,2,4,1
+20260423,Referral,3,2,13,2
+20260427,Organic Social,3,2,2,0
+20260428,Organic Social,3,3,3,1
+20260501,Referral,3,2,3,1
+20260501,Unassigned,3,3,1,1
+20260504,Unassigned,3,3,0,0
+20260421,Organic Social,2,1,1,0
+20260421,Referral,2,2,3,2
+20260422,Referral,2,2,13,2
+20260423,Organic Social,2,1,1,0
+20260425,Referral,2,2,4,2
+20260429,Organic Social,2,2,2,1
+20260429,Referral,2,2,2,1
+20260501,Organic Social,2,2,2,2
+20260504,Organic Social,2,1,1,0
+20260504,Referral,2,1,2,0
+20260421,Unassigned,1,1,13,0
+20260422,Unassigned,1,1,1,0
+20260423,Unassigned,1,1,1,0
+20260424,Organic Social,1,1,1,0
+20260424,Unassigned,1,1,9,1
+20260425,Organic Social,1,1,1,0
+20260425,Unassigned,1,1,0,0
+20260426,Referral,1,1,1,0
+20260428,Unassigned,1,1,1,0
+20260429,Unassigned,1,1,1,0
+20260502,Organic Social,1,1,1,0
+20260502,Unassigned,1,1,4,1
+20260503,Organic Social,1,1,1,0
+20260503,Referral,1,1,1,0
+20260503,Unassigned,1,1,0,0

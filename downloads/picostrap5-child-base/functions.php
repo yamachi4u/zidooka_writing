@@ -183,7 +183,112 @@ add_action('wp_head', function(){
     }
 }, 7);
 
-// 2.3) Force eager/high priority for the front-page featured image
+function zidooka_force_priority_img_attrs($html) {
+    if (!is_string($html) || $html === '') return $html;
+
+    if (strpos($html, 'loading=') === false) {
+        $html = str_replace('<img', '<img loading="eager"', $html);
+    } else {
+        $html = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $html, 1);
+    }
+
+    if (strpos($html, 'fetchpriority=') === false) {
+        $html = str_replace('<img', '<img fetchpriority="high"', $html);
+    } else {
+        $html = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $html, 1);
+    }
+
+    if (stripos($html, 'decoding=') === false) {
+        $html = preg_replace('/<img/i', '<img decoding="async"', $html, 1);
+    }
+
+    return $html;
+}
+
+function zidooka_mark_first_content_image_priority($content) {
+    if (!is_string($content) || $content === '') {
+        return is_null($content) ? '' : $content;
+    }
+
+    $done = false;
+    return preg_replace_callback('/<img[^>]*>/i', function($m) use (&$done) {
+        if ($done) return $m[0];
+        $done = true;
+        return zidooka_force_priority_img_attrs($m[0]);
+    }, $content, 1);
+}
+
+function zidooka_print_inline_css_asset($relative_path, $style_id) {
+    $path = get_stylesheet_directory() . '/' . ltrim($relative_path, '/');
+    if (!file_exists($path)) return;
+
+    $css = file_get_contents($path);
+    if ($css === false || $css === '') return;
+
+    echo "<style id=\"" . esc_attr($style_id) . "\">{$css}</style>\n";
+}
+
+function zidooka_print_single_image_hints($post) {
+    if (!$post) return;
+
+    $content = (string) get_post_field('post_content', $post->ID);
+    $img_id = 0;
+    $first_src = '';
+
+    if ($content !== '') {
+        if (preg_match('/wp-image-(\d+)/', $content, $m)) {
+            $img_id = (int) $m[1];
+        }
+        if (preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $m2)) {
+            $first_src = $m2[1];
+        }
+    }
+
+    $printed = false;
+    if ($img_id) {
+        $src = wp_get_attachment_image_url($img_id, 'full');
+        $srcset = wp_get_attachment_image_srcset($img_id, 'full');
+        $sizes = '(min-width: 1024px) 1200px, 100vw';
+        if ($src && $srcset) {
+            printf(
+                "<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
+                esc_url($src),
+                esc_attr($srcset),
+                esc_attr($sizes)
+            );
+            $printed = true;
+        }
+    }
+
+    if (!$printed && $first_src !== '') {
+        printf("<link rel=\"preload\" as=\"image\" href=\"%s\">\n", esc_url($first_src));
+        $printed = true;
+    }
+
+    if (!$printed && has_post_thumbnail($post)) {
+        $thumb_id = get_post_thumbnail_id($post);
+        $src = wp_get_attachment_image_url($thumb_id, 'full');
+        $srcset = wp_get_attachment_image_srcset($thumb_id, 'full');
+        $sizes = '(min-width: 1024px) 1200px, 100vw';
+        if ($src && $srcset) {
+            printf(
+                "<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
+                esc_url($src),
+                esc_attr($srcset),
+                esc_attr($sizes)
+            );
+        }
+    }
+
+    $scheme = $first_src ? wp_parse_url($first_src, PHP_URL_SCHEME) : '';
+    $host   = $first_src ? wp_parse_url($first_src, PHP_URL_HOST) : '';
+    if ($scheme && $host) {
+        $origin = $scheme . '://' . $host;
+        printf("<link rel=\"preconnect\" href=\"%s\" crossorigin>\n", esc_url($origin));
+        printf("<link rel=\"dns-prefetch\" href=\"%s\">\n", esc_url($origin));
+    }
+}
+
 // 2.3) Force eager/high priority for the front-page featured image
 add_filter('post_thumbnail_html', function(
   $html, $post_id, $post_thumbnail_id, $size, $attr
@@ -191,329 +296,7 @@ add_filter('post_thumbnail_html', function(
   if (!is_front_page()) return $html;
   // only target the front page's own thumbnail
   if ((int) get_option('page_on_front') !== (int) $post_id) return $html;
-  // inject loading and fetchpriority attributes if missing
-  if (strpos($html, 'loading=') === false) {
-    $html = str_replace('<img', '<img loading="eager"', $html);
-  } else {
-    $html = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $html, 1);
-  }
-  if (strpos($html, 'fetchpriority=') === false) {
-    $html = str_replace('<img', '<img fetchpriority="high"', $html);
-  } else {
-    $html = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $html, 1);
-  }
-  return $html;
-}, 10, 5);add_action('wp_footer', function(){ 
-  return;
-    // 現在のURLが/lpを含む場合はバナーを表示しない
-    if (strpos($_SERVER['REQUEST_URI'], '/lp') !== false) {
-        return;
-    }
-    ?>
-
-    <!-- PC向け：右側固定バナー(デザイン改善版) -->
-    <div class="my-square-banner-pc d-none d-lg-flex flex-column align-items-center justify-content-center">
-      <button type="button" class="my-banner-close" onclick="this.parentNode.style.display='none'" aria-label="閉じる">
-        <i class="fas fa-times"></i>
-      </button>
-      <div class="my-banner-content">
-        <p class="my-banner-title">
-            時間を創出する<br>業務自動化の専門家
-            <span class="d-block small mt-1" style="font-size: 0.6em; font-weight: normal; opacity: 0.9;">Time Creation &<br>Automation Expert</span>
-        </p>
-        <p class="my-banner-subtitle">
-            あなたのビジネスに革新を
-            <span class="d-block small" style="font-size: 0.7em; opacity: 0.9;">Innovate Your Business</span>
-        </p>
-        <a href="/lp" target="_blank" rel="noopener" class="my-banner-link text-center">
-          <div><i class="fas fa-paper-plane me-1"></i>無料相談はこちら</div>
-          <div class="small" style="font-size: 0.7em; font-weight: normal;">Free Consultation</div>
-        </a>
-      </div>
-    </div>
-    
-    <div class="my-floating-banner-sp d-lg-none" id="spBanner">
-      <button type="button" class="my-banner-close" onclick="hideBanner()" aria-label="閉じる">
-        <i class="fas fa-times"></i>
-      </button>
-      <a href="/lp" class="sp-banner-link d-flex align-items-center justify-content-center">
-        <i class="fas fa-rocket me-2"></i>
-        <div class="text-start lh-sm">
-            <div>業務自動化で時間を創出しませんか？</div>
-            <div style="font-size: 0.65em; font-weight: normal;">Create time with automation?</div>
-        </div>
-      </a> 
-    </div>
-    
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-      /* PC向け：右側固定バナー (デザイン改善版) */
-      .my-square-banner-pc {
-        position: fixed;
-        top: 30%;
-        right: 20px;
-        width: 240px;
-        height: auto;
-        background: linear-gradient(135deg, #3a7bd5, #00d2ff);
-        color: #fff;
-        text-align: center;
-        border-radius: 12px;
-        z-index: 9999;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        padding: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        overflow: hidden;
-      }
-      
-      .my-square-banner-pc:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 28px rgba(0,0,0,0.25);
-      }
-      
-      .my-square-banner-pc::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        opacity: 0.6;
-        z-index: -1;
-      }
-      
-      .my-square-banner-pc .my-banner-close {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        background: rgba(255,255,255,0.2);
-        border: none;
-        color: #fff;
-        font-size: 14px;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: background 0.2s ease;
-      }
-      
-      .my-square-banner-pc .my-banner-close:hover {
-        background: rgba(255,255,255,0.4);
-      }
-      
-      /* SP向け：画面下フロートバナー (修正版) */
-      .my-floating-banner-sp {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: linear-gradient(135deg, #3a7bd5, #00d2ff);
-        color: #fff;
-        text-align: center;
-        padding: 12px 0;
-        z-index: 9999;
-        box-shadow: 0 -4px 10px rgba(0,0,0,0.15);
-        transform: translateY(0);
-        transition: transform 0.3s ease;
-        visibility: visible;
-        opacity: 1;
-      }
-      
-      .my-floating-banner-sp .my-banner-close {
-        position: absolute;
-        top: 50%;
-        right: 15px;
-        transform: translateY(-50%);
-        background: rgba(255,255,255,0.2);
-        border: none;
-        color: #fff;
-        font-size: 12px;
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: background 0.2s ease;
-      }
-      
-      .my-floating-banner-sp .my-banner-close:hover {
-        background: rgba(255,255,255,0.4);
-      }
-      
-      .my-floating-banner-sp.sp-hidden {
-        transform: translateY(100%);
-      }
-      
-      /* バナーコンテンツ共通 */
-      .my-banner-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .my-banner-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin-bottom: 5px;
-        line-height: 1.4;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-      }
-      
-      .my-banner-subtitle {
-        font-size: 0.9rem;
-        margin-bottom: 12px;
-        opacity: 0.9;
-      }
-      
-      .my-banner-link {
-        display: inline-block;
-        background-color: #fff;
-        color: #3a7bd5;
-        padding: 10px 16px;
-        border-radius: 30px;
-        font-size: 0.9rem;
-        font-weight: bold;
-        text-decoration: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      }
-      
-      .my-banner-link:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      }
-      
-      .sp-banner-link {
-        color: #fff;
-        text-decoration: none;
-        font-size: 0.95rem;
-        font-weight: bold;
-        display: block;
-        padding: 0 40px 0 10px;
-      }
-      
-      /* スクロールインジケーター */
-      .scroll-indicator {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 30px;
-        height: 30px;
-        opacity: 0.7;
-        animation: bounce 1.5s infinite;
-      }
-      
-      @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {
-          transform: translateY(0);
-        }
-        40% {
-          transform: translateY(-10px);
-        }
-        60% {
-          transform: translateY(-5px);
-        }
-      }
-      
-      /* レスポンシブ調整 */
-      @media (max-width: 768px) {
-        .my-floating-banner-sp {
-          padding: 10px 0;
-        }
-        
-        .sp-banner-link {
-          font-size: 0.9rem;
-        }
-      }
-    </style>
-    <script>
-      // バナー閉じる機能を関数化
-      function hideBanner() {
-        var spBanner = document.getElementById('spBanner');
-        if (spBanner) {
-          spBanner.style.transform = 'translateY(100%)';
-          // 一定時間後に非表示にする（transition効果が終わってから）
-          setTimeout(function() {
-            spBanner.style.display = 'none';
-          }, 300);
-          // 24時間（86400000ミリ秒）非表示にする
-          sessionStorage.setItem('bannerClosed', Date.now());
-        }
-      }
-      
-      // 初回表示時にアニメーション
-      document.addEventListener('DOMContentLoaded', function() {
-        // PCバナーアニメーション
-        var pcBanner = document.querySelector('.my-square-banner-pc');
-        if (pcBanner) {
-          pcBanner.style.transform = 'translateX(100%)';
-          setTimeout(function() {
-            pcBanner.style.transition = 'transform 0.5s ease';
-            pcBanner.style.transform = 'translateX(0)';
-          }, 1000);
-        }
-        
-        // SPバナー初期化
-        var spBanner = document.getElementById('spBanner');
-        
-        // 前回閉じてから24時間以内なら表示しない
-        var lastClosed = sessionStorage.getItem('bannerClosed');
-        if (lastClosed && Date.now() - lastClosed < 86400000) {
-          if (pcBanner) pcBanner.style.display = 'none';
-          if (spBanner) spBanner.style.display = 'none';
-        }
-        
-        // スクロール検出とバナー表示制御（緩和版）
-        var lastScrollTop = 0;
-        var scrollThreshold = 200; // スクロールしきい値
-        var scrollTimer = null;
-        var isScrolling = false;
-        
-        window.addEventListener('scroll', function() {
-          var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          isScrolling = true;
-          
-          // スクロールが停止したら3秒後にSPバナーを表示する
-          clearTimeout(scrollTimer);
-          scrollTimer = setTimeout(function() {
-            isScrolling = false;
-            if (spBanner) {
-              spBanner.classList.remove('sp-hidden');
-            }
-          }, 1000);
-          
-          // PCバナーのスクロール時の動作（少し上下に動く）
-          if (pcBanner) {
-            var shift = Math.min(5, Math.max(-5, (scrollTop - lastScrollTop) / 2));
-            pcBanner.style.transform = 'translateY(' + shift + 'px)';
-          }
-          
-          // SPバナーのスクロール動作（下スクロール時は徐々に隠す）
-          if (spBanner && spBanner.style.display !== 'none') {
-            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-              // 大幅な下スクロール時のみ隠す
-              if (scrollTop - lastScrollTop > 30) {
-                spBanner.classList.add('sp-hidden');
-              }
-            } else if (scrollTop < lastScrollTop) {
-              // 上スクロール時は表示する
-              spBanner.classList.remove('sp-hidden');
-            }
-          }
-          
-          lastScrollTop = scrollTop;
-        });
-      });
-    </script>
-    <?php
+  return zidooka_force_priority_img_attrs($html);
 }, 103);
 
 // ユーザープロフィールに英語の自己紹介欄を追加
@@ -711,6 +494,9 @@ add_action('transition_post_status', function ($new_status, $old_status, $post) 
 add_filter('the_content', 'zidooka_hcb_bridge_with_language', 20);
 
 function zidooka_hcb_bridge_with_language($content) {
+  if (!is_string($content) || $content === '') {
+    return is_null($content) ? '' : $content;
+  }
   
   if (strpos($content, 'language-') === false) {
     return $content;
@@ -915,28 +701,6 @@ function zidooka_category_list_shortcode($atts) {
     return $output;
 }
 add_shortcode('zidooka_cat_list', 'zidooka_category_list_shortcode');
-
-// 2.3) Force eager/high priority for the front-page featured image
-// 2.3) Force eager/high priority for the front-page featured image
-add_filter('post_thumbnail_html', function(
-  $html, $post_id, $post_thumbnail_id, $size, $attr
-){
-  if (!is_front_page()) return $html;
-  // only target the front page's own thumbnail
-  if ((int) get_option('page_on_front') !== (int) $post_id) return $html;
-  // inject loading and fetchpriority attributes if missing
-  if (strpos($html, 'loading=') === false) {
-    $html = str_replace('<img', '<img loading="eager"', $html);
-  } else {
-    $html = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $html, 1);
-  }
-  if (strpos($html, 'fetchpriority=') === false) {
-    $html = str_replace('<img', '<img fetchpriority="high"', $html);
-  } else {
-    $html = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $html, 1);
-  }
-  return $html;
-}, 10, 5);
 // 2.4) Home meta description fallback (only if no major SEO plugin)
 add_action('wp_head', function(){
     if (!is_front_page()) return;
@@ -970,172 +734,32 @@ add_filter('comment_form_fields', function($fields){
 }, 99);
 // 2.7) Normalize content URLs: convert ../wp-content/... to /wp-content/...
 add_filter('the_content', function($content){
+    if (!is_string($content) || $content === '') {
+        return is_null($content) ? '' : $content;
+    }
     // Fix src/href attributes that mistakenly start with ../wp-content
     $pattern = '/\b(src|href)=(\"|\')\.\.\/wp-content\//i';
     $replace = '$1=$2/wp-content/';
     return preg_replace($pattern, $replace, $content);
 }, 20);
-// === LCP improvements for single posts ===
-// Preload first content image or featured image in <head>
 add_action('wp_head', function(){
-  if (!is_single()) return;
-  global $post; if (!$post) return;
-  $content = get_post_field('post_content', $post->ID);
-  $img_id = 0;
-  if ($content) {
-    if (preg_match('/wp-image-(\d+)/', $content, $m)) {
-      $img_id = (int)$m[1];
-    }
-    if (!$img_id && preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $m2)) {
-      $href = esc_url($m2[1]);
-      printf("<link rel=\"preload\" as=\"image\" href=\"%s\">\n", $href);
-    }
-  }
-  if ($img_id) {
-    $src = wp_get_attachment_image_url($img_id, 'full');
-    $srcset = wp_get_attachment_image_srcset($img_id, 'full');
-    $sizes = '(min-width: 1024px) 1200px, 100vw';
-    if ($src && $srcset) {
-      printf("<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
-        esc_url($src), esc_attr($srcset), esc_attr($sizes)
-      );
-    }
-  } elseif (has_post_thumbnail($post)) {
-    $thumb_id = get_post_thumbnail_id($post);
-    $src = wp_get_attachment_image_url($thumb_id, 'full');
-    $srcset = wp_get_attachment_image_srcset($thumb_id, 'full');
-    $sizes = '(min-width: 1024px) 1200px, 100vw';
-    if ($src && $srcset) {
-      printf("<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
-        esc_url($src), esc_attr($srcset), esc_attr($sizes)
-      );
-    }
-  }
-}, 4);
+    if (!is_single()) return;
+    zidooka_print_inline_css_asset('css-output/critical-single.css', 'zdk-critical-single');
+}, 7);
 
-// Mark first content image eager/high priority
+add_action('wp_head', function(){
+    if (!is_single()) return;
+    global $post;
+    zidooka_print_single_image_hints($post);
+}, 6);
+
 add_filter('the_content', function($content){
-  if (!is_single() || empty($content)) return $content;
-  $replaced = false;
-  $content = preg_replace_callback('/<img[^>]*>/i', function($m) use (&$replaced){
-    if ($replaced) return $m[0];
-    $img = $m[0];
-    if (stripos($img, 'loading=') !== false) {
-      $img = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $img, 1);
-    } else {
-      $img = preg_replace('/<img/i', '<img loading="eager"', $img, 1);
-    }
-    if (stripos($img, 'fetchpriority=') !== false) {
-      $img = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $img, 1);
-    } else {
-      $img = preg_replace('/<img/i', '<img fetchpriority="high"', $img, 1);
-    }
-    if (stripos($img, 'decoding=') === false) {
-      $img = preg_replace('/<img/i', '<img decoding="async"', $img, 1);
-    }
-    $replaced = true;
-    return $img;
-  }, $content, 1);
-  return $content;
+    if (!is_single()) return $content;
+    return zidooka_mark_first_content_image_priority($content);
 }, 12);
 
 // Ensure featured image on single has eager/high priority (when used)
 add_filter('post_thumbnail_html', function($html){
   if (!is_single()) return $html;
-  if (strpos($html, 'loading=') === false) {
-    $html = str_replace('<img', '<img loading="eager"', $html);
-  } else {
-    $html = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $html, 1);
-  }
-  if (strpos($html, 'fetchpriority=') === false) {
-    $html = str_replace('<img', '<img fetchpriority="high"', $html);
-  } else {
-    $html = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $html, 1);
-  }
-  return $html;
+  return zidooka_force_priority_img_attrs($html);
 }, 11);
-
-// === LCP improvements for single posts ===
-add_action('wp_head', function(){
-    if (!is_single()) return;
-    $path = get_stylesheet_directory() . '/css-output/critical-single.css';
-    if (file_exists($path)) {
-        $css = file_get_contents($path);
-        if ($css !== false && $css !== '') {
-            echo "<style id=\"zdk-critical-single\">{$css}</style>\n";
-        }
-    }
-}, 7);
-
-add_action('wp_head', function(){
-    if (!is_single()) return;
-    global $post; if (!$post) return;
-    $content = get_post_field('post_content', $post->ID) ?: '';
-    $img_id = 0;
-    if (preg_match('/wp-image-(\d+)/', $content, $m)) {
-        $img_id = (int)$m[1];
-    }
-    $printed = false;
-    if ($img_id) {
-        $src = wp_get_attachment_image_url($img_id, 'full');
-        $srcset = wp_get_attachment_image_srcset($img_id, 'full');
-        $sizes = '(min-width: 1024px) 1200px, 100vw';
-        if ($src && $srcset) {
-            printf("<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
-                esc_url($src), esc_attr($srcset), esc_attr($sizes)
-            );
-            $printed = true;
-        }
-    }
-    if (!$printed) {
-        if (preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $m2)) {
-            $href = esc_url($m2[1]);
-            printf("<link rel=\"preload\" as=\"image\" href=\"%s\">\n", $href);
-            $printed = true;
-        }
-    }
-    if (!$printed && has_post_thumbnail($post)) {
-        $thumb_id = get_post_thumbnail_id($post);
-        $src = wp_get_attachment_image_url($thumb_id, 'full');
-        $srcset = wp_get_attachment_image_srcset($thumb_id, 'full');
-        $sizes = '(min-width: 1024px) 1200px, 100vw';
-        if ($src && $srcset) {
-            printf("<link rel=\"preload\" as=\"image\" href=\"%s\" imagesrcset=\"%s\" imagesizes=\"%s\">\n",
-                esc_url($src), esc_attr($srcset), esc_attr($sizes)
-            );
-            $printed = true;
-        }
-    }
-    if (preg_match('/<img[^>]+src=["\']([^"\']+)["\']/', $content, $m3)) {
-        $host = wp_parse_url($m3[1], PHP_URL_SCHEME) . '://' . wp_parse_url($m3[1], PHP_URL_HOST);
-        if ($host) {
-            printf("<link rel=\"preconnect\" href=\"%s\" crossorigin>\n", esc_url($host));
-            printf("<link rel=\"dns-prefetch\" href=\"%s\">\n", esc_url($host));
-        }
-    }
-}, 6);
-
-add_filter('the_content', function($content){
-    if (!is_single() || empty($content)) return $content;
-    $done = false;
-    $content = preg_replace_callback('/<img[^>]*>/i', function($m) use (&$done){
-        if ($done) return $m[0];
-        $img = $m[0];
-        if (stripos($img, 'loading=') !== false) {
-            $img = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $img, 1);
-        } else {
-            $img = preg_replace('/<img/i', '<img loading="eager"', $img, 1);
-        }
-        if (stripos($img, 'fetchpriority=') !== false) {
-            $img = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $img, 1);
-        } else {
-            $img = preg_replace('/<img/i', '<img fetchpriority="high"', $img, 1);
-        }
-        if (stripos($img, 'decoding=') === false) {
-            $img = preg_replace('/<img/i', '<img decoding="async"', $img, 1);
-        }
-        $done = true;
-        return $img;
-    }, $content, 1);
-    return $content;
-}, 12);

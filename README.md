@@ -15,20 +15,26 @@ CLI 経由で記事の作成・校正・画像処理・WordPress 投稿を行う
 ## ディレクトリ構成
 ```
 zidooka-writing/
-  ├── data/
+  ├── data/                  # メタデータ・投稿データ
   │   └── metadata.json
-  ├── drafts/
-  ├── images/
-  ├── scripts/
-  │   └── remote-agent/   # リモート編集用ユーティリティ
-  ├── src/
+  ├── docs/                  # 技術ドキュメント・スタイルガイド
+  │   ├── snippets/
+  │   ├── troubleshooting/
+  │   ├── REMOTE_UPLOAD.md
+  │   ├── ZIDOOKA_STYLE.md
+  │   └── ...
+  ├── downloads/             # WPテーマファイル・テンプレート
+  ├── drafts/                # 記事の下書き
+  ├── drat/                  # 一時メモ・インシデントログ
+  ├── images/                # 記事用画像・サムネイル
+  ├── images-agent-browser/  # スクリーンショット出力先
+  ├── scripts/               # スクリプト
+  │   ├── remote-agent/      #   リモート編集用ユーティリティ
+  │   └── generate-thumbnail.cjs
+  ├── src/                   # CLIツール本体
   │   ├── index.js
-  │   ├── writer.js
-  │   ├── vision.js
-  │   ├── wp.js
-  │   └── utils.js
-  ├── docs/
-  │   └── REMOTE_UPLOAD.md
+  │   ├── cli/
+  │   └── services/
   ├── .env
   └── package.json
 ```
@@ -36,6 +42,27 @@ zidooka-writing/
 ## コマンド（主要）
 - カテゴリ/タグ同期: `node src/index.js sync`
 - 投稿: `node src/index.js post drafts/article.md`
+- GA4 レポート: `npm run ga4 -- --preset overview`
+- GSC クエリ: `npm run gsc -- --site=https://www.zidooka.com/ --preset top-queries --start-date=2026-02-25 --end-date=2026-03-23`
+
+## GA4 / GSC 連携
+サービスアカウント JSON を用いた read-only アクセスに対応しています。
+
+`.env` 例:
+```powershell
+GOOGLE_SERVICE_ACCOUNT_KEY_PATH=C:\Users\user\.secrets\google\codex-ga-gsc.json
+GOOGLE_GA4_PROPERTY_ID=344037190
+GOOGLE_GSC_SITE=https://www.zidooka.com/
+```
+
+例:
+- `npm run ga4 -- --preset overview`
+- `npm run ga4 -- --preset landing-pages --limit 20`
+- `npm run gsc -- --site=https://www.zidooka.com/ --preset top-queries --start-date=2026-02-25 --end-date=2026-03-23`
+- `npm run gsc -- --site=https://tools.zidooka.com/ --preset top-pages --start-date=2026-02-25 --end-date=2026-03-23`
+- `npm run seo:followup`
+  - 直近7日 vs 前7日で、SEO改善対象ページの GA4 / GSC 差分をまとめた Markdown / JSON レポートを `daily/seo-followup/` に出力
+  - このリポジトリでは ZIDOOKA の GA4 プロパティと GSC サイトを既定値として持つため、通常は `--key-file` だけ渡せばよい
 
 ## リモートアップロード（テーマファイル）
 リモートの WordPress テーマに対し、安全にファイルをアップロードするためのスクリプトを同梱（バックアップ自動作成・許可パス制限あり）。
@@ -61,4 +88,3 @@ zidooka-writing/
 補足
 - `npm run remote:agent -- <cmd>` でも実行できます。
 - ロールバックは作成された `.bak.<timestamp>` を元ファイル名へ戻すか、ホストのファイルマネージャで復元してください。
-

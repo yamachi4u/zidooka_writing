@@ -1,0 +1,2709 @@
+
+> zidooka-cli@1.0.0 gsc
+> node scripts/gsc-query.mjs --site https://www.zidooka.com/ --key-file C:\Users\user\.secrets\google\codex-ga-gsc.json --preset top-pages --start-date 2026-04-01 --end-date 2026-04-18 --limit 300 --json
+
+{
+  "rows": [
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/105"
+      ],
+      "clicks": 112,
+      "impressions": 400,
+      "ctr": 0.28,
+      "position": 3.97
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4006"
+      ],
+      "clicks": 51,
+      "impressions": 530,
+      "ctr": 0.09622641509433963,
+      "position": 7.796226415094339
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/185"
+      ],
+      "clicks": 35,
+      "impressions": 310,
+      "ctr": 0.11290322580645161,
+      "position": 5.712903225806452
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/633"
+      ],
+      "clicks": 33,
+      "impressions": 8179,
+      "ctr": 0.004034723071280107,
+      "position": 10.398581733708276
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2590"
+      ],
+      "clicks": 32,
+      "impressions": 385,
+      "ctr": 0.08311688311688312,
+      "position": 5.864935064935065
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3999"
+      ],
+      "clicks": 28,
+      "impressions": 299,
+      "ctr": 0.09364548494983277,
+      "position": 7.424749163879599
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/411"
+      ],
+      "clicks": 27,
+      "impressions": 129,
+      "ctr": 0.20930232558139536,
+      "position": 5.255813953488372
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/670"
+      ],
+      "clicks": 21,
+      "impressions": 100,
+      "ctr": 0.21,
+      "position": 6.12
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/443"
+      ],
+      "clicks": 20,
+      "impressions": 89,
+      "ctr": 0.2247191011235955,
+      "position": 4.359550561797753
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4154"
+      ],
+      "clicks": 19,
+      "impressions": 1428,
+      "ctr": 0.01330532212885154,
+      "position": 9.563025210084033
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1083"
+      ],
+      "clicks": 18,
+      "impressions": 31,
+      "ctr": 0.5806451612903226,
+      "position": 1.6774193548387095
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2750"
+      ],
+      "clicks": 16,
+      "impressions": 253,
+      "ctr": 0.06324110671936758,
+      "position": 8.059288537549406
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/240"
+      ],
+      "clicks": 15,
+      "impressions": 70,
+      "ctr": 0.21428571428571427,
+      "position": 6.8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3200"
+      ],
+      "clicks": 14,
+      "impressions": 289,
+      "ctr": 0.04844290657439446,
+      "position": 7.719723183391004
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3290"
+      ],
+      "clicks": 14,
+      "impressions": 689,
+      "ctr": 0.020319303338171262,
+      "position": 7.4078374455732945
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2581"
+      ],
+      "clicks": 12,
+      "impressions": 156,
+      "ctr": 0.07692307692307693,
+      "position": 6.455128205128205
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2636"
+      ],
+      "clicks": 12,
+      "impressions": 137,
+      "ctr": 0.08759124087591241,
+      "position": 5.474452554744525
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3079"
+      ],
+      "clicks": 12,
+      "impressions": 165,
+      "ctr": 0.07272727272727272,
+      "position": 9.357575757575757
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3189"
+      ],
+      "clicks": 12,
+      "impressions": 165,
+      "ctr": 0.07272727272727272,
+      "position": 6.6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3636"
+      ],
+      "clicks": 10,
+      "impressions": 152,
+      "ctr": 0.06578947368421052,
+      "position": 5.947368421052632
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3670"
+      ],
+      "clicks": 10,
+      "impressions": 135,
+      "ctr": 0.07407407407407407,
+      "position": 7.888888888888889
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2633"
+      ],
+      "clicks": 9,
+      "impressions": 73,
+      "ctr": 0.1232876712328767,
+      "position": 8.246575342465754
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/841"
+      ],
+      "clicks": 9,
+      "impressions": 191,
+      "ctr": 0.04712041884816754,
+      "position": 3.9842931937172774
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/420"
+      ],
+      "clicks": 8,
+      "impressions": 142,
+      "ctr": 0.056338028169014086,
+      "position": 5.71830985915493
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/492"
+      ],
+      "clicks": 8,
+      "impressions": 184,
+      "ctr": 0.043478260869565216,
+      "position": 8.559782608695652
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3622"
+      ],
+      "clicks": 7,
+      "impressions": 51,
+      "ctr": 0.13725490196078433,
+      "position": 5.392156862745098
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/586"
+      ],
+      "clicks": 7,
+      "impressions": 147,
+      "ctr": 0.047619047619047616,
+      "position": 8.63265306122449
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1060"
+      ],
+      "clicks": 6,
+      "impressions": 89,
+      "ctr": 0.06741573033707865,
+      "position": 15.460674157303371
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/218"
+      ],
+      "clicks": 6,
+      "impressions": 42,
+      "ctr": 0.14285714285714285,
+      "position": 8.69047619047619
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/358"
+      ],
+      "clicks": 6,
+      "impressions": 53,
+      "ctr": 0.11320754716981132,
+      "position": 8.584905660377359
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1468"
+      ],
+      "clicks": 5,
+      "impressions": 23,
+      "ctr": 0.21739130434782608,
+      "position": 7.173913043478261
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2301"
+      ],
+      "clicks": 5,
+      "impressions": 38,
+      "ctr": 0.13157894736842105,
+      "position": 7.2894736842105265
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2353"
+      ],
+      "clicks": 5,
+      "impressions": 129,
+      "ctr": 0.03875968992248062,
+      "position": 6.27906976744186
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2607"
+      ],
+      "clicks": 5,
+      "impressions": 123,
+      "ctr": 0.04065040650406504,
+      "position": 9.178861788617887
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2668"
+      ],
+      "clicks": 5,
+      "impressions": 216,
+      "ctr": 0.023148148148148147,
+      "position": 9.12962962962963
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2672"
+      ],
+      "clicks": 5,
+      "impressions": 70,
+      "ctr": 0.07142857142857142,
+      "position": 8.885714285714286
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2755"
+      ],
+      "clicks": 5,
+      "impressions": 63,
+      "ctr": 0.07936507936507936,
+      "position": 6.349206349206349
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4025"
+      ],
+      "clicks": 5,
+      "impressions": 122,
+      "ctr": 0.040983606557377046,
+      "position": 7.69672131147541
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/439"
+      ],
+      "clicks": 5,
+      "impressions": 65,
+      "ctr": 0.07692307692307693,
+      "position": 11.8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/579"
+      ],
+      "clicks": 5,
+      "impressions": 91,
+      "ctr": 0.054945054945054944,
+      "position": 10.593406593406593
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2658"
+      ],
+      "clicks": 4,
+      "impressions": 21,
+      "ctr": 0.19047619047619047,
+      "position": 5.428571428571429
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3017"
+      ],
+      "clicks": 4,
+      "impressions": 128,
+      "ctr": 0.03125,
+      "position": 9.3671875
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/333"
+      ],
+      "clicks": 4,
+      "impressions": 212,
+      "ctr": 0.018867924528301886,
+      "position": 6.066037735849057
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3672"
+      ],
+      "clicks": 4,
+      "impressions": 1090,
+      "ctr": 0.003669724770642202,
+      "position": 8.946788990825688
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3930"
+      ],
+      "clicks": 4,
+      "impressions": 32,
+      "ctr": 0.125,
+      "position": 6.65625
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4161"
+      ],
+      "clicks": 4,
+      "impressions": 179,
+      "ctr": 0.0223463687150838,
+      "position": 7.094972067039106
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4189"
+      ],
+      "clicks": 4,
+      "impressions": 75,
+      "ctr": 0.05333333333333334,
+      "position": 13.093333333333334
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/427"
+      ],
+      "clicks": 4,
+      "impressions": 683,
+      "ctr": 0.005856515373352855,
+      "position": 8.67349926793558
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/140"
+      ],
+      "clicks": 3,
+      "impressions": 23,
+      "ctr": 0.13043478260869565,
+      "position": 6.521739130434782
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/158"
+      ],
+      "clicks": 3,
+      "impressions": 6,
+      "ctr": 0.5,
+      "position": 1.3333333333333333
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2770"
+      ],
+      "clicks": 3,
+      "impressions": 57,
+      "ctr": 0.05263157894736842,
+      "position": 7.824561403508772
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3273"
+      ],
+      "clicks": 3,
+      "impressions": 44,
+      "ctr": 0.06818181818181818,
+      "position": 6.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3301"
+      ],
+      "clicks": 3,
+      "impressions": 104,
+      "ctr": 0.028846153846153848,
+      "position": 7.596153846153846
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3410"
+      ],
+      "clicks": 3,
+      "impressions": 12,
+      "ctr": 0.25,
+      "position": 5.25
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/865"
+      ],
+      "clicks": 3,
+      "impressions": 41,
+      "ctr": 0.07317073170731707,
+      "position": 6.7317073170731705
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1039"
+      ],
+      "clicks": 2,
+      "impressions": 11,
+      "ctr": 0.18181818181818182,
+      "position": 7.181818181818182
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1049"
+      ],
+      "clicks": 2,
+      "impressions": 21,
+      "ctr": 0.09523809523809523,
+      "position": 4.190476190476191
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1166"
+      ],
+      "clicks": 2,
+      "impressions": 39,
+      "ctr": 0.05128205128205128,
+      "position": 12.923076923076923
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2100"
+      ],
+      "clicks": 2,
+      "impressions": 9,
+      "ctr": 0.2222222222222222,
+      "position": 4.666666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2407"
+      ],
+      "clicks": 2,
+      "impressions": 32,
+      "ctr": 0.0625,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2544"
+      ],
+      "clicks": 2,
+      "impressions": 42,
+      "ctr": 0.047619047619047616,
+      "position": 10.952380952380953
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2639"
+      ],
+      "clicks": 2,
+      "impressions": 116,
+      "ctr": 0.017241379310344827,
+      "position": 9.413793103448276
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2838"
+      ],
+      "clicks": 2,
+      "impressions": 69,
+      "ctr": 0.028985507246376812,
+      "position": 6.6521739130434785
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3229"
+      ],
+      "clicks": 2,
+      "impressions": 86,
+      "ctr": 0.023255813953488372,
+      "position": 8.418604651162791
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3268"
+      ],
+      "clicks": 2,
+      "impressions": 17,
+      "ctr": 0.11764705882352941,
+      "position": 5.9411764705882355
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/342"
+      ],
+      "clicks": 2,
+      "impressions": 39,
+      "ctr": 0.05128205128205128,
+      "position": 7.384615384615385
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4015"
+      ],
+      "clicks": 2,
+      "impressions": 15,
+      "ctr": 0.13333333333333333,
+      "position": 7.066666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4027"
+      ],
+      "clicks": 2,
+      "impressions": 24,
+      "ctr": 0.08333333333333333,
+      "position": 14.625
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4034"
+      ],
+      "clicks": 2,
+      "impressions": 38,
+      "ctr": 0.05263157894736842,
+      "position": 13
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/570"
+      ],
+      "clicks": 2,
+      "impressions": 88,
+      "ctr": 0.022727272727272728,
+      "position": 15.590909090909092
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/596"
+      ],
+      "clicks": 2,
+      "impressions": 42,
+      "ctr": 0.047619047619047616,
+      "position": 8.261904761904763
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/654"
+      ],
+      "clicks": 2,
+      "impressions": 109,
+      "ctr": 0.01834862385321101,
+      "position": 9.55045871559633
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/679"
+      ],
+      "clicks": 2,
+      "impressions": 37,
+      "ctr": 0.05405405405405406,
+      "position": 10.81081081081081
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/885"
+      ],
+      "clicks": 2,
+      "impressions": 74,
+      "ctr": 0.02702702702702703,
+      "position": 8.662162162162161
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1045"
+      ],
+      "clicks": 1,
+      "impressions": 12,
+      "ctr": 0.08333333333333333,
+      "position": 13.166666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/118"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 8.333333333333332
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/121"
+      ],
+      "clicks": 1,
+      "impressions": 210,
+      "ctr": 0.004761904761904762,
+      "position": 8.790476190476191
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/152"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 5.6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2048"
+      ],
+      "clicks": 1,
+      "impressions": 26,
+      "ctr": 0.038461538461538464,
+      "position": 11.26923076923077
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2142"
+      ],
+      "clicks": 1,
+      "impressions": 34,
+      "ctr": 0.029411764705882353,
+      "position": 8.323529411764707
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2199"
+      ],
+      "clicks": 1,
+      "impressions": 11,
+      "ctr": 0.09090909090909091,
+      "position": 14.090909090909092
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2348"
+      ],
+      "clicks": 1,
+      "impressions": 23,
+      "ctr": 0.043478260869565216,
+      "position": 17.130434782608695
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2356"
+      ],
+      "clicks": 1,
+      "impressions": 187,
+      "ctr": 0.0053475935828877,
+      "position": 8.080213903743315
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2381"
+      ],
+      "clicks": 1,
+      "impressions": 59,
+      "ctr": 0.01694915254237288,
+      "position": 7.711864406779661
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2395"
+      ],
+      "clicks": 1,
+      "impressions": 14,
+      "ctr": 0.07142857142857142,
+      "position": 9.428571428571429
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2421"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2665"
+      ],
+      "clicks": 1,
+      "impressions": 39,
+      "ctr": 0.02564102564102564,
+      "position": 12.871794871794872
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2726"
+      ],
+      "clicks": 1,
+      "impressions": 50,
+      "ctr": 0.02,
+      "position": 8.1
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2786"
+      ],
+      "clicks": 1,
+      "impressions": 27,
+      "ctr": 0.037037037037037035,
+      "position": 11.333333333333334
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2812"
+      ],
+      "clicks": 1,
+      "impressions": 8,
+      "ctr": 0.125,
+      "position": 8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2832"
+      ],
+      "clicks": 1,
+      "impressions": 12,
+      "ctr": 0.08333333333333333,
+      "position": 8.833333333333332
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2916"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 6.8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2937"
+      ],
+      "clicks": 1,
+      "impressions": 12,
+      "ctr": 0.08333333333333333,
+      "position": 8.416666666666668
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2991"
+      ],
+      "clicks": 1,
+      "impressions": 342,
+      "ctr": 0.0029239766081871343,
+      "position": 8.397660818713451
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2994"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 3
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/30"
+      ],
+      "clicks": 1,
+      "impressions": 4,
+      "ctr": 0.25,
+      "position": 21.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3011"
+      ],
+      "clicks": 1,
+      "impressions": 67,
+      "ctr": 0.014925373134328358,
+      "position": 9.925373134328359
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3098"
+      ],
+      "clicks": 1,
+      "impressions": 4,
+      "ctr": 0.25,
+      "position": 8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3151"
+      ],
+      "clicks": 1,
+      "impressions": 9,
+      "ctr": 0.1111111111111111,
+      "position": 8.666666666666668
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3192"
+      ],
+      "clicks": 1,
+      "impressions": 9,
+      "ctr": 0.1111111111111111,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3211"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 17
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3245"
+      ],
+      "clicks": 1,
+      "impressions": 17,
+      "ctr": 0.058823529411764705,
+      "position": 6.176470588235294
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3285"
+      ],
+      "clicks": 1,
+      "impressions": 61,
+      "ctr": 0.01639344262295082,
+      "position": 7.245901639344262
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3333"
+      ],
+      "clicks": 1,
+      "impressions": 20,
+      "ctr": 0.05,
+      "position": 7.65
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3346"
+      ],
+      "clicks": 1,
+      "impressions": 18,
+      "ctr": 0.05555555555555555,
+      "position": 16.27777777777778
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3483"
+      ],
+      "clicks": 1,
+      "impressions": 100,
+      "ctr": 0.01,
+      "position": 11.93
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3640"
+      ],
+      "clicks": 1,
+      "impressions": 345,
+      "ctr": 0.002898550724637681,
+      "position": 5.353623188405797
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3645"
+      ],
+      "clicks": 1,
+      "impressions": 9,
+      "ctr": 0.1111111111111111,
+      "position": 5.222222222222222
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/365"
+      ],
+      "clicks": 1,
+      "impressions": 39,
+      "ctr": 0.02564102564102564,
+      "position": 7.846153846153846
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3716"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3792"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 3.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/381"
+      ],
+      "clicks": 1,
+      "impressions": 11,
+      "ctr": 0.09090909090909091,
+      "position": 9.636363636363637
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/384"
+      ],
+      "clicks": 1,
+      "impressions": 76,
+      "ctr": 0.013157894736842105,
+      "position": 8.526315789473685
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3933"
+      ],
+      "clicks": 1,
+      "impressions": 404,
+      "ctr": 0.0024752475247524753,
+      "position": 8.410891089108912
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3974"
+      ],
+      "clicks": 1,
+      "impressions": 135,
+      "ctr": 0.007407407407407408,
+      "position": 9.696296296296296
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3991"
+      ],
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1,
+      "position": 8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3995"
+      ],
+      "clicks": 1,
+      "impressions": 9,
+      "ctr": 0.1111111111111111,
+      "position": 8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4003"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4012"
+      ],
+      "clicks": 1,
+      "impressions": 3,
+      "ctr": 0.3333333333333333,
+      "position": 9
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4017"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 4.4
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4172"
+      ],
+      "clicks": 1,
+      "impressions": 6,
+      "ctr": 0.16666666666666666,
+      "position": 11.666666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4183"
+      ],
+      "clicks": 1,
+      "impressions": 4,
+      "ctr": 0.25,
+      "position": 12.75
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4185"
+      ],
+      "clicks": 1,
+      "impressions": 17,
+      "ctr": 0.058823529411764705,
+      "position": 4.117647058823529
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/4202"
+      ],
+      "clicks": 1,
+      "impressions": 7,
+      "ctr": 0.14285714285714285,
+      "position": 20.428571428571427
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/429"
+      ],
+      "clicks": 1,
+      "impressions": 13,
+      "ctr": 0.07692307692307693,
+      "position": 4.461538461538462
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/524"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/580"
+      ],
+      "clicks": 1,
+      "impressions": 73,
+      "ctr": 0.0136986301369863,
+      "position": 12.36986301369863
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/62"
+      ],
+      "clicks": 1,
+      "impressions": 23,
+      "ctr": 0.043478260869565216,
+      "position": 11.130434782608695
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/66"
+      ],
+      "clicks": 1,
+      "impressions": 7,
+      "ctr": 0.14285714285714285,
+      "position": 12.142857142857142
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/677"
+      ],
+      "clicks": 1,
+      "impressions": 18,
+      "ctr": 0.05555555555555555,
+      "position": 10.166666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/700"
+      ],
+      "clicks": 1,
+      "impressions": 39,
+      "ctr": 0.02564102564102564,
+      "position": 6.82051282051282
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/711"
+      ],
+      "clicks": 1,
+      "impressions": 42,
+      "ctr": 0.023809523809523808,
+      "position": 8.095238095238095
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/915"
+      ],
+      "clicks": 1,
+      "impressions": 9,
+      "ctr": 0.1111111111111111,
+      "position": 4.666666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/968"
+      ],
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 0.5,
+      "position": 8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/97"
+      ],
+      "clicks": 1,
+      "impressions": 7,
+      "ctr": 0.14285714285714285,
+      "position": 29
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/category/%E5%BA%83%E5%91%8Atips/amazonassociate"
+      ],
+      "clicks": 1,
+      "impressions": 6,
+      "ctr": 0.16666666666666666,
+      "position": 15
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/category/errors/ai-error"
+      ],
+      "clicks": 1,
+      "impressions": 75,
+      "ctr": 0.013333333333333334,
+      "position": 11.666666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/tag/%E3%82%A8%E3%83%A9%E3%83%BC%E8%A7%A3%E6%B1%BA"
+      ],
+      "clicks": 1,
+      "impressions": 22,
+      "ctr": 0.045454545454545456,
+      "position": 7.2727272727272725
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/tag/approval_policy"
+      ],
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 9.8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/"
+      ],
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": 0,
+      "position": 13.4375
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/3"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 19.75
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1001"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 3
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1010"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 14
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1016"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 9.666666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1026"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 7.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1043"
+      ],
+      "clicks": 0,
+      "impressions": 13,
+      "ctr": 0,
+      "position": 5.538461538461538
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1053"
+      ],
+      "clicks": 0,
+      "impressions": 26,
+      "ctr": 0,
+      "position": 6.538461538461538
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1055"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 7.666666666666667
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1058"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 7.666666666666667
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1060#toc-0"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1060#toc-2"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1073"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 10.75
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1090"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/111"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 14.2
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1112"
+      ],
+      "clicks": 0,
+      "impressions": 79,
+      "ctr": 0,
+      "position": 7.189873417721519
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1127"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 14.666666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1132"
+      ],
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 8.571428571428571
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1141"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 6.6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1151"
+      ],
+      "clicks": 0,
+      "impressions": 11,
+      "ctr": 0,
+      "position": 9.636363636363637
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1181"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1193"
+      ],
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": 0,
+      "position": 40.8125
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1206"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 33.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1214"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1217"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 10.6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1219"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1242"
+      ],
+      "clicks": 0,
+      "impressions": 12,
+      "ctr": 0,
+      "position": 12.416666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1247"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1250"
+      ],
+      "clicks": 0,
+      "impressions": 17,
+      "ctr": 0,
+      "position": 10.764705882352942
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/130"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1319"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1323"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 4.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/134"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 6.75
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1358"
+      ],
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 11.428571428571429
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1378"
+      ],
+      "clicks": 0,
+      "impressions": 30,
+      "ctr": 0,
+      "position": 8.533333333333333
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/142"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 12.166666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/142#toc-0"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/142#toc-2"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/142#toc-3"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1472"
+      ],
+      "clicks": 0,
+      "impressions": 11,
+      "ctr": 0,
+      "position": 9.636363636363637
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/149"
+      ],
+      "clicks": 0,
+      "impressions": 96,
+      "ctr": 0,
+      "position": 15.072916666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1559"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 4.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1598"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 21.333333333333332
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1604"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/161"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 23
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1610"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 28
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/166"
+      ],
+      "clicks": 0,
+      "impressions": 30,
+      "ctr": 0,
+      "position": 8.066666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/179"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 6.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1962"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 12.25
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1965"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 8.333333333333332
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1968"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 45
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/197"
+      ],
+      "clicks": 0,
+      "impressions": 132,
+      "ctr": 0,
+      "position": 10.083333333333334
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/1978"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 7.666666666666667
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2003"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2032"
+      ],
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": 0,
+      "position": 10.3125
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2039"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 8.75
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2053"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 2.333333333333333
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/209"
+      ],
+      "clicks": 0,
+      "impressions": 30,
+      "ctr": 0,
+      "position": 17.2
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2100#toc-0"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2100#toc-2"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2114"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 15.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/214"
+      ],
+      "clicks": 0,
+      "impressions": 112,
+      "ctr": 0,
+      "position": 10.169642857142858
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/214#toc-1"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 8.25
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/214#toc-2"
+      ],
+      "clicks": 0,
+      "impressions": 44,
+      "ctr": 0,
+      "position": 8.863636363636363
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/214#toc-3"
+      ],
+      "clicks": 0,
+      "impressions": 58,
+      "ctr": 0,
+      "position": 8.931034482758621
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/214#toc-5"
+      ],
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": 0,
+      "position": 9.0625
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/214#toc-6"
+      ],
+      "clicks": 0,
+      "impressions": 58,
+      "ctr": 0,
+      "position": 8.931034482758621
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/214#toc-7"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 8.333333333333332
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2157"
+      ],
+      "clicks": 0,
+      "impressions": 33,
+      "ctr": 0,
+      "position": 10.121212121212121
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2192"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2207"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 14
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2215"
+      ],
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 15
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/222"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 64.75
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2222"
+      ],
+      "clicks": 0,
+      "impressions": 20,
+      "ctr": 0,
+      "position": 11.05
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2262"
+      ],
+      "clicks": 0,
+      "impressions": 17,
+      "ctr": 0,
+      "position": 9.235294117647058
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2268"
+      ],
+      "clicks": 0,
+      "impressions": 11,
+      "ctr": 0,
+      "position": 5.363636363636363
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2271"
+      ],
+      "clicks": 0,
+      "impressions": 122,
+      "ctr": 0,
+      "position": 13.98360655737705
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2279"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2283"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 6.666666666666667
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/23"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 16
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2303"
+      ],
+      "clicks": 0,
+      "impressions": 42,
+      "ctr": 0,
+      "position": 8.047619047619047
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2315"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 6.333333333333333
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2320"
+      ],
+      "clicks": 0,
+      "impressions": 144,
+      "ctr": 0,
+      "position": 7.0625
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2322"
+      ],
+      "clicks": 0,
+      "impressions": 17,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2341"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2367"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 14.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2372"
+      ],
+      "clicks": 0,
+      "impressions": 21,
+      "ctr": 0,
+      "position": 8.19047619047619
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2375"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 37
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2379"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 13
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2381?utm_source=rss&utm_medium=rss&utm_campaign=deprecated-creation-of-dynamic-property-%25ef%25bd%259e-%25e3%2581%258c%25e5%2587%25ba%25e3%2582%258b%25e7%2590%2586%25e7%2594%25b1-%25e3%2580%2590php-8-2-x-wordpress%25e3%2580%2591%25e3%2581%25a7%25e7%2590%2586%25e8%25a7%25a3%25e3%2581%2599%25e3%2581%25b9%25e3%2581%258d"
+      ],
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 6.1
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2383?utm_source=rss&utm_medium=rss&utm_campaign=reason-for-deprecated-creation-of-dynamic-property-understanding-and-dealing-with-php-8-2-x-wordpress"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2401"
+      ],
+      "clicks": 0,
+      "impressions": 34,
+      "ctr": 0,
+      "position": 11.176470588235293
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2401#-jsonparse-"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 6.333333333333333
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2401#json-parse-"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 6.333333333333333
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2404"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 5.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2424"
+      ],
+      "clicks": 0,
+      "impressions": 19,
+      "ctr": 0,
+      "position": 7.473684210526316
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2441"
+      ],
+      "clicks": 0,
+      "impressions": 41,
+      "ctr": 0,
+      "position": 6.390243902439025
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2461"
+      ],
+      "clicks": 0,
+      "impressions": 29,
+      "ctr": 0,
+      "position": 5.896551724137931
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2463"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2494"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2496"
+      ],
+      "clicks": 0,
+      "impressions": 52,
+      "ctr": 0,
+      "position": 10.365384615384615
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2498"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 8.6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2501"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 8.333333333333332
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2524"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2530"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 9.666666666666666
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2546"
+      ],
+      "clicks": 0,
+      "impressions": 21,
+      "ctr": 0,
+      "position": 9.571428571428571
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2550"
+      ],
+      "clicks": 0,
+      "impressions": 32,
+      "ctr": 0,
+      "position": 6.8125
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2565"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2581#toc-0"
+      ],
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2581#toc-1"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 7.25
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2581#toc-3"
+      ],
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2581#toc-4"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2595"
+      ],
+      "clicks": 0,
+      "impressions": 41,
+      "ctr": 0,
+      "position": 10.365853658536585
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2597"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 7.875
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2607#toc-1"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 8.88888888888889
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2607#toc-3"
+      ],
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 9.6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2607#toc-5"
+      ],
+      "clicks": 0,
+      "impressions": 17,
+      "ctr": 0,
+      "position": 9.294117647058824
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2617"
+      ],
+      "clicks": 0,
+      "impressions": 12,
+      "ctr": 0,
+      "position": 6.75
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2633#toc-1"
+      ],
+      "clicks": 0,
+      "impressions": 24,
+      "ctr": 0,
+      "position": 6.958333333333333
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2633#toc-2"
+      ],
+      "clicks": 0,
+      "impressions": 24,
+      "ctr": 0,
+      "position": 6.958333333333333
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2646"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2649"
+      ],
+      "clicks": 0,
+      "impressions": 13,
+      "ctr": 0,
+      "position": 5.923076923076923
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2655"
+      ],
+      "clicks": 0,
+      "impressions": 63,
+      "ctr": 0,
+      "position": 8.349206349206348
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2661"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 8.25
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2687"
+      ],
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 9.6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2697"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 7.6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2704"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2713"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2716"
+      ],
+      "clicks": 0,
+      "impressions": 31,
+      "ctr": 0,
+      "position": 7.419354838709677
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2736"
+      ],
+      "clicks": 0,
+      "impressions": 12,
+      "ctr": 0,
+      "position": 54.416666666666664
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2742"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2746"
+      ],
+      "clicks": 0,
+      "impressions": 96,
+      "ctr": 0,
+      "position": 8.625
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2755#toc-0"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2755#toc-1"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2765"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2774"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 38.8
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2776"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 17.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2786#gemini-api"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2786#iam-api"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2794"
+      ],
+      "clicks": 0,
+      "impressions": 27,
+      "ctr": 0,
+      "position": 6.962962962962963
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2797"
+      ],
+      "clicks": 0,
+      "impressions": 21,
+      "ctr": 0,
+      "position": 7.476190476190476
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2806"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 12.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2829"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/283"
+      ],
+      "clicks": 0,
+      "impressions": 54,
+      "ctr": 0,
+      "position": 29.814814814814813
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2835"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 10.375
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2838#-"
+      ],
+      "clicks": 0,
+      "impressions": 14,
+      "ctr": 0,
+      "position": 4.571428571428571
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2838#-v8"
+      ],
+      "clicks": 0,
+      "impressions": 14,
+      "ctr": 0,
+      "position": 4.571428571428571
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2877"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2880"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 5.2
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2919"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2921"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 39.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2924"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 7.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2945"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 3.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2948"
+      ],
+      "clicks": 0,
+      "impressions": 36,
+      "ctr": 0,
+      "position": 10.694444444444445
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2952"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 9.25
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2955"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 6.333333333333333
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2964"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10.5
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2982"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 9.4
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2988"
+      ],
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 5.25
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/2997"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "https://www.zidooka.com/archives/3003"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 8
+    }
+  ],
+  "responseAggregationType": "byPage"
+}

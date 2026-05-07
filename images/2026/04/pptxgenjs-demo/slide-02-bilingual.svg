@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F4F0E8"/>
+  <rect x="56" y="56" width="1168" height="608" rx="28" fill="#FFFDFC" stroke="#D6D3D1"/>
+  <text x="96" y="130" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="700" fill="#1F2937"><tspan x="96" dy="0">Bilingual Executive Brief</tspan></text>
+  <rect x="96" y="166" width="1088" height="1" fill="#D6D3D1"/>
+  <rect x="96" y="198" width="500" height="388" rx="22" fill="#F2FBFD" stroke="#CFECEF"/>
+  <rect x="636" y="198" width="500" height="388" rx="22" fill="#FFF3EF" stroke="#F7D6CD"/>
+  <text x="126" y="246" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#0E7490"><tspan x="126" dy="0">日本語サマリー</tspan></text>
+  <text x="666" y="246" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#E76F51"><tspan x="666" dy="0">English Summary</tspan></text>
+  
+      <circle cx="158" cy="238" r="8" fill="#0E7490"/>
+      <text x="182" y="248" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="400" fill="#1F2937"><tspan x="182" dy="0">経営会議向けの3枚資料を自動生成</tspan></text>
+      <circle cx="158" cy="330" r="8" fill="#0E7490"/>
+      <text x="182" y="340" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="400" fill="#1F2937"><tspan x="182" dy="0">見出し、表、グラフをコードで固定</tspan></text>
+      <circle cx="158" cy="422" r="8" fill="#0E7490"/>
+      <text x="182" y="432" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="400" fill="#1F2937"><tspan x="182" dy="0">毎週の数値差し替えだけで再利用しやすい</tspan></text>
+  
+      <circle cx="698" cy="238" r="8" fill="#E76F51"/>
+      <text x="722" y="248" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" fill="#1F2937"><tspan x="722" dy="0">Generate a 3-slide executive brief automatically</tspan></text>
+      <circle cx="698" cy="330" r="8" fill="#E76F51"/>
+      <text x="722" y="340" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" fill="#1F2937"><tspan x="722" dy="0">Lock layout, charts, and tables in code</tspan></text>
+      <circle cx="698" cy="422" r="8" fill="#E76F51"/>
+      <text x="722" y="432" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" fill="#1F2937"><tspan x="722" dy="0">Reuse weekly by swapping data only</tspan></text>
+</svg>

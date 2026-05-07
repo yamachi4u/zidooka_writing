@@ -1,0 +1,4 @@
+deviceCategory,sessions_current,sessions_previous,sessions_delta,sessions_delta_pct,totalUsers_current,totalUsers_previous,totalUsers_delta,totalUsers_delta_pct,screenPageViews_current,screenPageViews_previous,screenPageViews_delta,screenPageViews_delta_pct,engagedSessions_current,engagedSessions_previous,engagedSessions_delta,engagedSessions_delta_pct
+desktop,3080,2506,574,22.91%,2667,2145,522,24.34%,4262,3593,669,18.62%,1450,1335,115,8.61%
+mobile,404,339,65,19.17%,353,295,58,19.66%,621,529,92,17.39%,183,168,15,8.93%
+tablet,18,10,8,80%,16,10,6,60%,19,15,4,26.67%,10,8,2,25%

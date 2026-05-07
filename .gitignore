@@ -3,3 +3,9 @@
 
 node_modules/
 
+# Temporary files
+tmp_*.html
+tmp_*.xml
+*.tmp
+debug_*.cjs
+.ralph-*

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PptxGenJSがかなり強い。CodexやClaudeでPowerPointを自動生成するなら有力候補です</title>
+  <style>
+    :root {
+      --bg: #f4f0e8;
+      --paper: #fffdfc;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #d6d3d1;
+      --accent: #0e7490;
+      --accent2: #e76f51;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #efe8dd 0%, #f8f4ee 100%);
+      color: var(--text);
+      font-family: "Segoe UI", "Yu Gothic UI", sans-serif;
+      line-height: 1.8;
+    }
+    main {
+      max-width: 920px;
+      margin: 40px auto 80px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 56px 64px 64px;
+      box-shadow: 0 20px 60px rgba(31, 41, 55, 0.08);
+    }
+    h1, h2, h3 { line-height: 1.3; }
+    h1 { font-size: 2.4rem; margin: 0 0 1rem; }
+    h2 {
+      margin-top: 2.8rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+      font-size: 1.6rem;
+    }
+    p, li { font-size: 1.05rem; }
+    img {
+      width: 100%;
+      height: auto;
+      margin: 1rem 0 1.2rem;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+    code {
+      padding: 0.15rem 0.4rem;
+      background: #f5f7fa;
+      border-radius: 6px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      padding: 18px 20px;
+      overflow: auto;
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 16px;
+    }
+    pre code {
+      padding: 0;
+      background: transparent;
+      color: inherit;
+    }
+    .callout {
+      margin: 1.4rem 0;
+      padding: 1rem 1.1rem;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fbfaf8;
+    }
+    .callout-label {
+      display: inline-block;
+      margin-bottom: 0.4rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fff;
+      background: var(--accent);
+    }
+    .warning .callout-label { background: #b45309; }
+    .example .callout-label { background: #7c3aed; }
+    .step .callout-label { background: #0f766e; }
+    .conclusion .callout-label { background: var(--accent2); }
+    .meta {
+      margin-bottom: 1.4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="meta">drafts\pptxgenjs-codex-claude-slides-ja.md</div>
+    <p>PptxGenJS を見ていて、これはかなり実務向きだと感じました。JavaScript から PowerPoint を組み立てられる系のライブラリはいくつかありますが、<strong>「とりあえずスライドを 1 枚作る」だけで終わらず、実際の業務資料に寄せやすい</strong>のが強いです。</p>
+<p>特に、Codex や Claude のようなコード生成系のエージェントと相性がいいです。雑な箇条書き、表データ、数値を渡して、Node.js スクリプトまで作らせれば、そのまま <code>.pptx</code> まで落とし込めます。</p>
+<section class="callout conclusion"><div class="callout-label">結論</div><p>PptxGenJS は「AI に資料の本文を書かせる」より一段進んで、「PowerPoint の構造そのものをコードで量産・再利用したい」場面でかなり強いです。</p>
+</section>
+
+<h2>何がそんなに良いのか</h2>
+<p>PptxGenJS の公式サイトでは、Node.js、React、ブラウザなど複数環境で動き、テキスト、表、図形、画像、グラフを扱えると案内されています。さらに、Slide Master、HTML テーブルからのスライド生成、ブラウザでの <code>.pptx</code> 出力まで揃っています。</p>
+<p>つまり、単なる「PowerPoint を書き出せるライブラリ」ではなく、<strong>テンプレ資料のエンジン</strong>として使いやすいです。</p>
+<section class="callout note"><div class="callout-label">ポイント</div><p>AI エージェントに任せるなら、レイアウトを自然言語で毎回説明するより、PptxGenJS のテンプレを 1 本持っておくほうが安定します。</p>
+</section>
+
+<h2>こういうスライドを自動生成しやすいです</h2>
+<p>今回の作業では、<code>pptxgenjs</code> をローカルに追加して、Codex / Claude 向けの紹介デモを Node.js から生成できる形にしました。下の画像は、そのサンプル deck の見た目を把握しやすいように置いたプレビューです。</p>
+<p><img src="file:///C:/Users/CodexSandboxOffline/.codex/.sandbox/cwd/9b737df9010c7323/images/2026/04/pptxgenjs-demo/slide-01-title.png" alt="PptxGenJS demo title slide"></p>
+<p>1 枚目はタイトルスライドです。色、余白、帯、ラベルを固定しておけば、AI に本文だけ差し替えさせる運用がしやすくなります。</p>
+<p><img src="file:///C:/Users/CodexSandboxOffline/.codex/.sandbox/cwd/9b737df9010c7323/images/2026/04/pptxgenjs-demo/slide-02-bilingual.png" alt="PptxGenJS bilingual brief slide"></p>
+<p>2 枚目は日英のバイリンガル要約です。<strong>日本語カラムと英語カラムを同時に出す</strong>ようなレイアウトは、人間が毎回整えると地味に面倒ですが、コード化すると再利用がかなり楽です。</p>
+<p><img src="file:///C:/Users/CodexSandboxOffline/.codex/.sandbox/cwd/9b737df9010c7323/images/2026/04/pptxgenjs-demo/slide-03-chart.png" alt="PptxGenJS metrics slide"></p>
+<p>3 枚目は数値サマリーです。グラフや補足カードが入ると、もう「テキストを並べるだけの自動化」ではなく、<strong>ちゃんと資料として読める形</strong>に近づきます。</p>
+<h2>Codex や Claude にやらせるなら、たしかにこれです</h2>
+<p>ここが本題です。</p>
+<p>Codex や Claude に「プレゼン資料を作って」と言うだけだと、たいていは本文や見出し案までは出せても、PowerPoint そのものの仕上がりは不安定です。ですが、PptxGenJS のテンプレと制約を先に用意しておけば、エージェント側の仕事はかなり整理できます。</p>
+<p>たとえば、次のような分担にできます。</p>
+<ol>
+<li>AI に構成案を出させる</li>
+<li>AI に各スライドの見出し、箇条書き、表データを JSON で出させる</li>
+<li>その JSON を PptxGenJS に流して <code>.pptx</code> を生成する</li>
+</ol>
+<section class="callout step"><div class="callout-label">対処</div><p>「資料の内容を考える部分」と「PowerPoint の見た目を崩さず出力する部分」を分離すると、AI エージェント運用はかなり安定します。</p>
+</section>
+
+<p>これは、週報、営業資料、経営会議メモ、進捗報告、イベントの概要資料などで特に効きます。毎回ゼロからデザインさせるより、<strong>スライド骨格をコードで固定したほうが事故が少ない</strong>からです。</p>
+<h2>公式機能を見ると、実務寄りです</h2>
+<p>PptxGenJS の公式ドキュメントを見ると、次の機能が特に実務向きです。</p>
+<ul>
+<li>テキスト、表、図形、画像、グラフの生成</li>
+<li>Slide Master による共通デザイン化</li>
+<li>HTML テーブルを複数スライドへ流し込む <code>tableToSlides()</code></li>
+<li>ブラウザでも Node.js でも <code>.pptx</code> を出力できる構成</li>
+<li>Node.js、React、Vite、Electron、Serverless での利用</li>
+</ul>
+<section class="callout example"><div class="callout-label">具体例</div><p>管理画面の一覧表や BI のテーブルを HTML で持っているなら、<code>tableToSlides()</code> を経由して PowerPoint 化する流れはかなり実用的です。</p>
+</section>
+
+<h2>実際に AI へ投げるときの依頼イメージ</h2>
+<p>エージェントに丸投げするより、入力を少し構造化したほうがうまくいきます。</p>
+<pre><code class="language-text">次の JSON から 16:9 の PowerPoint を PptxGenJS で生成してください。
+- 3 slides
+- タイトルは日本語、補足は英語
+- 色はティール系
+- Slide 2 は日英の2カラム
+- Slide 3 は棒グラフと要点カード
+- 出力は .pptx
+</code></pre>
+<p>このようにレイアウト条件まで渡しておくと、Codex でも Claude でもコード生成のブレが減ります。</p>
+<h2>注意点もあります</h2>
+<p>もちろん万能ではありません。</p>
+<section class="callout warning"><div class="callout-label">注意</div><p>PptxGenJS を入れたからといって、AI がいきなり美しい資料を毎回作るわけではありません。テンプレ、色、余白、フォント、部品サイズの基準は人間側で先に決めたほうが安定します。</p>
+</section>
+
+<p>また、図版の作り込みやアニメーション演出まで強く求めると、別の調整が必要です。ただ、<strong>定型資料を量産したい</strong>という目的なら、かなり筋が良いです。</p>
+<h2>まとめ</h2>
+<p>PptxGenJS は、PowerPoint を JavaScript で触るためのライブラリというより、<strong>AI 時代の資料テンプレ基盤</strong>として見ると価値がわかりやすいです。</p>
+<p>Codex や Claude に「資料を作らせたい」と思ったとき、本文生成だけで止めず、PptxGenJS を挟んで <code>.pptx</code> まで落とすと実務に乗せやすくなります。</p>
+<p>「AI に PowerPoint を作らせるなら何を軸にするか」で迷っているなら、かなり有力候補です。</p>
+<h2>References</h2>
+<ol>
+<li>PptxGenJS Home
+<a href="https://gitbrent.github.io/PptxGenJS/">https://gitbrent.github.io/PptxGenJS/</a></li>
+<li>PptxGenJS Introduction
+<a href="https://gitbrent.github.io/PptxGenJS/docs/introduction/">https://gitbrent.github.io/PptxGenJS/docs/introduction/</a></li>
+<li>PptxGenJS HTML to PowerPoint
+<a href="https://gitbrent.github.io/PptxGenJS/docs/html-to-powerpoint/">https://gitbrent.github.io/PptxGenJS/docs/html-to-powerpoint/</a></li>
+<li>PptxGenJS Masters and Placeholders
+<a href="https://gitbrent.github.io/PptxGenJS/docs/masters.html">https://gitbrent.github.io/PptxGenJS/docs/masters.html</a></li>
+<li>PptxGenJS Charts
+<a href="https://gitbrent.github.io/PptxGenJS/docs/api-charts.html">https://gitbrent.github.io/PptxGenJS/docs/api-charts.html</a></li>
+</ol>
+
+  </main>
+</body>
+</html>
