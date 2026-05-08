@@ -24,12 +24,16 @@ Options:
   --csv-out     Save rows to CSV
   --json        Print raw JSON
   --key-file    Service account JSON path
+  --filter-dimension  Dimension name to filter (e.g., landingPagePlusQueryString)
+  --filter-match      Filter match type: contains | exact (default: contains)
+  --filter-expressions  Comma-separated values to filter by
 
 Examples:
   npm run ga4 -- --preset overview
   npm run ga4 -- --preset landing-pages --limit 20
   npm run ga4 -- --preset acquisition --compare previous
-  npm run ga4 -- --preset events --start-date 2026-02-25 --end-date 2026-03-24 --csv-out daily/ga4-events.csv`);
+  npm run ga4 -- --preset events --start-date 2026-02-25 --end-date 2026-03-24 --csv-out daily/ga4-events.csv
+  npm run ga4 -- --preset landing-pages --filter-dimension landingPagePlusQueryString --filter-expressions /jp/calendar`);
 }
 
 function buildPreset(preset) {
@@ -92,8 +96,8 @@ function buildPreset(preset) {
   }
 }
 
-function buildBody({ dimensions, metrics, startDate, endDate, limit, orderBys }) {
-  return {
+function buildBody({ dimensions, metrics, startDate, endDate, limit, orderBys, dimensionFilter }) {
+  const body = {
     dimensions: dimensions.map((name) => ({ name })),
     metrics: metrics.map((name) => ({ name })),
     dateRanges: [
@@ -105,6 +109,46 @@ function buildBody({ dimensions, metrics, startDate, endDate, limit, orderBys })
     limit,
     keepEmptyRows: false,
     orderBys,
+  };
+  if (dimensionFilter) {
+    body.dimensionFilter = dimensionFilter;
+  }
+  return body;
+}
+
+function buildDimensionFilter(filterDimension, filterMatch, filterExpressions) {
+  if (!filterDimension || !filterExpressions) return undefined;
+  const expressions = filterExpressions.split(',').map((e) => e.trim()).filter(Boolean);
+  if (!expressions.length) return undefined;
+
+  const filterType = filterMatch === 'exact' ? 'exact' : 'contains';
+  const matchType = filterType === 'exact' ? 'EXACT' : 'CONTAINS';
+
+  if (expressions.length === 1) {
+    return {
+      filter: {
+        fieldName: filterDimension,
+        stringFilter: {
+          matchType,
+          value: expressions[0],
+        },
+      },
+    };
+  }
+
+  // Multiple expressions -> OR group
+  return {
+    orGroup: {
+      expressions: expressions.map((value) => ({
+        filter: {
+          fieldName: filterDimension,
+          stringFilter: {
+            matchType,
+            value,
+          },
+        },
+      })),
+    },
   };
 }
 
