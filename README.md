@@ -9,8 +9,10 @@ CLI 経由で記事の作成・校正・画像処理・WordPress 投稿を行う
 
 ## ワークフロー（概要）
 1. メタデータ同期: `node src/index.js sync`（カテゴリ/タグのローカル更新）
-2. 下書き作成: `drafts/` に Markdown を作成（Frontmatter ルールは `PIPELINE_MANUAL.md`）
-3. 投稿/更新: `node src/index.js post drafts/xxx.md`
+2. 下書き作成: 原則として `drafts/` に日本語版と英語版を別ファイルで作成（Frontmatter ルールは `PIPELINE_MANUAL.md`）
+3. 投稿/更新:
+   - 日英同時投稿: `node src/index.js post-pair drafts/article-jp.md`
+   - 単独投稿が必要なときだけ: `node src/index.js post drafts/article-jp.md`
 
 ## ディレクトリ構成
 ```
@@ -41,6 +43,7 @@ zidooka-writing/
 
 ## コマンド（主要）
 - カテゴリ/タグ同期: `node src/index.js sync`
+- 日英同時投稿: `node src/index.js post-pair drafts/article-jp.md`
 - 投稿: `node src/index.js post drafts/article.md`
 - GA4 レポート: `npm run ga4 -- --preset overview`
 - GSC クエリ: `npm run gsc -- --site=https://www.zidooka.com/ --preset top-queries --start-date=2026-02-25 --end-date=2026-03-23`

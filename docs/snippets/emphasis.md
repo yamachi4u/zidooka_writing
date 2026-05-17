@@ -1,28 +1,33 @@
 # Emphasis Snippets
 
-Use these standardized patterns for strong, consistent emphasis in articles, notes, and answers. Keep each emphasis line concise (ideally one sentence).
+Use Zidooka blocks for strong, consistent emphasis in articles, notes, and answers.
 
-## One-Line Emphasis
-- 【結論】要点を一行で端的に述べる。
-- 【ポイント】読者がまず押さえるべき要点。
-- 【注意】誤りやすい点、落とし穴の明示。
-- 【対処】実行可能な対処・コマンド・設定名を具体的に。
-
-Rules:
-- Use full-width brackets and bold labels as written above; do not add emojis.
-- Keep the emphasized statement on a single line. Provide details in the following paragraph if needed.
-- For commands/identifiers, wrap with backticks like: `npm run build` or `GAS Logger.log`.
-
-## Short Block Emphasis (when one line is insufficient)
-> 【結論】一文目で主旨を言い切る。
-> 次行以降で補足（最大 2–3 行）。
+## Supported Blocks
+- `:::conclusion` — 結論・まとめ
+- `:::note` — 補足・メモ・ポイント
+- `:::warning` — 注意・警告
+- `:::step` — 手順・ステップ・対処
+- `:::example` — 具体例
 
 Rules:
-- Use a normal Markdown blockquote (`>`). Avoid special admonition syntaxes that may not render in all environments.
-- Keep it short (max 3 lines). Longer guidance should go into normal sections.
+- Do not use bracket labels such as `【結論】`, `【ポイント】`, `【注意】`, or `【対処】`.
+- Keep each block concise whenever possible.
+- For commands and identifiers, wrap them with backticks such as `npm run build` or `GAS Logger.log`.
+- Do not repeat the block role inside the block body; the block type already communicates it.
 
 ## Examples
-- 【結論】`PIPELINE_MANUAL.md` の「下書き→校正→公開」手順に必ず従う。
-- 【注意】WordPress への貼り付け時は Markdown の生 URL を保持する。
-- 【対処】`series_data.cjs` を更新後、`npm run generate:series` を実行する。
+
+```markdown
+:::conclusion
+`PIPELINE_MANUAL.md` の「下書き→校正→公開」手順に従います。
+:::
+
+:::warning
+WordPress への貼り付け時は、生 URL を日本語文の直前に置かないようにします。
+:::
+
+:::step
+`series_data.cjs` を更新後、`npm run generate:series` を実行します。
+:::
+```
 

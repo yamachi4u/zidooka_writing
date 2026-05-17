@@ -224,7 +224,7 @@ export class PostService {
     // 3. Resolve Metadata
     const metadata = await this.loadMetadata();
     const categoryIds = this.resolveCategories(frontmatter.categories, metadata.categories);
-    const tagIds = await this.resolveTags(frontmatter.tags, metadata.tags);
+    const tagIds = await this.resolveTags(frontmatter.tags, metadata);
 
     // 4. Handle Featured Image
     let featuredMediaId = null;
@@ -354,9 +354,16 @@ export class PostService {
     return ids;
   }
 
-  async resolveTags(names, metadataList) {
+  async saveMetadata(metadata) {
+    await fs.mkdir(path.dirname(config.paths.metadata), { recursive: true });
+    await fs.writeFile(config.paths.metadata, JSON.stringify(metadata, null, 2));
+  }
+
+  async resolveTags(names, metadata) {
     if (!names || !Array.isArray(names)) return [];
+    const metadataList = metadata.tags;
     const ids = [];
+    let metadataChanged = false;
     for (const name of names) {
       const nameStr = String(name);
       const found = metadataList.find(m => String(m.name).toLowerCase() === nameStr.toLowerCase() || String(m.slug).toLowerCase() === nameStr.toLowerCase());
@@ -365,8 +372,14 @@ export class PostService {
       } else {
         console.log(`Tag '${name}' not found. Creating...`);
         const newTag = await this.wp.createTag(nameStr);
+        metadataList.push({ id: newTag.id, name: newTag.name, slug: newTag.slug });
+        metadataChanged = true;
         ids.push(newTag.id);
       }
+    }
+    if (metadataChanged) {
+      metadata.lastUpdated = new Date().toISOString();
+      await this.saveMetadata(metadata);
     }
     return ids;
   }
