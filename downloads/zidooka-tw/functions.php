@@ -1233,12 +1233,12 @@ function zenn_get_related_posts($is_english_only = false) {
 // --- GAS script distribution (Custom Post Type) ---
 // Publish small, reusable Google Apps Script snippets and drive consulting leads.
 
-const ZDK_GAS_POST_TYPE = 'gas_script';
-const ZDK_GAS_META_VERSION = '_zdk_gas_version';
-const ZDK_GAS_META_FILENAME = '_zdk_gas_filename';
-const ZDK_GAS_META_CODE = '_zdk_gas_code';
-const ZDK_GAS_META_BUNDLE = '_zdk_gas_bundle';
-const ZDK_GAS_QV_DOWNLOAD = 'zdk_gas_download';
+define('ZDK_GAS_POST_TYPE', 'gas_script');
+define('ZDK_GAS_META_VERSION', '_zdk_gas_version');
+define('ZDK_GAS_META_FILENAME', '_zdk_gas_filename');
+define('ZDK_GAS_META_CODE', '_zdk_gas_code');
+define('ZDK_GAS_META_BUNDLE', '_zdk_gas_bundle');
+define('ZDK_GAS_QV_DOWNLOAD', 'zdk_gas_download');
 
 function zdk_gas_normalize_newlines($text) {
     if (!is_string($text) || $text === '') return '';
