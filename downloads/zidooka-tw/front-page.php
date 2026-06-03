@@ -247,7 +247,18 @@ get_header();
             $query = new WP_Query($args);
             if ($query->have_posts()) : ?>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <?php while ($query->have_posts()) : $query->the_post(); ?>
+                    <?php $post_count = 0; while ($query->have_posts()) : $query->the_post(); $post_count++; ?>
+                        <?php if ($post_count === 3) : ?>
+                        <div class="flex col-span-1 md:col-span-2 justify-center">
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-format="fluid"
+                                 data-ad-layout-key="-66+c1+y-11+h7"
+                                 data-ad-client="ca-pub-5002038850592836"
+                                 data-ad-slot="1657762831"></ins>
+                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                        </div>
+                        <?php endif; ?>
                         <div class="flex">
                             <article id="post-<?php the_ID(); ?>" <?php post_class('post-card w-100'); ?>>
                                 <div class="post-thumbnail">
@@ -404,8 +415,8 @@ get_header();
                             echo '<i class="fas fa-chevron-right toggle-icon mr-2 text-gray-500 text-[0.7rem]"></i>';
                             echo '<a href="' . get_category_link($parent->term_id) . '" class="footer-link flex items-center text-gray-900 grow" onclick="event.stopPropagation()">';
                             echo '<i class="fas fa-folder mr-2 text-blue-600 text-[0.8rem]"></i>';
-                            echo $parent->name;
-                            echo '<span class="ml-auto inline-flex items-center rounded-full bg-gray-100 text-gray-900 text-xs px-2 py-0.5">' . $parent->count . '</span>';
+                            echo esc_html($parent->name);
+                            echo '<span class="ml-auto inline-flex items-center rounded-full bg-gray-100 text-gray-900 text-xs px-2 py-0.5">' . esc_html($parent->count) . '</span>';
                             echo '</a>';
                             echo '</div>';
                             
@@ -413,7 +424,7 @@ get_header();
                             foreach($child_categories as $child) {
                                 echo '<li class="mb-1"><a href="' . get_category_link($child->term_id) . '" class="footer-link flex items-center text-gray-900 text-[0.9rem]">';
                                 echo '<i class="fas fa-chevron-right mr-2 text-gray-500 text-[0.6rem]"></i>';
-                                echo $child->name;
+                                echo esc_html($child->name);
                                 echo '<span class="ml-auto inline-flex items-center rounded-full bg-gray-100 text-gray-900 text-[0.7rem] px-2 py-0.5">' . $child->count . '</span>';
                                 echo '</a></li>';
                             }
@@ -421,7 +432,7 @@ get_header();
                         } else {
                             echo '<a href="' . get_category_link($parent->term_id) . '" class="footer-link flex items-center text-gray-900">';
                             echo '<i class="fas fa-folder mr-2 text-blue-600 text-[0.8rem]"></i>';
-                            echo $parent->name;
+                            echo esc_html($parent->name);
                             echo '<span class="ml-auto inline-flex items-center rounded-full bg-gray-100 text-gray-900 text-xs px-2 py-0.5">' . $parent->count . '</span>';
                             echo '</a>';
                         }

@@ -128,7 +128,9 @@ add_action('wp_head', function(){
     ?>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    var attempts = 0;
     var poll = setInterval(function () {
+        if (++attempts > 20) { clearInterval(poll); return; }
         var ads = document.querySelectorAll('ins.adsbygoogle[data-ad-status="filled"]');
         if (ads.length === 0) return;
         clearInterval(poll);
@@ -239,9 +241,6 @@ add_action('wp_head', function(){
     }
     // Default to previous client from base theme if not overridden
     if (!$client) $client = 'ca-pub-5002038850592836';
-    if (!$client) {
-        $client = 'ca-pub-5002038850592836';
-    }
     $client = apply_filters('zidooka_adsense_client', $client);
     if (!$client) return;
 
@@ -751,7 +750,7 @@ add_action( 'edit_user_profile_update', 'save_english_bio_field' );
 function save_english_bio_field( $user_id ) {
     if ( !current_user_can( 'edit_user', $user_id ) )
         return false;
-    update_user_meta( $user_id, 'description_en', $_POST['description_en'] );
+    update_user_meta( $user_id, 'description_en', isset($_POST['description_en']) ? $_POST['description_en'] : '' );
 }
 
 // ZIDOOKA!：xserverタグ付き投稿にA8バナー挿入

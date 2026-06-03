@@ -5,11 +5,49 @@
  * @package ZennLike
  */
 
+/**
+ * Determine if the post title is English-only
+ */
+function zenn_is_english_only($title) {
+    return !preg_match('/[\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{4E00}-\x{9FAF}]/u', $title);
+}
+
+/**
+ * Get smart adjacent post (prioritize same language)
+ */
+function zenn_get_smart_adjacent_post($previous, $is_english_only) {
+    $current_date = get_post_field('post_date', get_the_ID());
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => 10,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => $previous ? 'DESC' : 'ASC',
+        'date_query' => array(
+            array(
+                $previous ? 'before' : 'after' => $current_date,
+                'inclusive' => false,
+            ),
+        ),
+        'post__not_in' => array(get_the_ID()),
+    );
+
+    $candidates = get_posts($args);
+    if (empty($candidates)) return null;
+
+    foreach ($candidates as $p) {
+        $is_p_english = zenn_is_english_only($p->post_title);
+        if ($is_p_english === $is_english_only) {
+            return $p;
+        }
+    }
+
+    return $candidates[0];
+}
+
 get_header(); ?>
 
 
-
-<!-- wp:social-links --><ul class="wp-block-social-links"><!-- wp:social-link {"url":"https://gravatar.com/testnewstsukuba","service":"gravatar","rel":"me"} /--></ul><!-- /wp:social-links -->
 
 <!-- スタイルは style.css に移動しました -->
 
@@ -56,7 +94,7 @@ get_header(); ?>
                 'toc_title' => 'Table of Contents',
                 'no_toc' => 'No table of contents',
                 'sidebar_about_title' => 'About Zidooka',
-                'sidebar_about_body' => '“Zidooka” means automation in Japanese. We share practical automation solutions and real-world workflows. If you need help, we also accept consulting or implementation work.',
+                'sidebar_about_body' => 'Zidooka is run by a freelance engineer in their 20s based in Kyoto, Japan. Small requests are welcome.',
                 'sidebar_reco_title' => 'Recommended',
                 'bio_title' => 'Need help with the content of this article?',
                 'bio_desc' => 'I provide individual technical support related to the issues described in this article, as a freelance developer.<br>If the problem is blocking your work or internal tasks, feel free to reach out.',
@@ -88,7 +126,7 @@ get_header(); ?>
                 'toc_title' => '目次',
                 'no_toc' => '目次はありません',
                 'sidebar_about_title' => 'Zidookaについて',
-                'sidebar_about_body' => 'Zidookaは実務で使える自動化ソリューションや運用の工夫を実務者目線で共有するウェブサイトです。必要であれば、下記のフォーム・メールから個別相談・受託も可能です。フリーランスエンジニアとしても活動しております。',
+                'sidebar_about_body' => 'Zidookaは20代のフリーランスエンジニア（関西在住）が運営しています。業務の自動化やHP制作のご相談も、小さなことから気軽にどうぞ。',
                 'sidebar_reco_title' => 'おすすめの記事',
                 'bio_title' => 'この記事の内容について、対応できます',
                 'bio_desc' => 'ZIDOOKA!では、この記事で扱っている内容に関連する技術トラブルや開発上の問題について、フリーランスとして個別対応を行っています。<br>「調べても解決しない」「業務で詰まっている」「社内で対応が難しい」といった場合にご相談ください。',
@@ -115,9 +153,11 @@ get_header(); ?>
               "@context": "https://schema.org",
               "@type": "Article",
               "headline": <?php echo json_encode(get_the_title()); ?>,
+              <?php if (has_post_thumbnail()): ?>
               "image": [
-                "<?php echo has_post_thumbnail() ? get_the_post_thumbnail_url(null, 'large') : ''; ?>"
+                "<?php echo get_the_post_thumbnail_url(null, 'large'); ?>"
                ],
+              <?php endif; ?>
               "datePublished": "<?php echo get_the_date('c'); ?>",
               "dateModified": "<?php echo get_the_modified_date('c'); ?>",
               "author": [{
@@ -177,6 +217,17 @@ get_header(); ?>
             <!-- Article Header -->
             <article class="zenn-article">
                 <header class="zenn-article-header mb-6">
+                    <!-- ディスプレイ広告（タイトル直上） -->
+                    <div class="mb-6" style="max-width:100%;overflow:hidden;">
+                        <ins class="adsbygoogle"
+                             style="display:block;max-width:100%;overflow:hidden;"
+                             data-ad-client="ca-pub-5002038850592836"
+                             data-ad-slot="2410921395"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+
                     <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight tracking-tight mb-4"><?php the_title(); ?></h1>
 
                     <div class="text-sm text-slate-500 leading-relaxed mb-4">
@@ -238,7 +289,7 @@ get_header(); ?>
                             $tags = get_the_tags();
                             if ($tags) {
                                 foreach ($tags as $tag) {
-                                    echo '<a href="' . get_tag_link($tag->term_id) . '" class="inline-flex items-center px-3 py-1 text-sm rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors no-underline">#' . $tag->name . '</a>';
+                                    echo '<a href="' . get_tag_link($tag->term_id) . '" class="inline-flex items-center px-3 py-1 text-sm rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors no-underline">#' . esc_html($tag->name) . '</a>';
                                 }
                             }
                             ?>
@@ -325,13 +376,119 @@ get_header(); ?>
                 </footer>
             </article>
 
+            <!-- Author Bio -->
+            <section class="zenn-author-section mt-10 pt-8 border-t border-slate-200">
+                <div class="zenn-author-card">
+                    <div class="zenn-author-info-large">
+                        <h3 class="zenn-author-name-large text-base font-bold text-slate-800 mb-3">
+                            <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" class="hover:text-indigo-600 transition-colors no-underline">
+                                <?php the_author(); ?>
+                            </a>
+                        </h3>
+                        <div class="zenn-author-bio">
+                            <div class="zenn-bio-content">
+                                <p class="zenn-bio-title text-sm font-semibold text-slate-700 mb-1"><?php echo esc_html($ui_text['bio_title']); ?></p>
+                                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                                    <?php echo $ui_text['bio_desc']; ?>
+                                </p>
+
+                                <p class="bio-price text-sm text-slate-700 mb-4">
+                                    <span class="font-semibold text-indigo-700"><?php echo esc_html($ui_text['bio_price']); ?></span>
+                                    <span class="text-slate-500"> <?php echo esc_html($ui_text['bio_price_note']); ?></span>
+                                </p>
+
+                                <div class="zenn-bio-actions flex flex-wrap gap-3">
+                                    <a href="<?php echo esc_url($form_url); ?>" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors no-underline">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                        <?php echo esc_html($ui_text['bio_btn_form']); ?>
+                                    </a>
+                                    <a href="mailto:main@zidooka.com" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 border border-slate-300 rounded-lg hover:border-indigo-400 hover:text-indigo-600 transition-colors no-underline">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                        <?php echo esc_html($ui_text['bio_btn_mail']); ?>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <nav class="zenn-post-navigation flex flex-col sm:flex-row gap-4 mt-10 pt-8 border-t border-slate-200">
+                <?php
+                $prev_post = zenn_get_smart_adjacent_post(true, $is_english_only);
+                $next_post = zenn_get_smart_adjacent_post(false, $is_english_only);
+                ?>
+
+                <?php if ($prev_post) : ?>
+                    <a href="<?php echo get_permalink($prev_post->ID); ?>" class="zenn-nav-prev flex-1 group no-underline" rel="prev">
+                        <div class="zenn-nav-direction text-xs text-slate-400 mb-1"><?php echo esc_html($ui_text['prev_direction']); ?></div>
+                        <div class="zenn-nav-title text-sm text-slate-700 group-hover:text-indigo-600 transition-colors line-clamp-2"><?php echo get_the_title($prev_post->ID); ?></div>
+                    </a>
+                <?php else: ?>
+                    <div class="flex-1"></div>
+                <?php endif; ?>
+
+                <?php if ($next_post) : ?>
+                    <a href="<?php echo get_permalink($next_post->ID); ?>" class="zenn-nav-next flex-1 text-right group no-underline" rel="next">
+                        <div class="zenn-nav-direction text-xs text-slate-400 mb-1"><?php echo esc_html($ui_text['next_direction']); ?></div>
+                        <div class="zenn-nav-title text-sm text-slate-700 group-hover:text-indigo-600 transition-colors line-clamp-2"><?php echo get_the_title($next_post->ID); ?></div>
+                    </a>
+                <?php endif; ?>
+            </nav>
+
+            <!-- Next Read -->
+            <?php
+            $next_read_posts = zenn_get_related_posts($is_english_only);
+            if (!empty($next_read_posts)) :
+                $next_read = $next_read_posts[0];
+            ?>
+                <div class="zenn-next-read bg-indigo-50 border-l-4 border-indigo-500 px-5 py-4 mt-10 mb-8">
+                    <div class="zenn-next-read-label text-xs font-bold text-indigo-600 uppercase tracking-wide mb-1"><?php echo esc_html($ui_text['next_read_label']); ?></div>
+                    <a href="<?php echo get_permalink($next_read->ID); ?>" class="zenn-next-read-link text-base font-medium text-slate-900 hover:text-indigo-600 transition-colors no-underline">
+                        <?php echo get_the_title($next_read->ID); ?>
+                    </a>
+                </div>
+            <?php endif; ?>
+
+            <!-- AI Policy -->
+            <div class="zenn-ai-policy mt-12 pt-6 border-t border-slate-100">
+                <div class="border-l-2 border-indigo-200 pl-4 py-2">
+                    <p class="text-xs font-semibold text-indigo-600 mb-1"><?php echo esc_html($ui_text['ai_policy_title']); ?></p>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        <?php echo esc_html($ui_text['ai_policy_text']); ?>
+                    </p>
+                </div>
+            </div>
+
             <?php
             $related_posts = zenn_get_related_posts($is_english_only);
             ?>
 
+            <?php if (!empty($related_posts)) : ?>
+            <section class="mt-10" style="max-width:72ch;">
+                <h2 class="text-lg font-bold text-slate-800 mb-4"><?php echo $is_english_only ? 'Related Posts' : '関連記事'; ?></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <?php foreach ($related_posts as $rp) : ?>
+                        <a href="<?php echo get_permalink($rp->ID); ?>" class="flex gap-3 rounded-xl border border-slate-200 bg-white p-3 no-underline transition hover:shadow-md hover:-translate-y-0.5">
+                            <?php if (has_post_thumbnail($rp->ID)) : ?>
+                                <div class="w-20 h-20 shrink-0 overflow-hidden rounded-lg bg-slate-100">
+                                    <?php echo get_the_post_thumbnail($rp->ID, 'thumbnail', ['class' => 'w-full h-full object-cover', 'loading' => 'lazy']); ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="min-w-0">
+                                <span class="block text-sm font-semibold text-slate-800 leading-snug line-clamp-2"><?php echo get_the_title($rp->ID); ?></span>
+                                <span class="block mt-1 text-xs text-slate-500"><?php echo get_the_date('Y.m.d', $rp->ID); ?></span>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+            <?php endif; ?>
+
             <!-- Comments -->
             <?php if (comments_open() || get_comments_number()) : ?>
-                <section class="zenn-comments-section">
+                <section class="zenn-comments-section" style="max-width:72ch;margin-left:0;">
                     <?php comments_template(); ?>
                 </section>
             <?php endif; ?>
@@ -378,16 +535,27 @@ get_header(); ?>
     </aside>
 
     <aside class="zenn-sidebar-column hidden lg:block">
-        <div class="sticky top-6">
-            <div class="space-y-5 max-h-[calc(100vh-48px)] overflow-y-auto">
+        <div class="zenn-sidebar-sticky">
+            <div class="zenn-sidebar-inner">
             <div class="bg-slate-50 rounded-xl p-4">
-                <h4 class="text-sm font-bold text-slate-800 mb-2 pb-2 border-b border-slate-200"><?php echo esc_html($ui_text['sidebar_about_title']); ?></h4>
-                <p class="text-sm text-slate-600 leading-relaxed mb-3"><?php echo esc_html($ui_text['sidebar_about_body']); ?></p>
+                <div class="mb-2 flex items-center gap-3">
+                    <img
+                        src="<?php echo esc_url('https://www.zidooka.com/wp-content/uploads/2026/02/a32feb566c4b1ba32701232567d017f7.png'); ?>"
+                        alt="Zidooka"
+                        class="w-9 h-9 rounded-full object-cover border border-slate-200"
+                        loading="lazy"
+                        decoding="async"
+                    />
+                    <div class="text-sm font-semibold text-slate-700">Zidooka</div>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed mb-3"><?php echo esc_html($ui_text['sidebar_about_body']); ?></p>
                 <div class="space-y-2">
-                    <a class="block w-full text-center px-3 py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors no-underline" href="<?php echo esc_url($form_url); ?>" target="_blank" rel="noopener">
+                    <a class="inline-flex items-center justify-center gap-2 w-full px-3 py-2 text-sm font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors no-underline" href="<?php echo esc_url($form_url); ?>" target="_blank" rel="noopener">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                         <?php echo esc_html($ui_text['bio_btn_form']); ?>
                     </a>
-                    <a class="block w-full text-center px-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-colors no-underline" href="mailto:main@zidooka.com">
+                    <a class="inline-flex items-center justify-center gap-2 w-full px-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-colors no-underline" href="mailto:main@zidooka.com">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                         <?php echo esc_html($ui_text['bio_btn_mail']); ?>
                     </a>
                 </div>
@@ -404,7 +572,6 @@ get_header(); ?>
                 </div>
             <?php endif; ?>
 
-            <!-- Buy Me a Coffee -->
             <div class="pt-3 border-t border-slate-200">
                 <a href="https://buymeacoffee.com/zidooka" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-indigo-600 transition-colors no-underline">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -548,6 +715,11 @@ get_header(); ?>
     margin: 1rem 0;
     color: #475569;
 }
+.zenn-left-sticky { position: sticky; top: 96px; }
+.zenn-sidebar-sticky { position: sticky; top: 96px; }
+.zenn-sidebar-inner { max-height: none; overflow: visible; }
+body.admin-bar .zenn-sidebar-sticky { top: 128px; }
+body.admin-bar .zenn-left-sticky { top: 128px; }
 .zenn-content code {
     background: #f1f5f9;
     border-radius: 4px;
@@ -660,13 +832,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const headings = content.querySelectorAll('h2, h3');
     
-    // Debug log
-    console.log('TOC Generation: Found ' + headings.length + ' headings');
-
     // Show TOC if there are at least 2 headings (H2 or H3)
     // Relaxed condition: 1 H2 + H3s is also a valid structure for TOC
     if (headings.length < 2) {
-        console.log('TOC Generation: Skipped (fewer than 2 headings)');
         return;
     }
     
