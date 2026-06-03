@@ -49,14 +49,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Copy to clipboard
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function() {
+// Copy to clipboard (via data-url attribute)
+document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.zenn-copy-btn');
+    if (!btn || !btn.dataset.url) return;
+    navigator.clipboard.writeText(btn.dataset.url).then(function() {
         alert(window.zdkUiText?.copySuccess || 'Copied!');
     }, function() {
         alert(window.zdkUiText?.copyFail || 'Copy failed');
     });
-}
+});
 
 // Like button
 document.addEventListener('DOMContentLoaded', function() {

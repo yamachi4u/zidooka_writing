@@ -1167,6 +1167,42 @@ function zidooka_category_list_shortcode($atts) {
 }
 add_shortcode('zidooka_cat_list', 'zidooka_category_list_shortcode');
 
+// Language detection for posts
+function zenn_is_english_only($title) {
+    return !preg_match('/[\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{4E00}-\x{9FAF}]/u', $title);
+}
+
+// Smart adjacent post (prioritize same language)
+function zenn_get_smart_adjacent_post($previous, $is_english_only) {
+    $current_date = get_post_field('post_date', get_the_ID());
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => 10,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => $previous ? 'DESC' : 'ASC',
+        'date_query' => array(
+            array(
+                $previous ? 'before' : 'after' => $current_date,
+                'inclusive' => false,
+            ),
+        ),
+        'post__not_in' => array(get_the_ID()),
+    );
+
+    $candidates = get_posts($args);
+    if (empty($candidates)) return null;
+
+    foreach ($candidates as $p) {
+        $is_p_english = zenn_is_english_only($p->post_title);
+        if ($is_p_english === $is_english_only) {
+            return $p;
+        }
+    }
+
+    return $candidates[0];
+}
+
 // 2.4) Fallback meta description for front page, 404, search, archive
 add_action('wp_head', function(){
     if (function_exists('aioseo') || function_exists('wpseo_head') || defined('RANK_MATH_VERSION')) return;

@@ -1,50 +1,7 @@
 <?php
 /**
- * Zenn-like Single Post Template
- * 
- * @package ZennLike
+ * Single Post Template
  */
-
-/**
- * Determine if the post title is English-only
- */
-function zenn_is_english_only($title) {
-    return !preg_match('/[\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{4E00}-\x{9FAF}]/u', $title);
-}
-
-/**
- * Get smart adjacent post (prioritize same language)
- */
-function zenn_get_smart_adjacent_post($previous, $is_english_only) {
-    $current_date = get_post_field('post_date', get_the_ID());
-    $args = array(
-        'post_type' => 'post',
-        'posts_per_page' => 10,
-        'post_status' => 'publish',
-        'orderby' => 'date',
-        'order' => $previous ? 'DESC' : 'ASC',
-        'date_query' => array(
-            array(
-                $previous ? 'before' : 'after' => $current_date,
-                'inclusive' => false,
-            ),
-        ),
-        'post__not_in' => array(get_the_ID()),
-    );
-
-    $candidates = get_posts($args);
-    if (empty($candidates)) return null;
-
-    foreach ($candidates as $p) {
-        $is_p_english = zenn_is_english_only($p->post_title);
-        if ($is_p_english === $is_english_only) {
-            return $p;
-        }
-    }
-
-    return $candidates[0];
-}
-
 get_header(); ?>
 
 
@@ -303,7 +260,7 @@ get_header(); ?>
                     // Featured Image
                     if (has_post_thumbnail()) : ?>
                         <div class="zenn-featured-image">
-                            <?php the_post_thumbnail('large', array('class' => 'zenn-thumbnail')); ?>
+                            <?php the_post_thumbnail('large', array('class' => 'zenn-thumbnail', 'loading' => 'eager', 'fetchpriority' => 'high')); ?>
                         </div>
                     <?php endif; ?>
                     
@@ -340,12 +297,12 @@ get_header(); ?>
                         
                         <!-- Share Section -->
                         <div class="flex flex-wrap justify-center gap-2">
-                            <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink() . '?utm_source=twitter&utm_medium=social&utm_campaign=zidooka_share'); ?>&text=<?php echo urlencode(get_the_title()); ?>" 
+                            <a href="https://x.com/intent/post?url=<?php echo urlencode(get_permalink() . '?utm_source=x&utm_medium=social&utm_campaign=zidooka_share'); ?>&text=<?php echo urlencode(get_the_title()); ?>" 
                                class="inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors no-underline" target="_blank" rel="noopener">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                                 </svg>
-                                <span class="hidden sm:inline">Twitter</span>
+                                <span class="hidden sm:inline">X</span>
                             </a>
                             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink() . '?utm_source=facebook&utm_medium=social&utm_campaign=zidooka_share'); ?>" 
                                class="inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors no-underline" target="_blank" rel="noopener">
@@ -354,7 +311,7 @@ get_header(); ?>
                                 </svg>
                                 <span class="hidden sm:inline">Facebook</span>
                             </a>
-                            <button class="inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors" onclick="copyToClipboard('<?php echo get_permalink() . '?utm_source=copy&utm_medium=social&utm_campaign=zidooka_share'; ?>')">
+                            <button class="zenn-copy-btn inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors" data-url="<?php echo esc_url(get_permalink() . '?utm_source=copy&utm_medium=social&utm_campaign=zidooka_share'); ?>">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                     <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
@@ -402,7 +359,7 @@ get_header(); ?>
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                                         <?php echo esc_html($ui_text['bio_btn_form']); ?>
                                     </a>
-                                    <a href="mailto:main@zidooka.com" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 border border-slate-300 rounded-lg hover:border-indigo-400 hover:text-indigo-600 transition-colors no-underline">
+                                    <a href="https://www.zidooka.com/contact" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 border border-slate-300 rounded-lg hover:border-indigo-400 hover:text-indigo-600 transition-colors no-underline">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                                         <?php echo esc_html($ui_text['bio_btn_mail']); ?>
                                     </a>
@@ -509,9 +466,9 @@ get_header(); ?>
                     </svg>
                     <span class="zenn-like-count text-xs font-semibold"><?php echo (int)get_post_meta($post_id, '_post_like_count', true); ?></span>
                 </button>
-                <a class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink($post_id) . '?utm_source=twitter&utm_medium=social&utm_campaign=zidooka_share'); ?>&text=<?php echo urlencode(get_the_title($post_id)); ?>" target="_blank" rel="noopener" aria-label="Share on Twitter">
+                <a class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" href="https://x.com/intent/post?url=<?php echo urlencode(get_permalink($post_id) . '?utm_source=x&utm_medium=social&utm_campaign=zidooka_share'); ?>&text=<?php echo urlencode(get_the_title($post_id)); ?>" target="_blank" rel="noopener" aria-label="Share on X">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                 </a>
                 <a class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink($post_id) . '?utm_source=facebook&utm_medium=social&utm_campaign=zidooka_share'); ?>" target="_blank" rel="noopener" aria-label="Share on Facebook">
@@ -519,7 +476,7 @@ get_header(); ?>
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                 </a>
-                <button class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" onclick="copyToClipboard('<?php echo get_permalink($post_id) . '?utm_source=copy&utm_medium=social&utm_campaign=zidooka_share'; ?>')" aria-label="<?php echo esc_attr($ui_text['copy_link']); ?>">
+                <button class="zenn-copy-btn inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-slate-600" data-url="<?php echo esc_url(get_permalink($post_id) . '?utm_source=copy&utm_medium=social&utm_campaign=zidooka_share'); ?>" aria-label="<?php echo esc_attr($ui_text['copy_link']); ?>">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                         <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
@@ -554,7 +511,7 @@ get_header(); ?>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                         <?php echo esc_html($ui_text['bio_btn_form']); ?>
                     </a>
-                    <a class="inline-flex items-center justify-center gap-2 w-full px-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-colors no-underline" href="mailto:main@zidooka.com">
+                    <a class="inline-flex items-center justify-center gap-2 w-full px-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-colors no-underline" href="https://www.zidooka.com/contact">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                         <?php echo esc_html($ui_text['bio_btn_mail']); ?>
                     </a>
