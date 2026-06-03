@@ -19,6 +19,18 @@
 
 */
 
+// Production safeguard: third-party plugins can emit PHP 8.x deprecated/warning output
+// during admin bootstrap, which then breaks headers. Keep debug visibility when WP_DEBUG
+// is enabled, but suppress on normal runtime so wp-admin remains usable.
+if (PHP_SAPI !== 'cli' && (!defined('WP_DEBUG') || !WP_DEBUG)) {
+    @ini_set('display_errors', '0');
+    @ini_set('display_startup_errors', '0');
+    $current_error_reporting = error_reporting();
+    if ($current_error_reporting) {
+        error_reporting($current_error_reporting & ~E_DEPRECATED & ~E_USER_DEPRECATED & ~E_WARNING & ~E_USER_WARNING);
+    }
+}
+
 // Dequeue Bootstrap from parent if registered (harmless if not present)
 add_action( 'wp_print_scripts', function(){
     wp_dequeue_script( 'bootstrap5' );
@@ -38,6 +50,16 @@ add_action( 'wp_enqueue_scripts', function() {
     $style_path = get_stylesheet_directory() . '/style.css';
     $ver = file_exists( $style_path ) ? filemtime( $style_path ) : null;
     wp_enqueue_style( 'theme-style', get_stylesheet_uri(), array(), $ver );
+
+    // A/B experiment CSS
+    $exp_css = '
+        .exp-font-large { font-size: 20px; }
+        .exp-line-loose { line-height: 1.9; }
+        .exp-toc-sticky { position: sticky; top: 1rem; }
+        .exp-related-grid4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .exp-ad-early .zidooka-xserver-ad:first-of-type { display: none; }
+    ';
+    wp_add_inline_style('theme-style', $exp_css);
 }, 101);
 
 // Register menu locations used by header.php
@@ -73,6 +95,55 @@ add_action('wp_head', function(){
     echo "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '" . esc_js($ga4_id) . "');\n";
     echo "</script>\n";
 }, 30);
+
+// PostHog feature flags & analytics injection
+// Configure via:
+// - define('POSTHOG_KEY', 'phc_xxxxx') in wp-config.php, or
+// - add_filter('zidooka_posthog_key', fn(){ return 'phc_xxxxx'; });
+// Requires 'person_profiles: identified_only' for GDPR compliance.
+add_action('wp_head', function(){
+    $key = '';
+    if (defined('POSTHOG_KEY')) {
+        $key = constant('POSTHOG_KEY');
+    }
+    $key = apply_filters('zidooka_posthog_key', $key);
+    if (!$key) return;
+    ?>
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Di ji init en nn Ar tn an Yi capture calculateEventProperties dn register register_once register_for_session unregister unregister_for_session gn getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync mn identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty fn hn createPersonProfile setInternalOrTestUser pn Ji opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing un debug $r vn getPageViewId captureTraceFeedback captureTraceMetric Zi".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('<?php echo esc_js($key); ?>', {
+        api_host: 'https://us.i.posthog.com',
+        person_profiles: 'identified_only',
+    });
+</script>
+    <?php
+}, 26);
+
+// PostHog ad click tracking — captures clicks on filled adsbygoogle elements.
+add_action('wp_head', function(){
+    $key = '';
+    if (defined('POSTHOG_KEY')) { $key = constant('POSTHOG_KEY'); }
+    $key = apply_filters('zidooka_posthog_key', $key);
+    if (!$key) return;
+    ?>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var poll = setInterval(function () {
+        var ads = document.querySelectorAll('ins.adsbygoogle[data-ad-status="filled"]');
+        if (ads.length === 0) return;
+        clearInterval(poll);
+        ads.forEach(function (ad) {
+            if (ad._adClickTracked) return;
+            ad._adClickTracked = true;
+            ad.addEventListener('click', function () {
+                try { posthog.capture('ad_click', { slot: ad.getAttribute('data-ad-slot'), path: location.pathname }); } catch (e) {}
+            });
+        });
+    }, 500);
+});
+</script>
+    <?php
+}, 27);
 
 // Temporary GA4 probe for `(not set)` landing-page investigation.
 // Fires only on single posts with search/chat/cross-site referrers.
@@ -168,6 +239,9 @@ add_action('wp_head', function(){
     }
     // Default to previous client from base theme if not overridden
     if (!$client) $client = 'ca-pub-5002038850592836';
+    if (!$client) {
+        $client = 'ca-pub-5002038850592836';
+    }
     $client = apply_filters('zidooka_adsense_client', $client);
     if (!$client) return;
 
@@ -177,17 +251,16 @@ add_action('wp_head', function(){
     );
 }, 25);
 
-// HACK HERE: ENQUEUE YOUR CUSTOM JS FILES, IF NEEDED
-add_action( 'wp_enqueue_scripts', function() {	   
-    
-    //UNCOMMENT next row to include the js/custom.js file globally
-    //wp_enqueue_script('custom', get_stylesheet_directory_uri() . '/js/custom.js', array(/* 'jquery' */), null, array('strategy' => 'defer', 'in_footer' => true) ); 
-
-    //UNCOMMENT next 3 rows to load the js file only on one page
-    //if (is_page('mypageslug')) {
-    //    wp_enqueue_script('custom', get_stylesheet_directory_uri() . '/js/custom.js', array(/* 'jquery' */), null, array('strategy' => 'defer', 'in_footer' => true) ); 
-    //}  
-
+// PostHog experiments JS
+add_action( 'wp_enqueue_scripts', function() {
+    if (!is_singular('post') && !is_page()) return;
+    wp_enqueue_script(
+        'zdk-posthog-experiments',
+        get_stylesheet_directory_uri() . '/assets/posthog-experiments.js',
+        array(),
+        file_exists(get_stylesheet_directory() . '/assets/posthog-experiments.js') ? filemtime(get_stylesheet_directory() . '/assets/posthog-experiments.js') : null,
+        array('strategy' => 'defer', 'in_footer' => true)
+    );
 }, 102);
 
 // OPTIONAL: ADD MORE NAV MENUS
@@ -633,15 +706,13 @@ add_action('wp_head', function(){
     }
 }, 7);
 
-// 2.3) Force eager/high priority for the front-page featured image
-// 2.3) Force eager/high priority for the front-page featured image
+// 2.3) Force eager/high priority for the front-page and single-post featured image
 add_filter('post_thumbnail_html', function(
   $html, $post_id, $post_thumbnail_id, $size, $attr
 ){
-  if (!is_front_page()) return $html;
-  // only target the front page's own thumbnail
-  if ((int) get_option('page_on_front') !== (int) $post_id) return $html;
-  // inject loading and fetchpriority attributes if missing
+  $is_target = is_front_page() && (int) get_option('page_on_front') === (int) $post_id;
+  $is_target = $is_target || (is_single() && in_the_loop());
+  if (!$is_target) return $html;
   if (strpos($html, 'loading=') === false) {
     $html = str_replace('<img', '<img loading="eager"', $html);
   } else {
@@ -653,318 +724,7 @@ add_filter('post_thumbnail_html', function(
     $html = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $html, 1);
   }
   return $html;
-}, 10, 5);add_action('wp_footer', function(){ 
-  return;
-    // 現在のURLが/lpを含む場合はバナーを表示しない
-    if (strpos($_SERVER['REQUEST_URI'], '/lp') !== false) {
-        return;
-    }
-    ?>
-
-    <!-- PC向け：右側固定バナー(デザイン改善版) -->
-    <div class="my-square-banner-pc d-none d-lg-flex flex-column align-items-center justify-content-center">
-      <button type="button" class="my-banner-close" onclick="this.parentNode.style.display='none'" aria-label="閉じる">
-        <i class="fas fa-times"></i>
-      </button>
-      <div class="my-banner-content">
-        <p class="my-banner-title">
-            時間を創出する<br>業務自動化の専門家
-            <span class="d-block small mt-1" style="font-size: 0.6em; font-weight: normal; opacity: 0.9;">Time Creation &<br>Automation Expert</span>
-        </p>
-        <p class="my-banner-subtitle">
-            あなたのビジネスに革新を
-            <span class="d-block small" style="font-size: 0.7em; opacity: 0.9;">Innovate Your Business</span>
-        </p>
-        <a href="/lp" target="_blank" rel="noopener" class="my-banner-link text-center">
-          <div><i class="fas fa-paper-plane me-1"></i>無料相談はこちら</div>
-          <div class="small" style="font-size: 0.7em; font-weight: normal;">Free Consultation</div>
-        </a>
-      </div>
-    </div>
-    
-    <div class="my-floating-banner-sp d-lg-none" id="spBanner">
-      <button type="button" class="my-banner-close" onclick="hideBanner()" aria-label="閉じる">
-        <i class="fas fa-times"></i>
-      </button>
-      <a href="/lp" class="sp-banner-link d-flex align-items-center justify-content-center">
-        <i class="fas fa-rocket me-2"></i>
-        <div class="text-start lh-sm">
-            <div>業務自動化で時間を創出しませんか？</div>
-            <div style="font-size: 0.65em; font-weight: normal;">Create time with automation?</div>
-        </div>
-      </a> 
-    </div>
-    
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-      /* PC向け：右側固定バナー (デザイン改善版) */
-      .my-square-banner-pc {
-        position: fixed;
-        top: 30%;
-        right: 20px;
-        width: 240px;
-        height: auto;
-        background: linear-gradient(135deg, #3a7bd5, #00d2ff);
-        color: #fff;
-        text-align: center;
-        border-radius: 12px;
-        z-index: 9999;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        padding: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        overflow: hidden;
-      }
-      
-      .my-square-banner-pc:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 28px rgba(0,0,0,0.25);
-      }
-      
-      .my-square-banner-pc::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        opacity: 0.6;
-        z-index: -1;
-      }
-      
-      .my-square-banner-pc .my-banner-close {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        background: rgba(255,255,255,0.2);
-        border: none;
-        color: #fff;
-        font-size: 14px;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: background 0.2s ease;
-      }
-      
-      .my-square-banner-pc .my-banner-close:hover {
-        background: rgba(255,255,255,0.4);
-      }
-      
-      /* SP向け：画面下フロートバナー (修正版) */
-      .my-floating-banner-sp {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: linear-gradient(135deg, #3a7bd5, #00d2ff);
-        color: #fff;
-        text-align: center;
-        padding: 12px 0;
-        z-index: 9999;
-        box-shadow: 0 -4px 10px rgba(0,0,0,0.15);
-        transform: translateY(0);
-        transition: transform 0.3s ease;
-        visibility: visible;
-        opacity: 1;
-      }
-      
-      .my-floating-banner-sp .my-banner-close {
-        position: absolute;
-        top: 50%;
-        right: 15px;
-        transform: translateY(-50%);
-        background: rgba(255,255,255,0.2);
-        border: none;
-        color: #fff;
-        font-size: 12px;
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: background 0.2s ease;
-      }
-      
-      .my-floating-banner-sp .my-banner-close:hover {
-        background: rgba(255,255,255,0.4);
-      }
-      
-      .my-floating-banner-sp.sp-hidden {
-        transform: translateY(100%);
-      }
-      
-      /* バナーコンテンツ共通 */
-      .my-banner-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .my-banner-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin-bottom: 5px;
-        line-height: 1.4;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-      }
-      
-      .my-banner-subtitle {
-        font-size: 0.9rem;
-        margin-bottom: 12px;
-        opacity: 0.9;
-      }
-      
-      .my-banner-link {
-        display: inline-block;
-        background-color: #fff;
-        color: #3a7bd5;
-        padding: 10px 16px;
-        border-radius: 30px;
-        font-size: 0.9rem;
-        font-weight: bold;
-        text-decoration: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      }
-      
-      .my-banner-link:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      }
-      
-      .sp-banner-link {
-        color: #fff;
-        text-decoration: none;
-        font-size: 0.95rem;
-        font-weight: bold;
-        display: block;
-        padding: 0 40px 0 10px;
-      }
-      
-      /* スクロールインジケーター */
-      .scroll-indicator {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 30px;
-        height: 30px;
-        opacity: 0.7;
-        animation: bounce 1.5s infinite;
-      }
-      
-      @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {
-          transform: translateY(0);
-        }
-        40% {
-          transform: translateY(-10px);
-        }
-        60% {
-          transform: translateY(-5px);
-        }
-      }
-      
-      /* レスポンシブ調整 */
-      @media (max-width: 768px) {
-        .my-floating-banner-sp {
-          padding: 10px 0;
-        }
-        
-        .sp-banner-link {
-          font-size: 0.9rem;
-        }
-      }
-    </style>
-    <script>
-      // バナー閉じる機能を関数化
-      function hideBanner() {
-        var spBanner = document.getElementById('spBanner');
-        if (spBanner) {
-          spBanner.style.transform = 'translateY(100%)';
-          // 一定時間後に非表示にする（transition効果が終わってから）
-          setTimeout(function() {
-            spBanner.style.display = 'none';
-          }, 300);
-          // 24時間（86400000ミリ秒）非表示にする
-          sessionStorage.setItem('bannerClosed', Date.now());
-        }
-      }
-      
-      // 初回表示時にアニメーション
-      document.addEventListener('DOMContentLoaded', function() {
-        // PCバナーアニメーション
-        var pcBanner = document.querySelector('.my-square-banner-pc');
-        if (pcBanner) {
-          pcBanner.style.transform = 'translateX(100%)';
-          setTimeout(function() {
-            pcBanner.style.transition = 'transform 0.5s ease';
-            pcBanner.style.transform = 'translateX(0)';
-          }, 1000);
-        }
-        
-        // SPバナー初期化
-        var spBanner = document.getElementById('spBanner');
-        
-        // 前回閉じてから24時間以内なら表示しない
-        var lastClosed = sessionStorage.getItem('bannerClosed');
-        if (lastClosed && Date.now() - lastClosed < 86400000) {
-          if (pcBanner) pcBanner.style.display = 'none';
-          if (spBanner) spBanner.style.display = 'none';
-        }
-        
-        // スクロール検出とバナー表示制御（緩和版）
-        var lastScrollTop = 0;
-        var scrollThreshold = 200; // スクロールしきい値
-        var scrollTimer = null;
-        var isScrolling = false;
-        
-        window.addEventListener('scroll', function() {
-          var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          isScrolling = true;
-          
-          // スクロールが停止したら3秒後にSPバナーを表示する
-          clearTimeout(scrollTimer);
-          scrollTimer = setTimeout(function() {
-            isScrolling = false;
-            if (spBanner) {
-              spBanner.classList.remove('sp-hidden');
-            }
-          }, 1000);
-          
-          // PCバナーのスクロール時の動作（少し上下に動く）
-          if (pcBanner) {
-            var shift = Math.min(5, Math.max(-5, (scrollTop - lastScrollTop) / 2));
-            pcBanner.style.transform = 'translateY(' + shift + 'px)';
-          }
-          
-          // SPバナーのスクロール動作（下スクロール時は徐々に隠す）
-          if (spBanner && spBanner.style.display !== 'none') {
-            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-              // 大幅な下スクロール時のみ隠す
-              if (scrollTop - lastScrollTop > 30) {
-                spBanner.classList.add('sp-hidden');
-              }
-            } else if (scrollTop < lastScrollTop) {
-              // 上スクロール時は表示する
-              spBanner.classList.remove('sp-hidden');
-            }
-          }
-          
-          lastScrollTop = scrollTop;
-        });
-      });
-    </script>
-    <?php
-}, 103);
+}, 10, 5);
 
 // ユーザープロフィールに英語の自己紹介欄を追加
 add_action( 'show_user_profile', 'add_english_bio_field' );
@@ -1366,27 +1126,6 @@ function zidooka_category_list_shortcode($atts) {
 }
 add_shortcode('zidooka_cat_list', 'zidooka_category_list_shortcode');
 
-// 2.3) Force eager/high priority for the front-page featured image
-// 2.3) Force eager/high priority for the front-page featured image
-add_filter('post_thumbnail_html', function(
-  $html, $post_id, $post_thumbnail_id, $size, $attr
-){
-  if (!is_front_page()) return $html;
-  // only target the front page's own thumbnail
-  if ((int) get_option('page_on_front') !== (int) $post_id) return $html;
-  // inject loading and fetchpriority attributes if missing
-  if (strpos($html, 'loading=') === false) {
-    $html = str_replace('<img', '<img loading="eager"', $html);
-  } else {
-    $html = preg_replace('/loading=(["\'])([^"\']*)(["\'])/i', 'loading=$1eager$3', $html, 1);
-  }
-  if (strpos($html, 'fetchpriority=') === false) {
-    $html = str_replace('<img', '<img fetchpriority="high"', $html);
-  } else {
-    $html = preg_replace('/fetchpriority=(["\'])([^"\']*)(["\'])/i', 'fetchpriority=$1high$3', $html, 1);
-  }
-  return $html;
-}, 10, 5);
 // 2.4) Home meta description fallback (only if no major SEO plugin)
 add_action('wp_head', function(){
     if (!is_front_page()) return;
