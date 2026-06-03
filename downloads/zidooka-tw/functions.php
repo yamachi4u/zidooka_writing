@@ -36,17 +36,15 @@ add_action( 'wp_print_scripts', function(){
     wp_dequeue_script( 'bootstrap5' );
 }, 100 );
 
-// Tailwind-first: enqueue only theme stylesheet; do not enqueue Bootstrap JS/CSS
+// Enqueue stylesheets — Tailwind production build + theme styles
 add_action( 'wp_enqueue_scripts', function() {
-    // Optional icon set: Bootstrap Icons (for templates using `bi bi-*`)
-    wp_enqueue_style(
-        'bootstrap-icons',
-        'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css',
-        array(),
-        null
-    );
+    // Tailwind production build (replaces CDN)
+    $tw_path = get_stylesheet_directory() . '/assets/tailwind.css';
+    if (file_exists($tw_path)) {
+        wp_enqueue_style('tailwind-output', get_stylesheet_directory_uri() . '/assets/tailwind.css', array(), filemtime($tw_path));
+    }
 
-    // Theme stylesheet (Tailwind build output) with cache-busting
+    // Theme custom styles
     $style_path = get_stylesheet_directory() . '/style.css';
     $ver = file_exists( $style_path ) ? filemtime( $style_path ) : null;
     wp_enqueue_style( 'theme-style', get_stylesheet_uri(), array(), $ver );
@@ -60,7 +58,16 @@ add_action( 'wp_enqueue_scripts', function() {
         .exp-ad-early .zidooka-xserver-ad:first-of-type { display: none; }
     ';
     wp_add_inline_style('theme-style', $exp_css);
-}, 101);
+// Disable WordPress emoji/embed bloat
+add_action('init', function() {
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    remove_action('wp_head', 'wp_oembed_add_discovery');
+    remove_action('wp_head', 'wp_oembed_add_host_js');
+    remove_filter('the_content', 'convert_smilies');
+    remove_filter('excerpt_more', 'convert_smilies');
+    add_filter('xmlrpc_enabled', '__return_false');
+});
 
 // Register menu locations used by header.php
 add_action( 'after_setup_theme', function(){
@@ -635,13 +642,20 @@ add_action('wp_head', function () {
     echo '<meta property="og:site_name" content="' . esc_attr(get_bloginfo('name')) . '" />' . "\n";
 
     $thumb_id = get_post_thumbnail_id($post_id);
-    $img = $thumb_id ? wp_get_attachment_image_src($thumb_id, 'full') : null;
-    if ($img) {
-        echo '<meta property="og:image" content="' . esc_url($img[0]) . '" />' . "\n";
-        echo '<meta property="og:image:width" content="' . intval($img[1]) . '" />' . "\n";
-        echo '<meta property="og:image:height" content="' . intval($img[2]) . '" />' . "\n";
-        echo '<meta name="twitter:image" content="' . esc_url($img[0]) . '" />' . "\n";
+    $og_img = '';
+    if ($thumb_id) {
+        $img = wp_get_attachment_image_src($thumb_id, 'full');
+        if ($img) {
+            $og_img = $img[0];
+            echo '<meta property="og:image:width" content="' . intval($img[1]) . '" />' . "\n";
+            echo '<meta property="og:image:height" content="' . intval($img[2]) . '" />' . "\n";
+        }
     }
+    if (!$og_img) {
+        $og_img = 'https://www.zidooka.com/wp-content/uploads/2024/05/Slide-16_9-1.png';
+    }
+    echo '<meta property="og:image" content="' . esc_url($og_img) . '" />' . "\n";
+    echo '<meta name="twitter:image" content="' . esc_url($og_img) . '" />' . "\n";
 
     echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
     echo '<meta name="twitter:title" content="' . esc_attr($title) . '" />' . "\n";
@@ -1132,16 +1146,15 @@ add_action('wp_head', function(){
     $desc = 'AI活用と業務自動化、ノーコード/ローコードの実験記録と実務ノウハウを発信。設定・運用のつまずきを最短で解決し、成果に直結する手順と判断基準をまとめます。';
     echo '<meta name="description" content="' . esc_attr($desc) . '" />' . "\n";
 }, 7);
-// 2.5) Preconnect hints for external hosts (front page only)
+// 2.5) Preconnect hints for external hosts
 add_action('wp_head', function(){
-    if (!is_front_page()) return;
     $hosts = [
       'https://www.googletagmanager.com',
       'https://pagead2.googlesyndication.com',
+      'https://us.i.posthog.com',
     ];
     foreach ($hosts as $h) {
       echo '<link rel="preconnect" href="' . esc_url($h) . '" crossorigin />' . "\n";
-      echo '<link rel="dns-prefetch" href="' . esc_url($h) . '" />' . "\n";
     }
 }, 3);
 // 2.6) Comments: make name/email optional and remove website field
@@ -1347,14 +1360,14 @@ add_action('init', function () {
     register_post_meta(ZDK_GAS_POST_TYPE, ZDK_GAS_META_CODE, [
         'single' => true,
         'type' => 'string',
-        'show_in_rest' => true,
+        'show_in_rest' => false,
         'sanitize_callback' => $passthrough,
         'auth_callback' => $can_edit,
     ]);
     register_post_meta(ZDK_GAS_POST_TYPE, ZDK_GAS_META_BUNDLE, [
         'single' => true,
         'type' => 'string',
-        'show_in_rest' => true,
+        'show_in_rest' => false,
         'sanitize_callback' => $passthrough,
         'auth_callback' => $can_edit,
     ]);

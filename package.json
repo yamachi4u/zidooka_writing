@@ -8,7 +8,14 @@
     "ga4": "node scripts/ga4-report.mjs",
     "gsc": "node scripts/gsc-query.mjs",
     "seo:followup": "node scripts/seo-followup-report.mjs",
-    "ga4:admin-setup": "node scripts/ga4-admin-setup.mjs"
+    "ga4:admin-setup": "node scripts/ga4-admin-setup.mjs",
+    "seo:weekly": "node scripts/ga4-report.mjs --period 7d && node scripts/gsc-query.mjs --period 7d",
+    "seo:monthly": "node scripts/ga4-report.mjs --period 30d && node scripts/gsc-query.mjs --period 30d",
+    "seo:errors": "node scripts/seo-followup-report.mjs --query-limit 3",
+    "adsense": "node scripts/adsense-report.mjs",
+    "bing": "node scripts/bing-webmaster-report.mjs",
+    "weekly": "node scripts/weekly-report.mjs",
+    "indexnow": "node scripts/ping-indexnow.mjs"
   },
   "dependencies": {
     "agent-browser": "github:vercel-labs/agent-browser",
@@ -24,5 +31,9 @@
     "sharp": "^0.34.5",
     "ssh2-sftp-client": "^10.0.3",
     "webdav": "^4.11.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "tailwindcss": "^4.3.0"
   }
 }
