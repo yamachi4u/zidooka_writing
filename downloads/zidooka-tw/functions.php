@@ -93,11 +93,9 @@ add_action('wp_head', function(){
         $ga4_id = constant('GA_MEASUREMENT_ID');
     }
     $ga4_id = apply_filters('zidooka_ga4_id', $ga4_id);
-    // Default to provided stream if not overridden
     if (!$ga4_id) {
         $ga4_id = 'G-VNF3D5QY6E';
     }
-    if (!$ga4_id) return;
 
     echo "<script async src=\"https://www.googletagmanager.com/gtag/js?id=" . esc_attr($ga4_id) . "\"></script>\n";
     echo "<script>\n";
@@ -269,6 +267,25 @@ add_action( 'wp_enqueue_scripts', function() {
         file_exists(get_stylesheet_directory() . '/assets/posthog-experiments.js') ? filemtime(get_stylesheet_directory() . '/assets/posthog-experiments.js') : null,
         array('strategy' => 'defer', 'in_footer' => true)
     );
+
+    // Single post CSS/JS (extracted from inline)
+    if (is_singular('post')) {
+        $css_path = get_stylesheet_directory() . '/assets/single.css';
+        if (file_exists($css_path)) {
+            wp_enqueue_style('zdk-single', get_stylesheet_directory_uri() . '/assets/single.css', array(), filemtime($css_path));
+        }
+        $js_path = get_stylesheet_directory() . '/assets/single.js';
+        if (file_exists($js_path)) {
+            wp_enqueue_script('zdk-single', get_stylesheet_directory_uri() . '/assets/single.js', array(), filemtime($js_path), true);
+            wp_localize_script('zdk-single', 'zdkUiText', array(
+                'tocTitle' => __('目次', 'zidooka-tw'),
+                'copySuccess' => __('コピーしました', 'zidooka-tw'),
+                'copyFail' => __('コピーに失敗しました', 'zidooka-tw'),
+                'ajaxUrl' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('simple-like-nonce'),
+            ));
+        }
+    }
 }, 102);
 
 // OPTIONAL: ADD MORE NAV MENUS
@@ -606,6 +623,15 @@ add_action('wp_ajax_nopriv_process_simple_like', 'process_simple_like');
 add_action('wp_ajax_process_simple_like', 'process_simple_like');
 
 function process_simple_like() {
+    // Rate limit: max 10 likes per IP per hour
+    $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+    $rate_key = 'zdk_like_rate_' . md5($ip);
+    $attempts = intval(get_transient($rate_key));
+    if ($attempts >= 10) {
+        wp_send_json_error('Rate limit exceeded');
+    }
+    set_transient($rate_key, $attempts + 1, HOUR_IN_SECONDS);
+
     // Security check
     $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : '';
     if (!wp_verify_nonce($nonce, 'simple-like-nonce')) {
@@ -1141,12 +1167,24 @@ function zidooka_category_list_shortcode($atts) {
 }
 add_shortcode('zidooka_cat_list', 'zidooka_category_list_shortcode');
 
-// 2.4) Home meta description fallback (only if no major SEO plugin)
+// 2.4) Fallback meta description for front page, 404, search, archive
 add_action('wp_head', function(){
-    if (!is_front_page()) return;
     if (function_exists('aioseo') || function_exists('wpseo_head') || defined('RANK_MATH_VERSION')) return;
-    $desc = 'AI活用と業務自動化、ノーコード/ローコードの実験記録と実務ノウハウを発信。設定・運用のつまずきを最短で解決し、成果に直結する手順と判断基準をまとめます。';
-    echo '<meta name="description" content="' . esc_attr($desc) . '" />' . "\n";
+
+    if (is_front_page()) {
+        $desc = 'AI活用と業務自動化、ノーコード/ローコードの実験記録と実務ノウハウを発信。設定・運用のつまずきを最短で解決し、成果に直結する手順と判断基準をまとめます。';
+        echo '<meta name="description" content="' . esc_attr($desc) . '" />' . "\n";
+    } elseif (is_404()) {
+        echo '<meta name="description" content="お探しのページが見つかりませんでした。ZIDOOKAの記事一覧からお探しください。" />' . "\n";
+        echo '<meta name="robots" content="noindex,follow" />' . "\n";
+    } elseif (is_search()) {
+        $q = get_search_query();
+        echo '<meta name="description" content="' . esc_attr('「' . $q . '」の検索結果 – ZIDOOKA') . '" />' . "\n";
+        echo '<meta name="robots" content="noindex,follow" />' . "\n";
+    } elseif (is_archive()) {
+        $desc = strip_tags(get_the_archive_title());
+        echo '<meta name="description" content="' . esc_attr($desc . ' に関する記事一覧 – ZIDOOKA') . '" />' . "\n";
+    }
 }, 7);
 // 2.5) Preconnect hints for external hosts
 add_action('wp_head', function(){
