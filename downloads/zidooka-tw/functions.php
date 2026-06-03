@@ -58,6 +58,8 @@ add_action( 'wp_enqueue_scripts', function() {
         .exp-ad-early .zidooka-xserver-ad:first-of-type { display: none; }
     ';
     wp_add_inline_style('theme-style', $exp_css);
+});
+
 // Disable WordPress emoji/embed bloat
 add_action('init', function() {
     remove_action('wp_head', 'print_emoji_detection_script', 7);
