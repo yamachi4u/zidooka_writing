@@ -1,365 +1,259 @@
 # AGENTS Guidelines
 
-Scope: Applies to the entire repository.
+Scope: zidooka_writing repository.
 
-## Default Workspace And Upload Requests
-- If the user says `zidookaでアップして`, treat this repository at `C:\Users\user\Documents\zidooka_writing` as the default working directory.
-- For that request, do not require Git staging, commits, or PR creation unless the user explicitly asks for Git handling.
+## Quick Index
 
-## Must-Read
-- `PIPELINE_MANUAL.md` (overall workflow/pipeline manual)
-- `docs/snippets/emphasis.md` (standard emphasis patterns to use in outputs)
+| 知りたいこと | 見るセクション |
+|---|---|
+| 作業を始める前に | [Start-of-Work](#start-of-work) |
+| PostHog A/B実験の状況 | [PostHog A/B Operations](#posthog-ab-operations) |
+| 記事を公開する | [Publishing Pipeline](#publishing-pipeline) |
+| SEO/分析を回す | [Analytics & SEO](#analytics--seo) |
+| テーマをデプロイする | [Remote Theme Pipeline](#remote-theme-pipeline) |
+| 文体・表記ルール | [Conventions](#conventions) |
+| スクリーンショット | [Screenshot Capture](#screenshot-capture) |
+| サムネイル生成 | [Thumbnail Generator](#thumbnail-generator) |
 
-## Workflow
-- Read both Must-Read files before answering or editing.
-- Implement changes, then restate which sections you followed.
-- Self-check: confirm output conforms to emphasis snippet patterns.
+---
 
-## GA4 / GSC Env Check
-- Before concluding that GA4 / GSC tooling is unavailable, check all of:
-  - repository `.env`
-  - process / user / machine environment variables
-  - explicit CLI overrides such as `--property` and `--key-file`
-- When verifying analytics credentials, never print secret values directly. Report only whether each required key is set or missing.
-- If `scripts/ga4-report.mjs` fails due to missing config, state which key category is missing (`GOOGLE_GA4_PROPERTY_ID`, `GOOGLE_SERVICE_ACCOUNT_KEY_PATH`, etc.) and only then treat the local GA4 CLI as unavailable.
+## Start-of-Work
 
-## Pipeline (How changes flow from idea to publication)
-- Plan: Define scope and gather requirements from Must-Read docs; capture tasks in a to-do list.
-- Implement: Make code/docs updates in a single logical unit.
-- Review: Self-check against AGENTS.md rules; peer review if available; verify with emphasis blocks.
-- Validate: Ensure changes align with Drat workflow and cross-links; run any tests if applicable.
-- Publish: Stage changes, create a PR, and, once approved, merge and optionally move Drat drafts to public docs.
-- Publish: Use the CLI post command to publish drafts (e.g. `node src/index.js post --draft drafts/claude-status-20260303-ja.md`). Confirm frontmatter and categories; attach featured image if applicable.
-- Publish: For immediate publication on ZIDOOKA, omit `date` from frontmatter. If `date` is set manually, the current REST path can create a `future` post due to timezone conversion.
-- Trace: Link back to the corresponding Drat entry and the updated AGENTS.md section.
+1. Read today's agent coordination log: `daily-agent/YYYYMMDD.md`
+2. Read current PostHog status: `drat/posthog-status.md`
+3. Check decision records: `docs/decisions/` (verification dates)
+4. If working on theme files: `docs/operations/README.md`
+5. Read self-improvement docs: `docs/SELF-IMPROVEMENT.md`, `docs/AGENT-TOOL-IMPROVEMENT.md`
+
+```powershell
+.\daily-agent.cmd --agent Codex --task "<task description>"
+```
+
+Status words: `start`, `claim`, `doing`, `blocked`, `handoff`, `done`, `memo`.
+Append-only. Do not rewrite other agents' entries.
+
+---
+
+## PostHog A/B Operations
+
+### Quick Commands
+
+```powershell
+npm run posthog:check    # Full data pull → daily/posthog/YYYY-MM-DD.md + auto-update status
+npm run posthog:status   # Read current status from drat/posthog-status.md
+```
+
+### Status File
+
+**`drat/posthog-status.md`** is the single source of truth. It shows:
+- Active experiment + health (null rate with trend arrows ↑↓→)
+- Outcome comparison (control vs treatment + lift)
+- Next action with closeout checklist
+- Pipeline priority
+- Meta alerts
+
+Updated automatically by `npm run posthog:check`.
+
+### Key Rules
+
+- One experiment at a time. At most two if same purpose.
+- Never run ad/CTA experiments with readability/navigation experiments.
+- CTA/consultation banner experiments are prohibited.
+- Judge winners by outcome events (not impression counts).
+- Before changing flags or deploying: check `daily-agent/YYYYMMDD.md` for active claims.
+
+### Reference Files
+
+| File | Purpose |
+|---|---|
+| `drat/posthog-status.md` | **Primary** — current state + next action |
+| `docs/operations/posthog-ab-operations.md` | Policy, thresholds, troubleshooting |
+| `drat/posthog-experiments.md` | Registry, pipeline, action log |
+| `daily/posthog/YYYY-MM-DD.md` | Detailed per-check report |
+| `downloads/zidooka-tw/assets/posthog-experiments.js` | Client-side experiment JS |
+
+### Decision Thresholds
+
+| Threshold | Value |
+|---|---|
+| Min data days | 5 |
+| Min impressions/variant | 200 |
+| Min outcomes/variant | 100 |
+| Meaningful lift | 15% |
+| Max null rate | 30% |
+
+---
+
+## Agent Coordination Log
+
+zidooka_writing uses a shared daily coordination log (`daily-agent/YYYYMMDD.md`) to prevent multi-agent conflicts, especially for PostHog experiment operations and theme deployments.
+
+File format and rules: `daily-agent/README.md`.
+
+---
+
+## Publishing Pipeline
+
+### CLI Commands
+
+```powershell
+node src/index.js post drafts/file.md          # Publish (with validation)
+node src/index.js post drafts/file.md --force   # Skip validation
+node src/index.js post-pair drafts/file-ja.md   # Publish ja+en pair
+node src/index.js schedule drafts/file.md       # Schedule next free 09:00 JST
+node src/index.js thumbnail --title "..." --output path.png
+```
+
+### Rules
+
+- Japanese + English paired publishing is the default unless user says single-language.
+- Omit `date` from frontmatter for immediate publish (timezone safety).
+- `--validate` checks: title length, slug presence, content length (300+ chars), no `【】` brackets.
+
+### Post-Publish
+
+```powershell
+node src/index.js post drafts/xxx.md && node scripts/ping-indexnow.mjs <url>
+```
+
+### Must-Read
+
+- `PIPELINE_MANUAL.md`
+- `docs/snippets/emphasis.md`
+
+---
+
+## Analytics & SEO
+
+### Available Commands
+
+```powershell
+npm run weekly          # All 5 channels: GA4 + GSC + AdSense + Bing + PostHog
+npm run seo:weekly      # GA4 + GSC 7d digest
+npm run seo:monthly     # GA4 + GSC 30d deep dive
+npm run seo:errors      # 19 tracked error pages followup
+npm run ga4 -- --preset overview|acquisition|landing-pages|events
+npm run gsc -- --preset top-queries|top-pages --limit N
+npm run adsense
+npm run bing -- --preset crawl-stats|top-queries|rank-traffic
+```
+
+### Weekly Rhythm
+
+| Frequency | Task | Command |
+|---|---|---|
+| Mon/Thu | PostHog A/B check | `npm run posthog:check` |
+| Weekly | Integrated report | `npm run weekly` |
+| Weekly | Low-CTR article check | `npm run gsc -- --preset top-queries --limit 30` |
+| Biweekly | GSC gap analysis | `npm run seo:errors` |
+| Monthly | Article performance review | `npm run seo:monthly` |
+
+### Monitoring Thresholds
+
+| Metric | Healthy | Warning | Command |
+|---|---|---|---|
+| RPM | ¥170+ | <¥100 | `npm run adsense` |
+| Desktop fill rate | 70%+ | <60% | `npm run adsense -- --dimensions PLATFORM_TYPE_CODE` |
+| Bing crawl error | <30% | >50% | `npm run bing -- --preset crawl-stats` |
+| GSC low-CTR article | — | CTR<5% & 100+imp | `npm run gsc -- --preset top-queries --limit 30` |
+
+### API Stack
+
+| Channel | Command | Auth |
+|---|---|---|
+| GA4 | `npm run ga4` | Service Account |
+| GSC | `npm run gsc` | Service Account |
+| AdSense | `npm run adsense` | OAuth Desktop |
+| Bing | `npm run bing` | API Key |
+| PostHog | `npm run posthog:check` | Personal API Key |
+
+---
+
+## Remote Theme Pipeline
+
+Push/pull WordPress theme files via WebDAV (configured in `.env`).
+
+```powershell
+# Pull for local editing
+$env:REMOTE_PROTOCOL='WEBDAV'
+$env:WEBDAV_URL='https://ciao-yamakazu.webdav-lolipop.jp/'
+$env:WEBDAV_USER='ciao.jp-yamakazu'
+$env:WEBDAV_PASS='...'
+$env:REMOTE_BASES='zidooka/wp-content/themes/zidooka-tw/'
+node scripts/remote-agent/index.js check
+
+# Pull → edit → push
+node scripts/remote-agent/index.js pull --file="zidooka/wp-content/themes/zidooka-tw/single.php" --out="tmp_remote_agent/zidooka-tw/single.php"
+# ... edit locally ...
+node scripts/remote-agent/index.js push --file="zidooka/wp-content/themes/zidooka-tw/single.php" --src="downloads/zidooka-tw/single.php"
+```
+
+### Verification
+
+```powershell
+node --check downloads/zidooka-tw/assets/posthog-experiments.js
+node scripts/remote-agent/index.js push ...
+node scripts/remote-agent/index.js pull --file=... --out=tmp_remote_agent/verify.js
+# Compare: local == pulled
+```
+
+---
 
 ## Conventions
-- Use only the emphasis patterns defined in `docs/snippets/emphasis.md` for highlighting key takeaways, cautions, or conclusions.
-- Prefer concise, single-line emphasis where possible; avoid decorative emojis.
-- For code, use inline backticks for identifiers and fenced blocks for multi-line code.
-- **DO NOT use 【】bracket emphasis** (e.g., 【結論】, 【ポイント】, 【注意】, 【対処】).
-- **ALWAYS use Zidooka blocks instead** for key takeaways, cautions, steps, examples, and conclusions.
-- 【対応ブロック一覧】
-  - `:::conclusion` (結論・まとめ) - Use for conclusions and key takeaways
-  - `:::note` (補足・メモ・ポイント) - Use for notes and key points
-  - `:::warning` (注意・警告) - Use for cautions and warnings
-  - `:::step` (手順・ステップ・対処) - Use for action items and procedures
-  - `:::example` (具体例) - Use for specific examples
 
-## URL Formatting (WordPress Auto-Link Safety)
+### Zidooka Blocks (use these, not 【】)
 
-WordPress (and some Markdown-to-block pipelines) may auto-link bare URLs. When a URL is immediately followed by Japanese punctuation/text (e.g. `）を開きます。`), the auto-linker can accidentally include that trailing text in the URL.
+```
+:::conclusion  — 結論・まとめ
+:::note        — 補足・メモ・ポイント
+:::warning     — 注意・警告
+:::step        — 手順・ステップ・対処
+:::example     — 具体例
+```
 
-Rules:
-- Prefer Markdown links: `[表示テキスト](https://example.com/path)` when you have link text.
-- If you must show a bare URL, wrap it in angle brackets: `<https://example.com/path>`.
-- Avoid writing `https://...` directly followed by `）` / `、` / `。` / Japanese text. Put the URL in `<...>` or use a Markdown link.
+### Writing Style
 
-Examples:
-- Bad: `UTM生成ツール（https://tools.zidooka.com/jp/utmtools/generator）を開く`
-- Good: `UTM生成ツール（<https://tools.zidooka.com/jp/utmtools/generator>）を開く`
-- Good: `[UTM生成ツール](https://tools.zidooka.com/jp/utmtools/generator)を開く`
+- 日本語: ですます調
+- 英語: standard technical writing
+- URLs: wrap in `<...>` or use Markdown links to avoid WordPress auto-link bugs
 
-## Writing Style (記事の文体)
-- 日本語記事は原則「ですます調」で統一する。
-- 「である調」は避け、読者に親しみやすい文体を維持する。
-- 英語記事は standard technical writing style を使用する。
+### AdSense Control
 
-## Conflict Resolution
-- If guidance conflicts, follow the more specific rule.
-- Ask a clarifying question if uncertainty remains after reading the Must-Read files.
+Add `affiliate` tag to a post to disable AdSense on that page.
 
 ---
 
-## Screenshot Capture (Playwright)
-
-記事用にWebサイトのスクリーンショットが必要な場合、以下のスクリプトを使用する。
-
-### 基本コマンド
+## Screenshot Capture
 
 ```powershell
-node scripts/agent-browser-screenshot.mjs "<URL>" "<出力パス>"
+node scripts/agent-browser-screenshot.mjs "https://..." "images-agent-browser/output.png"
+# Default: 1920x900 PNG
+# Resize: $env:SCREEN_WIDTH="1280"; $env:SCREEN_HEIGHT="720"; node scripts/...
+# Gallery: node scripts/agent-browser-gallery.mjs  (PC + mobile + tablet)
 ```
-
-**例:**
-```powershell
-node scripts/agent-browser-screenshot.mjs "https://example.com" "images-agent-browser/example-homepage.png"
-```
-
-### 仕様
-- **デフォルトサイズ**: 1920x900（横長、記事に最適）
-- **出力先**: `images-agent-browser/` ディレクトリ
-- **形式**: PNG
-- **fullPage**: false（ビューポートのみ、縦長にならない）
-
-### サイズ変更（環境変数）
-```powershell
-$env:SCREEN_WIDTH = "1280"; $env:SCREEN_HEIGHT = "720"; node scripts/agent-browser-screenshot.mjs "<URL>" "<出力パス>"
-```
-
-### ギャラリー撮影（複数デバイス）
-```powershell
-node scripts/agent-browser-gallery.mjs
-```
-→ PC全体・モバイル・タブレットの3種類を `images-agent-browser/` に保存
-
-### 記事への組み込み
-撮影後、Markdownで以下のように参照:
-```markdown
-![サイトのスクリーンショット](../images-agent-browser/example-homepage.png)
-```
-
-### 注意事項
-- URLは必ず `https://` から始める
-- 出力ファイル名にスペースを含めない
-- 撮影前にサイトが存在するか確認する
-- 記事用には縦長（fullPage: true）を避け、ビューポートのみを撮影する
-
----
-
-# AGENTS.md
-
-**Rule:** In each command, **define → use**. Do **not** escape `$`. Use generic `'path/to/file.ext'`.
-
----
-
-## 1) READ (UTF‑8 no BOM, line‑numbered)
-
-```bash
-bash -lc 'powershell -NoLogo -Command "
-$OutputEncoding = [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false);
-Set-Location -LiteralPath (Convert-Path .);
-function Get-Lines { param([string]$Path,[int]$Skip=0,[int]$First=40)
-  $enc=[Text.UTF8Encoding]::new($false)
-  $text=[IO.File]::ReadAllText($Path,$enc)
-  if($text.Length -gt 0 -and $text[0] -eq [char]0xFEFF){ $text=$text.Substring(1) }
-  $ls=$text -split \"`r?`n\"
-  for($i=$Skip; $i -lt [Math]::Min($Skip+$First,$ls.Length); $i++){ \"{0:D4}: {1}\" -f ($i+1), $ls[$i] }
-}
-Get-Lines -Path \"path/to/file.ext\" -First 120 -Skip 0
-"'
-```
-
----
-
-## 2) WRITE (UTF‑8 no BOM, atomic replace, backup)
-
-```bash
-bash -lc 'powershell -NoLogo -Command "
-$OutputEncoding = [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false);
-Set-Location -LiteralPath (Convert-Path .);
-function Write-Utf8NoBom { param([string]$Path,[string]$Content)
-  $dir = Split-Path -Parent $Path
-  if (-not (Test-Path $dir)) {
-    New-Item -ItemType Directory -Path $dir -Force | Out-Null
-  }
-  $tmp = [IO.Path]::GetTempFileName()
-  try {
-    $enc = [Text.UTF8Encoding]::new($false)
-    [IO.File]::WriteAllText($tmp,$Content,$enc)
-    Move-Item $tmp $Path -Force
-  }
-  finally {
-    if (Test-Path $tmp) {
-      Remove-Item $tmp -Force -ErrorAction SilentlyContinue
-    }
-  }
-}
-$file = "path/to/your_file.ext"
-$enc  = [Text.UTF8Encoding]::new($false)
-$old  = (Test-Path $file) ? ([IO.File]::ReadAllText($file,$enc)) : ''
-Write-Utf8NoBom -Path $file -Content ($old+"`nYOUR_TEXT_HERE`n")
-"'
-```
-
----
-
-## Remote Theme Pipeline (SFTP/FTPS/WebDAV)
-
-Minimal, safe pipeline to pull/push WordPress theme files using the bundled Remote Template Agent.
-
-### Prerequisites
-- Node.js installed; run `npm install` once.
-- `.env` contains remote credentials and whitelist path(s).
-
-### Environment (define → use)
-
-PowerShell example (pick one protocol and define required vars):
-
-```powershell
-# SFTP
-$env:REMOTE_PROTOCOL = "SFTP"
-$env:SFTP_HOST = "example.host"
-$env:SFTP_PORT = "22"
-$env:SFTP_USER = "username"
-$env:SFTP_PASS = "password"
-
-# FTPS (optional)
-$env:REMOTE_PROTOCOL = "FTPS"
-$env:FTPS_HOST = "example.host"
-$env:FTPS_PORT = "21"
-$env:FTPS_USER = "username"
-$env:FTPS_PASS = "password"
-
-# WebDAV (optional; often works on shared hosts)
-$env:REMOTE_PROTOCOL = "WEBDAV"
-$env:WEBDAV_URL  = "https://example.webdav-host.tld/"
-$env:WEBDAV_USER = "username"
-$env:WEBDAV_PASS = "password"
-
-# Whitelist: allowed remote prefixes (comma-separated)
-$env:REMOTE_BASES = "site/wp-content/themes/your-theme/,site/wp-content/themes/your-child-theme/"
-
-# Use after defining the above
-node scripts/remote-agent/index.js check
-```
-
-### Common Commands (define → use)
-
-- List a directory
-```powershell
-$dir = "site/wp-content/themes/your-theme/"
-node scripts/remote-agent/index.js ls --dir="$dir"
-```
-
-- Pull a remote file
-```powershell
-$remote = "site/wp-content/themes/your-theme/path/to/file.php"
-$out    = "tmp_remote_agent/your-theme/file.php"
-node scripts/remote-agent/index.js pull --file="$remote" --out="$out"
-```
-
-- Push a local file (creates `<file>.bak.<timestamp>` on remote)
-```powershell
-$remote = "site/wp-content/themes/your-theme/path/to/file.php"
-$src    = "path/to/file.php"
-node scripts/remote-agent/index.js push --file="$remote" --src="$src"
-```
-
-### WEBDAV Example (ZIDOOKA)
-
-```powershell
-$env:REMOTE_PROTOCOL = "WEBDAV"
-$env:WEBDAV_URL  = "https://example.webdav-host.tld/"
-$env:WEBDAV_USER = "username"
-$env:WEBDAV_PASS = "password"
-$env:REMOTE_BASES = "zidooka/wp-content/themes/zidooka-tw/"
-node scripts/remote-agent/index.js check
-
-$remote = "zidooka/wp-content/themes/zidooka-tw/single.php"
-$out    = "tmp_remote_agent/zidooka-tw/single.php"
-node scripts/remote-agent/index.js pull --file="$remote" --out="$out"
-
-$src = "tmp_remote_agent/zidooka-tw/single.php"
-node scripts/remote-agent/index.js push --file="$remote" --src="$src"
-```
-
-- Safe in-place replace (preview or apply)
-```powershell
-$file = "site/wp-content/themes/your-theme/path/to/file.php"
-node scripts/remote-agent/index.js replace --file="$file" --from="old" --to="new" --dry-run
-node scripts/remote-agent/index.js replace --file="$file" --from="old" --to="new"
-```
-
-### Notes
-- Operations are refused outside `REMOTE_BASES` for safety.
-- Local backups are stored under `tmp_remote_agent/`.
-- Prefer editing locally (pull → edit → push). Use `replace` for small, surgical changes.
 
 ---
 
 ## Thumbnail Generator
 
-Generate branded ZIDOOKA thumbnail images (SVG → PNG via sharp) for blog articles.
-
-### Usage
-
-```bash
-node src/index.js thumbnail --title "..." --output path/to/file.png [options]
+```powershell
+node src/index.js thumbnail --title "..." --output images/2026/thumb.png [--subtitle "..." --accent cyan --category "..." --icon link]
 ```
 
-Or directly:
-```bash
-node scripts/generate-thumbnail.cjs --title "..." --output path/to/file.png [options]
-```
-
-### Required Options
-
-| Option     | Description           |
-|------------|-----------------------|
-| `--title`  | Main title text       |
-| `--output` | Output file path (.png) |
-
-### Optional Options
-
-| Option       | Default              | Description                          |
-|--------------|----------------------|--------------------------------------|
-| `--subtitle` | (none)               | Subtitle text                        |
-| `--icon`     | `link`               | Icon type (see list below)           |
-| `--accent`   | `cyan` (#06b6d4)     | Accent color — name or hex           |
-| `--category` | `便利ツール`          | Category pill text                   |
-| `--badge`    | `tools.zidooka.com`  | Bottom badge text                    |
-| `--width`    | `1920`               | Image width in px                    |
-| `--height`   | `900`                | Image height in px                   |
-
-### Available Icons
-
-`link` | `plus` | `qr` | `search` | `chart` | `code` | `gear` | `book` | `pen` | `globe`
-
-### Accent Color Presets
-
-`cyan` | `green` | `purple` | `amber` | `red` | `blue` | `pink` | `orange` | `teal` | `indigo`
-
-Any hex color (e.g. `#ff6600`) is also accepted.
-
-### Examples
-
-```bash
-# UTM tool article thumbnail
-node src/index.js thumbnail \
-  --title "UTM生成ツールの使い方" \
-  --subtitle "入力候補・短縮URL・QRコードまで" \
-  --icon plus --accent green \
-  --output images/2026/utm-generator-thumbnail.png
-
-# GAS article with custom category and badge
-node src/index.js thumbnail \
-  --title "GASでメール自動送信" \
-  --icon code --accent indigo \
-  --category "GAS" --badge "www.zidooka.com" \
-  --output images/2026/gas-mail-thumbnail.png
-```
-
-### Output Spec
-- Format: PNG
-- Default size: 1920x900
-- Design: gradient background, accent bar top/bottom, decorative circles, icon area, ZIDOOKA.COM label, category pill, title/subtitle, badge
-- Output directories are created automatically if they don't exist
-
-### Frontmatter Integration
-
-Reference the generated thumbnail in article frontmatter:
-```yaml
-featured_image: ../images/2026/my-article-thumbnail.png
-```
-
-The CLI's `post` command will upload and attach it as the featured image automatically.
+Icons: `link` | `plus` | `qr` | `search` | `chart` | `code` | `gear` | `book` | `pen` | `globe`
+Accents: `cyan` | `green` | `purple` | `amber` | `red` | `blue` | `pink` | `orange` | `teal` | `indigo`
 
 ---
 
-## AdSense Control
+## Key Files Map
 
-To disable Google AdSense on a specific post (e.g. for policy compliance or landing pages), add the `affiliate` tag to the post.
-
-- **Tag:** `affiliate`
-- **Effect:** Prevents AdSense script injection in `header.php` / `functions.php`.
-
----
-
-## Draft Area (Drat)
-
-- For drafting notes, experiments, and transient incident reports (not yet public), store files under the `drat/` directory at the repository root.
-- Naming convention: `drat/YYYYMMDD-description.md`, e.g. `drat/claude-status-20260303.md`.
-- Content should be markdown and can use Zidooka emphasis blocks (e.g. :::note, :::step, :::conclusion) when appropriate.
-- Process: create drafts in `drat/`, review, and when ready, move or copy to the public docs folder (eg. `docs/`), and update links accordingly.
-- Do not publish drafts directly; maintain them as drafts until approval.
+| File | Purpose |
+|---|---|
+| `drat/posthog-status.md` | PostHog current state + next action |
+| `drat/posthog-experiments.md` | Experiment registry + pipeline |
+| `docs/operations/posthog-ab-operations.md` | Policy + thresholds + troubleshooting |
+| `docs/operations/README.md` | Operations registry |
+| `daily-agent/YYYYMMDD.md` | Daily coordination log |
+| `drat/seo-todo-zidooka-tw.md` | SEO master TODO |
+| `downloads/zidooka-tw/` | Local theme copy (edit here) |
+| `tmp_remote_agent/zidooka-tw/` | Remote theme pull (compare) |
