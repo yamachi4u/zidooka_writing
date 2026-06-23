@@ -1,0 +1,1202 @@
+{
+  "currentRange": {
+    "startDate": "2026-05-06",
+    "endDate": "2026-05-13"
+  },
+  "previousRange": {
+    "startDate": "2026-04-28",
+    "endDate": "2026-05-05"
+  },
+  "trackedPages": [
+    {
+      "path": "/archives/105",
+      "url": "https://www.zidooka.com/archives/105",
+      "label": "princexml"
+    },
+    {
+      "path": "/archives/2590",
+      "url": "https://www.zidooka.com/archives/2590",
+      "label": "edgesuite"
+    },
+    {
+      "path": "/archives/2726",
+      "url": "https://www.zidooka.com/archives/2726",
+      "label": "Drive error"
+    },
+    {
+      "path": "/archives/411",
+      "url": "https://www.zidooka.com/archives/411",
+      "label": "Copilot has been working"
+    },
+    {
+      "path": "/archives/185",
+      "url": "https://www.zidooka.com/archives/185",
+      "label": "ChatGPT upload error"
+    },
+    {
+      "path": "/archives/3290",
+      "url": "https://www.zidooka.com/archives/3290",
+      "label": "Something went wrong"
+    },
+    {
+      "path": "/archives/3017",
+      "url": "https://www.zidooka.com/archives/3017",
+      "label": "X post fetch failed"
+    },
+    {
+      "path": "/archives/4006",
+      "url": "https://www.zidooka.com/archives/4006",
+      "label": "archives/4006"
+    },
+    {
+      "path": "/archives/3999",
+      "url": "https://www.zidooka.com/archives/3999",
+      "label": "archives/3999"
+    },
+    {
+      "path": "/archives/443",
+      "url": "https://www.zidooka.com/archives/443",
+      "label": "ChatGPT offline"
+    },
+    {
+      "path": "/archives/1083",
+      "url": "https://www.zidooka.com/archives/1083",
+      "label": "Image analysis"
+    },
+    {
+      "path": "/archives/586",
+      "url": "https://www.zidooka.com/archives/586",
+      "label": "ChatGPT upload error 2"
+    },
+    {
+      "path": "/archives/2581",
+      "url": "https://www.zidooka.com/archives/2581",
+      "label": "archives/2581"
+    },
+    {
+      "path": "/archives/3636",
+      "url": "https://www.zidooka.com/archives/3636",
+      "label": "archives/3636"
+    },
+    {
+      "path": "/archives/2750",
+      "url": "https://www.zidooka.com/archives/2750",
+      "label": "archives/2750"
+    },
+    {
+      "path": "/archives/240",
+      "url": "https://www.zidooka.com/archives/240",
+      "label": "Cursor high demand"
+    },
+    {
+      "path": "/archives/2672",
+      "url": "https://www.zidooka.com/archives/2672",
+      "label": "Copilot errors hub"
+    },
+    {
+      "path": "/archives/2755",
+      "url": "https://www.zidooka.com/archives/2755",
+      "label": "Copilot rate_limited"
+    },
+    {
+      "path": "/archives/4154",
+      "url": "https://www.zidooka.com/archives/4154",
+      "label": "X errors summary"
+    }
+  ],
+  "rows": [
+    {
+      "path": "/archives/105",
+      "url": "https://www.zidooka.com/archives/105",
+      "label": "princexml",
+      "ga4": {
+        "sessionsCurrent": 57,
+        "sessionsPrevious": 29,
+        "sessionsDelta": 28,
+        "sessionsDeltaPct": 96.55172413793103,
+        "usersCurrent": 49,
+        "usersPrevious": 25,
+        "usersDelta": 24,
+        "engagedCurrent": 37,
+        "engagedPrevious": 23,
+        "engagedDelta": 14,
+        "viewsCurrent": 69,
+        "viewsPrevious": 35,
+        "viewsDelta": 34
+      },
+      "gsc": {
+        "clicksCurrent": 20,
+        "clicksPrevious": 20,
+        "clicksDelta": 0,
+        "clicksDeltaPct": 0,
+        "impressionsCurrent": 65,
+        "impressionsPrevious": 105,
+        "impressionsDelta": -40,
+        "impressionsDeltaPct": -38.095238095238095,
+        "ctrCurrent": 30.76923076923077,
+        "ctrPrevious": 19.047619047619047,
+        "ctrDelta": 11.721611721611724,
+        "positionCurrent": 3.923076923076923,
+        "positionPrevious": 6.476190476190476,
+        "positionDelta": -2.5531135531135534
+      },
+      "topQueries": [
+        {
+          "query": "princexml is required to be installed",
+          "clicks": 6,
+          "impressions": 10,
+          "ctr": 0.6,
+          "position": 5.3
+        },
+        {
+          "query": "\"princexml\" is required to be installed.",
+          "clicks": 3,
+          "impressions": 4,
+          "ctr": 0.75,
+          "position": 3.25
+        },
+        {
+          "query": "princexml",
+          "clicks": 3,
+          "impressions": 25,
+          "ctr": 0.12,
+          "position": 4.5600000000000005
+        }
+      ]
+    },
+    {
+      "path": "/archives/2590",
+      "url": "https://www.zidooka.com/archives/2590",
+      "label": "edgesuite",
+      "ga4": {
+        "sessionsCurrent": 59,
+        "sessionsPrevious": 49,
+        "sessionsDelta": 10,
+        "sessionsDeltaPct": 20.408163265306122,
+        "usersCurrent": 54,
+        "usersPrevious": 46,
+        "usersDelta": 8,
+        "engagedCurrent": 35,
+        "engagedPrevious": 33,
+        "engagedDelta": 2,
+        "viewsCurrent": 70,
+        "viewsPrevious": 51,
+        "viewsDelta": 19
+      },
+      "gsc": {
+        "clicksCurrent": 14,
+        "clicksPrevious": 21,
+        "clicksDelta": -7,
+        "clicksDeltaPct": -33.33333333333333,
+        "impressionsCurrent": 105,
+        "impressionsPrevious": 174,
+        "impressionsDelta": -69,
+        "impressionsDeltaPct": -39.6551724137931,
+        "ctrCurrent": 13.333333333333334,
+        "ctrPrevious": 12.068965517241379,
+        "ctrDelta": 1.2643678160919534,
+        "positionCurrent": 5.180952380952381,
+        "positionPrevious": 5.333333333333333,
+        "positionDelta": -0.15238095238095184
+      },
+      "topQueries": [
+        {
+          "query": "edgesuite",
+          "clicks": 6,
+          "impressions": 16,
+          "ctr": 0.375,
+          "position": 1.5625
+        },
+        {
+          "query": "errors.edgesuite.net",
+          "clicks": 3,
+          "impressions": 6,
+          "ctr": 0.5,
+          "position": 1.6666666666666665
+        },
+        {
+          "query": "edgesuite.net",
+          "clicks": 2,
+          "impressions": 6,
+          "ctr": 0.3333333333333333,
+          "position": 1.1666666666666667
+        }
+      ]
+    },
+    {
+      "path": "/archives/2726",
+      "url": "https://www.zidooka.com/archives/2726",
+      "label": "Drive error",
+      "ga4": {
+        "sessionsCurrent": 10,
+        "sessionsPrevious": 47,
+        "sessionsDelta": -37,
+        "sessionsDeltaPct": -78.72340425531915,
+        "usersCurrent": 8,
+        "usersPrevious": 43,
+        "usersDelta": -35,
+        "engagedCurrent": 5,
+        "engagedPrevious": 30,
+        "engagedDelta": -25,
+        "viewsCurrent": 10,
+        "viewsPrevious": 48,
+        "viewsDelta": -38
+      },
+      "gsc": {
+        "clicksCurrent": 5,
+        "clicksPrevious": 29,
+        "clicksDelta": -24,
+        "clicksDeltaPct": -82.75862068965517,
+        "impressionsCurrent": 29,
+        "impressionsPrevious": 316,
+        "impressionsDelta": -287,
+        "impressionsDeltaPct": -90.82278481012658,
+        "ctrCurrent": 17.24137931034483,
+        "ctrPrevious": 9.177215189873419,
+        "ctrDelta": 8.06416412047141,
+        "positionCurrent": 4.0344827586206895,
+        "positionPrevious": 4.8164556962025316,
+        "positionDelta": -0.781972937581842
+      },
+      "topQueries": [
+        {
+          "query": "exception: service error: drive",
+          "clicks": 1,
+          "impressions": 4,
+          "ctr": 0.25,
+          "position": 2
+        },
+        {
+          "query": "exception service error drive",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "query": "exception: サービス エラー: ドライブ",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 2
+        }
+      ]
+    },
+    {
+      "path": "/archives/411",
+      "url": "https://www.zidooka.com/archives/411",
+      "label": "Copilot has been working",
+      "ga4": {
+        "sessionsCurrent": 20,
+        "sessionsPrevious": 21,
+        "sessionsDelta": -1,
+        "sessionsDeltaPct": -4.761904761904762,
+        "usersCurrent": 19,
+        "usersPrevious": 19,
+        "usersDelta": 0,
+        "engagedCurrent": 10,
+        "engagedPrevious": 14,
+        "engagedDelta": -4,
+        "viewsCurrent": 20,
+        "viewsPrevious": 21,
+        "viewsDelta": -1
+      },
+      "gsc": {
+        "clicksCurrent": 12,
+        "clicksPrevious": 17,
+        "clicksDelta": -5,
+        "clicksDeltaPct": -29.411764705882355,
+        "impressionsCurrent": 43,
+        "impressionsPrevious": 58,
+        "impressionsDelta": -15,
+        "impressionsDeltaPct": -25.862068965517242,
+        "ctrCurrent": 27.906976744186046,
+        "ctrPrevious": 29.310344827586203,
+        "ctrDelta": -1.4033680834001583,
+        "positionCurrent": 2.441860465116279,
+        "positionPrevious": 3.7241379310344827,
+        "positionDelta": -1.2822774659182037
+      },
+      "topQueries": [
+        {
+          "query": "copilot has been working on this problem for a while. it can continue to iterate, or you can send a new message to refine your prompt. configure max requests.",
+          "clicks": 8,
+          "impressions": 20,
+          "ctr": 0.4,
+          "position": 2
+        },
+        {
+          "query": "copilot has been working on this problem for a while. it can continue to iterate, or you can send a new message to refine your prompt",
+          "clicks": 2,
+          "impressions": 7,
+          "ctr": 0.2857142857142857,
+          "position": 2
+        },
+        {
+          "query": "copilot has been working on this problem for a while. it can continue to iterate, or you can send a new message to refine your prompt.",
+          "clicks": 2,
+          "impressions": 8,
+          "ctr": 0.25,
+          "position": 1.625
+        }
+      ]
+    },
+    {
+      "path": "/archives/185",
+      "url": "https://www.zidooka.com/archives/185",
+      "label": "ChatGPT upload error",
+      "ga4": {
+        "sessionsCurrent": 27,
+        "sessionsPrevious": 31,
+        "sessionsDelta": -4,
+        "sessionsDeltaPct": -12.903225806451612,
+        "usersCurrent": 26,
+        "usersPrevious": 27,
+        "usersDelta": -1,
+        "engagedCurrent": 16,
+        "engagedPrevious": 14,
+        "engagedDelta": 2,
+        "viewsCurrent": 33,
+        "viewsPrevious": 38,
+        "viewsDelta": -5
+      },
+      "gsc": {
+        "clicksCurrent": 20,
+        "clicksPrevious": 20,
+        "clicksDelta": 0,
+        "clicksDeltaPct": 0,
+        "impressionsCurrent": 105,
+        "impressionsPrevious": 147,
+        "impressionsDelta": -42,
+        "impressionsDeltaPct": -28.57142857142857,
+        "ctrCurrent": 19.047619047619047,
+        "ctrPrevious": 13.60544217687075,
+        "ctrDelta": 5.442176870748297,
+        "positionCurrent": 5.066666666666666,
+        "positionPrevious": 4.292517006802721,
+        "positionDelta": 0.7741496598639452
+      },
+      "topQueries": [
+        {
+          "query": "files.oaiusercontent.com にアップロードできませんでした。ネットワーク設定でこのサイトへのアクセスを許可するか、ネットワーク管理者に問い合わせてください。",
+          "clicks": 11,
+          "impressions": 38,
+          "ctr": 0.2894736842105263,
+          "position": 2.473684210526316
+        },
+        {
+          "query": "files.oaiusercontent.com",
+          "clicks": 2,
+          "impressions": 4,
+          "ctr": 0.5,
+          "position": 3
+        },
+        {
+          "query": "files.oaiusercontent.com にアップロードできませんでした。",
+          "clicks": 1,
+          "impressions": 1,
+          "ctr": 1,
+          "position": 2
+        }
+      ]
+    },
+    {
+      "path": "/archives/3290",
+      "url": "https://www.zidooka.com/archives/3290",
+      "label": "Something went wrong",
+      "ga4": {
+        "sessionsCurrent": 13,
+        "sessionsPrevious": 27,
+        "sessionsDelta": -14,
+        "sessionsDeltaPct": -51.85185185185185,
+        "usersCurrent": 13,
+        "usersPrevious": 27,
+        "usersDelta": -14,
+        "engagedCurrent": 6,
+        "engagedPrevious": 16,
+        "engagedDelta": -10,
+        "viewsCurrent": 14,
+        "viewsPrevious": 27,
+        "viewsDelta": -13
+      },
+      "gsc": {
+        "clicksCurrent": 5,
+        "clicksPrevious": 21,
+        "clicksDelta": -16,
+        "clicksDeltaPct": -76.19047619047619,
+        "impressionsCurrent": 172,
+        "impressionsPrevious": 270,
+        "impressionsDelta": -98,
+        "impressionsDeltaPct": -36.2962962962963,
+        "ctrCurrent": 2.9069767441860463,
+        "ctrPrevious": 7.777777777777778,
+        "ctrDelta": -4.870801033591732,
+        "positionCurrent": 5.715116279069767,
+        "positionPrevious": 5.685185185185185,
+        "positionDelta": 0.02993109388458226
+      },
+      "topQueries": [
+        {
+          "query": "something went wrong ツイッター",
+          "clicks": 2,
+          "impressions": 13,
+          "ctr": 0.15384615384615385,
+          "position": 9.23076923076923
+        },
+        {
+          "query": "something went wrong. try reloading.",
+          "clicks": 1,
+          "impressions": 34,
+          "ctr": 0.029411764705882353,
+          "position": 4.4411764705882355
+        },
+        {
+          "query": "x something went wrong. try reloading.",
+          "clicks": 1,
+          "impressions": 3,
+          "ctr": 0.3333333333333333,
+          "position": 3
+        }
+      ]
+    },
+    {
+      "path": "/archives/3017",
+      "url": "https://www.zidooka.com/archives/3017",
+      "label": "X post fetch failed",
+      "ga4": {
+        "sessionsCurrent": 27,
+        "sessionsPrevious": 26,
+        "sessionsDelta": 1,
+        "sessionsDeltaPct": 3.8461538461538463,
+        "usersCurrent": 22,
+        "usersPrevious": 24,
+        "usersDelta": -2,
+        "engagedCurrent": 13,
+        "engagedPrevious": 11,
+        "engagedDelta": 2,
+        "viewsCurrent": 30,
+        "viewsPrevious": 28,
+        "viewsDelta": 2
+      },
+      "gsc": {
+        "clicksCurrent": 14,
+        "clicksPrevious": 15,
+        "clicksDelta": -1,
+        "clicksDeltaPct": -6.666666666666667,
+        "impressionsCurrent": 209,
+        "impressionsPrevious": 254,
+        "impressionsDelta": -45,
+        "impressionsDeltaPct": -17.716535433070867,
+        "ctrCurrent": 6.698564593301436,
+        "ctrPrevious": 5.905511811023622,
+        "ctrDelta": 0.7930527822778137,
+        "positionCurrent": 6.708133971291866,
+        "positionPrevious": 7.515748031496063,
+        "positionDelta": -0.8076140602041972
+      },
+      "topQueries": [
+        {
+          "query": "ポストを読み込めません 垢消し",
+          "clicks": 2,
+          "impressions": 15,
+          "ctr": 0.13333333333333333,
+          "position": 2.8666666666666667
+        },
+        {
+          "query": "ポストを読み込めません アカウント削除",
+          "clicks": 1,
+          "impressions": 10,
+          "ctr": 0.1,
+          "position": 3.1
+        },
+        {
+          "query": "現在ポストを取得 できません 垢 消し",
+          "clicks": 1,
+          "impressions": 9,
+          "ctr": 0.1111111111111111,
+          "position": 9
+        }
+      ]
+    },
+    {
+      "path": "/archives/4006",
+      "url": "https://www.zidooka.com/archives/4006",
+      "label": "archives/4006",
+      "ga4": {
+        "sessionsCurrent": 18,
+        "sessionsPrevious": 12,
+        "sessionsDelta": 6,
+        "sessionsDeltaPct": 50,
+        "usersCurrent": 15,
+        "usersPrevious": 12,
+        "usersDelta": 3,
+        "engagedCurrent": 7,
+        "engagedPrevious": 8,
+        "engagedDelta": -1,
+        "viewsCurrent": 19,
+        "viewsPrevious": 12,
+        "viewsDelta": 7
+      },
+      "gsc": {
+        "clicksCurrent": 5,
+        "clicksPrevious": 5,
+        "clicksDelta": 0,
+        "clicksDeltaPct": 0,
+        "impressionsCurrent": 127,
+        "impressionsPrevious": 221,
+        "impressionsDelta": -94,
+        "impressionsDeltaPct": -42.53393665158371,
+        "ctrCurrent": 3.937007874015748,
+        "ctrPrevious": 2.262443438914027,
+        "ctrDelta": 1.6745644351017208,
+        "positionCurrent": 8.937007874015748,
+        "positionPrevious": 8.624434389140271,
+        "positionDelta": 0.3125734848754771
+      },
+      "topQueries": [
+        {
+          "query": "codex 重い",
+          "clicks": 1,
+          "impressions": 7,
+          "ctr": 0.14285714285714285,
+          "position": 15.142857142857142
+        },
+        {
+          "query": "codex extra high",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 10.666666666666666
+        },
+        {
+          "query": "codex fastmode",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 9
+        }
+      ]
+    },
+    {
+      "path": "/archives/3999",
+      "url": "https://www.zidooka.com/archives/3999",
+      "label": "archives/3999",
+      "ga4": {
+        "sessionsCurrent": 31,
+        "sessionsPrevious": 40,
+        "sessionsDelta": -9,
+        "sessionsDeltaPct": -22.5,
+        "usersCurrent": 31,
+        "usersPrevious": 36,
+        "usersDelta": -5,
+        "engagedCurrent": 24,
+        "engagedPrevious": 23,
+        "engagedDelta": 1,
+        "viewsCurrent": 35,
+        "viewsPrevious": 41,
+        "viewsDelta": -6
+      },
+      "gsc": {
+        "clicksCurrent": 10,
+        "clicksPrevious": 6,
+        "clicksDelta": 4,
+        "clicksDeltaPct": 66.66666666666666,
+        "impressionsCurrent": 120,
+        "impressionsPrevious": 184,
+        "impressionsDelta": -64,
+        "impressionsDeltaPct": -34.78260869565217,
+        "ctrCurrent": 8.333333333333332,
+        "ctrPrevious": 3.260869565217391,
+        "ctrDelta": 5.0724637681159415,
+        "positionCurrent": 8.15,
+        "positionPrevious": 7.369565217391305,
+        "positionDelta": 0.7804347826086957
+      },
+      "topQueries": [
+        {
+          "query": "codex トークン消費",
+          "clicks": 1,
+          "impressions": 5,
+          "ctr": 0.2,
+          "position": 9
+        },
+        {
+          "query": "codex トークン消費量",
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 9.833333333333334
+        },
+        {
+          "query": "codex トークン節約",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 56
+        }
+      ]
+    },
+    {
+      "path": "/archives/443",
+      "url": "https://www.zidooka.com/archives/443",
+      "label": "ChatGPT offline",
+      "ga4": {
+        "sessionsCurrent": 16,
+        "sessionsPrevious": 8,
+        "sessionsDelta": 8,
+        "sessionsDeltaPct": 100,
+        "usersCurrent": 15,
+        "usersPrevious": 8,
+        "usersDelta": 7,
+        "engagedCurrent": 11,
+        "engagedPrevious": 3,
+        "engagedDelta": 8,
+        "viewsCurrent": 19,
+        "viewsPrevious": 10,
+        "viewsDelta": 9
+      },
+      "gsc": {
+        "clicksCurrent": 5,
+        "clicksPrevious": 7,
+        "clicksDelta": -2,
+        "clicksDeltaPct": -28.57142857142857,
+        "impressionsCurrent": 36,
+        "impressionsPrevious": 30,
+        "impressionsDelta": 6,
+        "impressionsDeltaPct": 20,
+        "ctrCurrent": 13.88888888888889,
+        "ctrPrevious": 23.333333333333332,
+        "ctrDelta": -9.444444444444445,
+        "positionCurrent": 4.722222222222222,
+        "positionPrevious": 4.433333333333334,
+        "positionDelta": 0.28888888888888875
+      },
+      "topQueries": [
+        {
+          "query": "チャットgpt オフラインになっているようです",
+          "clicks": 3,
+          "impressions": 14,
+          "ctr": 0.21428571428571427,
+          "position": 1.5714285714285714
+        },
+        {
+          "query": "chatgpt オフラインになっているようです",
+          "clicks": 1,
+          "impressions": 7,
+          "ctr": 0.14285714285714285,
+          "position": 1.8571428571428572
+        },
+        {
+          "query": "チャットgpt オフライン",
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 11.75
+        }
+      ]
+    },
+    {
+      "path": "/archives/1083",
+      "url": "https://www.zidooka.com/archives/1083",
+      "label": "Image analysis",
+      "ga4": {
+        "sessionsCurrent": 13,
+        "sessionsPrevious": 5,
+        "sessionsDelta": 8,
+        "sessionsDeltaPct": 160,
+        "usersCurrent": 13,
+        "usersPrevious": 5,
+        "usersDelta": 8,
+        "engagedCurrent": 7,
+        "engagedPrevious": 4,
+        "engagedDelta": 3,
+        "viewsCurrent": 14,
+        "viewsPrevious": 5,
+        "viewsDelta": 9
+      },
+      "gsc": {
+        "clicksCurrent": 6,
+        "clicksPrevious": 9,
+        "clicksDelta": -3,
+        "clicksDeltaPct": -33.33333333333333,
+        "impressionsCurrent": 18,
+        "impressionsPrevious": 26,
+        "impressionsDelta": -8,
+        "impressionsDeltaPct": -30.76923076923077,
+        "ctrCurrent": 33.33333333333333,
+        "ctrPrevious": 34.61538461538461,
+        "ctrDelta": -1.282051282051283,
+        "positionCurrent": 2.7777777777777777,
+        "positionPrevious": 1.8846153846153846,
+        "positionDelta": 0.8931623931623931
+      },
+      "topQueries": [
+        {
+          "query": "個の画像を分析しています",
+          "clicks": 4,
+          "impressions": 10,
+          "ctr": 0.4,
+          "position": 1.3
+        }
+      ]
+    },
+    {
+      "path": "/archives/586",
+      "url": "https://www.zidooka.com/archives/586",
+      "label": "ChatGPT upload error 2",
+      "ga4": {
+        "sessionsCurrent": 19,
+        "sessionsPrevious": 13,
+        "sessionsDelta": 6,
+        "sessionsDeltaPct": 46.15384615384615,
+        "usersCurrent": 18,
+        "usersPrevious": 13,
+        "usersDelta": 5,
+        "engagedCurrent": 7,
+        "engagedPrevious": 9,
+        "engagedDelta": -2,
+        "viewsCurrent": 20,
+        "viewsPrevious": 15,
+        "viewsDelta": 5
+      },
+      "gsc": {
+        "clicksCurrent": 9,
+        "clicksPrevious": 16,
+        "clicksDelta": -7,
+        "clicksDeltaPct": -43.75,
+        "impressionsCurrent": 105,
+        "impressionsPrevious": 138,
+        "impressionsDelta": -33,
+        "impressionsDeltaPct": -23.91304347826087,
+        "ctrCurrent": 8.571428571428571,
+        "ctrPrevious": 11.594202898550725,
+        "ctrDelta": -3.0227743271221534,
+        "positionCurrent": 5.761904761904762,
+        "positionPrevious": 5.528985507246377,
+        "positionDelta": 0.23291925465838492
+      },
+      "topQueries": [
+        {
+          "query": "files.oaiusercontent.com にアップロードできませんでした。ネットワーク設定でこのサイトへのアクセスを許可するか、ネットワーク管理者に問い合わせてください。",
+          "clicks": 9,
+          "impressions": 38,
+          "ctr": 0.23684210526315788,
+          "position": 4.605263157894736
+        },
+        {
+          "query": "files.oaiusercontent",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "query": "files.oaiusercontent.com",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 6.666666666666667
+        }
+      ]
+    },
+    {
+      "path": "/archives/2581",
+      "url": "https://www.zidooka.com/archives/2581",
+      "label": "archives/2581",
+      "ga4": {
+        "sessionsCurrent": 6,
+        "sessionsPrevious": 8,
+        "sessionsDelta": -2,
+        "sessionsDeltaPct": -25,
+        "usersCurrent": 6,
+        "usersPrevious": 7,
+        "usersDelta": -1,
+        "engagedCurrent": 5,
+        "engagedPrevious": 5,
+        "engagedDelta": 0,
+        "viewsCurrent": 13,
+        "viewsPrevious": 10,
+        "viewsDelta": 3
+      },
+      "gsc": {
+        "clicksCurrent": 5,
+        "clicksPrevious": 6,
+        "clicksDelta": -1,
+        "clicksDeltaPct": -16.666666666666664,
+        "impressionsCurrent": 59,
+        "impressionsPrevious": 113,
+        "impressionsDelta": -54,
+        "impressionsDeltaPct": -47.78761061946903,
+        "ctrCurrent": 8.47457627118644,
+        "ctrPrevious": 5.3097345132743365,
+        "ctrDelta": 3.164841757912104,
+        "positionCurrent": 6.661016949152542,
+        "positionPrevious": 7.061946902654867,
+        "positionDelta": -0.40092995350232474
+      },
+      "topQueries": [
+        {
+          "query": "files.oaiusercontent.com にアップロードできませんでした。",
+          "clicks": 1,
+          "impressions": 1,
+          "ctr": 1,
+          "position": 5
+        },
+        {
+          "query": "files.oaiusercontent.com にアップロードできませんでした。ネットワーク設定でこのサイトへのアクセスを許可するか、ネットワーク管理者に問い合わせてください。",
+          "clicks": 1,
+          "impressions": 7,
+          "ctr": 0.14285714285714285,
+          "position": 8.285714285714285
+        },
+        {
+          "query": "\"oaiusercontent.com\"",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 2
+        }
+      ]
+    },
+    {
+      "path": "/archives/3636",
+      "url": "https://www.zidooka.com/archives/3636",
+      "label": "archives/3636",
+      "ga4": {
+        "sessionsCurrent": 14,
+        "sessionsPrevious": 4,
+        "sessionsDelta": 10,
+        "sessionsDeltaPct": 250,
+        "usersCurrent": 14,
+        "usersPrevious": 4,
+        "usersDelta": 10,
+        "engagedCurrent": 10,
+        "engagedPrevious": 3,
+        "engagedDelta": 7,
+        "viewsCurrent": 14,
+        "viewsPrevious": 4,
+        "viewsDelta": 10
+      },
+      "gsc": {
+        "clicksCurrent": 7,
+        "clicksPrevious": 6,
+        "clicksDelta": 1,
+        "clicksDeltaPct": 16.666666666666664,
+        "impressionsCurrent": 135,
+        "impressionsPrevious": 39,
+        "impressionsDelta": 96,
+        "impressionsDeltaPct": 246.15384615384616,
+        "ctrCurrent": 5.185185185185185,
+        "ctrPrevious": 15.384615384615385,
+        "ctrDelta": -10.199430199430202,
+        "positionCurrent": 7.0814814814814815,
+        "positionPrevious": 8.897435897435898,
+        "positionDelta": -1.8159544159544163
+      },
+      "topQueries": [
+        {
+          "query": "40333",
+          "clicks": 1,
+          "impressions": 3,
+          "ctr": 0.3333333333333333,
+          "position": 2
+        },
+        {
+          "query": "discord error api",
+          "clicks": 1,
+          "impressions": 1,
+          "ctr": 1,
+          "position": 9
+        },
+        {
+          "query": "discord internal server error",
+          "clicks": 1,
+          "impressions": 10,
+          "ctr": 0.1,
+          "position": 8.3
+        }
+      ]
+    },
+    {
+      "path": "/archives/2750",
+      "url": "https://www.zidooka.com/archives/2750",
+      "label": "archives/2750",
+      "ga4": {
+        "sessionsCurrent": 3,
+        "sessionsPrevious": 19,
+        "sessionsDelta": -16,
+        "sessionsDeltaPct": -84.21052631578947,
+        "usersCurrent": 3,
+        "usersPrevious": 19,
+        "usersDelta": -16,
+        "engagedCurrent": 3,
+        "engagedPrevious": 12,
+        "engagedDelta": -9,
+        "viewsCurrent": 5,
+        "viewsPrevious": 22,
+        "viewsDelta": -17
+      },
+      "gsc": {
+        "clicksCurrent": 0,
+        "clicksPrevious": 11,
+        "clicksDelta": -11,
+        "clicksDeltaPct": -100,
+        "impressionsCurrent": 41,
+        "impressionsPrevious": 175,
+        "impressionsDelta": -134,
+        "impressionsDeltaPct": -76.57142857142857,
+        "ctrCurrent": 0,
+        "ctrPrevious": 6.2857142857142865,
+        "ctrDelta": -6.2857142857142865,
+        "positionCurrent": 7.2439024390243905,
+        "positionPrevious": 7.177142857142857,
+        "positionDelta": 0.06675958188153341
+      },
+      "topQueries": [
+        {
+          "query": "github copilot プレミアムリクエスト リセット",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 8.5
+        },
+        {
+          "query": "github copilot リセット",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "query": "github copilot リセット いつ",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 6
+        }
+      ]
+    },
+    {
+      "path": "/archives/240",
+      "url": "https://www.zidooka.com/archives/240",
+      "label": "Cursor high demand",
+      "ga4": {
+        "sessionsCurrent": 5,
+        "sessionsPrevious": 1,
+        "sessionsDelta": 4,
+        "sessionsDeltaPct": 400,
+        "usersCurrent": 5,
+        "usersPrevious": 1,
+        "usersDelta": 4,
+        "engagedCurrent": 3,
+        "engagedPrevious": 0,
+        "engagedDelta": 3,
+        "viewsCurrent": 5,
+        "viewsPrevious": 1,
+        "viewsDelta": 4
+      },
+      "gsc": {
+        "clicksCurrent": 1,
+        "clicksPrevious": 0,
+        "clicksDelta": 1,
+        "clicksDeltaPct": "",
+        "impressionsCurrent": 39,
+        "impressionsPrevious": 3,
+        "impressionsDelta": 36,
+        "impressionsDeltaPct": 1200,
+        "ctrCurrent": 2.564102564102564,
+        "ctrPrevious": 0,
+        "ctrDelta": 2.564102564102564,
+        "positionCurrent": 6.6923076923076925,
+        "positionPrevious": 5.666666666666667,
+        "positionDelta": 1.0256410256410255
+      },
+      "topQueries": [
+        {
+          "query": "we're experiencing high demand for composer 2 right now. please switch to auto, another model, or try again in a few moments.",
+          "clicks": 0,
+          "impressions": 21,
+          "ctr": 0,
+          "position": 5.714285714285714
+        },
+        {
+          "query": "we're experiencing high demand for composer 2 right now. please upgrade to pro, switch to auto, another model, or try again in a few moments.",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 8.666666666666668
+        },
+        {
+          "query": "we're experiencing high demand for gpt-5.5 right now. please switch to auto, another model, or try again in a few moments.",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 10
+        }
+      ]
+    },
+    {
+      "path": "/archives/2672",
+      "url": "https://www.zidooka.com/archives/2672",
+      "label": "Copilot errors hub",
+      "ga4": {
+        "sessionsCurrent": 2,
+        "sessionsPrevious": 1,
+        "sessionsDelta": 1,
+        "sessionsDeltaPct": 100,
+        "usersCurrent": 2,
+        "usersPrevious": 1,
+        "usersDelta": 1,
+        "engagedCurrent": 2,
+        "engagedPrevious": 1,
+        "engagedDelta": 1,
+        "viewsCurrent": 3,
+        "viewsPrevious": 2,
+        "viewsDelta": 1
+      },
+      "gsc": {
+        "clicksCurrent": 0,
+        "clicksPrevious": 0,
+        "clicksDelta": 0,
+        "clicksDeltaPct": "",
+        "impressionsCurrent": 6,
+        "impressionsPrevious": 6,
+        "impressionsDelta": 0,
+        "impressionsDeltaPct": 0,
+        "ctrCurrent": 0,
+        "ctrPrevious": 0,
+        "ctrDelta": 0,
+        "positionCurrent": 7.333333333333333,
+        "positionPrevious": 11,
+        "positionDelta": -3.666666666666667
+      },
+      "topQueries": [
+        {
+          "query": "user_global_rate_limited:pro",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 15
+        }
+      ]
+    },
+    {
+      "path": "/archives/2755",
+      "url": "https://www.zidooka.com/archives/2755",
+      "label": "Copilot rate_limited",
+      "ga4": {
+        "sessionsCurrent": 4,
+        "sessionsPrevious": 7,
+        "sessionsDelta": -3,
+        "sessionsDeltaPct": -42.857142857142854,
+        "usersCurrent": 4,
+        "usersPrevious": 7,
+        "usersDelta": -3,
+        "engagedCurrent": 2,
+        "engagedPrevious": 6,
+        "engagedDelta": -4,
+        "viewsCurrent": 4,
+        "viewsPrevious": 8,
+        "viewsDelta": -4
+      },
+      "gsc": {
+        "clicksCurrent": 0,
+        "clicksPrevious": 1,
+        "clicksDelta": -1,
+        "clicksDeltaPct": -100,
+        "impressionsCurrent": 15,
+        "impressionsPrevious": 40,
+        "impressionsDelta": -25,
+        "impressionsDeltaPct": -62.5,
+        "ctrCurrent": 0,
+        "ctrPrevious": 2.5,
+        "ctrDelta": -2.5,
+        "positionCurrent": 6.733333333333333,
+        "positionPrevious": 8.8,
+        "positionDelta": -2.0666666666666673
+      },
+      "topQueries": [
+        {
+          "query": "sorry, you have been rate-limited. please wait a moment before trying again. learn more server error: sorry, you've exceeded your 5 hour session limits. please review our terms of service. error code: user_global_rate_limited:edu",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "query": "sorry, you have been rate-limited. please wait a moment before trying again. learn more server error: sorry, you've exceeded your 5 hour session limits. please review our terms of service. error code: user_global_rate_limited:free",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "query": "sorry, you've exceeded your 5 hour session limits. please review our [terms of service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 11
+        }
+      ]
+    },
+    {
+      "path": "/archives/4154",
+      "url": "https://www.zidooka.com/archives/4154",
+      "label": "X errors summary",
+      "ga4": {
+        "sessionsCurrent": 4,
+        "sessionsPrevious": 0,
+        "sessionsDelta": 4,
+        "sessionsDeltaPct": "",
+        "usersCurrent": 4,
+        "usersPrevious": 0,
+        "usersDelta": 4,
+        "engagedCurrent": 2,
+        "engagedPrevious": 0,
+        "engagedDelta": 2,
+        "viewsCurrent": 5,
+        "viewsPrevious": 0,
+        "viewsDelta": 5
+      },
+      "gsc": {
+        "clicksCurrent": 0,
+        "clicksPrevious": 0,
+        "clicksDelta": 0,
+        "clicksDeltaPct": "",
+        "impressionsCurrent": 67,
+        "impressionsPrevious": 90,
+        "impressionsDelta": -23,
+        "impressionsDeltaPct": -25.555555555555554,
+        "ctrCurrent": 0,
+        "ctrPrevious": 0,
+        "ctrDelta": 0,
+        "positionCurrent": 11.671641791044776,
+        "positionPrevious": 12.411111111111111,
+        "positionDelta": -0.7394693200663358
+      },
+      "topQueries": [
+        {
+          "query": "x ポストを読み込めません 特定の人",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "query": "x現在ポストを取得できません",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 23
+        },
+        {
+          "query": "ツイッター 取得できない",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 46
+        }
+      ]
+    }
+  ]
+}

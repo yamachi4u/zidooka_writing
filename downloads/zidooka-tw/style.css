@@ -1,0 +1,148 @@
+/*
+Theme Name: zidooka
+Theme URI: https://zidooka-tw
+Description: A custom theme based on _tw
+Version: 0.1.0
+Author: kazunori
+Author URI: https://www.zidooka.com/
+Text Domain: zidooka-tw
+Requires at least: 6.8
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: LICENSE
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+
+zidooka is based on _tw https://underscoretw.com/, (C) 2021-2026 Greg Sullivan
+_tw is distributed under the terms of the GNU GPL v2 or later.
+
+_tw is based on Underscores https://underscores.me/ and Varia https://github.com/Automattic/themes/tree/master/varia, (C) 2012-2026 Automattic, Inc.
+Underscores and Varia are distributed under the terms of the GNU GPL v2 or later.
+*/
+
+#comments,
+.comments-area,
+.comment-respond{
+  border:1px solid #e5e7eb;
+  padding:1rem;
+  border-radius:6px;
+  background:#fff;
+}
+#comments input[type="text"],
+#comments input[type="email"],
+#comments input[type="url"],
+#comments input[type="search"],
+#comments input[type="tel"],
+#comments input[type="number"],
+#comments input[type="password"],
+#comments textarea,
+.comment-respond input[type="text"],
+.comment-respond input[type="email"],
+.comment-respond input[type="url"],
+.comment-respond input[type="search"],
+.comment-respond input[type="tel"],
+.comment-respond input[type="number"],
+.comment-respond input[type="password"],
+.comment-respond textarea{
+  border:1px solid #d1d5db;
+  padding:0.5rem 0.75rem;
+  border-radius:6px;
+  background:#fff;
+  width:100%;
+  box-sizing:border-box;
+}
+#comments input:focus,
+#comments textarea:focus,
+.comment-respond input:focus,
+.comment-respond textarea:focus{
+  outline:2px solid transparent;
+  outline-offset:2px;
+  border-color:#6366f1;
+  box-shadow:0 0 0 3px rgba(99,102,241,0.25);
+}
+.search-form .form-control{
+  border:1px solid #d1d5db;
+  padding:0.5rem 1rem;
+  border-radius:9999px;
+  background:#fff;
+  box-sizing:border-box;
+}
+.search-form .form-control:focus{
+  outline:2px solid transparent;
+  outline-offset:2px;
+  border-color:#6366f1;
+  box-shadow:0 0 0 3px rgba(99,102,241,0.25);
+}
+.btn.btn-primary{
+  border-radius:9999px;
+  padding:0.5rem 1rem;
+  background:#4f46e5;
+  color:#fff;
+  border:1px solid #4f46e5;
+}
+.btn.btn-primary:hover{
+  background:#4338ca;
+  border-color:#4338ca;
+}
+.zenn-article-actions-footer{
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:flex-start;
+  gap:0.75rem;
+}
+.zenn-article-actions-footer .zenn-like-section{
+  flex:0 0 auto;
+}
+.zenn-article-actions-footer .zenn-share-section{
+  flex:1 1 auto;
+  min-width:0;
+}
+.zenn-article-actions-footer .zenn-share-buttons{
+  margin-top:0;
+  align-items:center;
+  row-gap:0.5rem;
+}
+.zenn-article-actions-footer .zenn-like-section,
+.zenn-article-actions-footer .zenn-share-section{
+  display:flex;
+  align-items:center;
+}
+.zenn-article-actions-footer .zenn-like-btn-large{
+  background-color:transparent;
+  border:0;
+  color:#0f172a;
+  padding:8px 12px;
+  gap:8px;
+}
+.zenn-article-actions-footer .zenn-like-btn-large svg{
+  margin-right:0;
+}
+
+/* ── Site header ── */
+html { scroll-behavior: smooth; }
+.zdk-site-header {
+  transition: box-shadow 0.25s ease;
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+.zdk-header-scrolled { box-shadow: 0 1px 6px rgba(0,0,0,0.08); }
+.zdk-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 22px 20px;
+}
+.zdk-brand-link {
+  text-decoration: none;
+  color: #0f172a;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+}
+
+/* ── Revenue mode ── */
+.zdk-mode-ads .zenn-cta-container,
+.zdk-mode-ads .zenn-cta-section,
+.zdk-mode-ads .zenn-cta-footer,
+.zdk-mode-ads .zenn-consult-cta { display: none; }

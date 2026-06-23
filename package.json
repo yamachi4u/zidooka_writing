@@ -15,7 +15,13 @@
     "adsense": "node scripts/adsense-report.mjs",
     "bing": "node scripts/bing-webmaster-report.mjs",
     "weekly": "node scripts/weekly-report.mjs",
-    "indexnow": "node scripts/ping-indexnow.mjs"
+    "indexnow": "node scripts/ping-indexnow.mjs",
+    "posthog:check": "node scripts/posthog-check.mjs",
+    "posthog:status": "node -e \"const fs=require('fs');const p=require('path');const f=p.join(process.cwd(),'drat','posthog-status.md');if(fs.existsSync(f))console.log(fs.readFileSync(f,'utf8'));else console.log('No status file. Run npm run posthog:check first.')\"",
+    "build:css": "npx @tailwindcss/cli -i downloads/zidooka-tw/assets/tailwind-input.css -o downloads/zidooka-tw/assets/tailwind.css --minify",
+    "build:tw": "npx @tailwindcss/cli -i assets/tailwind-input.css -o downloads/zidooka-tw/assets/tailwind.css --minify",
+    "backup:content": "node scripts/backup-content.mjs",
+    "decisions": "node scripts/check-decisions.mjs"
   },
   "dependencies": {
     "agent-browser": "github:vercel-labs/agent-browser",

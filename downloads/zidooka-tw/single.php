@@ -8,6 +8,9 @@ get_header(); ?>
 
 <!-- スタイルは style.css に移動しました -->
 
+<!-- Reading Progress Bar -->
+<div id="zdk-progress-bar" style="position:fixed;top:0;left:0;height:3px;background:#4f46e5;z-index:9999;width:0%;transition:width 0.1s linear;"></div>
+
 <div class="zenn-flex-wrapper">
     <main class="zenn-main-column px-4 sm:px-6 lg:px-0">
         <div class="zenn-container">
@@ -127,7 +130,7 @@ get_header(); ?>
                 "name": "ZIDOOKA!",
                 "logo": {
                   "@type": "ImageObject",
-                  "url": "https://www.zidooka.com/wp-content/uploads/2024/05/Slide-16_9-1.png"
+                  "url": "<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/og-default.png'); ?>"
                 }
               },
               "mainEntityOfPage": {
@@ -267,7 +270,18 @@ get_header(); ?>
                     <div class="zenn-content">
                         <?php the_content(); ?>
                     </div>
-                    
+
+                    <!-- Mid-content AdSense (desktop fill rate improvement) -->
+                    <div class="my-8" style="max-width:100%;overflow:hidden;">
+                        <ins class="adsbygoogle"
+                             style="display:block;max-width:100%;overflow:hidden;"
+                             data-ad-client="ca-pub-5002038850592836"
+                             data-ad-slot="2410921395"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+
                     <!-- Pagination for multi-page posts -->
                     <?php
                     $args = array(
@@ -320,15 +334,7 @@ get_header(); ?>
                             </button>
                         </div>
 
-                        <!-- Buy Me a Coffee -->
-                        <div class="text-center">
-                            <a href="https://buymeacoffee.com/zidooka" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-indigo-600 transition-colors no-underline">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/>
-                                </svg>
-                                <?php echo $is_english_only ? 'If helpful, Buy Me a Coffee' : '役に立ったら Buy Me a Coffee'; ?>
-                            </a>
-                        </div>
+                        <!-- Buy Me a Coffee removed from article footer (kept in sidebar) -->
                     </div>
                 </footer>
             </article>
@@ -423,7 +429,7 @@ get_header(); ?>
             ?>
 
             <?php if (!empty($related_posts)) : ?>
-            <section class="mt-10" style="max-width:72ch;">
+            <section class="mt-10 zidooka-related-posts" style="max-width:72ch;">
                 <h2 class="text-lg font-bold text-slate-800 mb-4"><?php echo $is_english_only ? 'Related Posts' : '関連記事'; ?></h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <?php foreach ($related_posts as $rp) : ?>
@@ -482,11 +488,6 @@ get_header(); ?>
                         <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
                     </svg>
                 </button>
-                <a class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors text-indigo-500" href="https://buymeacoffee.com/zidooka" target="_blank" rel="noopener" aria-label="Buy Me a Coffee">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/>
-                    </svg>
-                </a>
             </div>
         </div>
     </aside>
@@ -553,6 +554,9 @@ get_header(); ?>
 
 <!-- スタイルは style.css に移動しました -->
 
-
+<script>
+// Reading progress bar
+(function(){var bar=document.getElementById('zdk-progress-bar');if(!bar)return;var ticking=false;window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(function(){var h=document.documentElement.scrollHeight-window.innerHeight;if(h>0)bar.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';ticking=false});ticking=true}},{passive:true})})();
+</script>
 
 <?php get_footer(); ?>

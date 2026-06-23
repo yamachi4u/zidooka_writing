@@ -224,7 +224,7 @@ export class PostService {
     // 3. Resolve Metadata
     const metadata = await this.loadMetadata();
     const categoryIds = this.resolveCategories(frontmatter.categories, metadata.categories);
-    const tagIds = await this.resolveTags(frontmatter.tags, metadata.tags);
+    const tagIds = await this.resolveTags(frontmatter.tags, metadata);
 
     // 4. Handle Featured Image
     let featuredMediaId = null;
@@ -310,6 +310,21 @@ export class PostService {
     const { type: postType, data: postData } = await this.processFile(filePath);
     
     let existingPost = null;
+
+    // Quick validation before publishing
+    const issues = [];
+    if (!postData.title || postData.title.trim().length < 3) issues.push('Title too short (<3 chars)');
+    if (!postData.slug) issues.push('Missing slug');
+    if (postData.content && postData.content.length < 300) issues.push('Content too short (<300 chars)');
+    if (postData.content && (postData.content.includes('【') || postData.content.includes('】'))) {
+      issues.push('Contains 【】brackets — use :::note/:::conclusion blocks instead');
+    }
+    if (issues.length > 0) {
+      console.warn('Validation issues:');
+      issues.forEach(i => console.warn(`  - ${i}`));
+      console.warn('Use --force to publish anyway.');
+      throw new Error(`Validation failed (${issues.length} issue(s)). Use --force to skip.`);
+    }
     if (postData.id) {
       existingPost = { id: postData.id };
     } else {
@@ -354,9 +369,16 @@ export class PostService {
     return ids;
   }
 
-  async resolveTags(names, metadataList) {
+  async saveMetadata(metadata) {
+    await fs.mkdir(path.dirname(config.paths.metadata), { recursive: true });
+    await fs.writeFile(config.paths.metadata, JSON.stringify(metadata, null, 2));
+  }
+
+  async resolveTags(names, metadata) {
     if (!names || !Array.isArray(names)) return [];
+    const metadataList = metadata.tags;
     const ids = [];
+    let metadataChanged = false;
     for (const name of names) {
       const nameStr = String(name);
       const found = metadataList.find(m => String(m.name).toLowerCase() === nameStr.toLowerCase() || String(m.slug).toLowerCase() === nameStr.toLowerCase());
@@ -365,8 +387,14 @@ export class PostService {
       } else {
         console.log(`Tag '${name}' not found. Creating...`);
         const newTag = await this.wp.createTag(nameStr);
+        metadataList.push({ id: newTag.id, name: newTag.name, slug: newTag.slug });
+        metadataChanged = true;
         ids.push(newTag.id);
       }
+    }
+    if (metadataChanged) {
+      metadata.lastUpdated = new Date().toISOString();
+      await this.saveMetadata(metadata);
     }
     return ids;
   }

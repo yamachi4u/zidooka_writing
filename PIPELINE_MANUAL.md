@@ -22,6 +22,7 @@ CLIツールは `src/index.js` を経由して実行します。
 | `sync` | カテゴリ・タグ情報を同期し `data/metadata.json` を更新します | `node src/index.js sync` |
 | `list` | ローカルのカテゴリ・タグ一覧を表示します | `node src/index.js list categories` |
 | `post` | 指定したMarkdownファイルを投稿（または更新）します | `node src/index.js post drafts/article.md` |
+| `post-pair` | `-jp` / `-ja` と `-en` のペア記事をまとめて投稿（または更新）します | `node src/index.js post-pair drafts/article-jp.md` |
 
 ---
 
@@ -45,6 +46,12 @@ node src/index.js list tags
 
 ### Step 2: 記事ドラフトの作成
 `drafts/` フォルダ内にMarkdownファイルを作成します。
+
+ZIDOOKA の通常運用では、ユーザーから単言語指定がない限り、日本語版と英語版を別記事で用意します。
+
+推奨ファイル名:
+- `article-jp.md` または `article-ja.md`
+- `article-en.md`
 
 **ファイル構成例:**
 ```markdown
@@ -120,10 +127,16 @@ gas:
 - `gas.mode: bundle`: ファイルが1つでも ZIP にしたい場合に指定できます
 
 ### Step 3: 記事の投稿・更新
-作成したファイルを指定してコマンドを実行します。
+通常は、日本語版または英語版のどちらか片方を指定して `post-pair` を実行します。対応する相方ファイルを自動検出して、2本とも投稿します。
 
 ```powershell
-node src/index.js post drafts/my-article.md
+node src/index.js post-pair drafts/my-article-jp.md
+```
+
+単独投稿を意図している場合だけ、従来どおり `post` を使います。
+
+```powershell
+node src/index.js post drafts/my-article-jp.md
 ```
 
 **処理の流れ:**

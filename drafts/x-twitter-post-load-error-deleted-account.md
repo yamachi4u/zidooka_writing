@@ -1,7 +1,8 @@
 ---
-title: "X(Twitter)で「ポストを読み込めません」と出る原因は相手のアカウント削除か鍵化です"
+title: "X(Twitter)で「ポストを読み込めません アカウント削除」された？原因と確認方法" 
+date: 2026-05-20 09:00:00
 slug: "x-twitter-post-load-error-deleted-account"
-status: "draft"
+status: future
 categories: 
   - "SNS"
   - "Network / Access Errors"

@@ -8,36 +8,26 @@ import {
 } from './google-api-common.mjs';
 
 const DEFAULT_TRACKED_PAGES = [
-  {
-    path: '/archives/185',
-    url: 'https://www.zidooka.com/archives/185',
-    label: 'ChatGPT files.oaiusercontent.com',
-  },
-  {
-    path: '/archives/240',
-    url: 'https://www.zidooka.com/archives/240',
-    label: 'Cursor high demand',
-  },
-  {
-    path: '/archives/633',
-    url: 'https://www.zidooka.com/archives/633',
-    label: 'X post fetch failed',
-  },
-  {
-    path: '/archives/2672',
-    url: 'https://www.zidooka.com/archives/2672',
-    label: 'Copilot errors hub',
-  },
-  {
-    path: '/archives/2755',
-    url: 'https://www.zidooka.com/archives/2755',
-    label: 'Copilot rate_limited',
-  },
-  {
-    path: '/archives/4154',
-    url: 'https://www.zidooka.com/archives/4154',
-    label: 'X errors summary',
-  },
+  // === エラー系トップ記事（GSC順位・CTR監視対象） ===
+  { path: '/archives/105',  url: 'https://www.zidooka.com/archives/105',  label: 'princexml' },
+  { path: '/archives/2590', url: 'https://www.zidooka.com/archives/2590', label: 'edgesuite' },
+  { path: '/archives/2726', url: 'https://www.zidooka.com/archives/2726', label: 'Drive error' },
+  { path: '/archives/411',  url: 'https://www.zidooka.com/archives/411',  label: 'Copilot has been working' },
+  { path: '/archives/185',  url: 'https://www.zidooka.com/archives/185',  label: 'ChatGPT upload error' },
+  { path: '/archives/3290', url: 'https://www.zidooka.com/archives/3290', label: 'Something went wrong' },
+  { path: '/archives/3017', url: 'https://www.zidooka.com/archives/3017', label: 'X post fetch failed' },
+  { path: '/archives/4006', url: 'https://www.zidooka.com/archives/4006', label: 'archives/4006' },
+  { path: '/archives/3999', url: 'https://www.zidooka.com/archives/3999', label: 'archives/3999' },
+  { path: '/archives/443',  url: 'https://www.zidooka.com/archives/443',  label: 'ChatGPT offline' },
+  { path: '/archives/1083', url: 'https://www.zidooka.com/archives/1083', label: 'Image analysis' },
+  { path: '/archives/586',  url: 'https://www.zidooka.com/archives/586',  label: 'ChatGPT upload error 2' },
+  { path: '/archives/2581', url: 'https://www.zidooka.com/archives/2581', label: 'archives/2581' },
+  { path: '/archives/3636', url: 'https://www.zidooka.com/archives/3636', label: 'archives/3636' },
+  { path: '/archives/2750', url: 'https://www.zidooka.com/archives/2750', label: 'archives/2750' },
+  { path: '/archives/240',  url: 'https://www.zidooka.com/archives/240',  label: 'Cursor high demand' },
+  { path: '/archives/2672', url: 'https://www.zidooka.com/archives/2672', label: 'Copilot errors hub' },
+  { path: '/archives/2755', url: 'https://www.zidooka.com/archives/2755', label: 'Copilot rate_limited' },
+  { path: '/archives/4154', url: 'https://www.zidooka.com/archives/4154', label: 'X errors summary' },
 ];
 
 const DEFAULT_GA4_PROPERTY = '344037190';

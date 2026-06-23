@@ -1,0 +1,103 @@
+{
+  "cache_key": "cache_451906_457195a5e91b848d8bb84b188cffe89c09e86a038e42a9e40bf81bb1be8d6cb0",
+  "cache_target_age": "2026-06-04T06:59:57.459953Z",
+  "calculation_trigger": null,
+  "clickhouse": "SELECT\n    events.event AS event,\n    count() AS events,\n    count(DISTINCT if(not(empty(events__override.distinct_id)), events__override.person_id, events.person_id)) AS persons\nFROM\n    events\n    LEFT OUTER JOIN (SELECT\n        tupleElement(argMax(tuple(person_distinct_id_overrides.person_id), person_distinct_id_overrides.version), 1) AS person_id,\n        person_distinct_id_overrides.distinct_id AS distinct_id\n    FROM\n        person_distinct_id_overrides\n    WHERE\n        equals(person_distinct_id_overrides.team_id, 451906)\n    GROUP BY\n        person_distinct_id_overrides.distinct_id\n    HAVING\n        ifNull(equals(tupleElement(argMax(tuple(person_distinct_id_overrides.is_deleted), person_distinct_id_overrides.version), 1), 0), 0)\n    SETTINGS optimize_aggregation_in_order=1) AS events__override ON equals(events.distinct_id, events__override.distinct_id)\nWHERE\n    and(equals(events.team_id, 451906), greaterOrEquals(events.timestamp, minus(now64(6, %(hogql_val_0)s), toIntervalHour(2))))\nGROUP BY\n    events.event\nORDER BY\n    events DESC\nLIMIT 50 SETTINGS readonly=2, max_execution_time=10, max_threads=60, allow_experimental_object_type=1, max_ast_elements=4000000, max_expanded_ast_elements=4000000, max_bytes_before_external_group_by=0, transform_null_in=1, optimize_min_equality_disjunction_chain_length=4294967295, allow_experimental_join_condition=1, use_hive_partitioning=0",
+  "columns": [
+    "event",
+    "events",
+    "persons"
+  ],
+  "error": null,
+  "explain": null,
+  "hasMore": null,
+  "hogql": "SELECT\n    event,\n    count() AS events,\n    count(DISTINCT person_id) AS persons\nFROM\n    events\nWHERE\n    greaterOrEquals(timestamp, minus(now(), toIntervalHour(2)))\nGROUP BY\n    event\nORDER BY\n    events DESC\nLIMIT 50",
+  "is_cached": false,
+  "last_refresh": "2026-06-04T00:59:57.459953Z",
+  "limit": null,
+  "metadata": null,
+  "modifiers": {
+    "bounceRateDurationSeconds": null,
+    "bounceRatePageViewMode": "count_pageviews",
+    "convertToProjectTimezone": true,
+    "customChannelTypeRules": null,
+    "dataWarehouseEventsModifiers": null,
+    "debug": null,
+    "forceClickhouseDataSkippingIndexes": null,
+    "formatCsvAllowDoubleQuotes": null,
+    "inCohortVia": "subquery",
+    "inlineCohortCalculation": "auto",
+    "materializationMode": "legacy_null_as_null",
+    "materializedColumnsOptimizationMode": null,
+    "optimizeJoinedFilters": false,
+    "optimizeProjections": true,
+    "parserMode": null,
+    "personsArgMaxVersion": "auto",
+    "personsJoinMode": null,
+    "personsOnEventsMode": "person_id_override_properties_on_events",
+    "propertyGroupsMode": "optimized",
+    "s3TableUseInvalidColumns": null,
+    "sessionIdPushdown": false,
+    "sessionPropertyPreAggregation": false,
+    "sessionTableVersion": "auto",
+    "sessionsV2JoinMode": "uuid",
+    "timings": null,
+    "useMaterializedViews": true,
+    "usePreaggregatedIntermediateResults": null,
+    "usePreaggregatedTableTransforms": null,
+    "useWebAnalyticsPreAggregatedTables": null
+  },
+  "next_allowed_client_refresh": "2026-06-04T01:00:57.459953Z",
+  "offset": null,
+  "query": null,
+  "query_metadata": {
+    "events": [],
+    "updated_at": "2026-06-04T00:59:57.707169Z"
+  },
+  "query_status": null,
+  "resolved_date_range": null,
+  "results": [
+    [
+      "zdk_experiment_impression",
+      216,
+      36
+    ],
+    [
+      "$feature_flag_called",
+      50,
+      10
+    ],
+    [
+      "$pageview",
+      43,
+      36
+    ],
+    [
+      "$pageleave",
+      37,
+      30
+    ],
+    [
+      "$autocapture",
+      12,
+      7
+    ]
+  ],
+  "timezone": "UTC",
+  "timings": null,
+  "types": [
+    [
+      "event",
+      "String"
+    ],
+    [
+      "events",
+      "UInt64"
+    ],
+    [
+      "persons",
+      "UInt64"
+    ]
+  ],
+  "warnings": null
+}

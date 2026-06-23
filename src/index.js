@@ -1,6 +1,7 @@
 import { PostService } from './services/postService.js';
 import { WpClient } from './services/wpClient.js';
 import { execFileSync } from 'child_process';
+import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
@@ -9,6 +10,44 @@ const __dirname = path.dirname(__filename);
 
 const args = process.argv.slice(2);
 const command = args[0];
+
+async function pathExists(filePath) {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function resolveBilingualPairPaths(inputPath) {
+  const absoluteInput = path.resolve(inputPath);
+  const dir = path.dirname(absoluteInput);
+  const base = path.basename(absoluteInput);
+  const candidates = [];
+
+  if (/-jp\.md$/i.test(base)) {
+    candidates.push(base.replace(/-jp\.md$/i, '-en.md'));
+  } else if (/-ja\.md$/i.test(base)) {
+    candidates.push(base.replace(/-ja\.md$/i, '-en.md'));
+  } else if (/-en\.md$/i.test(base)) {
+    candidates.push(
+      base.replace(/-en\.md$/i, '-jp.md'),
+      base.replace(/-en\.md$/i, '-ja.md')
+    );
+  } else {
+    throw new Error('Bilingual posting expects a filename ending in `-jp.md`, `-ja.md`, or `-en.md`.');
+  }
+
+  for (const candidate of candidates) {
+    const candidatePath = path.join(dir, candidate);
+    if (await pathExists(candidatePath)) {
+      return [absoluteInput, candidatePath];
+    }
+  }
+
+  throw new Error(`Pair draft not found for ${inputPath}. Expected one of: ${candidates.join(', ')}`);
+}
 
 async function main() {
   try {
@@ -48,12 +87,50 @@ async function main() {
       case 'post':
         const filePath = args[1];
         if (!filePath) throw new Error('Please specify a file path');
+        const forceFlag = args.includes('--force');
 
         const poster = new PostService();
-        const result = await poster.post(filePath);
-        console.log(`Successfully posted: "${result.title.raw}"`);
-        console.log(`Link: ${result.link}`);
+        try {
+          const result = await poster.post(filePath);
+          console.log(`Successfully posted: "${result.title.raw}"`);
+          console.log(`Link: ${result.link}`);
+        } catch (err) {
+          if (forceFlag && err.message.includes('Validation failed')) {
+            console.warn('--force: skipping validation, posting anyway...');
+            const { type: postType, data } = await poster.processFile(filePath);
+            let existing = data.id ? { id: data.id } : await poster.wp.getPostBySlug(data.slug, postType);
+            let result;
+            if (existing) {
+              const { id: _i, ...p } = data;
+              result = await poster.wp.updatePost(existing.id, p, postType);
+            } else {
+              const { id: _i, meta: _m, ...draftPayload } = data;
+              const draftData = { ...draftPayload, content: 'Temp content...', status: 'draft' };
+              const draft = await poster.wp.createPost(draftData, postType);
+              const { id: _i2, ...payload } = data;
+              result = await poster.wp.updatePost(draft.id, payload, postType);
+            }
+            console.log(`Force posted: "${result.title.raw}"`);
+            console.log(`Link: ${result.link}`);
+          } else {
+            throw err;
+          }
+        }
         break;
+
+      case 'post-pair': {
+        const pairPath = args[1];
+        if (!pairPath) throw new Error('Please specify one Japanese or English draft path');
+
+        const [firstPath, secondPath] = await resolveBilingualPairPaths(pairPath);
+        const pairPoster = new PostService();
+        for (const targetPath of [firstPath, secondPath]) {
+          const pairResult = await pairPoster.post(targetPath);
+          console.log(`Successfully posted: "${pairResult.title.raw}"`);
+          console.log(`Link: ${pairResult.link}`);
+        }
+        break;
+      }
 
       case 'schedule':
         const schedulePath = args[1];
@@ -88,6 +165,7 @@ Usage:
   node src/index.js sync             - Sync WP categories/tags
   node src/index.js list <type>      - List categories or tags (type: categories, tags)
   node src/index.js post <file>      - Post markdown file to WP
+  node src/index.js post-pair <file> - Post paired Japanese/English drafts together
   node src/index.js schedule <file>  - Schedule post for next available morning
   node src/index.js auth             - Check authentication
   node src/index.js thumbnail [opts] - Generate a branded thumbnail image

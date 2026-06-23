@@ -31,6 +31,56 @@ if (PHP_SAPI !== 'cli' && (!defined('WP_DEBUG') || !WP_DEBUG)) {
     }
 }
 
+if (!defined('ZIDOOKA_TW_TYPOGRAPHY_CLASSES')) {
+    define('ZIDOOKA_TW_TYPOGRAPHY_CLASSES', 'prose');
+}
+if (!defined('ZDK_OGP_FALLBACK_IMAGE')) {
+    define('ZDK_OGP_FALLBACK_IMAGE', 'https://www.zidooka.com/wp-content/uploads/2024/05/Slide-16_9-1.png');
+}
+
+function zidooka_ga4_id() {
+    $ga4_id = defined('GA_MEASUREMENT_ID') ? constant('GA_MEASUREMENT_ID') : '';
+    $ga4_id = apply_filters('zidooka_ga4_id', $ga4_id);
+    return $ga4_id ? $ga4_id : 'G-VNF3D5QY6E';
+}
+
+// Cache-Control for public pages
+add_action('send_headers', function(){
+    if (is_admin() || is_user_logged_in()) return;
+    header('Cache-Control: public, max-age=3600, s-maxage=86400');
+});
+
+// WebSite schema with SearchAction
+add_action('wp_head', function(){
+    $url = home_url('/');
+    $name = get_bloginfo('name');
+    echo '<script type="application/ld+json">' . json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'WebSite',
+        'name' => $name,
+        'url' => $url,
+        'potentialAction' => [
+            '@type' => 'SearchAction',
+            'target' => [
+                '@type' => 'EntryPoint',
+                'urlTemplate' => $url . '?s={search_term_string}'
+            ],
+            'query-input' => 'required name=search_term_string'
+        ]
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n";
+}, 3);
+
+// Block REST API user enumeration
+add_filter('rest_endpoints', function($endpoints){
+    if (isset($endpoints['/wp/v2/users'])) unset($endpoints['/wp/v2/users']);
+    if (isset($endpoints['/wp/v2/users/(?P<id>[\d]+)'])) unset($endpoints['/wp/v2/users/(?P<id>[\d]+)']);
+    return $endpoints;
+});
+
+// Fix WordPress default sender email/name
+add_filter('wp_mail_from', function(){ return 'main@zidooka.com'; });
+add_filter('wp_mail_from_name', function(){ return 'ZIDOOKA'; });
+
 // Dequeue Bootstrap from parent if registered (harmless if not present)
 add_action( 'wp_print_scripts', function(){
     wp_dequeue_script( 'bootstrap5' );
@@ -49,15 +99,16 @@ add_action( 'wp_enqueue_scripts', function() {
     $ver = file_exists( $style_path ) ? filemtime( $style_path ) : null;
     wp_enqueue_style( 'theme-style', get_stylesheet_uri(), array(), $ver );
 
-    // A/B experiment CSS
-    $exp_css = '
-        .exp-font-large { font-size: 20px; }
-        .exp-line-loose { line-height: 1.9; }
-        .exp-toc-sticky { position: sticky; top: 1rem; }
-        .exp-related-grid4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        .exp-ad-early .zidooka-xserver-ad:first-of-type { display: none; }
-    ';
-    wp_add_inline_style('theme-style', $exp_css);
+    wp_enqueue_style('zdk-font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1');
+
+    $dm_css = get_stylesheet_directory() . '/assets/dark-mode.css';
+    if (file_exists($dm_css)) {
+        wp_enqueue_style('zdk-dark-mode', get_stylesheet_directory_uri() . '/assets/dark-mode.css', array(), filemtime($dm_css));
+    }
+    $dm_js = get_stylesheet_directory() . '/assets/dark-mode.js';
+    if (file_exists($dm_js)) {
+        wp_enqueue_script('zdk-dark-mode', get_stylesheet_directory_uri() . '/assets/dark-mode.js', array(), filemtime($dm_js), true);
+    }
 });
 
 // Disable WordPress emoji/embed bloat
@@ -88,14 +139,8 @@ add_action( 'after_setup_theme', function(){
 // - Define('GA_MEASUREMENT_ID', 'G-XXXXXXX') in wp-config.php, or
 // - add_filter('zidooka_ga4_id', fn(){ return 'G-XXXXXXX'; }); in a plugin/snippet
 add_action('wp_head', function(){
-    $ga4_id = '';
-    if (defined('GA_MEASUREMENT_ID')) {
-        $ga4_id = constant('GA_MEASUREMENT_ID');
-    }
-    $ga4_id = apply_filters('zidooka_ga4_id', $ga4_id);
-    if (!$ga4_id) {
-        $ga4_id = 'G-VNF3D5QY6E';
-    }
+    $ga4_id = zidooka_ga4_id();
+    if (!$ga4_id) return;
 
     echo "<script async src=\"https://www.googletagmanager.com/gtag/js?id=" . esc_attr($ga4_id) . "\"></script>\n";
     echo "<script>\n";
@@ -153,6 +198,19 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     <?php
 }, 27);
+
+// JS error tracking via PostHog
+add_action('wp_head', function(){
+    $key = '';
+    if (defined('POSTHOG_KEY')) { $key = constant('POSTHOG_KEY'); }
+    $key = apply_filters('zidooka_posthog_key', $key);
+    if (!$key) return;
+    ?>
+<script>
+(function(){var q=[];window.addEventListener('error',function(e){var m=e.message||'',s=e.filename||'',l=e.lineno||0,c=e.colno||0;q.push({message:m,source:s,lineno:l,colno:c,path:location.pathname,ts:Date.now()});if(q.length>10)q.shift()});var flush=function(){if(!q.length||typeof posthog==='undefined'||!posthog.capture)return;var batch=q.splice(0);try{posthog.capture('$exception',{errors:batch,_batch:true})}catch(e){}};setInterval(flush,15000);window.addEventListener('beforeunload',flush)})();
+</script>
+    <?php
+}, 28);
 
 // Temporary GA4 probe for `(not set)` landing-page investigation.
 // Fires only on single posts with search/chat/cross-site referrers.
@@ -257,9 +315,15 @@ add_action('wp_head', function(){
     );
 }, 25);
 
-// PostHog experiments JS
+// PostHog experiments JS + experiment CSS
 add_action( 'wp_enqueue_scripts', function() {
     if (!is_singular('post') && !is_page()) return;
+
+    $key = '';
+    if (defined('POSTHOG_KEY')) { $key = constant('POSTHOG_KEY'); }
+    $key = apply_filters('zidooka_posthog_key', $key);
+    if (!$key) return;
+
     wp_enqueue_script(
         'zdk-posthog-experiments',
         get_stylesheet_directory_uri() . '/assets/posthog-experiments.js',
@@ -267,6 +331,14 @@ add_action( 'wp_enqueue_scripts', function() {
         file_exists(get_stylesheet_directory() . '/assets/posthog-experiments.js') ? filemtime(get_stylesheet_directory() . '/assets/posthog-experiments.js') : null,
         array('strategy' => 'defer', 'in_footer' => true)
     );
+
+    // A/B experiment CSS (loaded only when PostHog is configured)
+    $exp_css = '
+        .exp-line-loose { line-height: 1.9; }
+        .exp-related-grid4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .exp-ad-early .zidooka-xserver-ad:first-of-type { display: none; }
+    ';
+    wp_add_inline_style('theme-style', $exp_css);
 
     // Single post CSS/JS (extracted from inline)
     if (is_singular('post')) {
@@ -284,6 +356,13 @@ add_action( 'wp_enqueue_scripts', function() {
                 'ajaxUrl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('simple-like-nonce'),
             ));
+        }
+    }
+
+    if (is_front_page()) {
+        $fp_css = get_stylesheet_directory() . '/assets/front-page.css';
+        if (file_exists($fp_css)) {
+            wp_enqueue_style('zdk-front-page', get_stylesheet_directory_uri() . '/assets/front-page.css', array(), filemtime($fp_css));
         }
     }
 }, 102);
@@ -348,275 +427,61 @@ if (!function_exists('zidooka_tw_the_posts_navigation')) {
     }
 }
 
-if (!function_exists('zidooka_tw_html5_comment')) {
-    function zidooka_tw_html5_comment($comment, $args, $depth) {
-        $GLOBALS['comment'] = $comment;
-        echo '<li '; comment_class('comment'); echo ' id="comment-'; comment_ID(); echo '">';
-        echo '<article class="comment-body">';
-        echo '<footer class="comment-meta">';
-        echo get_avatar($comment, 48);
-        echo '<b class="fn">' . get_comment_author_link() . '</b>';
-        echo '<span class="comment-metadata"><a href="' . esc_url(get_comment_link($comment->comment_ID)) . '">';
-        echo esc_html(get_comment_date()) . '</a></span>';
-        echo '</footer>';
-        echo '<div class="comment-content">';
-        comment_text();
-        echo '</div>';
-        if ($comment->comment_approved == '0') {
-            echo '<em>' . esc_html__('Your comment is awaiting moderation.', 'zidooka-tw') . '</em>';
-        }
-        echo '</article>';
-    }
-}
-
-// --- Category-based CTA system ---
+// --- Theme helper fallbacks (avoid fatal on search/archive templates) ---
 if (!function_exists('zidooka_is_english_post')) {
     function zidooka_is_english_post($post_id) {
         if (!$post_id) return false;
-
         $slug = get_post_field('post_name', $post_id);
         if ($slug && preg_match('/(^|-)en($|-)/', $slug)) return true;
-
         $cats = get_the_category($post_id);
         if (!empty($cats)) {
             foreach ($cats as $cat) {
                 if (!empty($cat->slug) && preg_match('/(^|-)en($|-)/', $cat->slug)) return true;
             }
         }
-
         $tags = get_the_tags($post_id);
         if (!empty($tags)) {
             foreach ($tags as $tag) {
                 if (!empty($tag->slug) && preg_match('/(^|-)en($|-)/', $tag->slug)) return true;
             }
         }
-
-        $title = get_the_title($post_id);
-        return $title ? !preg_match('/[\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{4E00}-\x{9FAF}]/u', $title) : false;
+        $post = get_post($post_id);
+        return $post ? (zidooka_detect_lang_by_post($post) === 'en') : false;
     }
 }
 
-function zidooka_cta_default_map() {
-    $default = [
-            'heading' => 'この記事の内容、60分で一緒に解決できます。',
-            'sub' => '「詰まって進めない」「社内で対応できない」など、状況を聞いて最短ルートを提案します。',
-            'note' => '初回5,000円〜／事前見積りで安心。',
-            'heading_en' => 'Stuck on this topic? I can help.',
-            'sub_en' => 'We can solve your specific issue in a short, focused session.',
-            'note_en' => 'Clear estimate provided before we start.',
-            'primary' => [
-                'label' => 'サービス詳細を見る',
-                'label_en' => 'View services',
-                'url' => 'https://www.zidooka.com/lp2025',
-                'url_en' => 'https://www.zidooka.com/lp2025en',
-                'target' => '_self',
-                'ga_label' => 'lp2025',
-            ],
-            'secondary' => [
-                'label' => 'この記事の相談フォームを開く',
-                'label_en' => 'Open consult form',
-                'url' => 'https://docs.google.com/forms/d/e/1FAIpQLSdsaBbQn208NuejNs3UPCx_AXsP0cImtvLStGAhQ2Ob92e23Q/viewform',
-                'target' => '_blank',
-                'ga_label' => 'form',
-            ],
-        ];
-    $gas = [
-            'heading' => 'GASの詰まり、最短で解決します。',
-            'sub' => '原因の切り分け→暫定回避→再発防止までまとめて支援します。',
-            'note' => '初回5,000円〜／事前見積りで安心。',
-            'primary' => [
-                'label' => 'GAS相談の詳細を見る',
-                'url' => 'https://www.zidooka.com/lp2025',
-                'target' => '_self',
-                'ga_label' => 'gas_lp',
-            ],
-            'secondary' => [
-                'label' => 'GAS相談フォームを開く',
-                'url' => 'https://docs.google.com/forms/d/e/1FAIpQLSdsaBbQn208NuejNs3UPCx_AXsP0cImtvLStGAhQ2Ob92e23Q/viewform',
-                'target' => '_blank',
-                'ga_label' => 'gas_form',
-            ],
-        ];
-    $wordpress = [
-            'heading' => 'WordPressの不具合、再発防止まで支援します。',
-            'sub' => '原因調査→修正→保守まで一貫して対応します。',
-            'note' => '初回5,000円〜／事前見積りで安心。',
-            'primary' => [
-                'label' => 'WP相談の詳細を見る',
-                'url' => 'https://www.zidooka.com/lp2025',
-                'target' => '_self',
-                'ga_label' => 'wp_lp',
-            ],
-            'secondary' => [
-                'label' => 'WP相談フォームを開く',
-                'url' => 'https://docs.google.com/forms/d/e/1FAIpQLSdsaBbQn208NuejNs3UPCx_AXsP0cImtvLStGAhQ2Ob92e23Q/viewform',
-                'target' => '_blank',
-                'ga_label' => 'wp_form',
-            ],
-        ];
-    $ai = [
-            'heading' => 'AI導入・自動化の詰まり、整理します。',
-            'sub' => '要件整理→設計→実装支援まで最短ルートで進めます。',
-            'note' => '初回5,000円〜／事前見積りで安心。',
-            'primary' => [
-                'label' => 'AI相談の詳細を見る',
-                'url' => 'https://www.zidooka.com/lp2025',
-                'target' => '_self',
-                'ga_label' => 'ai_lp',
-            ],
-            'secondary' => [
-                'label' => 'AI相談フォームを開く',
-                'url' => 'https://docs.google.com/forms/d/e/1FAIpQLSdsaBbQn208NuejNs3UPCx_AXsP0cImtvLStGAhQ2Ob92e23Q/viewform',
-                'target' => '_blank',
-                'ga_label' => 'ai_form',
-            ],
-        ];
-    $error = [
-            'heading' => '緊急トラブル、即時で原因を特定します。',
-            'sub' => 'ログ解析→暫定回避→恒久対策まで一括で支援します。',
-            'note' => '初回5,000円〜／事前見積りで安心。',
-            'primary' => [
-                'label' => 'トラブル相談の詳細を見る',
-                'url' => 'https://www.zidooka.com/lp2025',
-                'target' => '_self',
-                'ga_label' => 'error_lp',
-            ],
-            'secondary' => [
-                'label' => 'トラブル相談フォームを開く',
-                'url' => 'https://docs.google.com/forms/d/e/1FAIpQLSdsaBbQn208NuejNs3UPCx_AXsP0cImtvLStGAhQ2Ob92e23Q/viewform',
-                'target' => '_blank',
-                'ga_label' => 'error_form',
-            ],
-        ];
+require_once get_stylesheet_directory() . '/inc/cta.php';
 
-    return [
-        'default' => $default,
-        // GAS系
-        'gas' => $gas,
-        'gas-tips' => $gas,
-        'gastips' => $gas,
-        // WordPress系
-        'wordpress' => $wordpress,
-        'wordpresstips' => $wordpress,
-        // AI系
-        'ai' => $ai,
-        'chatgpt' => $ai,
-        // Error系
-        'errors' => $error,
-        'gas-errors' => $error,
-        'ai-error' => $error,
-        'wordpress-errors' => $error,
-        'google-errors' => $error,
-        'copiloterro' => $error,
-        'naerror' => $error,
-        'win-errror' => $error,
-        'python-errors' => $error,
-    ];
-}
 
-function zidooka_cta_load_override() {
-    $json = get_option('zidooka_cta_json', '');
-    if (!$json || !is_string($json)) return [];
-    $data = json_decode($json, true);
-    if (!is_array($data)) return [];
-    return $data;
-}
-
-function zidooka_cta_get_map() {
-    $map = zidooka_cta_default_map();
-    $override = zidooka_cta_load_override();
-    if ($override) {
-        $map = array_replace_recursive($map, $override);
-    }
-    return apply_filters('zidooka_cta_map', $map);
-}
-
-function zidooka_cta_pick_key($map, $post_id) {
-    $cats = get_the_category($post_id);
-    if (!$cats) return 'default';
-    foreach ($cats as $cat) {
-        $slug = $cat->slug;
-        if (isset($map[$slug])) return $slug;
-    }
-    return isset($map['default']) ? 'default' : array_key_first($map);
-}
-
-function zidooka_get_cta_for_post($post_id, $is_english_only = false) {
-    $map = zidooka_cta_get_map();
-    if (!$map || !is_array($map)) return null;
-    $key = zidooka_cta_pick_key($map, $post_id);
-    if (!$key || !isset($map[$key]) || !is_array($map[$key])) return null;
-    $cta = $map[$key];
-    $cta['key'] = $key;
-
-    if ($is_english_only) {
-        $default = isset($map['default']) && is_array($map['default']) ? $map['default'] : [];
-        if (!empty($cta['heading_en'])) {
-            $cta['heading'] = $cta['heading_en'];
-        } elseif (!empty($default['heading_en'])) {
-            $cta['heading'] = $default['heading_en'];
-        }
-        if (!empty($cta['sub_en'])) {
-            $cta['sub'] = $cta['sub_en'];
-        } elseif (!empty($default['sub_en'])) {
-            $cta['sub'] = $default['sub_en'];
-        }
-        if (!empty($cta['note_en'])) {
-            $cta['note'] = $cta['note_en'];
-        } elseif (!empty($default['note_en'])) {
-            $cta['note'] = $default['note_en'];
-        }
-        if (!empty($cta['primary']['label_en'])) {
-            $cta['primary']['label'] = $cta['primary']['label_en'];
-        } elseif (!empty($default['primary']['label_en'])) {
-            $cta['primary']['label'] = $default['primary']['label_en'];
-        }
-        if (!empty($cta['primary']['url_en'])) {
-            $cta['primary']['url'] = $cta['primary']['url_en'];
-        } elseif (!empty($default['primary']['url_en'])) {
-            $cta['primary']['url'] = $default['primary']['url_en'];
-        }
-        if (!empty($cta['secondary']['label_en'])) {
-            $cta['secondary']['label'] = $cta['secondary']['label_en'];
-        } elseif (!empty($default['secondary']['label_en'])) {
-            $cta['secondary']['label'] = $default['secondary']['label_en'];
-        }
-        if (!empty($cta['secondary']['url_en'])) {
-            $cta['secondary']['url'] = $cta['secondary']['url_en'];
-        } elseif (!empty($default['secondary']['url_en'])) {
-            $cta['secondary']['url'] = $default['secondary']['url_en'];
-        }
-    }
-
-    return $cta;
-}
-
-add_action('admin_init', function () {
-    register_setting('zidooka_cta_settings', 'zidooka_cta_json');
-});
-
-add_action('admin_menu', function () {
-    add_theme_page('CTA Settings', 'CTA Settings', 'manage_options', 'zidooka-cta-settings', 'zidooka_cta_settings_page');
-});
-
-function zidooka_cta_settings_page() {
-    if (!current_user_can('manage_options')) return;
-    $default = json_encode(zidooka_cta_default_map(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    $value = get_option('zidooka_cta_json', '');
+// Site UX: search tracking, keyboard shortcut, back-to-top
+add_action('wp_footer', function(){
     ?>
-    <div class="wrap">
-        <h1>CTA Settings</h1>
-        <p>カテゴリのスラッグに合わせてCTAを切り替えます。未指定の場合は <code>default</code> を使用します。</p>
-        <form method="post" action="options.php">
-            <?php settings_fields('zidooka_cta_settings'); ?>
-            <textarea name="zidooka_cta_json" rows="18" style="width: 100%; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, \"Liberation Mono\", monospace;"><?php echo esc_textarea($value); ?></textarea>
-            <p>空のまま保存するとデフォルト設定が使われます。下はデフォルトの例です。</p>
-            <textarea rows="18" style="width: 100%; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, \"Liberation Mono\", monospace;" readonly><?php echo esc_textarea($default); ?></textarea>
-            <?php submit_button(); ?>
-        </form>
-    </div>
+<script>
+(function(){
+  document.addEventListener('submit',function(e){
+    var f=e.target;if(!f||f.tagName!=='FORM')return;
+    var s=f.querySelector('input[type=search],input[name=s]');
+    if(!s)return;var q=s.value.trim();if(!q)return;
+    try{if(typeof gtag==='function')gtag('event','zdk_search',{search_term:q})}catch(er){}
+  },{passive:true});
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='/'||e.target!==document.body||e.ctrlKey||e.metaKey||e.altKey)return;
+    var s=document.querySelector('input[type=search],input[name=s]');
+    if(s){e.preventDefault();s.focus();s.select()}
+  });
+  var btn=document.createElement('button');
+  btn.innerHTML='\u2191';
+  btn.setAttribute('aria-label','Back to top');
+  btn.style.cssText='position:fixed;bottom:24px;right:24px;z-index:999;width:44px;height:44px;border-radius:50%;border:1px solid #d1d5db;background:#fff;color:#4f46e5;font-size:20px;cursor:pointer;opacity:0;transition:opacity 0.25s;box-shadow:0 2px 8px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center';
+  btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+  var t=false;
+  window.addEventListener('scroll',function(){if(t)return;t=true;requestAnimationFrame(function(){t=false;btn.style.opacity=window.scrollY>400?'1':'0'})},{passive:true});
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(btn)});
+  else document.body.appendChild(btn);
+})();
+</script>
     <?php
-}
+}, 100);
 
 // Simple Like System
 add_action('wp_ajax_nopriv_process_simple_like', 'process_simple_like');
@@ -680,7 +545,7 @@ add_action('wp_head', function () {
         }
     }
     if (!$og_img) {
-        $og_img = 'https://www.zidooka.com/wp-content/uploads/2024/05/Slide-16_9-1.png';
+        $og_img = ZDK_OGP_FALLBACK_IMAGE;
     }
     echo '<meta property="og:image" content="' . esc_url($og_img) . '" />' . "\n";
     echo '<meta name="twitter:image" content="' . esc_url($og_img) . '" />' . "\n";
@@ -699,6 +564,21 @@ add_action('wp_head', function () {
         foreach ($tags as $t) echo '<meta property="article:tag" content="' . esc_attr($t->name) . '" />' . "\n";
     }
 
+    // hreflang for bilingual posts
+    $is_en = function_exists('zidooka_is_english_post') ? zidooka_is_english_post($post_id) : false;
+    $slug = get_post_field('post_name', $post_id);
+    $counterpart_slug = $is_en ? preg_replace('/-en$/', '', $slug) : ($slug . '-en');
+    if ($counterpart_slug !== $slug) {
+        $counterpart = get_page_by_path($counterpart_slug, OBJECT, 'post');
+        if ($counterpart && $counterpart->post_status === 'publish') {
+            $en_url = $is_en ? $url : get_permalink($counterpart);
+            $ja_url = $is_en ? get_permalink($counterpart) : $url;
+            echo '<link rel="alternate" hreflang="ja" href="' . esc_url($ja_url) . '" />' . "\n";
+            echo '<link rel="alternate" hreflang="en" href="' . esc_url($en_url) . '" />' . "\n";
+            echo '<link rel="alternate" hreflang="x-default" href="' . esc_url($ja_url) . '" />' . "\n";
+        }
+    }
+
     // Multipage rel prev/next for paginated posts
     global $page, $numpages;
     if ($numpages > 1) {
@@ -706,6 +586,50 @@ add_action('wp_head', function () {
         if ($page < $numpages) echo '<link rel="next" href="' . esc_url(get_pagenum_link($page + 1)) . '" />' . "\n";
     }
 }, 5);
+
+// 1.6) FAQ schema for error/QA articles
+add_action('wp_head', function(){
+    if (!is_singular('post')) return;
+    $post_id = get_queried_object_id();
+    $content = get_post_field('post_content', $post_id);
+    if (!$content) return;
+
+    // Detect Q&A pattern: headings with 原因/対処/解決/方法/FAQ
+    preg_match_all('/<h[23][^>]*>(.*?(原因|対処|解決方法|やり方|手順|方法|とは|意味|エラー|FAQ).*?)<\/h[23]>/iu', $content, $matches, PREG_SET_ORDER);
+    if (count($matches) < 3) return; // require at least 3 matching headings
+
+    $qa = array();
+    foreach ($matches as $m) {
+        $q = wp_strip_all_tags($m[1]);
+        // Extract next paragraph after this heading
+        $pattern = '/' . preg_quote($m[0], '/') . '\s*<(p|div|ul|ol)[^>]*>(.*?)<\/\1>/is';
+        if (preg_match($pattern, $content, $am)) {
+            $answer = wp_strip_all_tags($am[2]);
+            $answer = mb_substr($answer, 0, 300);
+            if (mb_strlen($answer) < 20) continue;
+            $qa[] = array('q' => $q, 'a' => $answer);
+        }
+    }
+    if (count($qa) < 3) return;
+
+    $faqItems = array();
+    foreach ($qa as $pair) {
+        $faqItems[] = array(
+            '@type' => 'Question',
+            'name' => $pair['q'],
+            'acceptedAnswer' => array(
+                '@type' => 'Answer',
+                'text' => $pair['a'],
+            ),
+        );
+    }
+
+    echo '<script type="application/ld+json">' . json_encode(array(
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => $faqItems,
+    ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+}, 10);
 
 // 2) Image attributes: ensure alt fallback and decoding=async
 add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment) {
@@ -1015,21 +939,15 @@ add_action('after_setup_theme', 'setup_theme');
  */
 function zidooka_detect_lang_by_post($post) {
     $title = $post->post_title;
-
-    // 日本語が含まれていれば日本語
-    if (preg_match('/[ぁ-んァ-ン一-龠]/u', $title)) {
+    if (preg_match('/[\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{4E00}-\x{9FFF}]/u', $title)) {
         return 'ja';
     }
-
-    // ASCII比率で判定
     $ascii_count = preg_match_all('/[A-Za-z0-9\/\-\_\.\:\(\)\[\]\'" ]/', $title);
     $total_len   = mb_strlen($title);
     $ascii_ratio = $total_len > 0 ? ($ascii_count / $total_len) : 0;
-
     if ($ascii_ratio >= 0.7) {
         return 'en';
     }
-
     return 'ja';
 }
 
@@ -1167,9 +1085,23 @@ function zidooka_category_list_shortcode($atts) {
 }
 add_shortcode('zidooka_cat_list', 'zidooka_category_list_shortcode');
 
+// RSS feed: add featured image
+add_action('rss2_item', function(){
+    if (!has_post_thumbnail()) return;
+    $img = get_the_post_thumbnail(null, 'medium_large', ['style' => 'max-width:100%;height:auto;margin-bottom:8px;']);
+    echo $img;
+});
+
+add_action('transition_post_status', function ($new_status, $old_status, $post) {
+    if ($post->post_type !== 'post') return;
+    if ($new_status !== 'publish' && $old_status !== 'publish') return;
+    global $wpdb;
+    $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_zidooka_cat_list_v2_%' OR option_name LIKE '_transient_timeout_zidooka_cat_list_v2_%'");
+}, 10, 3);
+
 // Language detection for posts
 function zenn_is_english_only($title) {
-    return !preg_match('/[\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{4E00}-\x{9FAF}]/u', $title);
+    return !preg_match('/[\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{4E00}-\x{9FFF}]/u', $title);
 }
 
 // Smart adjacent post (prioritize same language)
@@ -1222,20 +1154,45 @@ add_action('wp_head', function(){
         echo '<meta name="description" content="' . esc_attr($desc . ' に関する記事一覧 – ZIDOOKA') . '" />' . "\n";
     }
 }, 7);
+// 2.5b) Noindex all feeds (reduces Bing crawl errors from thin XML pages)
+add_filter('wp_robots', function($robots) {
+    if (is_feed()) {
+        $robots['noindex'] = true;
+        $robots['follow'] = true;
+    }
+    return $robots;
+});
 // 2.5) Preconnect hints for external hosts
 add_action('wp_head', function(){
     $hosts = [
+      'https://cdn.tailwindcss.com',
       'https://www.googletagmanager.com',
       'https://pagead2.googlesyndication.com',
       'https://us.i.posthog.com',
     ];
     foreach ($hosts as $h) {
       echo '<link rel="preconnect" href="' . esc_url($h) . '" crossorigin />' . "\n";
+      echo '<link rel="dns-prefetch" href="' . esc_url($h) . '" />' . "\n";
     }
 }, 3);
 // 2.6) Comments: make name/email optional and remove website field
 // Do not require name and email
-add_filter('pre_option_require_name_email', function($value){ return '0'; });
+add_filter('pre_option_require_name_email', '__return_zero');
+add_filter('comment_form_default_fields', function($fields){
+    if (isset($fields['url'])) unset($fields['url']);
+    return $fields;
+});
+add_filter('comment_form_fields', function($fields){
+    if (isset($fields['url'])) unset($fields['url']);
+    $fields['zdk_hp'] = '<p class="zdk-hp-wrap" style="position:absolute;left:-9999px"><label for="zdk_hp">Leave empty</label><input type="text" name="zdk_hp" id="zdk_hp" tabindex="-1" autocomplete="off"></p>';
+    return $fields;
+}, 99);
+add_filter('preprocess_comment', function($data){
+    if (!empty($_POST['zdk_hp'])) {
+        wp_die('Spam detected.');
+    }
+    return $data;
+});
 // Remove the website (URL) field from the front-end form
 add_filter('comment_form_default_fields', function($fields){
     if (isset($fields['url'])) unset($fields['url']);
@@ -1261,465 +1218,153 @@ add_filter('the_content', function($content){
  */
 function zenn_get_related_posts($is_english_only = false) {
     if (!is_single()) return [];
-    
     global $post;
-    
-    // Get categories
+    $cache_key = 'zdk_rel_' . $post->ID . '_' . ($is_english_only ? 'en' : 'ja');
+    $cached = get_transient($cache_key);
+    if (is_array($cached)) return $cached;
+
     $categories = get_the_category();
-    if (empty($categories)) return [];
-    
-    $cat_ids = wp_list_pluck($categories, 'term_id');
-    
-    $args = [
-        'category__in' => $cat_ids,
-        'post__not_in' => [$post->ID],
-        'posts_per_page' => 10,
-        'orderby' => 'date', 
-        'order' => 'DESC',
-        'no_found_rows' => true,
-        'has_password' => false,
-        'post_status' => 'publish',
-        'ignore_sticky_posts' => true,
-    ];
-    
-    $query = new WP_Query($args);
-    $related = [];
-    
-    if ($query->have_posts()) {
-        foreach ($query->posts as $p) {
-            // Filter by language
-            if (function_exists('zidooka_detect_lang_by_post')) {
-                $p_lang = zidooka_detect_lang_by_post($p);
-                $p_is_english = ($p_lang === 'en');
-                
-                if ($p_is_english !== $is_english_only) {
-                    continue;
-                }
-            }
-            $related[] = $p;
-            if (count($related) >= 5) break; 
+    $tags = get_the_tags();
+    $cat_ids = $categories ? wp_list_pluck($categories, 'term_id') : [];
+    $tag_ids = $tags ? wp_list_pluck($tags, 'term_id') : [];
+
+    $collected = [];
+    $scored = [];
+    $seen = [$post->ID => true];
+
+    // Phase 1: tag-matched candidates (high relevance, limit 8)
+    if (!empty($tag_ids)) {
+        $tag_query = new WP_Query([
+            'tag__in' => $tag_ids,
+            'post__not_in' => [$post->ID],
+            'posts_per_page' => 8,
+            'no_found_rows' => true,
+            'has_password' => false,
+            'post_status' => 'publish',
+            'ignore_sticky_posts' => true,
+        ]);
+        foreach ($tag_query->posts as $p) {
+            if (isset($seen[$p->ID])) continue;
+            $seen[$p->ID] = true;
+            $collected[] = $p;
         }
     }
-    
+
+    // Phase 2: category-matched candidates (fallback if not enough from tags)
+    $need = max(10 - count($collected), 0);
+    if ($need > 0 && !empty($cat_ids)) {
+        $cat_query = new WP_Query([
+            'category__in' => $cat_ids,
+            'post__not_in' => array_merge([$post->ID], array_keys($seen)),
+            'posts_per_page' => $need,
+            'no_found_rows' => true,
+            'has_password' => false,
+            'post_status' => 'publish',
+            'ignore_sticky_posts' => true,
+        ]);
+        foreach ($cat_query->posts as $p) {
+            if (isset($seen[$p->ID])) continue;
+            $seen[$p->ID] = true;
+            $collected[] = $p;
+        }
+    }
+
+    // Phase 3: language filter
+    $filtered = [];
+    foreach ($collected as $p) {
+        if (function_exists('zidooka_detect_lang_by_post')) {
+            $p_lang = zidooka_detect_lang_by_post($p);
+            if (($p_lang === 'en') !== $is_english_only) continue;
+        }
+        $filtered[] = $p;
+    }
+
+    // Phase 4: score by multi-signal relevance
+    $current_title = $post->post_title;
+    $current_title_words = array_filter(explode(' ', mb_strtolower(wp_strip_all_tags($current_title))));
+    $current_cats = [];
+    foreach ($categories as $c) $current_cats[$c->term_id] = true;
+    $current_tags = [];
+    foreach ($tags as $t) $current_tags[$t->term_id] = true;
+
+    foreach ($filtered as $p) {
+        $score = 0;
+
+        // Shared tags: +3 each
+        $p_tags = wp_get_post_tags($p->ID, ['fields' => 'ids']);
+        foreach ($p_tags as $tid) {
+            if (isset($current_tags[$tid])) $score += 3;
+        }
+
+        // Shared categories: +1 each
+        $p_cats = wp_get_post_categories($p->ID, ['fields' => 'ids']);
+        foreach ($p_cats as $cid) {
+            if (isset($current_cats[$cid])) $score += 1;
+        }
+
+        // Title word overlap: +2 per shared significant word
+        $p_title = wp_strip_all_tags($p->post_title);
+        $p_words = array_filter(explode(' ', mb_strtolower($p_title)));
+        foreach ($current_title_words as $cw) {
+            if (mb_strlen($cw) < 2) continue;
+            foreach ($p_words as $pw) {
+                if ($cw === $pw || (mb_strlen($cw) > 3 && mb_strpos($pw, $cw) !== false)) {
+                    $score += 2;
+                    break;
+                }
+            }
+        }
+
+        // Recency bonus: +0 to +2 (newer = better within 180 days)
+        $age_days = (time() - strtotime($p->post_date)) / 86400;
+        if ($age_days <= 30) $score += 2;
+        elseif ($age_days <= 90) $score += 1;
+        elseif ($age_days <= 180) $score += 0.5;
+
+        $scored[] = ['post' => $p, 'score' => $score];
+    }
+
+    // Sort by score DESC, date DESC as tiebreaker
+    usort($scored, function($a, $b) {
+        $diff = $b['score'] - $a['score'];
+        if ($diff != 0) return $diff > 0 ? 1 : -1;
+        return strtotime($b['post']->post_date) - strtotime($a['post']->post_date);
+    });
+
+    $related = [];
+    foreach ($scored as $s) {
+        $related[] = $s['post'];
+        if (count($related) >= 5) break;
+    }
+
+    // Fallback: if nothing found, return latest posts matching language
+    if (empty($related)) {
+        $fallback = new WP_Query([
+            'post__not_in' => [$post->ID],
+            'posts_per_page' => 10,
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'no_found_rows' => true,
+            'has_password' => false,
+            'post_status' => 'publish',
+            'ignore_sticky_posts' => true,
+        ]);
+        foreach ($fallback->posts as $p) {
+            if (function_exists('zidooka_detect_lang_by_post')) {
+                $p_lang = zidooka_detect_lang_by_post($p);
+                if (($p_lang === 'en') !== $is_english_only) continue;
+            }
+            $related[] = $p;
+            if (count($related) >= 5) break;
+        }
+    }
+
+    set_transient($cache_key, $related, 12 * HOUR_IN_SECONDS);
     return $related;
 }
 
-// --- GAS script distribution (Custom Post Type) ---
-// Publish small, reusable Google Apps Script snippets and drive consulting leads.
+require_once get_stylesheet_directory() . '/inc/gas-dist.php';
 
-define('ZDK_GAS_POST_TYPE', 'gas_script');
-define('ZDK_GAS_META_VERSION', '_zdk_gas_version');
-define('ZDK_GAS_META_FILENAME', '_zdk_gas_filename');
-define('ZDK_GAS_META_CODE', '_zdk_gas_code');
-define('ZDK_GAS_META_BUNDLE', '_zdk_gas_bundle');
-define('ZDK_GAS_QV_DOWNLOAD', 'zdk_gas_download');
 
-function zdk_gas_normalize_newlines($text) {
-    if (!is_string($text) || $text === '') return '';
-    return str_replace(["\r\n", "\r"], "\n", $text);
-}
-
-function zdk_gas_sanitize_zip_path($path) {
-    $path = (string) $path;
-    if ($path === '') return '';
-
-    $path = str_replace('\\', '/', $path);
-    $parts = explode('/', $path);
-    $clean = [];
-    foreach ($parts as $p) {
-        $p = trim($p);
-        if ($p === '' || $p === '.') continue;
-        if ($p === '..') continue;
-        $p = sanitize_file_name($p);
-        if ($p === '') continue;
-        $clean[] = $p;
-    }
-    return implode('/', $clean);
-}
-
-function zdk_gas_parse_bundle($bundle) {
-    $text = zdk_gas_normalize_newlines((string) $bundle);
-    if ($text === '') return [];
-
-    $pattern = '/^\s*---\s*file:\s*(.+?)\s*---\s*$/m';
-    if (!preg_match_all($pattern, $text, $m, PREG_OFFSET_CAPTURE)) return [];
-
-    $files = [];
-    $count = count($m[0]);
-    for ($i = 0; $i < $count; $i++) {
-        $name = trim((string) $m[1][$i][0]);
-        if ($name === '') continue;
-
-        $start = $m[0][$i][1] + strlen($m[0][$i][0]);
-        $end = ($i + 1 < $count) ? $m[0][$i + 1][1] : strlen($text);
-        $content = substr($text, $start, $end - $start);
-        if ($content !== '' && $content[0] === "\n") $content = substr($content, 1);
-
-        $files[] = [
-            'name' => $name,
-            'content' => (string) $content,
-        ];
-    }
-    return $files;
-}
-
-function zdk_gas_get_dist_files($post_id) {
-    $post_id = (int) $post_id;
-    if ($post_id <= 0) return [];
-
-    $bundle = (string) get_post_meta($post_id, ZDK_GAS_META_BUNDLE, true);
-    $files = zdk_gas_parse_bundle($bundle);
-    if (!empty($files)) return $files;
-
-    $code = (string) get_post_meta($post_id, ZDK_GAS_META_CODE, true);
-    if ($code === '') return [];
-
-    $filename = (string) get_post_meta($post_id, ZDK_GAS_META_FILENAME, true);
-    if ($filename === '') $filename = 'Code.gs';
-    if (!preg_match('/\.(gs|js)$/i', $filename)) $filename .= '.gs';
-
-    return [[
-        'name' => $filename,
-        'content' => $code,
-    ]];
-}
-
-add_action('init', function () {
-    $labels = [
-        'name' => 'GAS配布',
-        'singular_name' => 'GAS配布',
-        'menu_name' => 'GAS配布',
-        'name_admin_bar' => 'GAS配布',
-        'add_new' => '新規追加',
-        'add_new_item' => '新しいGAS配布を追加',
-        'edit_item' => 'GAS配布を編集',
-        'new_item' => '新しいGAS配布',
-        'view_item' => 'GAS配布を表示',
-        'search_items' => 'GAS配布を検索',
-        'not_found' => 'GAS配布が見つかりません',
-        'not_found_in_trash' => 'ゴミ箱にGAS配布はありません',
-        'all_items' => 'GAS配布一覧',
-    ];
-
-    register_post_type(ZDK_GAS_POST_TYPE, [
-        'labels' => $labels,
-        'public' => true,
-        'show_in_rest' => true,
-        'menu_icon' => 'dashicons-editor-code',
-        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions'],
-        // Reuse existing site taxonomies (so CTA mapping by category slug can work as-is)
-        'taxonomies' => ['category', 'post_tag'],
-        'has_archive' => true,
-        'rewrite' => [
-            'slug' => 'gas-works',
-            'with_front' => false,
-        ],
-    ]);
-
-    // Allow CLI (REST API) to write meta fields.
-    $can_edit = function () { return current_user_can('edit_posts'); };
-    register_post_meta(ZDK_GAS_POST_TYPE, ZDK_GAS_META_VERSION, [
-        'single' => true,
-        'type' => 'string',
-        'show_in_rest' => true,
-        'sanitize_callback' => 'sanitize_text_field',
-        'auth_callback' => $can_edit,
-    ]);
-    register_post_meta(ZDK_GAS_POST_TYPE, ZDK_GAS_META_FILENAME, [
-        'single' => true,
-        'type' => 'string',
-        'show_in_rest' => true,
-        'sanitize_callback' => 'sanitize_text_field',
-        'auth_callback' => $can_edit,
-    ]);
-    $passthrough = function ($value) { return is_string($value) ? $value : ''; };
-    register_post_meta(ZDK_GAS_POST_TYPE, ZDK_GAS_META_CODE, [
-        'single' => true,
-        'type' => 'string',
-        'show_in_rest' => false,
-        'sanitize_callback' => $passthrough,
-        'auth_callback' => $can_edit,
-    ]);
-    register_post_meta(ZDK_GAS_POST_TYPE, ZDK_GAS_META_BUNDLE, [
-        'single' => true,
-        'type' => 'string',
-        'show_in_rest' => false,
-        'sanitize_callback' => $passthrough,
-        'auth_callback' => $can_edit,
-    ]);
-
-    // Pretty download endpoint: /gas-works/<slug>/download/
-    add_rewrite_rule(
-        '^gas-works/([^/]+)/download/?$',
-        'index.php?' . ZDK_GAS_POST_TYPE . '=$matches[1]&' . ZDK_GAS_QV_DOWNLOAD . '=1',
-        'top'
-    );
-});
-
-add_filter('query_vars', function ($vars) {
-    $vars[] = ZDK_GAS_QV_DOWNLOAD;
-    return $vars;
-});
-
-add_action('admin_init', function () {
-    if (get_option('zdk_gas_rewrite_flushed') === '1') return;
-    flush_rewrite_rules(false);
-    update_option('zdk_gas_rewrite_flushed', '1');
-});
-
-function zdk_gas_get_download_url($post_id) {
-    $permalink = get_permalink($post_id);
-    if (!$permalink) return '';
-    return trailingslashit($permalink) . 'download/';
-}
-
-add_action('template_redirect', function () {
-    if (!get_query_var(ZDK_GAS_QV_DOWNLOAD)) return;
-
-    $post = get_queried_object();
-    if (!$post || !($post instanceof WP_Post) || $post->post_type !== ZDK_GAS_POST_TYPE) {
-        status_header(404);
-        exit;
-    }
-
-    $bundle = (string) get_post_meta($post->ID, ZDK_GAS_META_BUNDLE, true);
-    $files = zdk_gas_parse_bundle($bundle);
-    $is_bundle = !empty($files);
-
-    // Backward compatibility: single file meta
-    $single_code = (string) get_post_meta($post->ID, ZDK_GAS_META_CODE, true);
-
-    if (!$is_bundle && $single_code === '') {
-        status_header(404);
-        exit;
-    }
-
-    $filename = (string) get_post_meta($post->ID, ZDK_GAS_META_FILENAME, true);
-
-    // Bundle mode: ZIP preferred
-    if ($is_bundle) {
-        $zip_name = $filename !== ''
-            ? $filename
-            : (($post->post_name ? $post->post_name : ('gas-' . $post->ID)) . '.zip');
-
-        $zip_name = sanitize_file_name($zip_name);
-        if (!preg_match('/\.zip$/i', $zip_name)) $zip_name .= '.zip';
-        if ($zip_name === '') $zip_name = 'gas.zip';
-
-        // Try ZIP. If ZipArchive is unavailable, fallback to bundle text.
-        if (class_exists('ZipArchive')) {
-            $tmp = function_exists('wp_tempnam') ? wp_tempnam($zip_name) : tempnam(sys_get_temp_dir(), 'zdk-gas-');
-            if ($tmp && file_exists($tmp)) @unlink($tmp);
-
-            $zip = new ZipArchive();
-            $res = $tmp ? $zip->open($tmp, ZipArchive::CREATE) : false;
-            if ($res === true) {
-                foreach ($files as $f) {
-                    $name = isset($f['name']) ? zdk_gas_sanitize_zip_path($f['name']) : '';
-                    $content = isset($f['content']) ? (string) $f['content'] : '';
-                    if ($name === '') continue;
-                    $zip->addFromString($name, $content);
-                }
-                $zip->close();
-
-                if ($tmp && file_exists($tmp)) {
-                    nocache_headers();
-                    header('Content-Type: application/zip');
-                    header('X-Content-Type-Options: nosniff');
-                    header('Content-Disposition: attachment; filename="' . $zip_name . '"');
-                    header('Content-Length: ' . filesize($tmp));
-                    readfile($tmp);
-                    @unlink($tmp);
-                    exit;
-                }
-            }
-        }
-
-        $fallback = $bundle !== '' ? $bundle : '';
-        nocache_headers();
-        header('Content-Type: text/plain; charset=utf-8');
-        header('X-Content-Type-Options: nosniff');
-        header('Content-Disposition: attachment; filename="' . preg_replace('/\.zip$/i', '.txt', $zip_name) . '"');
-        echo $fallback;
-        exit;
-    }
-
-    // Single-file mode: .gs download
-    $out_name = $filename !== ''
-        ? $filename
-        : (($post->post_name ? $post->post_name : ('gas-' . $post->ID)) . '.gs');
-    $out_name = sanitize_file_name($out_name);
-    if ($out_name === '') $out_name = 'code.gs';
-    if (!preg_match('/\.(gs|js)$/i', $out_name)) $out_name .= '.gs';
-
-    nocache_headers();
-    header('Content-Type: text/plain; charset=utf-8');
-    header('X-Content-Type-Options: nosniff');
-    header('Content-Disposition: attachment; filename="' . $out_name . '"');
-    echo $single_code;
-    exit;
-});
-
-add_action('add_meta_boxes', function () {
-    add_meta_box(
-        'zdk_gas_dist_meta',
-        'GAS 配布設定',
-        'zdk_gas_dist_meta_box_cb',
-        ZDK_GAS_POST_TYPE,
-        'normal',
-        'high'
-    );
-});
-
-function zdk_gas_dist_meta_box_cb($post) {
-    if (!$post || !($post instanceof WP_Post)) return;
-    wp_nonce_field('zdk_gas_dist_meta_save', 'zdk_gas_dist_meta_nonce');
-
-    $version = (string) get_post_meta($post->ID, ZDK_GAS_META_VERSION, true);
-    $filename = (string) get_post_meta($post->ID, ZDK_GAS_META_FILENAME, true);
-    $code = (string) get_post_meta($post->ID, ZDK_GAS_META_CODE, true);
-    $bundle = (string) get_post_meta($post->ID, ZDK_GAS_META_BUNDLE, true);
-    $download_url = function_exists('zdk_gas_get_download_url') ? zdk_gas_get_download_url($post->ID) : '';
-
-    ?>
-    <p>
-        <label for="zdk_gas_version"><strong>バージョン</strong></label><br>
-        <input type="text" class="regular-text" id="zdk_gas_version" name="zdk_gas_version" value="<?php echo esc_attr($version); ?>" placeholder="例: 1.0.0">
-    </p>
-    <p>
-        <label for="zdk_gas_filename"><strong>ダウンロードファイル名</strong></label><br>
-        <input type="text" class="regular-text" id="zdk_gas_filename" name="zdk_gas_filename" value="<?php echo esc_attr($filename); ?>" placeholder="例: Code.gs">
-        <span class="description">未指定の場合は 単体なら <code>&lt;slug&gt;.gs</code> / ファイルセットなら <code>&lt;slug&gt;.zip</code> になります。</span>
-    </p>
-    <p>
-        <label for="zdk_gas_bundle"><strong>配布ファイルセット（複数ファイル / appsscript.json 対応）</strong></label><br>
-        <textarea id="zdk_gas_bundle" name="zdk_gas_bundle" style="width: 100%; min-height: 220px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;" placeholder="--- file: appsscript.json ---&#10;{&#10;  &quot;timeZone&quot;: &quot;Asia/Tokyo&quot;&#10;}&#10;--- file: Code.gs ---&#10;function main(){&#10;  Logger.log('hi');&#10;}"><?php echo esc_textarea($bundle); ?></textarea>
-        <span class="description">上の形式で貼り付けると ZIP 配布になります（空なら単体コードを使用）。</span>
-    </p>
-    <p>
-        <label for="zdk_gas_code"><strong>配布コード（単体・後方互換）</strong></label><br>
-        <textarea id="zdk_gas_code" name="zdk_gas_code" style="width: 100%; min-height: 260px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;"><?php echo esc_textarea($code); ?></textarea>
-        <span class="description">単体配布の場合に使用します（複数ファイルが必要なら上のファイルセットを使ってください）。</span>
-    </p>
-    <?php if ($download_url) : ?>
-        <p>
-            <strong>ダウンロードURL:</strong>
-            <code><?php echo esc_html($download_url); ?></code>
-        </p>
-    <?php endif; ?>
-    <?php
-}
-
-add_action('save_post_' . ZDK_GAS_POST_TYPE, function ($post_id) {
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    if (!isset($_POST['zdk_gas_dist_meta_nonce']) || !wp_verify_nonce($_POST['zdk_gas_dist_meta_nonce'], 'zdk_gas_dist_meta_save')) return;
-    if (!current_user_can('edit_post', $post_id)) return;
-
-    $version = isset($_POST['zdk_gas_version']) ? sanitize_text_field(wp_unslash($_POST['zdk_gas_version'])) : '';
-    $filename = isset($_POST['zdk_gas_filename']) ? sanitize_file_name(wp_unslash($_POST['zdk_gas_filename'])) : '';
-    $code = isset($_POST['zdk_gas_code']) ? (string) wp_unslash($_POST['zdk_gas_code']) : '';
-    $bundle = isset($_POST['zdk_gas_bundle']) ? (string) wp_unslash($_POST['zdk_gas_bundle']) : '';
-
-    if ($version !== '') update_post_meta($post_id, ZDK_GAS_META_VERSION, $version);
-    else delete_post_meta($post_id, ZDK_GAS_META_VERSION);
-
-    if ($filename !== '') update_post_meta($post_id, ZDK_GAS_META_FILENAME, $filename);
-    else delete_post_meta($post_id, ZDK_GAS_META_FILENAME);
-
-    if ($code !== '') update_post_meta($post_id, ZDK_GAS_META_CODE, $code);
-    else delete_post_meta($post_id, ZDK_GAS_META_CODE);
-
-    $bundle = zdk_gas_normalize_newlines($bundle);
-    if ($bundle !== '') update_post_meta($post_id, ZDK_GAS_META_BUNDLE, $bundle);
-    else delete_post_meta($post_id, ZDK_GAS_META_BUNDLE);
-});
-
-add_shortcode('zdk_gas_download', function ($atts = []) {
-    if (!is_singular(ZDK_GAS_POST_TYPE)) return '';
-    $post_id = get_the_ID();
-    if (!$post_id) return '';
-
-    $files = function_exists('zdk_gas_get_dist_files') ? zdk_gas_get_dist_files($post_id) : [];
-    if (empty($files)) return '';
-
-    $atts = shortcode_atts([
-        'label' => 'コードをダウンロード',
-    ], $atts, 'zdk_gas_download');
-
-    $url = zdk_gas_get_download_url($post_id);
-    if (!$url) return '';
-
-    $label = (string) $atts['label'];
-    return '<a href="' . esc_url($url) . '" class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors no-underline">' . esc_html($label) . '</a>';
-});
-
-add_shortcode('zdk_gas_code', function () {
-    if (!is_singular(ZDK_GAS_POST_TYPE)) return '';
-    $post_id = get_the_ID();
-    if (!$post_id) return '';
-
-    $files = function_exists('zdk_gas_get_dist_files') ? zdk_gas_get_dist_files($post_id) : [];
-    if (empty($files)) return '';
-
-    ob_start();
-    ?>
-    <div class="space-y-4">
-        <?php foreach ($files as $i => $f) :
-            $name = isset($f['name']) ? (string) $f['name'] : '';
-            $content = isset($f['content']) ? (string) $f['content'] : '';
-            if ($content === '') continue;
-            if ($name === '') $name = 'Code.gs';
-
-            $suffix = $post_id . '-' . $i;
-            $code_id = 'zdk-gas-code-' . $suffix;
-            $btn_id = 'zdk-gas-copy-' . $suffix;
-        ?>
-            <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
-                <div class="flex items-center justify-between px-4 py-2 border-b border-slate-200 bg-slate-50">
-                    <span class="text-xs font-mono text-slate-600"><?php echo esc_html($name); ?></span>
-                    <button type="button" id="<?php echo esc_attr($btn_id); ?>" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition-colors">
-                        コピー
-                    </button>
-                </div>
-                <pre class="m-0 p-4 overflow-x-auto text-sm leading-relaxed bg-slate-900 text-slate-100"><code id="<?php echo esc_attr($code_id); ?>"><?php echo esc_html($content); ?></code></pre>
-            </div>
-        <?php endforeach; ?>
-    </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const pairs = [
-            <?php foreach ($files as $i => $f) :
-                $content = isset($f['content']) ? (string) $f['content'] : '';
-                if ($content === '') continue;
-                $suffix = $post_id . '-' . $i;
-            ?>
-            { btn: <?php echo json_encode('zdk-gas-copy-' . $suffix); ?>, code: <?php echo json_encode('zdk-gas-code-' . $suffix); ?> },
-            <?php endforeach; ?>
-        ];
-        pairs.forEach(function (p) {
-            const btn = document.getElementById(p.btn);
-            const codeEl = document.getElementById(p.code);
-            if (!btn || !codeEl) return;
-            btn.addEventListener('click', async function () {
-                const text = codeEl.innerText || '';
-                try {
-                    await navigator.clipboard.writeText(text);
-                    const old = btn.innerText;
-                    btn.innerText = 'コピーしました';
-                    setTimeout(() => { btn.innerText = old; }, 1200);
-                } catch (e) {
-                    const range = document.createRange();
-                    range.selectNodeContents(codeEl);
-                    const sel = window.getSelection();
-                    sel.removeAllRanges();
-                    sel.addRange(range);
-                    document.execCommand('copy');
-                    sel.removeAllRanges();
-                }
-            });
-        });
-    });
-    </script>
-    <?php
-    return ob_get_clean();
-});
+require_once get_stylesheet_directory() . '/inc/template-functions.php';
+require_once get_stylesheet_directory() . '/inc/template-tags.php';

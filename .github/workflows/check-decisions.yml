@@ -1,0 +1,45 @@
+name: Check Decisions Due
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # daily 10:00 JST (01:00 UTC)
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - id: decisions
+        run: |
+          OUTPUT=$(npm run decisions 2>&1)
+          echo "$OUTPUT"
+          echo "output<<EOF" >> $GITHUB_OUTPUT
+          echo "$OUTPUT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          if echo "$OUTPUT" | grep -q "Due for review"; then
+            echo "has_due=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_due=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Create issue for due decisions
+        if: steps.decisions.outputs.has_due == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const output = `${{ steps.decisions.outputs.output }}`;
+            const lines = output.split('\n').filter(l => l.includes('Due for review') || l.match(/⏰/));
+            const title = 'Decision records due for review';
+            const body = `## ⏰ Decisions Due for Review\n\nRan \`npm run decisions\` on ${new Date().toISOString().slice(0,10)}.\n\n\`\`\`\n${output}\n\`\`\`\n\nPlease review the above decisions.`;
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['decisions']
+            });

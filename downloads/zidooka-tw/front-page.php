@@ -8,212 +8,6 @@
 get_header();
 ?>
 
-<!-- Front-page component styles -->
-<style>
-/* ── Layout ── */
-.content-area { padding-top: 2rem; padding-bottom: 2rem; }
-.site-title { color: #0f172a; }
-
-/* ── Post card overrides for front-page grid ── */
-.post-card {
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06);
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-.post-card:hover {
-  box-shadow: 0 6px 20px rgba(0,0,0,.1);
-  transform: translateY(-2px);
-}
-.post-card .post-thumbnail img {
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  width: 100%;
-}
-.post-card .entry-title {
-  font-size: 1rem;
-  line-height: 1.4;
-  font-weight: 600;
-  max-width: none;
-  margin-bottom: 0.25rem;
-}
-.post-card .entry-title a {
-  color: #1e293b;
-  text-decoration: none;
-}
-.post-card .entry-title a:hover { color: #4f46e5; }
-.post-card .entry-meta {
-  font-size: 0.8rem;
-  color: #64748b;
-  max-width: none;
-  margin-bottom: 0.5rem;
-}
-.post-card .entry-content {
-  font-size: 0.85rem;
-  color: #475569;
-  line-height: 1.5;
-  max-width: none;
-}
-.post-card .entry-footer { max-width: none; margin-bottom: 0; }
-.post-card .post-card-body {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 1rem 1.1rem 1.15rem;
-}
-.post-card .post-card-body .entry-footer { margin-top: auto; }
-
-/* ── Category badges ── */
-.cat-link {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 0.15em 0.6em;
-  border-radius: 9999px;
-  background: #eef2ff;
-  color: #4338ca;
-  text-decoration: none;
-  margin-right: 0.25rem;
-  margin-bottom: 0.25rem;
-}
-.cat-link:hover { background: #c7d2fe; }
-
-/* ── Resolved badge ── */
-.resolved-badge {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 0.15em 0.5em;
-  border-radius: 9999px;
-  background: #dcfce7;
-  color: #15803d;
-  margin-right: 0.25rem;
-}
-
-/* ── Pagination ── */
-.pagination-wrapper { margin-top: 2rem; }
-
-/* ── Sidebar ── */
-.sidebar {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.625rem;
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-.sidebar h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 0.9rem;
-}
-.sidebar h3 i { margin-right: 0.4rem; color: #4f46e5; }
-
-.sidebar-search-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.sidebar-search-form input[type="search"] {
-  width: 100%;
-  border: 1px solid #d1d5db;
-  border-radius: 0.625rem;
-  background: #fff;
-  color: #111827;
-  padding: 0.7rem 0.9rem;
-  box-sizing: border-box;
-}
-.sidebar-search-form input[type="search"]:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.18);
-}
-.sidebar-search-form button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  border-radius: 0.625rem;
-  background: #111827;
-  color: #fff;
-  padding: 0.7rem 1rem;
-  border: 1px solid #111827;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: background-color 0.15s, border-color 0.15s;
-}
-.sidebar-search-form button:hover {
-  background: #1f2937;
-  border-color: #1f2937;
-}
-
-/* About-site */
-.about-site p { font-size: 0.85rem; color: #475569; line-height: 1.6; margin-bottom: 0.5rem; }
-
-/* Footer / sidebar links */
-.footer-link {
-  text-decoration: none;
-  font-size: 0.9rem;
-  padding: 0.25rem 0;
-  transition: color 0.15s;
-}
-.footer-link:hover { color: #4f46e5 !important; }
-
-/* ── Category tree toggle ── */
-.category-children {
-  display: none;
-  margin-top: 0.25rem;
-}
-.category-children.open { display: block; }
-.category-parent {
-  cursor: pointer;
-  padding: 0.2rem 0;
-}
-.toggle-icon {
-  transition: transform 0.2s;
-  display: inline-block;
-}
-.category-parent.open .toggle-icon {
-  transform: rotate(90deg);
-}
-
-/* ── Recent posts ── */
-.recent-post-title {
-  font-size: 0.85rem;
-  color: #1e293b;
-  line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.recent-post-title:hover { color: #4f46e5; }
-
-/* ── Tag cloud ── */
-.tag-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.tag-cloud a {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.78rem;
-  padding: 0.25em 0.75em;
-  border: 1px solid #e5e7eb;
-  border-radius: 9999px;
-  color: #475569;
-  background: #f9fafb;
-  text-decoration: none;
-  transition: all 0.15s;
-}
-.tag-cloud a:hover {
-  background: #eef2ff;
-  border-color: #c7d2fe;
-  color: #4338ca;
-}
-</style>
-
 <!-- メインコンテンツエリア -->
 <div class="max-w-7xl mx-auto px-4 content-area">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -223,7 +17,8 @@ get_header();
             <div class="mb-5">
                 <form role="search" method="get" class="search-form" action="<?php echo esc_url(home_url('/')); ?>">
                     <div class="flex gap-2">
-                        <input type="search" class="rounded-md border-2 border-gray-300 bg-white px-4 py-2 text-gray-900 w-full focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300 focus:outline-none"
+                        <label class="sr-only" for="search-main">記事を検索</label>
+                        <input type="search" id="search-main" class="rounded-md border-2 border-gray-300 bg-white px-4 py-2 text-gray-900 w-full focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300 focus:outline-none"
                                placeholder="キーワードで記事を検索（例：エラー名、ツール名…）" value="<?php echo esc_attr(get_search_query()); ?>" name="s" />
                         <button type="submit" class="inline-flex items-center justify-center rounded-md px-5 py-2 text-white bg-indigo-600 hover:bg-indigo-700 font-medium text-sm whitespace-nowrap">
                             検索
@@ -249,7 +44,7 @@ get_header();
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <?php $post_count = 0; while ($query->have_posts()) : $query->the_post(); $post_count++; ?>
                         <?php if ($post_count === 3) : ?>
-                        <div class="flex col-span-1 md:col-span-2 justify-center">
+                        <div class="flex col-span-1 md:col-span-2 justify-center" style="min-height:100px">
                             <ins class="adsbygoogle"
                                  style="display:block"
                                  data-ad-format="fluid"
@@ -269,7 +64,7 @@ get_header();
                                         } elseif (has_post_thumbnail()) {
                                             the_post_thumbnail('medium_large', ['class' => 'w-full h-auto object-cover']);
                                         } else {
-                                            echo '<img src="https://www.zidooka.com/wp-content/uploads/2024/05/Slide-16_9-1.png" class="w-full h-auto object-cover" alt="' . esc_attr(get_the_title()) . '" loading="lazy">';
+                                            echo '<img src="' . esc_url(defined('ZDK_OGP_FALLBACK_IMAGE') ? ZDK_OGP_FALLBACK_IMAGE : 'https://www.zidooka.com/wp-content/uploads/2024/05/Slide-16_9-1.png') . '" class="w-full h-auto object-cover" alt="' . esc_attr(get_the_title()) . '" loading="lazy">';
                                         }
                                         ?>
                                     </a>
@@ -393,7 +188,8 @@ get_header();
             <div class="sidebar">
                 <h3><i class="fas fa-search"></i>検索</h3>
                 <form role="search" method="get" class="sidebar-search-form" action="<?php echo esc_url(home_url('/')); ?>">
-                    <input type="search" name="s" placeholder="キーワードで検索" value="<?php echo esc_attr(get_search_query()); ?>" />
+                    <label class="sr-only" for="search-sidebar">キーワードで検索</label>
+                    <input type="search" id="search-sidebar" name="s" placeholder="キーワードで検索" value="<?php echo esc_attr(get_search_query()); ?>" />
                     <button type="submit">検索</button>
                 </form>
             </div>
@@ -403,20 +199,25 @@ get_header();
                 <h3><i class="fas fa-folder"></i>カテゴリー</h3>
                 <ul class="list-unstyled mb-0">
                     <?php 
-                    $parent_categories = get_categories(array('parent' => 0));
+                    $all_cats = get_categories(array('hide_empty' => true, 'orderby' => 'name'));
+                    $cat_tree = array();
+                    foreach ($all_cats as $cat) {
+                        $cat_tree[$cat->parent][] = $cat;
+                    }
+                    $parent_categories = isset($cat_tree[0]) ? $cat_tree[0] : array();
                     foreach($parent_categories as $parent) {
-                        $child_categories = get_categories(array('parent' => $parent->term_id));
+                        $child_categories = isset($cat_tree[$parent->term_id]) ? $cat_tree[$parent->term_id] : array();
                         $has_children = !empty($child_categories);
                         
                         echo '<li class="mb-2">';
                         
                         if ($has_children) {
-                            echo '<div class="category-parent flex items-center" onclick="toggleCategory(this)">';
+                            echo '<div class="category-parent flex items-center" role="button" aria-expanded="false" tabindex="0" onclick="toggleCategory(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleCategory(this)}">';
                             echo '<i class="fas fa-chevron-right toggle-icon mr-2 text-gray-500 text-[0.7rem]"></i>';
                             echo '<a href="' . get_category_link($parent->term_id) . '" class="footer-link flex items-center text-gray-900 grow" onclick="event.stopPropagation()">';
                             echo '<i class="fas fa-folder mr-2 text-blue-600 text-[0.8rem]"></i>';
-                            echo esc_html($parent->name);
-                            echo '<span class="ml-auto inline-flex items-center rounded-full bg-gray-100 text-gray-900 text-xs px-2 py-0.5">' . esc_html($parent->count) . '</span>';
+                            echo $parent->name;
+                            echo '<span class="ml-auto inline-flex items-center rounded-full bg-gray-100 text-gray-900 text-xs px-2 py-0.5">' . $parent->count . '</span>';
                             echo '</a>';
                             echo '</div>';
                             
@@ -424,7 +225,7 @@ get_header();
                             foreach($child_categories as $child) {
                                 echo '<li class="mb-1"><a href="' . get_category_link($child->term_id) . '" class="footer-link flex items-center text-gray-900 text-[0.9rem]">';
                                 echo '<i class="fas fa-chevron-right mr-2 text-gray-500 text-[0.6rem]"></i>';
-                                echo esc_html($child->name);
+                                echo $child->name;
                                 echo '<span class="ml-auto inline-flex items-center rounded-full bg-gray-100 text-gray-900 text-[0.7rem] px-2 py-0.5">' . $child->count . '</span>';
                                 echo '</a></li>';
                             }
@@ -432,7 +233,7 @@ get_header();
                         } else {
                             echo '<a href="' . get_category_link($parent->term_id) . '" class="footer-link flex items-center text-gray-900">';
                             echo '<i class="fas fa-folder mr-2 text-blue-600 text-[0.8rem]"></i>';
-                            echo esc_html($parent->name);
+                            echo $parent->name;
                             echo '<span class="ml-auto inline-flex items-center rounded-full bg-gray-100 text-gray-900 text-xs px-2 py-0.5">' . $parent->count . '</span>';
                             echo '</a>';
                         }
@@ -445,6 +246,8 @@ get_header();
             
             <script>
             function toggleCategory(element) {
+                var expanded = element.getAttribute('aria-expanded') === 'true';
+                element.setAttribute('aria-expanded', !expanded);
                 element.classList.toggle('open');
                 const children = element.nextElementSibling;
                 if (children && children.classList.contains('category-children')) {
@@ -475,7 +278,7 @@ get_header();
                                     } elseif (has_post_thumbnail()) {
                                         the_post_thumbnail('thumbnail', ['class' => 'h-12 w-12 rounded-md object-cover']);
                                     } else {
-                                        echo '<img src="https://www.zidooka.com/wp-content/uploads/2024/05/Slide-16_9-1.png" class="h-12 w-12 rounded-md object-cover" alt="' . esc_attr(get_the_title()) . '" loading="lazy">';
+                                        echo '<img src="' . esc_url(defined('ZDK_OGP_FALLBACK_IMAGE') ? ZDK_OGP_FALLBACK_IMAGE : 'https://www.zidooka.com/wp-content/uploads/2024/05/Slide-16_9-1.png') . '" class="h-12 w-12 rounded-md object-cover" alt="' . esc_attr(get_the_title()) . '" loading="lazy">';
                                     }
                                     ?>
                                 </div>

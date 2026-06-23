@@ -1,0 +1,440 @@
+{
+  "currentRange": {
+    "startDate": "2026-05-06",
+    "endDate": "2026-05-12"
+  },
+  "previousRange": {
+    "startDate": "2026-04-29",
+    "endDate": "2026-05-05"
+  },
+  "trackedPages": [
+    {
+      "path": "/archives/185",
+      "url": "https://www.zidooka.com/archives/185",
+      "label": "ChatGPT files.oaiusercontent.com"
+    },
+    {
+      "path": "/archives/240",
+      "url": "https://www.zidooka.com/archives/240",
+      "label": "Cursor high demand"
+    },
+    {
+      "path": "/archives/633",
+      "url": "https://www.zidooka.com/archives/633",
+      "label": "X post fetch failed"
+    },
+    {
+      "path": "/archives/2672",
+      "url": "https://www.zidooka.com/archives/2672",
+      "label": "Copilot errors hub"
+    },
+    {
+      "path": "/archives/2755",
+      "url": "https://www.zidooka.com/archives/2755",
+      "label": "Copilot rate_limited"
+    },
+    {
+      "path": "/archives/4154",
+      "url": "https://www.zidooka.com/archives/4154",
+      "label": "X errors summary"
+    }
+  ],
+  "rows": [
+    {
+      "path": "/archives/185",
+      "url": "https://www.zidooka.com/archives/185",
+      "label": "ChatGPT files.oaiusercontent.com",
+      "ga4": {
+        "sessionsCurrent": 27,
+        "sessionsPrevious": 25,
+        "sessionsDelta": 2,
+        "sessionsDeltaPct": 8,
+        "usersCurrent": 26,
+        "usersPrevious": 22,
+        "usersDelta": 4,
+        "engagedCurrent": 16,
+        "engagedPrevious": 10,
+        "engagedDelta": 6,
+        "viewsCurrent": 33,
+        "viewsPrevious": 32,
+        "viewsDelta": 1
+      },
+      "gsc": {
+        "clicksCurrent": 20,
+        "clicksPrevious": 19,
+        "clicksDelta": 1,
+        "clicksDeltaPct": 5.263157894736842,
+        "impressionsCurrent": 105,
+        "impressionsPrevious": 124,
+        "impressionsDelta": -19,
+        "impressionsDeltaPct": -15.32258064516129,
+        "ctrCurrent": 19.047619047619047,
+        "ctrPrevious": 15.32258064516129,
+        "ctrDelta": 3.725038402457756,
+        "positionCurrent": 5.066666666666666,
+        "positionPrevious": 4.201612903225806,
+        "positionDelta": 0.8650537634408604
+      },
+      "topQueries": [
+        {
+          "query": "files.oaiusercontent.com にアップロードできませんでした。ネットワーク設定でこのサイトへのアクセスを許可するか、ネットワーク管理者に問い合わせてください。",
+          "clicks": 11,
+          "impressions": 38,
+          "ctr": 0.2894736842105263,
+          "position": 2.473684210526316
+        },
+        {
+          "query": "files.oaiusercontent.com",
+          "clicks": 2,
+          "impressions": 4,
+          "ctr": 0.5,
+          "position": 3
+        },
+        {
+          "query": "files.oaiusercontent.com にアップロードできませんでした。",
+          "clicks": 1,
+          "impressions": 1,
+          "ctr": 1,
+          "position": 2
+        },
+        {
+          "query": "\"oaiusercontent.com\"",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "query": "failed upload to files.oaiusercontent.com. please ensure your network settings allow access to this site or contact your network administrator.",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 10.666666666666666
+        }
+      ]
+    },
+    {
+      "path": "/archives/240",
+      "url": "https://www.zidooka.com/archives/240",
+      "label": "Cursor high demand",
+      "ga4": {
+        "sessionsCurrent": 5,
+        "sessionsPrevious": 1,
+        "sessionsDelta": 4,
+        "sessionsDeltaPct": 400,
+        "usersCurrent": 5,
+        "usersPrevious": 1,
+        "usersDelta": 4,
+        "engagedCurrent": 3,
+        "engagedPrevious": 0,
+        "engagedDelta": 3,
+        "viewsCurrent": 5,
+        "viewsPrevious": 1,
+        "viewsDelta": 4
+      },
+      "gsc": {
+        "clicksCurrent": 1,
+        "clicksPrevious": 0,
+        "clicksDelta": 1,
+        "clicksDeltaPct": "",
+        "impressionsCurrent": 39,
+        "impressionsPrevious": 3,
+        "impressionsDelta": 36,
+        "impressionsDeltaPct": 1200,
+        "ctrCurrent": 2.564102564102564,
+        "ctrPrevious": 0,
+        "ctrDelta": 2.564102564102564,
+        "positionCurrent": 6.6923076923076925,
+        "positionPrevious": 5.666666666666667,
+        "positionDelta": 1.0256410256410255
+      },
+      "topQueries": [
+        {
+          "query": "we're experiencing high demand for composer 2 right now. please switch to auto, another model, or try again in a few moments.",
+          "clicks": 0,
+          "impressions": 21,
+          "ctr": 0,
+          "position": 5.714285714285714
+        },
+        {
+          "query": "we're experiencing high demand for composer 2 right now. please upgrade to pro, switch to auto, another model, or try again in a few moments.",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 8.666666666666668
+        },
+        {
+          "query": "we're experiencing high demand for gpt-5.5 right now. please switch to auto, another model, or try again in a few moments.",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 10
+        }
+      ]
+    },
+    {
+      "path": "/archives/633",
+      "url": "https://www.zidooka.com/archives/633",
+      "label": "X post fetch failed",
+      "ga4": {
+        "sessionsCurrent": 4,
+        "sessionsPrevious": 12,
+        "sessionsDelta": -8,
+        "sessionsDeltaPct": -66.66666666666666,
+        "usersCurrent": 4,
+        "usersPrevious": 12,
+        "usersDelta": -8,
+        "engagedCurrent": 3,
+        "engagedPrevious": 5,
+        "engagedDelta": -2,
+        "viewsCurrent": 9,
+        "viewsPrevious": 13,
+        "viewsDelta": -4
+      },
+      "gsc": {
+        "clicksCurrent": 2,
+        "clicksPrevious": 10,
+        "clicksDelta": -8,
+        "clicksDeltaPct": -80,
+        "impressionsCurrent": 559,
+        "impressionsPrevious": 1181,
+        "impressionsDelta": -622,
+        "impressionsDeltaPct": -52.667231160033865,
+        "ctrCurrent": 0.35778175313059035,
+        "ctrPrevious": 0.8467400508044031,
+        "ctrDelta": -0.4889582976738127,
+        "positionCurrent": 10.640429338103758,
+        "positionPrevious": 10.24809483488569,
+        "positionDelta": 0.39233450321806806
+      },
+      "topQueries": [
+        {
+          "query": "ポストを読み込めません 特定の人",
+          "clicks": 1,
+          "impressions": 274,
+          "ctr": 0.0036496350364963502,
+          "position": 11.923357664233576
+        },
+        {
+          "query": "現在 ツイートを取得 できません 特定の人",
+          "clicks": 1,
+          "impressions": 1,
+          "ctr": 1,
+          "position": 1
+        },
+        {
+          "query": "x ポストを取得できません",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 12
+        },
+        {
+          "query": "x ポストを取得できません 原因",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 9
+        },
+        {
+          "query": "x ポストを読み込めません 特定の人",
+          "clicks": 0,
+          "impressions": 10,
+          "ctr": 0,
+          "position": 10.6
+        }
+      ]
+    },
+    {
+      "path": "/archives/2672",
+      "url": "https://www.zidooka.com/archives/2672",
+      "label": "Copilot errors hub",
+      "ga4": {
+        "sessionsCurrent": 2,
+        "sessionsPrevious": 0,
+        "sessionsDelta": 2,
+        "sessionsDeltaPct": "",
+        "usersCurrent": 2,
+        "usersPrevious": 0,
+        "usersDelta": 2,
+        "engagedCurrent": 2,
+        "engagedPrevious": 0,
+        "engagedDelta": 2,
+        "viewsCurrent": 3,
+        "viewsPrevious": 0,
+        "viewsDelta": 3
+      },
+      "gsc": {
+        "clicksCurrent": 0,
+        "clicksPrevious": 0,
+        "clicksDelta": 0,
+        "clicksDeltaPct": "",
+        "impressionsCurrent": 6,
+        "impressionsPrevious": 5,
+        "impressionsDelta": 1,
+        "impressionsDeltaPct": 20,
+        "ctrCurrent": 0,
+        "ctrPrevious": 0,
+        "ctrDelta": 0,
+        "positionCurrent": 7.333333333333333,
+        "positionPrevious": 11.2,
+        "positionDelta": -3.8666666666666663
+      },
+      "topQueries": [
+        {
+          "query": "user_global_rate_limited:pro",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 15
+        }
+      ]
+    },
+    {
+      "path": "/archives/2755",
+      "url": "https://www.zidooka.com/archives/2755",
+      "label": "Copilot rate_limited",
+      "ga4": {
+        "sessionsCurrent": 4,
+        "sessionsPrevious": 5,
+        "sessionsDelta": -1,
+        "sessionsDeltaPct": -20,
+        "usersCurrent": 4,
+        "usersPrevious": 5,
+        "usersDelta": -1,
+        "engagedCurrent": 2,
+        "engagedPrevious": 5,
+        "engagedDelta": -3,
+        "viewsCurrent": 4,
+        "viewsPrevious": 6,
+        "viewsDelta": -2
+      },
+      "gsc": {
+        "clicksCurrent": 0,
+        "clicksPrevious": 1,
+        "clicksDelta": -1,
+        "clicksDeltaPct": -100,
+        "impressionsCurrent": 15,
+        "impressionsPrevious": 32,
+        "impressionsDelta": -17,
+        "impressionsDeltaPct": -53.125,
+        "ctrCurrent": 0,
+        "ctrPrevious": 3.125,
+        "ctrDelta": -3.125,
+        "positionCurrent": 6.733333333333333,
+        "positionPrevious": 9.46875,
+        "positionDelta": -2.7354166666666666
+      },
+      "topQueries": [
+        {
+          "query": "sorry, you have been rate-limited. please wait a moment before trying again. learn more server error: sorry, you've exceeded your 5 hour session limits. please review our terms of service. error code: user_global_rate_limited:edu",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "query": "sorry, you have been rate-limited. please wait a moment before trying again. learn more server error: sorry, you've exceeded your 5 hour session limits. please review our terms of service. error code: user_global_rate_limited:free",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "query": "sorry, you've exceeded your 5 hour session limits. please review our [terms of service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 11
+        },
+        {
+          "query": "sorry, you've exceeded your weekly rate limit.",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 11
+        },
+        {
+          "query": "user_global_rate_limited:pro",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        }
+      ]
+    },
+    {
+      "path": "/archives/4154",
+      "url": "https://www.zidooka.com/archives/4154",
+      "label": "X errors summary",
+      "ga4": {
+        "sessionsCurrent": 4,
+        "sessionsPrevious": 0,
+        "sessionsDelta": 4,
+        "sessionsDeltaPct": "",
+        "usersCurrent": 4,
+        "usersPrevious": 0,
+        "usersDelta": 4,
+        "engagedCurrent": 2,
+        "engagedPrevious": 0,
+        "engagedDelta": 2,
+        "viewsCurrent": 5,
+        "viewsPrevious": 0,
+        "viewsDelta": 5
+      },
+      "gsc": {
+        "clicksCurrent": 0,
+        "clicksPrevious": 0,
+        "clicksDelta": 0,
+        "clicksDeltaPct": "",
+        "impressionsCurrent": 67,
+        "impressionsPrevious": 84,
+        "impressionsDelta": -17,
+        "impressionsDeltaPct": -20.238095238095237,
+        "ctrCurrent": 0,
+        "ctrPrevious": 0,
+        "ctrDelta": 0,
+        "positionCurrent": 11.671641791044776,
+        "positionPrevious": 12.25,
+        "positionDelta": -0.5783582089552244
+      },
+      "topQueries": [
+        {
+          "query": "x ポストを読み込めません 特定の人",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "query": "x現在ポストを取得できません",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 23
+        },
+        {
+          "query": "ツイッター 取得できない",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 46
+        },
+        {
+          "query": "ポストを取得できません",
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 11.5
+        },
+        {
+          "query": "現在ポストを取得 できません 原因",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 12
+        }
+      ]
+    }
+  ]
+}

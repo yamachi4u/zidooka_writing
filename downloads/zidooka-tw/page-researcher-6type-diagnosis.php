@@ -9,14 +9,7 @@ if (!defined('ABSPATH')) {
 }
 
 $asset_base = trailingslashit(get_stylesheet_directory_uri()) . 'assets/tools/researcher-6type';
-$ga4_id = '';
-if (defined('GA_MEASUREMENT_ID')) {
-    $ga4_id = constant('GA_MEASUREMENT_ID');
-}
-$ga4_id = apply_filters('zidooka_ga4_id', $ga4_id);
-if (!$ga4_id) {
-    $ga4_id = 'G-VNF3D5QY6E';
-}
+$ga4_id = function_exists('zidooka_ga4_id') ? zidooka_ga4_id() : '';
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>

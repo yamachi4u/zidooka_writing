@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ga4-analysis-report-20260513</title>
+  <style>
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+border: none;
+border-top: 1px solid #1a1a1a;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+</head>
+<body>
+<h1 id="ga4-gsc-分析レポート">GA4 / GSC 分析レポート</h1>
+<blockquote>
+<p>期間: 2026-04-13 ~ 2026-05-13（30日間） 計測: GA4 プロパティ
+344037190 / GSC https://www.zidooka.com/</p>
+</blockquote>
+<hr />
+<h2 id="サイト全体像">サイト全体像</h2>
+<table>
+<thead>
+<tr>
+<th>指標</th>
+<th>数値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>セッション</td>
+<td>6,970</td>
+</tr>
+<tr>
+<td>ユーザー</td>
+<td>5,934</td>
+</tr>
+<tr>
+<td>ページビュー</td>
+<td>10,670</td>
+</tr>
+<tr>
+<td>エンゲージドセッション</td>
+<td>3,339 (47.9%)</td>
+</tr>
+<tr>
+<td>Organic Search 比率</td>
+<td>77% (5,386 sessions)</td>
+</tr>
+<tr>
+<td>デスクトップ比率</td>
+<td><strong>87.7%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="気づきとアクション">気づきとアクション</h2>
+<h3 id="トラフィックの9割近くがデスクトップ">1.
+トラフィックの9割近くがデスクトップ</h3>
+<p>デスクトップ 87.7% / モバイル 12.2% / タブレット 0.5%</p>
+<p>→
+もう完全にデスクトップファーストでOK。モバイルの細かい調整よりデスクトップの表示速度・UIにリソース使うべき。</p>
+<h3 id="エラーメッセージseoがほぼすべてのトラフィック源">2.
+エラーメッセージSEOがほぼすべてのトラフィック源</h3>
+<p>上位の記事は全部エラーメッセージとのマッチング: -
+<code>/archives/105</code> (princexml) — 135 clicks, CTR 27.4% -
+<code>/archives/2590</code> (edgesuite) — 101 clicks, CTR 11.7% -
+<code>/archives/2726</code> (Drive error) — 92 clicks, CTR 9.6% -
+<code>/archives/411</code> (Copilot error) — 80 clicks, CTR 28.9% -
+<code>/archives/185</code> (ChatGPT upload error) — 70 clicks, CTR
+13.7%</p>
+<p><strong>→
+これは強い。検索クエリが長文エラーメッセージのままでクリックされる唯一のサイトになっている。</strong></p>
+<h3 id="低ctr高インプレッションの放置ページ要改善">3.
+低CTR・高インプレッションの放置ページ（要改善）</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 37%" />
+<col style="width: 12%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr>
+<th>ページ</th>
+<th>インプレッション</th>
+<th>CTR</th>
+<th>順位</th>
+<th>課題</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/archives/3290 (something went wrong)</td>
+<td>1,057</td>
+<td><strong>5.96%</strong></td>
+<td>6.2</td>
+<td>表示はされるがクリックされない</td>
+</tr>
+<tr>
+<td>/archives/4006</td>
+<td>757</td>
+<td><strong>5.15%</strong></td>
+<td>8.3</td>
+<td>順位が低い＋タイトル弱い</td>
+</tr>
+<tr>
+<td>/archives/3017</td>
+<td>732</td>
+<td><strong>7.38%</strong></td>
+<td>7.2</td>
+<td>改善余地あり</td>
+</tr>
+<tr>
+<td>/archives/2750</td>
+<td>498</td>
+<td><strong>4.22%</strong></td>
+<td>7.2</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>/archives/2581</td>
+<td>366</td>
+<td><strong>6.83%</strong></td>
+<td>6.5</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<p><strong>やること</strong>:
+これらの記事のタイトルタグとメタディスクリプションを見直す。エラーメッセージそのものをタイトルに含める
+or より具体的な解決策を前面に出す。</p>
+<h3 id="ctaクリックが実質ゼロ">4. CTAクリックが実質ゼロ</h3>
+<p><code>cta_click</code> = 2回、<code>form_start</code> =
+2回、<code>form_submit</code> = 2回（30日間で）</p>
+<p>6,970セッションに対してコンバージョン数が2。これはかなり低い。</p>
+<p><strong>原因推測</strong>: - CTAが記事下の方にあって見つけにくい -
+「この記事の内容について相談する」の文言が行動を促せていない -
+エラーページで「解決策を探しに来た」ユーザーには案件相談系CTAがミスマッチ</p>
+<p><strong>やること</strong>: -
+エラー解決記事には「同じエラーでお困りですか？」のようなCTAに変える -
+記事中の最初の解決策の直後に小さなCTAを追加 -
+CTAクリック自体をGA4イベントでもっと詳細に取れるようにする（今は2件しか取れてない）</p>
+<h3 id="chatgpt-copilot-からの参照流入が大量">5. ChatGPT / Copilot
+からの参照流入が大量</h3>
+<p><code>zdk_debug_search_boot</code> = 3,609回（30日間）</p>
+<p>これはChatGPTやCopilotの回答内でzidookaの記事がリンクされ、そこから訪れるユーザー。<strong>もう一つの重要なチャネル</strong>。</p>
+<p><strong>やること</strong>: -
+ChatGPT/Copilotの参照セッションのエンゲージメント率を計測する（今のGA4設定では取れてない）
+-
+もしエンゲージメントが高いなら、AI回答向けの記事構造（箇条書き・コードブロック・短い段落）を強化する</p>
+<h3 id="カレンダーページはエンゲージメント高いがseo流入少ない">6.
+カレンダーページはエンゲージメント高いがSEO流入少ない</h3>
+<p><code>/jp/calendar/2026/05</code> は 422 sessions、engaged
+324、平均391秒と高エンゲージメント。 しかし GSC
+トップには入ってこない（検索クエリが限定されるため）。</p>
+<p><strong>やること</strong>:
+カレンダーページからの内部リンクを強化して、記事への導線を増やす。</p>
+<h3 id="scroll-イベントが1082回全セッションの15.5">7.
+<code>scroll</code> イベントが1,082回（全セッションの15.5%）</h3>
+<p>スクロール計測は「最初の50%以上スクロール」で発火するデフォルト設定。15%はやや低い。</p>
+<p><strong>やること</strong>:
+GA4拡張計測機能でスクロール深度が正しく取れているか確認。もしまだなら「すべてON」にする（本人がやったと言っていたのでOKのはず）。</p>
+<hr />
+<h2 id="優先アクションリスト">優先アクションリスト</h2>
+<h3 id="今週やるといいこと">今週やるといいこと</h3>
+<ol type="1">
+<li><strong>タイトル/メタディスクリプション改善</strong>:
+/archives/3290, /archives/4006, /archives/3017, /archives/2750,
+/archives/2581</li>
+<li><strong>CTA文言の見直し</strong>: エラーページ用のCTAを用意する</li>
+</ol>
+<h3 id="来週以降">来週以降</h3>
+<ol start="3" type="1">
+<li><strong>CTAクリックのGA4イベント実装</strong>:
+現在2件しか取れていないので、data-ga-event属性の付与を見直す</li>
+<li><strong>ChatGPT/Copilot参照セッションの分析</strong>:
+専用のGA4ディメンションかイベントパラメータを追加</li>
+<li><strong><code>npm run seo:weekly</code> を定期実行</strong>:
+変化をウォッチする習慣をつける</li>
+</ol>
+</body>
+</html>
