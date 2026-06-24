@@ -1,6 +1,7 @@
 ---
-title: "Codex（ChatGPT）のバンク済みレート制限リセットをCLIで使う — aaamosh/codex-reset"
-slug: codex-reset-cli-jp
+title: "Codex（ChatGPT）のバンク済みレート制限リセットをCLIで使う — aaamosh/codex-reset を実際に試した"
+slug: codex-reset-cli-test-jp
+featured_image: ../images/2026/スクリーンショット 2026-06-23 123333.png
 status: publish
 categories:
   - AI
@@ -22,6 +23,22 @@ tags:
 :::conclusion
 codex-resetは、OpenAI Codexのバンク済みレート制限リセットをコマンドラインから実行するPythonスクリプト。依存関係ゼロ、公式拡張機能が使う未公開エンドポイントを直接叩く。WSLやサーバー、ターミナル環境でCodexを使っている人にはまさに救命器具。
 :::
+
+## 実際に試してみた
+
+筆者の環境（Windows 11, PowerShell 7）でも問題なく動作した。
+
+ダウンロードして実行すると、まず2つのバンクドクレジットが確認できた:
+
+![codex-reset 実行前の状態 — 2クレジット確認](../images/2026/スクリーンショット 2026-06-23 123327.png)
+
+`consume` コマンドで1つ消費。確認プロンプトに yes を答えると即座にリセットが実行され、レート制限が復活した:
+
+![消費後の状態 — セカンダリ制限がリセットされた](../images/2026/スクリーンショット 2026-06-23 123333.png)
+
+消費前は secondary が枯渇していたが、リセットにより 0% に戻っている。逆にクレジットがない状態だとこうなる:
+
+![クレジットがない状態](../images/2026/スクリーンショット 2026-06-23 123343.png)
 
 ## 何ができるのか
 

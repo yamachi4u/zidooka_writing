@@ -75,7 +75,9 @@
 | `zdk_line_height` | 行間 | control(50%) / loose(50%) | 100% | inactive (2026-06-16 クローズ: inconclusive) |
 | `zdk_related_posts` | 関連記事 | control(50%) / grid4(50%) | 100% | inactive (2026-06-22 クローズ: inconclusive) |
 | `zdk_ad_position` | 広告位置 | control(50%) / early(50%) | 100% | inactive (2026-06-04 停止) |
-| `zdk_code_fold` | コードブロック折りたたみ | control(50%) / folded(50%) | 100% | **active** (2026-06-22 開始) |
+| `zdk_code_fold` | コードブロック折りたたみ | control(50%) / folded(50%) | 100% | **active** (2026-06-22 開始, server-side) |
+| `zdk_header_image` | 記事ヘッダー画像サイズ | control(50%) / small(50%) | 100% | **active** (2026-06-23, server-side body class) |
+| `zdk_author_pos` | 著者プロフィール位置 | control(50%) / compact(50%) | 100% | **active** (2026-06-23, server-side body class) |
 
 ## パイプライン（優先順位付き）
 
@@ -85,8 +87,8 @@
 |--------|------|----------|------|--------|------|
 | **次** | コードブロック折りたたみ | `zdk_code_fold` | 長いコードブロックでスクロール軽減 | 中 | 新規flag。scrolldepthで間接測定可 |
 | 4 | コードブロック折りたたみ | `zdk_code_fold` | 長いコードブロックでスクロール軽減 | 中 | 新規flag。scrolldepthで間接測定可 |
-| 5 | 記事ヘッダー | `zdk_header_image` | feat image大 vs 小 | 低 | 新規flag。視覚的インパクトとスクロール深度 |
-| 6 | 著者プロフィール位置 | `zdk_author_pos` | 記事下 vs サイドバー | 低 | 新規flag |
+| 5 | 記事ヘッダー | `zdk_header_image` | feat image大 vs 小 | 低 | **active** (2026-06-23, server-side body class) |
+| 6 | 著者プロフィール位置 | `zdk_author_pos` | コンパクト vs 現在 | 低 | **active** (2026-06-23, server-side body class) |
 | 7 | 広告位置 | `zdk_ad_position` | RPM改善 | 低 | CSS実装修正が必要（現在は「最初の広告を隠す」だけ）。単独実験必須 |
 | 8 | 広告密度 | `zdk_ad_density` | 1個 vs 2個 | 低 | 新規flag。単独実験必須。収益影響あり |
 | 9 | モバイル広告配置 | `zdk_mobile_ad` | 記事中 vs 記事下 | 低 | 新規flag。単独実験必須 |
@@ -108,6 +110,8 @@
 | 2026-06-05 | **.env修正**: REMOTE_BASES の余計な外側クォート除去（remote-agent push/pull 失敗の原因） | Opencode |
 | 2026-06-16 | zdk_line_height クローズ（inconclusive）、zdk_related_posts 開始、CSS実装+デプロイ | Opencode |
 | 2026-06-22 | zdk_related_posts クローズ（inconclusive: KPI未計測）、TOCクリックセレクタ修正、posthog-check.mjs バグ修正、zdk_code_fold 開始 | Opencode |
+| 2026-06-23 | server-side A/B assignment導入（code_fold + header_image + author_pos）計画、死にコード掃除、TOC/Related Click closest() 修正、npm run decisions導入 | Opencode |
+| 2026-06-24 | action A-9: zdk_header_image 実装完了 — PostHog flag作成/有効化、functions.php body_class filter+B/A実験CSS追加、posthog-experiments.js 確認済 (既存)、status docs更新 | Opencode |
 
 ## 実験作成手順（エージェント用）
 

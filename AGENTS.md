@@ -213,9 +213,11 @@ node scripts/remote-agent/index.js pull --file=... --out=tmp_remote_agent/verify
 
 ### Writing Style
 
+- **参照**: `docs/ZIDOOKA-STYLE.md` — AI臭さを消すための詳細ルール
 - 日本語: ですます調
-- 英語: standard technical writing
+- 英語: standard technical writing, contractions OK
 - URLs: wrap in `<...>` or use Markdown links to avoid WordPress auto-link bugs
+- **必須**: 公開前に `docs/ZIDOOKA-STYLE.md` のセルフチェックをパスすること
 
 ### AdSense Control
 

@@ -1,6 +1,7 @@
 ---
-title: "Spend Your Codex Banked Rate-Limit Reset from the CLI — aaamosh/codex-reset"
-slug: codex-reset-cli-en
+title: "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI"
+slug: codex-reset-cli-test-en
+featured_image: ../images/2026/スクリーンショット 2026-06-23 123333.png
 status: publish
 categories:
   - AI
@@ -23,6 +24,22 @@ Enter **aaamosh/codex-reset**.
 :::conclusion
 codex-reset is a zero-dependency Python script that redeems your Codex banked rate-limit reset from the command line — no UI required. It talks to the same undocumented endpoints the official extension uses. If you're on a server, in WSL, or just live in a terminal, this is exactly what you need.
 :::
+
+## Tried It First-Hand
+
+I downloaded and ran it on Windows 11 (PowerShell 7). It worked without any issues.
+
+The status command showed 2 banked credits available:
+
+![codex-reset status output — 2 credits available](../images/2026/スクリーンショット 2026-06-23 123327.png)
+
+Running `consume` redeemed one credit and reset the secondary rate limit to 0%:
+
+![After consuming one credit — secondary limit restored](../images/2026/スクリーンショット 2026-06-23 123333.png)
+
+Before the reset, the secondary window was fully exhausted. After the reset it was back to 0%. This is what it looks like when you have no credits left:
+
+![No credits available state](../images/2026/スクリーンショット 2026-06-23 123343.png)
 
 ## What It Does
 

@@ -70,6 +70,14 @@
       if (body.classList.contains('zdk-code-fold-folded')) return 'folded';
       if (body.classList.contains('zdk-code-fold-control')) return 'control';
     }
+    if (key === 'zdk_header_image') {
+      if (body.classList.contains('zdk-header-image-small')) return 'small';
+      if (body.classList.contains('zdk-header-image-control')) return 'control';
+    }
+    if (key === 'zdk_author_pos') {
+      if (body.classList.contains('zdk-author-pos-compact')) return 'compact';
+      if (body.classList.contains('zdk-author-pos-control')) return 'control';
+    }
     return false;
   }
 
@@ -273,6 +281,9 @@
     initialized = true;
 
     var codeFoldVal = getServerVariant('zdk_code_fold') || getFlag('zdk_code_fold');
+    var headerImgVal = getServerVariant('zdk_header_image') || getFlag('zdk_header_image');
+    var authorPosVal = getServerVariant('zdk_author_pos') || getFlag('zdk_author_pos');
+
     if (typeof codeFoldVal === 'string') {
       experimentVariants.code_fold = codeFoldVal;
       capture('zdk_experiment_impression', { experiment: 'zdk_code_fold', variant: codeFoldVal });
@@ -280,7 +291,19 @@
         document.body.classList.add('exp-code-fold');
         setupCodeFold();
       }
-    } else {
+    }
+
+    if (typeof headerImgVal === 'string') {
+      experimentVariants.header_image = headerImgVal;
+      capture('zdk_experiment_impression', { experiment: 'zdk_header_image', variant: headerImgVal });
+    }
+
+    if (typeof authorPosVal === 'string') {
+      experimentVariants.author_pos = authorPosVal;
+      capture('zdk_experiment_impression', { experiment: 'zdk_author_pos', variant: authorPosVal });
+    }
+
+    if (!experimentVariants.code_fold && !experimentVariants.header_image && !experimentVariants.author_pos) {
       capture('zdk_experiment_impression', { experiment: 'fallback', variant: 'control' });
     }
 
@@ -292,24 +315,34 @@
   }
 
   function init() {
-    if (initialized) {
-      return true;
-    }
+    if (initialized) return true;
 
     var codeFoldVal = getServerVariant('zdk_code_fold') || getFlag('zdk_code_fold');
+    var headerImgVal = getServerVariant('zdk_header_image') || getFlag('zdk_header_image');
+    var authorPosVal = getServerVariant('zdk_author_pos') || getFlag('zdk_author_pos');
+
+    var anyResolved = typeof codeFoldVal === 'string' || typeof headerImgVal === 'string' || typeof authorPosVal === 'string';
+    if (!anyResolved) {
+      if (window.__zdkFallbackInit) return forceInit();
+      return false;
+    }
+
+    initialized = true;
+
     if (typeof codeFoldVal === 'string') {
       experimentVariants.code_fold = codeFoldVal;
       capture('zdk_experiment_impression', { experiment: 'zdk_code_fold', variant: codeFoldVal });
-      if (codeFoldVal === 'folded') {
-        document.body.classList.add('exp-code-fold');
-        setupCodeFold();
-      }
-      initialized = true;
-    } else {
-      if (window.__zdkFallbackInit) {
-        return forceInit();
-      }
-      return false;
+      if (codeFoldVal === 'folded') document.body.classList.add('exp-code-fold');
+    }
+
+    if (typeof headerImgVal === 'string') {
+      experimentVariants.header_image = headerImgVal;
+      capture('zdk_experiment_impression', { experiment: 'zdk_header_image', variant: headerImgVal });
+    }
+
+    if (typeof authorPosVal === 'string') {
+      experimentVariants.author_pos = authorPosVal;
+      capture('zdk_experiment_impression', { experiment: 'zdk_author_pos', variant: authorPosVal });
     }
 
     setupScrollDepth();

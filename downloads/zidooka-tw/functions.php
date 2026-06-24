@@ -315,6 +315,25 @@ add_action('wp_head', function(){
     );
 }, 25);
 
+// A/B experiment server-side assignment via body_class
+add_filter('body_class', function($classes) {
+    if (!is_singular('post') && !is_page()) return $classes;
+
+    // zdk_header_image: cookie-based 50/50 assignment
+    $cookie_key = 'zdk_header_image_variant';
+    $variant = '';
+    if (isset($_COOKIE[$cookie_key])) {
+        $variant = $_COOKIE[$cookie_key];
+    } else {
+        $variant = wp_rand(0, 1) ? 'small' : 'control';
+        setcookie($cookie_key, $variant, time() + 365 * 86400, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true);
+        $_COOKIE[$cookie_key] = $variant;
+    }
+    $classes[] = 'zdk-header-image-' . $variant;
+
+    return $classes;
+}, 20);
+
 // PostHog experiments JS + experiment CSS
 add_action( 'wp_enqueue_scripts', function() {
     if (!is_singular('post') && !is_page()) return;
@@ -337,6 +356,7 @@ add_action( 'wp_enqueue_scripts', function() {
         .exp-line-loose { line-height: 1.9; }
         .exp-related-grid4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         .exp-ad-early .zidooka-xserver-ad:first-of-type { display: none; }
+        .zdk-header-image-small .zenn-featured-image { max-width: 600px; margin: 0 auto; }
     ';
     wp_add_inline_style('theme-style', $exp_css);
 

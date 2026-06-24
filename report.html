@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>benri-tools / zidooka-writing 統合調査レポート 2026-06-23</title>
+<style>
+body { font-family: 'Yu Gothic UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; color: #222; line-height: 1.7; }
+h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 36px; }
+h2 { font-size: 17px; font-weight: 700; margin-top: 36px; margin-bottom: 12px; border-bottom: 2px solid #333; padding-bottom: 5px; }
+h3 { font-size: 14px; font-weight: 700; margin-top: 24px; margin-bottom: 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+th, td { padding: 5px 8px; text-align: left; border-bottom: 1px solid #ddd; }
+th { background: #f5f5f5; font-weight: 700; }
+p, li { font-size: 13px; }
+ol, ul { padding-left: 20px; }
+li { margin-bottom: 3px; }
+.section-label { display: inline-block; background: #333; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; margin-right: 6px; }
+.actions { counter-reset: action; }
+.action-item { list-style: none; margin-bottom: 6px; padding: 6px 10px; border-left: 3px solid #ffa726; background: #fffbf0; }
+.action-item::before { counter-increment: action; content: "A-" counter(action) " "; font-weight: 700; color: #ffa726; }
+.tag { display: inline-block; font-size: 10px; padding: 1px 5px; border-radius: 2px; margin-right: 3px; }
+.tag-bt { background: #e3f2fd; color: #1565c0; }
+.tag-zw { background: #fce4ec; color: #c62828; }
+.tag-both { background: #e8f5e9; color: #2e7d32; }
+</style>
+</head>
+<body>
+
+<h1>benri-tools / zidooka-writing 統合調査レポート</h1>
+<p class="subtitle">2026-06-23 / 山口和紀向け / 内部用</p>
+
+<h2>1. benri-tools 現状</h2>
+
+<p><span class="tag tag-bt">benri-tools</span> tools.zidooka.com / Next.js 16 + React 19 + Tailwind v4 / Netlify</p>
+
+<table>
+  <tr><th>指標</th><th>数値</th></tr>
+  <tr><td>ツール数</td><td>62（10カテゴリ）</td></tr>
+  <tr><td>最近追加</td><td>水星逆行カレンダー / 惑星逆行カレンダー</td></tr>
+  <tr><td>A/Bテスト運用中</td><td>Today Strip / Detail Drawer CTA / 2nd Ad Slot / B-3 Mobile Quick Chips</td></tr>
+  <tr><td>AdSense</td><td>実装済み、未設定スロット8個（calendar用）</td></tr>
+  <tr><td>自己改善</td><td>ADR形式 / decision records / <code>npm run decisions</code></td></tr>
+  <tr><td>満足度ギャップ</td><td>14ツールでスコア6-7/10</td></tr>
+</table>
+
+<p>62ツールで安定運用中。直近は逆行カレンダー2本を追加。一方実験はいずれもoutcome event不足で判断不能が続いている。calendarのAdSense 8スロットがTODOプレースホルダのまま。Netlify auto-deployのGitHub連携が壊れて手動trigger依存。</p>
+
+<h2>2. zidooka-writing 現状</h2>
+
+<p><span class="tag tag-zw">zidooka</span> zidooka.com / WordPress + CLI投稿パイプライン</p>
+
+<table>
+  <tr><th>指標</th><th>数値</th></tr>
+  <tr><td>月間セッション</td><td>約7,350</td></tr>
+  <tr><td>トラフィック構成</td><td>Bing 57.7% / Google 34.1% / AI検索（成長中）</td></tr>
+  <tr><td>下書き数</td><td>518（日本語247 / 英語189 / 他82）</td></tr>
+  <tr><td>最新公開</td><td>2026-06-08（ga4-notset-landing-page）</td></tr>
+  <tr><td>未公開シリーズ</td><td>GAS*CLASP入門（11章）/ GASパッケージ（6）/ ZIDOOKA起動連載（5）</td></tr>
+  <tr><td>A/Bテスト</td><td>zdk_code_fold（運用中）/ zdk_header_image / zdk_author_pos（待機）</td></tr>
+</table>
+
+<p>エラーメッセージSEOが主戦略。パイプラインは整っているが6/8以降投稿が止まっている。518の下書きに対して公開ペースが極端に低い。テーマは6/3に大規模リファクタ済み。benri-toolsからADR形式を移植して自己改善システム統一済み。</p>
+
+<h2>3. 両プロジェクトの関係</h2>
+
+<table>
+  <tr><th></th><th>benri-tools</th><th>zidooka-writing</th></tr>
+  <tr><td>役割</td><td>ツールサイト（プロダクト）</td><td>ブログ（コンテンツSEO）</td></tr>
+  <tr><td>収益</td><td>AdSense（ツールページ内）</td><td>AdSense（記事内）</td></tr>
+  <tr><td>分析基盤</td><td>GA4 + PostHog + GSC + Bing</td><td>同一スタック＋週次統合</td></tr>
+  <tr><td>自己改善</td><td>ADR（zidookaから移植）</td><td>ADR（元祖）</td></tr>
+  <tr><td>相互導線</td><td>→ zidooka: ほぼなし</td><td>→ benri-tools: 多数の下書きでpromotion</td></tr>
+</table>
+
+<p><strong>最大のギャップ:</strong> benri-tools から zidooka への導線がほぼ存在しない。片方向のリンク構造。</p>
+
+<h2>4. アクション一覧</h2>
+
+<ol class="actions" style="list-style: none; padding: 0;">
+
+<li class="action-item"><strong>benri-toolsからzidookaへの内部リンクを仕込む</strong><br>
+現在zidooka→benri-toolsの流入はあるが逆がない。フッターやaboutページ、ツール説明欄にzidooka記事へのリンクを追加。<!-- 優先度高、工数小 --></li>
+
+<li class="action-item"><strong>calendar AdSense 8スロットを本番IDに差し替え</strong><br>
+<code>app/jp/calendar/lib/ads.ts</code> の TODO_ marriage / business / wallet / lottery / moving / contract / travel を本番スロットに置換。<!-- 収益機会ロス、即効性あり --></li>
+
+<li class="action-item"><strong>Netlify auto-deployのGitHub連携を直す</strong><br>
+OPERATIONS-TODO 0-1。現在 <code>--trigger</code> のみ動作。GitHub連携設定を見直し。またはDeploy Hooksベースに移行。<!-- 運用負荷削減 --></li>
+
+<li class="action-item"><strong>Vercelバックアップディレクトリの掃除を完了する</strong><br>
+OPERATIONS-TODO 0-4。`.vercel.backup-*` の削除が中途半端。完全除去。<!-- 移行完了、ゴミ掃除 --></li>
+
+<li class="action-item"><strong>zidookaの投稿再開</strong><br>
+最新公開が6/8で止まっている。まず未公開シリーズ（GAS*CLASP 11章、GASパッケージ6、起動連載5）から1本ピックアップして公開。パイプラインは生きているのでCLI叩くだけ。<!-- コンテンツ更新停止はSEOに悪影響 --></li>
+
+<li class="action-item"><strong>benri-tools実験のoutcome event不足を解消する</strong><br>
+Today Strip / Detail Drawer CTA ともにdata insufficient。トリガー条件や計測イベントの設計を見直す。目標イベント数を週100に設定。<!-- 現状4/weekでは判断不能、実験自体が無意味 --></li>
+
+<li class="action-item"><strong>満足度6以下の2ツールを改善</strong><br>
+<code>image-responsive-preview</code> / <code>simple-metronome</code> がスコア6以下。simple-metronomeはaccent beat追加、image-responsive-previewはUI改善。<!-- クイックウィン、工数小 --></li>
+
+<li class="action-item"><strong>revision-review/page.tsxを分割</strong><br>
+1309行のモンスターファイル。Extract Componentで分割。medium-term-planにも記載あり。<!-- 技術負債解消 --></li>
+
+<li class="action-item"><strong>zidookaの次期A/Bテストをパイプラインから取り出す</strong><br>
+<code>zdk_header_image</code> / <code>zdk_author_pos</code> が待機中。code_foldが落ち着いたら2本のどちらかを開始。優先度はheader_imageが高め。<!-- 実験パイプラインの停滞防止 --></li>
+
+<li class="action-item"><strong>benri-tools にzidooka記事の「注目記事」ウィジェットを追加</strong><br>
+aboutページか各ツール下部に関連zidooka記事を表示。zidookaの記事数に対してbenri-toolsからの流入が少なすぎる問題の根本対応。<!-- 長期的な相互送客の基盤 --></li>
+
+<li class="action-item"><strong>92個の空catchブロックを全消し</strong><br>
+一部対応済みだが残りも掃除。medium-term-plan記載。<!-- 技術負債、エラーハンドリング改善 --></li>
+
+<li class="action-item"><strong>月次レポートに相互送客のKPIを追加</strong><br>
+zidooka→benri-tools / benri-tools→zidooka の遷移数をGA4 or PostHogで計測し、週次レポートに組み込む。<!-- 計測しないと改善できない --></li>
+
+<li class="action-item"><strong>IndexNow通知をデプロイCIに組み込む</strong><br>
+現在手動 <code>npm run indexnow</code>。Netlify Deploy HookやGitHub Actionsに自動実行ステップとして追加。<!-- 手動運用は忘れる --></li>
+
+<li class="action-item"><strong>daily-agentテンプレートを運用に乗せる</strong><br>
+OPERATIONS-TODO 2-7。structured template未使用。TEMPLATE.mdを実際に使い始める。<!-- エージェント間連携の品質向上 --></li>
+
+<li class="action-item"><strong>benri-tools→zidooka導線のA/Bテストを設計する</strong><br>
+フッターリンク vs ツール説明文内リンク vs サイドバーウィジェット。PostHogでCTRを計測しどの配置が効くか検証。<!-- エビデンスベースの導線設計 --></li>
+
+</ol>
+
+<h2>5. 優先順位（ざっくり）</h2>
+
+<table>
+  <tr><th>優先</th><th>アクション番号</th><th>理由</th></tr>
+  <tr><td>即日</td><td>A-1, A-5</td><td>相互導線（抜け）＋投稿停止（SEOリスク）</td></tr>
+  <tr><td>今週</td><td>A-2, A-3, A-10</td><td>収益機会ロス＋運用負荷＋導線基盤</td></tr>
+  <tr><td>今週</td><td>A-7, A-9</td><td>満足度改善＋実験パイプライン維持</td></tr>
+  <tr><td>2週以内</td><td>A-4, A-6, A-8, A-11</td><td>技術負債＋実験設計＋分割リファクタ</td></tr>
+  <tr><td>計画的</td><td>A-12, A-13, A-14, A-15</td><td>KPI設計＋自動化＋エージェント運用改善</td></tr>
+</table>
+
+<p style="margin-top: 30px; font-size: 12px; color: #999;">本レポートは2026-06-23時点のコード・データに基づく。山口和紀向け内部資料。</p>
+
+</body>
+</html>

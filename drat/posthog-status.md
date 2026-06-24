@@ -2,34 +2,39 @@
 > Last check: 2026-06-23  |  Run `npm run posthog:check` to refresh
 > **Before acting**: Check `daily-agent/YYYYMMDD.md` for active claims
 
-## Active Experiment
+## Active Experiments
 
 | Field | Value |
 |-------|-------|
-| Flag | `zdk_code_fold` |
-| Days running | 1 |
+| Flag (primary) | `zdk_code_fold` |
+| Days running | 2 |
 | Decision deadline | 2026-06-29 |
+| Flag (co-running) | `zdk_header_image` |
+| Started | 2026-06-24 |
+| Decision deadline | 2026-07-08 |
 
-## Health
+## Health — `zdk_code_fold`
 
 | Metric | Status | Value |
 |--------|--------|-------|
-| Null rate | OK | 0.0% (max 30.0%) ↓ |
-| Impressions (ctrl/treat) | LOW | 36 / 28 |
-| Outcome events (ctrl/treat) | OK | 889 / 772 |
+| Null rate | OK | 0.0% (max 30.0%) → |
+| Impressions (ctrl/treat) | LOW | 60 / 42 |
+| Outcome events (ctrl/treat) | OK | 845 / 747 |
 
-## Outcomes
+## Outcomes — `zdk_code_fold`
 
 | Event | Ctrl | Treat | Lift |
 |-------|------|-------|------|
-| Read Depth (25/50/75/90%) | 761 | 640 | +8.1% |
-| Engaged 60s | 128 | 132 | +32.6% |
+| Read Depth (25/50/75/90%) | 726 | 619 | +21.8% |
+| Engaged 60s | 119 | 128 | +53.7% |
 | TOC Click | 0 | 0 | - |
 | Related Click | 0 | 0 | - |
 
 ## Next Action
 
-**[WAIT]** wait_impressions: Need 200 impressions per variant. Currently control=36 treatment=28. Check again in a few days.
+**[WAIT]** wait_impressions: Need 200 impressions per variant for `zdk_code_fold`. Currently control=60 treatment=42.
+
+`zdk_header_image` just started (2026-06-24). Wait for data to accumulate.
 
 ### Closeout Steps
 
@@ -39,15 +44,17 @@
 
 ## Pipeline
 
-| Priority | Experiment | Flag |
-|----------|------------|------|
-| **next** | Code block fold | `zdk_code_fold` |
-| 2 | Header image | `zdk_header_image` |
-| 3 | Author position | `zdk_author_pos` |
+| Priority | Experiment | Flag | Status |
+|----------|------------|------|--------|
+| **active** | Code block fold | `zdk_code_fold` | monitoring |
+| **active** | Header image | `zdk_header_image` | deployed 2026-06-24 |
+| **next** | Author position | `zdk_author_pos` | queued |
+
+All 3 experiments use server-side body class assignment.
 
 ## Meta Alerts
 
-- **[MED]** flag_resolution_errors: 214 zdk_flag_resolution_error events in past 7 days.
+- **[MED]** flag_resolution_errors: 221 zdk_flag_resolution_error events in past 7 days.
 - **[MED]** dead_outcome: Outcome event(s) with zero data: TOC Click, Related Click.
 
 ---
