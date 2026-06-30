@@ -3,6 +3,9 @@
 
 node_modules/
 
+# Generated daily report exports
+/daily/
+
 # Temporary files
 tmp_*.html
 tmp_*.xml
