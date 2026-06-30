@@ -264,6 +264,11 @@ async function main() {
   report.push('```');
   report.push('');
 
+  report.push('---');
+  report.push('');
+  report.push('**Self-Improvement**: `npm run improve` で GA4/GSC/AdSense/Bing/PostHog データを統合し、TODO を自動生成できます。');
+  report.push('');
+
   const filePath = path.join(outputDir, `${date}-weekly-report.md`);
   await writeFile(filePath, report.join('\n'), 'utf8');
   console.log(`Report saved: ${filePath}`);

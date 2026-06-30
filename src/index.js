@@ -158,6 +158,12 @@ async function main() {
         break;
       }
 
+      case 'improve':
+        console.log('See: npm run improve — Self-improvement loop (GA4/GSC/AdSense/Bing/PostHog → TODO)');
+        console.log('     npm run improve:report — Show latest improvement report');
+        console.log('     npm run decisions — Check overdue decision records');
+        break;
+
       default:
         console.log(`
 ZIDOOKA CLI Tool (Refactored)
@@ -169,6 +175,11 @@ Usage:
   node src/index.js schedule <file>  - Schedule post for next available morning
   node src/index.js auth             - Check authentication
   node src/index.js thumbnail [opts] - Generate a branded thumbnail image
+
+Self-Improvement:
+  npm run improve                    - Data collection → TODO generation
+  npm run improve:report             - Show latest improvement report
+  npm run decisions                  - Check overdue decision records
 
 Thumbnail options (see --help):
   node src/index.js thumbnail --title "..." --output path.png [--subtitle "..." --accent cyan --category "..."]
