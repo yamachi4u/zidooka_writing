@@ -21,6 +21,8 @@
     "build:css": "npx @tailwindcss/cli -i downloads/zidooka-tw/assets/tailwind-input.css -o downloads/zidooka-tw/assets/tailwind.css --minify",
     "build:tw": "npx @tailwindcss/cli -i assets/tailwind-input.css -o downloads/zidooka-tw/assets/tailwind.css --minify",
     "backup:content": "node scripts/backup-content.mjs",
+    "improve": "node scripts/self-improvement-loop.mjs",
+    "improve:report": "node -e \"const fs=require('fs'),p=require('path'),d=p.join(process.cwd(),'daily','self-improvement');const f=fs.readdirSync(d).filter(x=>x.endsWith('.md')).sort().pop();console.log(f?fs.readFileSync(p.join(d,f),'utf8'):'No reports found.')\"",
     "decisions": "node scripts/check-decisions.mjs"
   },
   "dependencies": {

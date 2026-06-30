@@ -8,12 +8,9 @@ const PH_KEY  = process.env.POSTHOG_PERSONAL_API_KEY;
 const PH_PROJ = process.env.POSTHOG_PROJECT_ID;
 
 const FLAGS = [
-  { key:'zdk_font_size',     label:'font_size',     ui:'Font Size (18px vs 20px)',   startedAt:'2026-06-03', deadline:'2026-06-10' },
-  { key:'zdk_line_height',   label:'line_height',   ui:'Line Height (1.7 vs 1.9)',   startedAt:'2026-06-10', deadline:'2026-06-16' },
-  { key:'zdk_toc_sticky',    label:'toc_sticky',    ui:'TOC Sticky vs Inline',       startedAt:'2026-06-09', deadline:'2026-06-10' },
-  { key:'zdk_related_posts', label:'related_posts', ui:'Related Posts Layout',       startedAt:'2026-06-16', deadline:'2026-06-23' },
   { key:'zdk_code_fold',     label:'code_fold',     ui:'Code Block Fold',            startedAt:'2026-06-22', deadline:'2026-06-29' },
-  { key:'zdk_ad_position',   label:'ad_position',   ui:'Ad Position',                startedAt:'2026-06-04', deadline:'2026-06-04' },
+  { key:'zdk_header_image',  label:'header_image',  ui:'Header Image Size',          startedAt:'2026-06-23', deadline:'2026-07-07' },
+  { key:'zdk_author_pos',    label:'author_pos',    ui:'Author Position',            startedAt:'2026-06-23', deadline:'2026-07-07' },
 ];
 
 const OUTCOMES = [
@@ -352,15 +349,16 @@ function buildMetaRecommendations(analysis, flags, today, flagErrors) {
     }
   }
 
-  const expStart = (analysis && analysis.startedAt) ? analysis.startedAt : '2026-06-03';
-  const experimentDays = daysBetween(expStart, today);
-  if (experimentDays > META.maxExperimentDays && analysis && !analysis.canDecide) {
-    metas.push({
-      id: 'experiment_overdue',
-      severity: 'medium',
-      text: `zdk_font_size has been running for ${experimentDays} days (started 2026-06-03). If it cannot be decided soon, the experiment should be extended with more traffic, or closed as inconclusive to free the slot for the next pipeline candidate (zdk_toc_sticky).`,
-      action: 'If null rate is blocking: fix instrumentation and extend 5 more days. If impressions are too low: consider running for max 21 days total. If outcomes are too low: the experiment may not be meaningful at current traffic levels.'
-    });
+  if (analysis && analysis.startedAt && analysis.experiment) {
+    const experimentDays = daysBetween(analysis.startedAt, today);
+    if (experimentDays > META.maxExperimentDays && !analysis.canDecide) {
+      metas.push({
+        id: 'experiment_overdue',
+        severity: 'medium',
+        text: `${analysis.experiment} has been running for ${experimentDays} days (started ${analysis.startedAt}). Consider closing as inconclusive or extending with a clear deadline.`,
+        action: 'If impressions are too low: consider running for max 21 days total. If outcomes are too low: the experiment may not be meaningful at current traffic levels.'
+      });
+    }
   }
 
   if (flagErrors && flagErrors.length > 0) {
@@ -445,8 +443,8 @@ function buildMetaRecommendations(analysis, flags, today, flagErrors) {
     metas.push({
       id: 'pipeline_ready',
       severity: 'info',
-      text: `${totalInactive} inactive flags ready in the pipeline. As soon as zdk_font_size concludes, zdk_toc_sticky should be activated immediately to maintain momentum.`,
-      action: 'When declaring a winner for zdk_font_size, activate zdk_toc_sticky via PostHog API in the same session. Update drat/posthog-experiments.md with new start date and decision deadline.'
+      text: `${totalInactive} inactive flags ready in the pipeline. As soon as the active experiment concludes, the next pipeline candidate should be activated immediately to maintain momentum.`,
+      action: 'When declaring a winner, activate the next pipeline experiment via PostHog API in the same session. Update drat/posthog-experiments.md with new start date and decision deadline.'
     });
   }
 
@@ -535,12 +533,9 @@ function buildReport(analysis, flags, today, metaRecs) {
     p(`\`npm run posthog:check\``);
   }
 
-  h3('Pipeline — Next Experiment Candidate');
-  p('When the current experiment concludes, the recommended next experiment:');
-  p('');
-  p('1. **zdk_code_fold** — Code block fold (reduce scroll on long code blocks)');
-  p('2. **zdk_header_image** — Featured image size (large vs small)');
-  p('3. **zdk_author_pos** — Author profile position (below article vs sidebar)');
+  h3('Pipeline — Experiment Queue');
+  p('Current active flags: `' + flags.filter(f => f.active).map(f => f.key).join('`, `') + '`');
+  p('Pipeline: zdk_author_pos (next if slot opens)');
 
   h2('Meta Recommendations (Operations)');
 
@@ -600,12 +595,12 @@ function buildStatus(analysis, flags, metaRecs, today) {
   if (!analysis || activeFlags.length === 0) {
     p('## No active experiment');
     p('');
-    p('**Next**: Activate `zdk_toc_sticky` via PostHog API and start the next cycle.');
+    p('**Next**: Activate the next pipeline experiment via PostHog API and start the next cycle.');
     p('');
     p('### Pipeline');
-    p('1. zdk_toc_sticky');
-    p('2. zdk_line_height');
-    p('3. zdk_related_posts');
+    const inactive = flags.filter(f => !f.active).map(f => f.key);
+    p(`Inactive flags waiting: ${inactive.join(', ') || 'none'}`);
+    p('Typical order: code_fold → header_image → author_pos');
     return lines.join('\n');
   }
 
@@ -688,11 +683,15 @@ function buildStatus(analysis, flags, metaRecs, today) {
   p('');
   p('## Pipeline');
   p('');
-  p('| Priority | Experiment | Flag |');
-  p('|----------|------------|------|');
-  p('| **next** | Code block fold | `zdk_code_fold` |');
-  p('| 2 | Header image | `zdk_header_image` |');
-  p('| 3 | Author position | `zdk_author_pos` |');
+  p('| Status | Experiment | Flag |');
+  p('|--------|------------|------|');
+  const allFlags = flags.map(f => ({ key: f.key, active: f.active }));
+  const defs = { zdk_code_fold: 'Code block fold', zdk_header_image: 'Header image', zdk_author_pos: 'Author position' };
+  for (const f of allFlags) {
+    const name = defs[f.key] || f.key;
+    const badge = f.active ? '**running**' : 'pending';
+    p(`| ${badge} | ${name} | \`${f.key}\` |`);
+  }
 
   const highMeta = metaRecs.filter(m => m.severity === 'high');
   const medMeta = metaRecs.filter(m => m.severity === 'medium');

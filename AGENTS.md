@@ -5,11 +5,13 @@ Scope: zidooka_writing repository.
 ## Quick Index
 
 | 知りたいこと | 見るセクション |
-|---|---|
+|---|---|---|
 | 作業を始める前に | [Start-of-Work](#start-of-work) |
+| ナレッジベース | [Knowledge Base](#knowledge-base) |
 | PostHog A/B実験の状況 | [PostHog A/B Operations](#posthog-ab-operations) |
 | 記事を公開する | [Publishing Pipeline](#publishing-pipeline) |
 | SEO/分析を回す | [Analytics & SEO](#analytics--seo) |
+| 自己改善ループ | [Self-Improvement](#self-improvement) |
 | テーマをデプロイする | [Remote Theme Pipeline](#remote-theme-pipeline) |
 | 文体・表記ルール | [Conventions](#conventions) |
 | スクリーンショット | [Screenshot Capture](#screenshot-capture) |
@@ -24,6 +26,7 @@ Scope: zidooka_writing repository.
 3. Check decision records: `docs/decisions/` (verification dates)
 4. If working on theme files: `docs/operations/README.md`
 5. Read self-improvement docs: `docs/SELF-IMPROVEMENT.md`, `docs/AGENT-TOOL-IMPROVEMENT.md`
+6. Read knowledge base: `knowledge/index.md`
 
 ```powershell
 .\daily-agent.cmd --agent Codex --task "<task description>"
@@ -89,6 +92,31 @@ Updated automatically by `npm run posthog:check`.
 zidooka_writing uses a shared daily coordination log (`daily-agent/YYYYMMDD.md`) to prevent multi-agent conflicts, especially for PostHog experiment operations and theme deployments.
 
 File format and rules: `daily-agent/README.md`.
+
+---
+
+## Knowledge Base
+
+`knowledge/index.md` に OKF 形式で構造化されたナレッジベースあり。
+詳細は `C:\Users\user\Documents\knowledge-base-okf\bundles\personal-ops\` の横断KBも参照。
+
+- analytics/ — GA4/GSC/AdSense/Bing/PostHog
+- operations/ — improvement-cycle, decision-records, agent-coordination
+- conventions/ — writing-style
+- reference/ — troubleshooting, glossary, links
+
+---
+
+## Self-Improvement
+
+```powershell
+npm run improve          # Auto data collection → TODO generation
+npm run improve:report   # Show latest improvement report
+npm run decisions        # Check overdue decision records
+```
+
+サイクル: `docs/SELF-IMPROVEMENT.md` 参照。
+学習ログ: `docs/AGENT-TOOL-IMPROVEMENT.md` 参照。
 
 ---
 

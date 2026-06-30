@@ -27,4 +27,5 @@ zidooka_writing に self-improvement system を導入。benri-tools で確立し
 
 ## 結果（事後記入）
 - 2026-06-23: 初の運用セッション。null rate 改善確認、server-side flag導入、dead code削除、npm run decisions導入
+- 2026-06-30: 自己改善ループ自動化（npm run improve）。OKF知識基盤導入（knowledge/）。posthog-check.mjs stale参照クリーンアップ。benri-tools 実験3本停止。
 - 次回検証: 2026-07-17（1ヶ月の振り返り）

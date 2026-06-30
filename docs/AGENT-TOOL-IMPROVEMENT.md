@@ -44,6 +44,11 @@
 
 ## 学習ログ
 
+### 2026-06-30
+- ✅ **`npm run improve` 導入** — `scripts/self-improvement-loop.mjs` 作成。GA4/GSC/AdSense/Bing/PostHogのデータを統合収集し、自動で改善TODOを生成（benri-toolsから移植・zidooka特化）
+- ✅ **docs/SELF-IMPROVEMENT.md に自動トリガー追加** — セッション開始時・週次・月次のトリガー定義を明確化
+- ✅ **OKF知識基盤導入** — `knowledge/` ディレクトリをOKF形式で構築。プロジェクト横断の知識構造化
+
 ### 2026-06-23
 - ✅ server-side A/B assignment 導入 (zdk_code_fold)
 - ✅ forceInit 内でも getServerVariant を試行するよう改善

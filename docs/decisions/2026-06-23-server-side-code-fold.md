@@ -28,4 +28,9 @@ title: zdk_code_fold server-side A/B assignment 導入
 2026-06-30（1週間後に impressions 増加と null rate を確認）
 
 ## 結果（事後記入）
--
+- 検証日 (2026-06-30): PostHog 確認
+  - Null rate: 0.0% ✅（サーバーサイド割当により完全解消）
+  - Impressions: control=970 / treatment=1000（目標200/variant 達成）
+  - Outcome events: control=0 / treatment=4（まだ不足 — 週100目標未達）
+  - 判断の正しさ: **正しい** — null rate 0% を維持、impressions も十分蓄積
+  - 次のアクション: outcomes が溜まるまで継続計測。1週間後に再チェック

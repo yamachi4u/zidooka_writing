@@ -45,6 +45,18 @@ YYYY-MM-DD（この日までに効果を確認する）
 -
 ```
 
+## 定例トリガー
+
+エージェントは以下のタイミングで自律的に自己改善アクションを実行する：
+
+| トリガー | アクション | 成果物 |
+|---------|-----------|--------|
+| 毎回のセッション開始時 | `npm run decisions` で検証日超過の判断がないか確認 | 必要な場合、PostHog/GA4データで検証 |
+| 週1回 | `npm run improve` を実行 | `daily/self-improvement/YYYY-MM-DD-self-improvement.md` |
+| 実験開始から7日経過 | 実験判定 + adopt/continue/stop の判断 | 判断記録 + コード変更 |
+| 判断記録の検証日到達 | `npm run decisions` が検出。PostHogで確認し結果を追記 | 判断記録の「結果」欄 |
+| 30日ごと | 過去の全判断を振り返り、正答率を計算 | `daily-agent/retro-YYYY-MM-DD.md` |
+
 ## アラート条件
 
 | メトリクス | 閾値 | 超過時のアクション |
