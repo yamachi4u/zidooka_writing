@@ -530,7 +530,7 @@ get_header(); ?>
                 </div>
             <?php endif; ?>
 
-            <div class="pt-3 border-t border-slate-200">
+            <div class="pt-3 border-t border-slate-200 sticky top-4">
                 <?php echo zidooka_get_sidebar_banner(); ?>
             </div>
             </div>

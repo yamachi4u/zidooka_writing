@@ -823,10 +823,13 @@ function zidooka_render_banner(string $name, string $click_url, string $img_src,
   $e_pixel = esc_url($pixel_src);
   $e_name  = esc_js($name);
   return <<<HTML
-<a href="{$e_click}" target="_blank" rel="nofollow sponsored" class="block no-underline" onclick="try{posthog?.capture('banner_click',{provider:'{$e_name}',location:'sidebar'})}catch(e){}">
-  <img width="{$w}" height="{$h}" alt="{$name}" src="{$e_img}" class="w-full h-auto rounded-lg" loading="lazy" />
-  <img width="1" height="1" src="{$e_pixel}" alt="" aria-hidden class="pointer-events-none" />
-</a>
+<div class="zidooka-ad-banner">
+  <p class="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-400 mb-1.5">Sponsored</p>
+  <a href="{$e_click}" target="_blank" rel="nofollow sponsored" class="block no-underline" onclick="try{posthog?.capture('banner_click',{provider:'{$e_name}',location:'sidebar'})}catch(e){}">
+    <img width="{$w}" height="{$h}" alt="{$name}" src="{$e_img}" class="w-full h-auto rounded-lg border border-slate-200/60" loading="lazy" />
+    <img width="1" height="1" src="{$e_pixel}" alt="" aria-hidden class="pointer-events-none" />
+  </a>
+</div>
 <script>try{posthog?.capture('banner_exposure',{provider:'{$e_name}',location:'sidebar'})}catch(e){}</script>
 HTML;
 }
