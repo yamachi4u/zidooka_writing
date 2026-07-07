@@ -781,6 +781,56 @@ function zidooka_insert_xserver_banner($content) {
 }
 add_filter('the_content', 'zidooka_insert_xserver_banner');
 
+/**
+ * サイドバー用 A8 バナー出し分け
+ * タグに応じて適切なバナーを返す（記事詳細ページ用）
+ */
+function zidooka_get_sidebar_banner(): string {
+  if (!is_singular('post')) {
+    return zidooka_fp_cafe_banner();
+  }
+  $tags = wp_get_post_tags(get_queried_object_id(), ['fields' => 'slugs']);
+  $xserver_tags = ['xserver', 'server', 'hosting', 'wordpress', 'ドメイン', 'サーバー', 'レンタルサーバー'];
+  if (array_intersect($xserver_tags, $tags)) {
+    return zidooka_xserver_sidebar_banner();
+  }
+  return zidooka_fp_cafe_banner();
+}
+
+function zidooka_fp_cafe_banner(): string {
+  return zidooka_render_banner(
+    'FPカフェ',
+    'https://px.a8.net/svt/ejp?a8mat=4B7VKV+CXKZUA+5ULO+5YZ75',
+    'https://www29.a8.net/svt/bgt?aid=260707999782&wid=001&eno=01&mid=s00000027294001003000&mc=1',
+    300, 250,
+    'https://www12.a8.net/0.gif?a8mat=4B7VKV+CXKZUA+5ULO+5YZ75'
+  );
+}
+
+function zidooka_xserver_sidebar_banner(): string {
+  return zidooka_render_banner(
+    'Xserver',
+    'https://px.a8.net/svt/ejp?a8mat=45K9KW+9QOC36+CO4+6PRPD',
+    'https://www24.a8.net/svt/bgt?aid=251208320589&wid=001&eno=01&mid=s00000001642001128000&mc=1',
+    250, 250,
+    'https://www12.a8.net/0.gif?a8mat=45K9KW+9QOC36+CO4+6PRPD'
+  );
+}
+
+function zidooka_render_banner(string $name, string $click_url, string $img_src, int $w, int $h, string $pixel_src): string {
+  $e_click = esc_url($click_url);
+  $e_img   = esc_url($img_src);
+  $e_pixel = esc_url($pixel_src);
+  $e_name  = esc_js($name);
+  return <<<HTML
+<a href="{$e_click}" target="_blank" rel="nofollow sponsored" class="block no-underline" onclick="try{posthog?.capture('banner_click',{provider:'{$e_name}',location:'sidebar'})}catch(e){}">
+  <img width="{$w}" height="{$h}" alt="{$name}" src="{$e_img}" class="w-full h-auto rounded-lg" loading="lazy" />
+  <img width="1" height="1" src="{$e_pixel}" alt="" aria-hidden class="pointer-events-none" />
+</a>
+<script>try{posthog?.capture('banner_exposure',{provider:'{$e_name}',location:'sidebar'})}catch(e){}</script>
+HTML;
+}
+
 
 /**
  * Amazonリンク自動最適化（yamachi4u-22 専用）

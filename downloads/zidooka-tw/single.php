@@ -531,11 +531,7 @@ get_header(); ?>
             <?php endif; ?>
 
             <div class="pt-3 border-t border-slate-200">
-                <!-- FP Cafe (資産形成・保険相談) -->
-                <a href="https://px.a8.net/svt/ejp?a8mat=4B7VKV+CXKZUA+5ULO+5YZ75" target="_blank" rel="nofollow sponsored" class="block no-underline">
-                    <img border="0" width="300" height="250" alt="無料で資産形成や保険について相談できる！FPカフェ" src="https://www29.a8.net/svt/bgt?aid=260707999782&wid=001&eno=01&mid=s00000027294001003000&mc=1" class="w-full h-auto rounded-lg" loading="lazy" />
-                    <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=4B7VKV+CXKZUA+5ULO+5YZ75" alt="" aria-hidden class="pointer-events-none" />
-                </a>
+                <?php echo zidooka_get_sidebar_banner(); ?>
             </div>
             </div>
         </div>
