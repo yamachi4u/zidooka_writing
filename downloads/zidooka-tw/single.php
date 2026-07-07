@@ -531,11 +531,10 @@ get_header(); ?>
             <?php endif; ?>
 
             <div class="pt-3 border-t border-slate-200">
-                <a href="https://buymeacoffee.com/zidooka" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-indigo-600 transition-colors no-underline">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/>
-                    </svg>
-                    Buy Me a Coffee
+                <!-- FP Cafe (資産形成・保険相談) -->
+                <a href="https://px.a8.net/svt/ejp?a8mat=4B7VKV+CXKZUA+5ULO+5YZ75" target="_blank" rel="nofollow sponsored" class="block no-underline">
+                    <img border="0" width="300" height="250" alt="無料で資産形成や保険について相談できる！FPカフェ" src="https://www29.a8.net/svt/bgt?aid=260707999782&wid=001&eno=01&mid=s00000027294001003000&mc=1" class="w-full h-auto rounded-lg" loading="lazy" />
+                    <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=4B7VKV+CXKZUA+5ULO+5YZ75" alt="" aria-hidden class="pointer-events-none" />
                 </a>
             </div>
             </div>
