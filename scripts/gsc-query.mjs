@@ -18,6 +18,7 @@ Options:
   --type        web | image | video | news | discover | googleNews (default: web)
   --limit       Row limit (default: 25)
   --preset      top-queries | top-pages | page-query
+  --page        Filter results to one exact page URL
   --json        Print raw JSON
   --key-file    Service account JSON path
 
@@ -88,6 +89,16 @@ async function main() {
     type: args.type || 'web',
     rowLimit: Number(args.limit || 25),
   };
+
+  if (args.page) {
+    body.dimensionFilterGroups = [{
+      filters: [{
+        dimension: 'page',
+        operator: 'equals',
+        expression: args.page,
+      }],
+    }];
+  }
 
   const { accessToken } = await getAccessToken({
     keyFile: args['key-file'],
