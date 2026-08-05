@@ -2,7 +2,7 @@
 type: concept
 description: AdSense 分析・運用
 tags: [analytics, adsense, ads, revenue]
-updated: 2026-06-30
+updated: 2026-07-07
 links:
   - index.md
   - posthog.md
@@ -29,5 +29,9 @@ npm run adsense:setup                        # OAuth トークン再発行
 ## 注意点
 
 - OAuth Desktop 認証を使用。トークン期限切れ時は `npm run adsense:setup` で再発行
-- アドセンスのクリックは cross-origin iframe 内のため直接取得不可。`AdSlot` ラッパーの `onAdClick` をプロキシ指標として使用
+- アドセンスのクリックは cross-origin iframe 内のため直接取得不可。iframeへのフォーカス移動を
+  プロキシとして PostHog `ad_click` を送信（2026-07-07〜、`inc/ads.php`）
+- PostHogイベント: `ad_impression` / `ad_click` / `ad_unfilled`（placement別。fill率監視は ad_unfilled）
+- 広告の配置・設定は WP管理画面 [外観 > Ads Settings]（台帳: テーマ `inc/ads.php`、
+  設計: `docs/ADS_MANAGEMENT.md`）
 - セッションあたり最大3つの広告表示に制限

@@ -61,37 +61,46 @@
     color: #4f46e5;
 }
 
-/* Content Typography */
+/* Content Typography
+   本文はモバイル17px/デスクトップ18px（旧20pxはモバイルで1行16文字程度になり読みにくい）。
+   見出しは本文よりワンサイズ大きくして階層を明確にする。 */
 .zenn-content {
-    font-size: 1.25rem;
+    font-size: 1.0625rem;
     line-height: 1.9;
     color: #1f2937;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 @media (min-width: 640px) {
     .zenn-content {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
         line-height: 2;
     }
 }
 .zenn-content h2 {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 700;
     line-height: 1.4;
-    margin: 2rem 0 0.75rem;
+    margin: 2.25rem 0 0.75rem;
     padding-bottom: 0.4rem;
     border-bottom: 1px solid #e2e8f0;
 }
 @media (min-width: 640px) {
     .zenn-content h2 {
-        font-size: 1.4rem;
-        margin: 2.5rem 0 1rem;
+        font-size: 1.5rem;
+        margin: 2.75rem 0 1rem;
     }
 }
 .zenn-content h3 {
-    font-size: 1.1rem;
+    font-size: 1.125rem;
     font-weight: 600;
     line-height: 1.5;
-    margin: 1.25rem 0 0.5rem;
+    margin: 1.5rem 0 0.5rem;
+}
+@media (min-width: 640px) {
+    .zenn-content h3 {
+        font-size: 1.25rem;
+    }
 }
 .zenn-content p {
     margin: 0 0 1.1rem;
@@ -147,6 +156,10 @@ body.admin-bar .zenn-left-sticky { top: 128px; }
     border-collapse: collapse;
     margin: 1rem 0;
     font-size: 0.85rem;
+    /* 幅広テーブルはページ全体でなくテーブル内で横スクロールさせる */
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
 }
 .zenn-content th,
 .zenn-content td {

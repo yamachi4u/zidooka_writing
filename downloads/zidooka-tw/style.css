@@ -146,3 +146,140 @@ html { scroll-behavior: smooth; }
 .zdk-mode-ads .zenn-cta-section,
 .zdk-mode-ads .zenn-cta-footer,
 .zdk-mode-ads .zenn-consult-cta { display: none; }
+
+/* ── Ads (inc/ads.php 共通レンダラ) ──
+   すべての広告枠は .zdk-ad ラッパーで出力される。
+   ・ラベル表示（AdSenseポリシー / ステマ規制対応）
+   ・min-height 予約で読み込み時のガタつき（CLS）を抑制
+   ・未充填（data-ad-status="unfilled"）の白枠は自動で畳む */
+.zdk-ad {
+  margin: 1.75rem 0;
+  text-align: center;
+}
+.zdk-ad__label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.zdk-ad ins.adsbygoogle {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+}
+.zdk-ad img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: inline-block;
+}
+.zdk-ad__pixel { position: absolute; width: 1px; height: 1px; }
+.zdk-ad__link { text-decoration: none; }
+
+/* CLS対策: AdSense枠は高さを予約しておく */
+.zdk-ad--post_title_top { min-height: 120px; margin-top: 0; }
+.zdk-ad--post_below_content { min-height: 120px; }
+.zdk-ad--front_page_infeed { min-height: 100px; margin: 0; }
+
+/* 未充填になった枠は畳む（JS側でクラス付与。:has 対応ブラウザはCSSだけでも畳める） */
+.zdk-ad--unfilled,
+.zdk-ad:has(ins.adsbygoogle[data-ad-status="unfilled"]) {
+  display: none;
+}
+
+/* グリッド内の広告スロット（front_page_infeed 等のラッパー）。
+   未充填時はスロットごと畳んでグリッドに空行を残さない */
+.zdk-ad-slot:has(.zdk-ad--unfilled),
+.zdk-ad-slot:has(ins.adsbygoogle[data-ad-status="unfilled"]),
+.zdk-ad-slot--unfilled {
+  display: none;
+}
+
+/* サイドバーの枠は左寄せ・幅いっぱい */
+.zenn-sidebar-column .zdk-ad { margin: 0; text-align: left; }
+.zdk-ad__link { display: block; max-width: 100%; }
+.zenn-sidebar-column .zdk-ad {
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+}
+.zenn-sidebar-column .zdk-ad__link { max-width: 100%; }
+.zenn-sidebar-column .zdk-ad__label { text-align: left; }
+.zenn-sidebar-column .zdk-ad img:not(.zdk-ad__pixel) {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.zdk-prime-day-banner {
+  border-bottom: 1px solid #fde68a;
+  background: #fffbeb;
+  padding: clamp(6px, 1.5vw, 12px) clamp(10px, 3vw, 24px);
+}
+
+.zdk-prime-day-banner__link {
+  display: flex;
+  width: min(100%, 420px);
+  margin: 0 auto;
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.zdk-prime-day-banner__link:hover,
+.zdk-prime-day-banner__link:focus-visible {
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.12);
+  transform: translateY(-1px);
+}
+
+.zdk-prime-day-banner__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+@media (prefers-color-scheme: dark) {
+  .zdk-prime-day-banner {
+    border-bottom-color: rgba(148, 163, 184, 0.18);
+    background: #111827;
+  }
+
+  .zdk-prime-day-banner__link {
+    background: #0f172a;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .zdk-prime-day-banner__link:hover,
+  .zdk-prime-day-banner__link:focus-visible {
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.38);
+  }
+}
+/* Campaigns use the same responsive shell as ordinary A8 banners. */
+.zdk-ad--campaign_top {
+  margin: 0;
+  padding: 8px 12px;
+  background: #fffbeb;
+  border-bottom: 1px solid #fde68a;
+  text-align: center;
+}
+.zdk-ad--campaign_top .zdk-ad__link { display: block; width: min(100%, 420px); margin: 0 auto; }
+.zdk-ad--campaign_top img { display: block; width: 100%; height: auto; }
+.zdk-ad--campaign_top .zdk-ad__label { margin-bottom: 4px; }
+.zdk-ad--sidebar { margin-top: 1.25rem; }
+@media (prefers-color-scheme: dark) {
+  .zdk-ad--campaign_top { background: #111827; border-bottom-color: rgba(148, 163, 184, 0.18); }
+}
+/* Prepared PostHog experiment: zdk_header_density. */
+.zdk-header-density-compact .zdk-header-inner { padding-block: 10px; }
+@media (max-width: 639px) {
+  .zdk-header-density-compact .zdk-header-inner { padding-block: 8px; }
+}

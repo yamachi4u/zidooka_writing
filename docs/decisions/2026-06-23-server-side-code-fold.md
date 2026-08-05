@@ -34,3 +34,9 @@ title: zdk_code_fold server-side A/B assignment 導入
   - Outcome events: control=0 / treatment=4（まだ不足 — 週100目標未達）
   - 判断の正しさ: **正しい** — null rate 0% を維持、impressions も十分蓄積
   - 次のアクション: outcomes が溜まるまで継続計測。1週間後に再チェック
+
+- 検証日 (2026-07-09): 実験クローズ
+  - 17日間のデータ: control=800 / treatment=740 impressions
+  - Read Depth lift: +2.0%, Engaged 60s: -0.3% → **有意差なし**
+  - 判定: inconclusive — コードブロック折りたたみは読者の行動に影響を与えていない
+  - PostHog flag `zdk_code_fold` を inactive に設定

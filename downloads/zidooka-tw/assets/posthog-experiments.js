@@ -283,6 +283,7 @@
     var codeFoldVal = getServerVariant('zdk_code_fold') || getFlag('zdk_code_fold');
     var headerImgVal = getServerVariant('zdk_header_image') || getFlag('zdk_header_image');
     var authorPosVal = getServerVariant('zdk_author_pos') || getFlag('zdk_author_pos');
+    var headerDensityVal = getFlag('zdk_header_density');
 
     if (typeof codeFoldVal === 'string') {
       experimentVariants.code_fold = codeFoldVal;
@@ -303,7 +304,13 @@
       capture('zdk_experiment_impression', { experiment: 'zdk_author_pos', variant: authorPosVal });
     }
 
-    if (!experimentVariants.code_fold && !experimentVariants.header_image && !experimentVariants.author_pos) {
+    if (typeof headerDensityVal === 'string') {
+      experimentVariants.header_density = headerDensityVal;
+      capture('zdk_experiment_impression', { experiment: 'zdk_header_density', variant: headerDensityVal });
+      if (headerDensityVal === 'compact') document.body.classList.add('zdk-header-density-compact');
+    }
+
+    if (!experimentVariants.code_fold && !experimentVariants.header_image && !experimentVariants.author_pos && !experimentVariants.header_density) {
       capture('zdk_experiment_impression', { experiment: 'fallback', variant: 'control' });
     }
 
@@ -320,8 +327,9 @@
     var codeFoldVal = getServerVariant('zdk_code_fold') || getFlag('zdk_code_fold');
     var headerImgVal = getServerVariant('zdk_header_image') || getFlag('zdk_header_image');
     var authorPosVal = getServerVariant('zdk_author_pos') || getFlag('zdk_author_pos');
+    var headerDensityVal = getFlag('zdk_header_density');
 
-    var anyResolved = typeof codeFoldVal === 'string' || typeof headerImgVal === 'string' || typeof authorPosVal === 'string';
+    var anyResolved = typeof codeFoldVal === 'string' || typeof headerImgVal === 'string' || typeof authorPosVal === 'string' || typeof headerDensityVal === 'string';
     if (!anyResolved) {
       if (window.__zdkFallbackInit) return forceInit();
       return false;
@@ -343,6 +351,12 @@
     if (typeof authorPosVal === 'string') {
       experimentVariants.author_pos = authorPosVal;
       capture('zdk_experiment_impression', { experiment: 'zdk_author_pos', variant: authorPosVal });
+    }
+
+    if (typeof headerDensityVal === 'string') {
+      experimentVariants.header_density = headerDensityVal;
+      capture('zdk_experiment_impression', { experiment: 'zdk_header_density', variant: headerDensityVal });
+      if (headerDensityVal === 'compact') document.body.classList.add('zdk-header-density-compact');
     }
 
     setupScrollDepth();

@@ -1,6 +1,6 @@
 # ZIDOOKA Operations Registry
 
-Last updated: 2026-06-04
+Last updated: 2026-07-07
 
 ## What This Folder Is
 
@@ -30,7 +30,9 @@ Before starting work that touches an ongoing system:
 
 | Operation | Status | Required read | Live log | Why it exists |
 |---|---|---|---|---|
-| PostHog A/B testing | active | `docs/operations/posthog-ab-operations.md` | `drat/posthog-experiments.md`, `daily/posthog-summary-20260604.md`, `daily/posthog/` | Prevent confounded tests and keep winner decisions based on outcome events. Weekly auto-check via `npm run posthog:check`. |
+| PostHog A/B testing | active | `docs/operations/posthog-ab-operations.md` | `drat/posthog-status.md` (current state), `drat/posthog-experiments.md`, `daily/posthog/` | Prevent confounded tests and keep winner decisions based on outcome events. Mon/Thu auto-check via `npm run posthog:check`. |
+| Ads management (AdSense + A8) | active | `docs/ADS_MANAGEMENT.md` | `data/ads/a8/` (monthly CSV), `docs/decisions/2026-07-07-ads-registry.md` | Single registry (`inc/ads.php` + WP [外観 > Ads Settings]) for all ad placements, with unified labels/tracking. Monthly link check via `npm run ads:check`. |
+| Self-improvement loop | active | `docs/SELF-IMPROVEMENT.md` | `daily/self-improvement/`, `docs/decisions/` | Auto data collection → TODO generation via `npm run improve`; decision records verified via `npm run decisions`. |
 
 ## File Roles
 
@@ -87,6 +89,5 @@ Current preferred implementer for PostHog work:
 
 ## Current Notes
 
-- PostHog A/B testing is deliberately in a reduced mode: only `zdk_font_size` is active.
-- This is not because the other ideas are bad. They are paused because five simultaneous tests created confounding.
-- Future A/B tests should be queued and run sequentially unless the operation file says otherwise.
+- The current active experiment and its health are in `drat/posthog-status.md` (single source of truth, auto-updated by `npm run posthog:check`). Do not rely on this README for experiment state.
+- PostHog A/B testing runs one experiment at a time (max two, same purpose only). Five simultaneous tests once created confounding — queue and run sequentially unless the operation file says otherwise.

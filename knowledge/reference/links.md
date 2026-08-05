@@ -1,8 +1,8 @@
 ---
 type: concept
-description: 外部リンク・ツール・リファレンス
-tags: [reference, links, external]
-updated: 2026-06-30
+description: 外部リンク・ツール・リファレンス・内部リンク先
+tags: [reference, links, external, internal-linking]
+updated: 2026-07-07
 ---
 
 # Links
@@ -33,3 +33,14 @@ updated: 2026-06-30
 | <https://posthog.com/docs> | PostHog ドキュメント |
 | <https://nextjs.org/docs> | Next.js ドキュメント |
 | <https://tailwindcss.com/docs> | Tailwind CSS ドキュメント |
+
+## 内部リンク（エラーハブ記事）
+
+エラー系記事を書いたら、該当するハブ記事へ内部リンクを張る。
+
+| 記事 | URL |
+|------|-----|
+| GASエラーまとめ（日本語） | <https://www.zidooka.com/?p=1959> |
+| GASエラーまとめ（英語） | <https://www.zidooka.com/?p=1962> |
+| ChatGPTエラーまとめ（日本語） | <https://www.zidooka.com/?p=1965> |
+| ChatGPTエラーまとめ（英語） | <https://www.zidooka.com/?p=1968> |

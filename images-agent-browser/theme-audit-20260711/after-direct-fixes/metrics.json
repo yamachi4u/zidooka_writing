@@ -1,0 +1,777 @@
+[
+  {
+    "pageName": "home",
+    "viewportName": "desktop-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 3893
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 272
+    },
+    "main": {
+      "x": 96,
+      "y": 400,
+      "width": 824,
+      "height": 3343
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 115,
+      "y": 1064,
+      "width": 363,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "home",
+    "viewportName": "desktop-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 3599
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 272
+    },
+    "main": {
+      "x": 96,
+      "y": 400,
+      "width": 824,
+      "height": 3050
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 115,
+      "y": 1062,
+      "width": 363,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "home",
+    "viewportName": "tablet-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 834,
+      "height": 1112
+    },
+    "document": {
+      "clientWidth": 834,
+      "scrollWidth": 834,
+      "scrollHeight": 6788
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 834,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 834,
+      "height": 272
+    },
+    "main": {
+      "x": 16,
+      "y": 400,
+      "width": 802,
+      "height": 3323
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 35,
+      "y": 1051,
+      "width": 352,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "home",
+    "viewportName": "mobile-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 8994
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 16,
+      "y": 370,
+      "width": 358,
+      "height": 5068
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 35,
+      "y": 984,
+      "width": 321,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "home",
+    "viewportName": "mobile-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 8039
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 16,
+      "y": 370,
+      "width": 358,
+      "height": 4961
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 35,
+      "y": 984,
+      "width": 321,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "desktop-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 9865
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 272
+    },
+    "main": {
+      "x": 236,
+      "y": 408,
+      "width": 744,
+      "height": 9300
+    },
+    "sidebar": {
+      "x": 1020,
+      "y": 408,
+      "width": 280,
+      "height": 9300
+    },
+    "sidebarAd": {
+      "x": 1020,
+      "y": 796,
+      "width": 280,
+      "height": 179
+    },
+    "footer": {
+      "x": 236,
+      "y": 7941,
+      "width": 744,
+      "height": 127
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "desktop-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 9636
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 272
+    },
+    "main": {
+      "x": 236,
+      "y": 408,
+      "width": 744,
+      "height": 9071
+    },
+    "sidebar": {
+      "x": 1020,
+      "y": 408,
+      "width": 280,
+      "height": 9071
+    },
+    "sidebarAd": {
+      "x": 1020,
+      "y": 796,
+      "width": 280,
+      "height": 179
+    },
+    "footer": {
+      "x": 236,
+      "y": 7612,
+      "width": 744,
+      "height": 127
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "tablet-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 834,
+      "height": 1112
+    },
+    "document": {
+      "clientWidth": 834,
+      "scrollWidth": 834,
+      "scrollHeight": 9780
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 834,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 834,
+      "height": 272
+    },
+    "main": {
+      "x": 0,
+      "y": 368,
+      "width": 834,
+      "height": 9266
+    },
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "sidebarAd": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "footer": {
+      "x": 24,
+      "y": 7868,
+      "width": 786,
+      "height": 127
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "mobile-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 12348
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 0,
+      "y": 338,
+      "width": 390,
+      "height": 11805
+    },
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "sidebarAd": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "footer": {
+      "x": 16,
+      "y": 9891,
+      "width": 358,
+      "height": 123
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "mobile-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 12397
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 0,
+      "y": 338,
+      "width": 390,
+      "height": 11854
+    },
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "sidebarAd": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "footer": {
+      "x": 16,
+      "y": 9940,
+      "width": 358,
+      "height": 123
+    }
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "desktop-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4582",
+    "errors": [],
+    "title": "楽天トラベルで10倍貯まったポイント、ただ使うのはもったいない。証券で投資する方法 - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 6925
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 272
+    },
+    "main": {
+      "x": 236,
+      "y": 408,
+      "width": 744,
+      "height": 6032
+    },
+    "sidebar": {
+      "x": 1020,
+      "y": 408,
+      "width": 280,
+      "height": 6032
+    },
+    "sidebarAd": {
+      "x": 1020,
+      "y": 756,
+      "width": 280,
+      "height": 179
+    },
+    "footer": {
+      "x": 236,
+      "y": 4807,
+      "width": 744,
+      "height": 127
+    }
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "desktop-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/archives/4582",
+    "errors": [],
+    "title": "楽天トラベルで10倍貯まったポイント、ただ使うのはもったいない。証券で投資する方法 - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 6077
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 272
+    },
+    "main": {
+      "x": 236,
+      "y": 408,
+      "width": 744,
+      "height": 5184
+    },
+    "sidebar": {
+      "x": 1020,
+      "y": 408,
+      "width": 280,
+      "height": 5184
+    },
+    "sidebarAd": {
+      "x": 1020,
+      "y": 756,
+      "width": 280,
+      "height": 179
+    },
+    "footer": {
+      "x": 236,
+      "y": 4039,
+      "width": 744,
+      "height": 127
+    }
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "tablet-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4582",
+    "errors": [],
+    "title": "楽天トラベルで10倍貯まったポイント、ただ使うのはもったいない。証券で投資する方法 - ZIDOOKA!",
+    "viewport": {
+      "width": 834,
+      "height": 1112
+    },
+    "document": {
+      "clientWidth": 834,
+      "scrollWidth": 834,
+      "scrollHeight": 5752
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 834,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 834,
+      "height": 272
+    },
+    "main": {
+      "x": 0,
+      "y": 368,
+      "width": 834,
+      "height": 5239
+    },
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "sidebarAd": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "footer": {
+      "x": 24,
+      "y": 4097,
+      "width": 786,
+      "height": 127
+    }
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "mobile-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4582",
+    "errors": [],
+    "title": "楽天トラベルで10倍貯まったポイント、ただ使うのはもったいない。証券で投資する方法 - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 8415
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 0,
+      "y": 338,
+      "width": 390,
+      "height": 7845
+    },
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "sidebarAd": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "footer": {
+      "x": 16,
+      "y": 6227,
+      "width": 358,
+      "height": 123
+    }
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "mobile-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/archives/4582",
+    "errors": [],
+    "title": "楽天トラベルで10倍貯まったポイント、ただ使うのはもったいない。証券で投資する方法 - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 8899
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 0,
+      "y": 338,
+      "width": 390,
+      "height": 7891
+    },
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "sidebarAd": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "footer": {
+      "x": 16,
+      "y": 6291,
+      "width": 358,
+      "height": 123
+    }
+  }
+]

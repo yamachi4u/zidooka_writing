@@ -26,4 +26,8 @@ title: zdk_header_image server-side A/B 開始
 2026-07-07（2週間後に impressions + アウトカムを確認）
 
 ## 結果（事後記入）
--
+- 検証日 (2026-07-09): 実験クローズ
+  - 16日間のデータ: control=1105 / treatment=1120 impressions
+  - Read Depth lift: -6.9%, Engaged 60s: -9.1% → **有意差なし**
+  - 判定: inconclusive — ヘッダー画像サイズの大小は読者の行動に影響を与えていない
+  - PostHog flag `zdk_header_image` を inactive に設定

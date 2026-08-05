@@ -23,7 +23,7 @@ zidooka-writing/
   │   ├── snippets/
   │   ├── troubleshooting/
   │   ├── REMOTE_UPLOAD.md
-  │   ├── ZIDOOKA_STYLE.md
+  │   ├── ZIDOOKA-STYLE.md
   │   └── ...
   ├── downloads/             # WPテーマファイル・テンプレート
   ├── drafts/                # 記事の下書き

@@ -1,6 +1,6 @@
 ---
 created: 2026-06-30
-status: pending
+status: completed
 verify_date: 2026-07-14
 title: Bing クロールエラー対策 — robots.txt 最適化
 ---
@@ -56,4 +56,8 @@ Sitemap: https://www.zidooka.com/sitemap.rss
 2026-07-14
 
 ## 結果（事後記入）
--
+- 2026-07-09: 実装完了
+  - `functions.php` に `robots_txt` フィルター追加
+  - Disallow: /wp-json/, /xmlrpc.php, /*?s=, /*?amp=, /archives/*/attachment/, /archives/*/trackback/
+  - remote-agent push でデプロイ。確認: `curl https://www.zidooka.com/robots.txt` で反映確認済み
+  - 次のBingクロールレポートでエラー率の改善を確認予定

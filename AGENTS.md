@@ -5,16 +5,18 @@ Scope: zidooka_writing repository.
 ## Quick Index
 
 | 知りたいこと | 見るセクション |
-|---|---|---|
+|---|---|
 | 作業を始める前に | [Start-of-Work](#start-of-work) |
 | ナレッジベース | [Knowledge Base](#knowledge-base) |
 | PostHog A/B実験の状況 | [PostHog A/B Operations](#posthog-ab-operations) |
 | 記事を公開する | [Publishing Pipeline](#publishing-pipeline) |
 | SEO/分析を回す | [Analytics & SEO](#analytics--seo) |
+| 広告(AdSense/A8)を触る | [Ads Management](#ads-management) |
 | 自己改善ループ | [Self-Improvement](#self-improvement) |
 | テーマをデプロイする | [Remote Theme Pipeline](#remote-theme-pipeline) |
 | 文体・表記ルール | [Conventions](#conventions) |
 | スクリーンショット | [Screenshot Capture](#screenshot-capture) |
+| テーマの視覚改善 | `docs/THEME_VISUAL_QA.md` |
 | サムネイル生成 | [Thumbnail Generator](#thumbnail-generator) |
 
 ---
@@ -24,7 +26,7 @@ Scope: zidooka_writing repository.
 1. Read today's agent coordination log: `daily-agent/YYYYMMDD.md`
 2. Read current PostHog status: `drat/posthog-status.md`
 3. Check decision records: `docs/decisions/` (verification dates)
-4. If working on theme files: `docs/operations/README.md`
+4. If working on theme files: `docs/operations/README.md` and `docs/THEME_VISUAL_QA.md`
 5. Read self-improvement docs: `docs/SELF-IMPROVEMENT.md`, `docs/AGENT-TOOL-IMPROVEMENT.md`
 6. Read knowledge base: `knowledge/index.md`
 
@@ -197,6 +199,21 @@ npm run bing -- --preset crawl-stats|top-queries|rank-traffic
 
 ---
 
+## Ads Management
+
+広告(AdSense + A8.net)は台帳で一元管理。触る前に `docs/ADS_MANAGEMENT.md` を読むこと。
+
+- **台帳実装**: テーマ `downloads/zidooka-tw/inc/ads.php`(`zidooka_ads_default_config()`)。
+  WP管理画面 [外観 > Ads Settings] のJSONで上書き可能(デプロイ不要でON/OFF・差し替え)
+- **共通レンダラ**: `zidooka_render_ad('<placement_id>')` — ラベル・PostHog計測・CLS対策を統一適用
+- **計測イベント**: PostHog `ad_impression` / `ad_click` / `ad_unfilled`
+- **死活チェック**: `npm run ads:check`(A8リンク。月次)
+- **A8成果CSV**: `data/ads/a8/YYYY-MM.csv` に月次で配置
+- 記事に `affiliate` タグを付けるとそのページのAdSenseが無効化
+- 判断記録: `docs/decisions/2026-07-07-ads-registry.md`
+
+---
+
 ## Remote Theme Pipeline
 
 Push/pull WordPress theme files via WebDAV (configured in `.env`).
@@ -284,6 +301,7 @@ Accents: `cyan` | `green` | `purple` | `amber` | `red` | `blue` | `pink` | `oran
 | `docs/operations/posthog-ab-operations.md` | Policy + thresholds + troubleshooting |
 | `docs/operations/README.md` | Operations registry |
 | `daily-agent/YYYYMMDD.md` | Daily coordination log |
+| `docs/ADS_MANAGEMENT.md` | Ads design + inventory (AdSense/A8) |
 | `drat/seo-todo-zidooka-tw.md` | SEO master TODO |
 | `downloads/zidooka-tw/` | Local theme copy (edit here) |
 | `tmp_remote_agent/zidooka-tw/` | Remote theme pull (compare) |

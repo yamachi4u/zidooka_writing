@@ -177,16 +177,8 @@ get_header(); ?>
             <!-- Article Header -->
             <article class="zenn-article">
                 <header class="zenn-article-header mb-6">
-                    <!-- ディスプレイ広告（タイトル直上） -->
-                    <div class="mb-6" style="max-width:100%;overflow:hidden;">
-                        <ins class="adsbygoogle"
-                             style="display:block;max-width:100%;overflow:hidden;"
-                             data-ad-client="ca-pub-5002038850592836"
-                             data-ad-slot="2410921395"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                    </div>
+                    <!-- ディスプレイ広告（タイトル直上）: 台帳 inc/ads.php -->
+                    <?php echo zidooka_render_ad('post_title_top'); ?>
 
                     <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight tracking-tight mb-4"><?php the_title(); ?></h1>
 
@@ -271,16 +263,8 @@ get_header(); ?>
                         <?php the_content(); ?>
                     </div>
 
-                    <!-- Mid-content AdSense (desktop fill rate improvement) -->
-                    <div class="my-8" style="max-width:100%;overflow:hidden;">
-                        <ins class="adsbygoogle"
-                             style="display:block;max-width:100%;overflow:hidden;"
-                             data-ad-client="ca-pub-5002038850592836"
-                             data-ad-slot="2410921395"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                    </div>
+                    <!-- ディスプレイ広告（本文直後）: 台帳 inc/ads.php -->
+                    <?php echo zidooka_render_ad('post_below_content'); ?>
 
                     <!-- Pagination for multi-page posts -->
                     <?php
@@ -492,7 +476,8 @@ get_header(); ?>
         </div>
     </aside>
 
-    <aside class="zenn-sidebar-column hidden lg:block">
+    <?php // google-anno-skip: AdSenseインテント広告によるサイドバー内テキストのリンク化を防ぐ ?>
+    <aside class="zenn-sidebar-column hidden lg:block google-anno-skip">
         <div class="zenn-sidebar-sticky">
             <div class="zenn-sidebar-inner">
             <div class="bg-slate-50 rounded-xl p-4">
@@ -531,7 +516,7 @@ get_header(); ?>
             <?php endif; ?>
 
             <div class="pt-3 border-t border-slate-200 sticky top-4">
-                <?php echo zidooka_get_sidebar_banner(); ?>
+                <?php echo zidooka_render_ad('sidebar'); ?>
             </div>
             </div>
         </div>

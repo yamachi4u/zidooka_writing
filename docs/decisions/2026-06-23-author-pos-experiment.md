@@ -1,7 +1,7 @@
 ---
 created: 2026-06-23
-status: running
-verify_date: 2026-07-07
+status: deferred
+verify_date: 2026-07-23
 title: zdk_author_pos server-side A/B 開始
 ---
 
@@ -25,4 +25,6 @@ title: zdk_author_pos server-side A/B 開始
 2026-07-07（2週間後に確認）
 
 ## 結果（事後記入）
--
+- 2026-07-09: 実施延期
+  - PostHog flag 未作成。code_fold + header_image の2実験が inconclusive で閉じたため、パイプライン次候補の `zdk_author_pos` は後日開始予定
+  - トリガー: サイドバー広告A/Bテスト (7/23判定) の結果を待ってから開始しても良い

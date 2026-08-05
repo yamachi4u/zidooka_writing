@@ -294,6 +294,11 @@
       "id": 124,
       "name": "電気工事士",
       "slug": "%e9%9b%bb%e6%b0%97%e5%b7%a5%e4%ba%8b%e5%a3%ab"
+    },
+    {
+      "id": 660,
+      "name": "投資",
+      "slug": "investment"
     }
   ],
   "tags": [
@@ -3040,7 +3045,82 @@
       "id": 655,
       "name": "文体",
       "slug": "%e6%96%87%e4%bd%93"
+    },
+    {
+      "id": 656,
+      "name": "楽天経済圏",
+      "slug": "%e6%a5%bd%e5%a4%a9%e7%b5%8c%e6%b8%88%e5%9c%8f"
+    },
+    {
+      "id": 657,
+      "name": "ポイント投資",
+      "slug": "%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88%e6%8a%95%e8%b3%87"
+    },
+    {
+      "id": 658,
+      "name": "Rakuten",
+      "slug": "rakuten"
+    },
+    {
+      "id": 659,
+      "name": "Point Investment",
+      "slug": "point-investment"
+    },
+    {
+      "id": 661,
+      "name": "ShareX",
+      "slug": "sharex"
+    },
+    {
+      "id": 662,
+      "name": "DeepSeek V4",
+      "slug": "deepseek-v4"
+    },
+    {
+      "id": 663,
+      "name": "OpenRouter",
+      "slug": "openrouter"
+    },
+    {
+      "id": 664,
+      "name": "Generative AI",
+      "slug": "generative-ai"
+    },
+    {
+      "id": 665,
+      "name": "GPT-5.6",
+      "slug": "gpt-5-6"
+    },
+    {
+      "id": 666,
+      "name": "Luna",
+      "slug": "luna"
+    },
+    {
+      "id": 667,
+      "name": "料金",
+      "slug": "%e6%96%99%e9%87%91"
+    },
+    {
+      "id": 668,
+      "name": "チャットAI",
+      "slug": "%e3%83%81%e3%83%a3%e3%83%83%e3%83%88ai"
+    },
+    {
+      "id": 669,
+      "name": "プライバシー",
+      "slug": "%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%83%bc"
+    },
+    {
+      "id": 670,
+      "name": "Chat AI",
+      "slug": "chat-ai"
+    },
+    {
+      "id": 671,
+      "name": "Privacy",
+      "slug": "privacy"
     }
   ],
-  "lastUpdated": "2026-06-23T03:52:58.851Z"
+  "lastUpdated": "2026-08-05T01:00:03.755Z"
 }

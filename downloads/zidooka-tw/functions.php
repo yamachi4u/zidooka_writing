@@ -171,33 +171,7 @@ add_action('wp_head', function(){
     <?php
 }, 26);
 
-// PostHog ad click tracking — captures clicks on filled adsbygoogle elements.
-add_action('wp_head', function(){
-    $key = '';
-    if (defined('POSTHOG_KEY')) { $key = constant('POSTHOG_KEY'); }
-    $key = apply_filters('zidooka_posthog_key', $key);
-    if (!$key) return;
-    ?>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var attempts = 0;
-    var poll = setInterval(function () {
-        if (++attempts > 20) { clearInterval(poll); return; }
-        var ads = document.querySelectorAll('ins.adsbygoogle[data-ad-status="filled"]');
-        if (ads.length === 0) return;
-        clearInterval(poll);
-        ads.forEach(function (ad) {
-            if (ad._adClickTracked) return;
-            ad._adClickTracked = true;
-            ad.addEventListener('click', function () {
-                try { posthog.capture('ad_click', { slot: ad.getAttribute('data-ad-slot'), path: location.pathname }); } catch (e) {}
-            });
-        });
-    }, 500);
-});
-</script>
-    <?php
-}, 27);
+// PostHog ad click/impression tracking → moved to inc/ads.php (unified ad_click / ad_impression / ad_unfilled)
 
 // JS error tracking via PostHog
 add_action('wp_head', function(){
@@ -287,52 +261,9 @@ add_action('wp_head', function(){
     <?php
 }, 31);
 
-// Google AdSense injection (migrated from old header)
-// Configure via:
-// - define('ADSENSE_CLIENT', 'ca-pub-5002038850592836'); in wp-config.php, or
-// - add_filter('zidooka_adsense_client', fn(){ return 'ca-pub-XXXX'; });
-// Skips on posts tagged 'affiliate' (same behavior as before)
-add_action('wp_head', function(){
-    if (is_admin()) return;
-    // Do not serve AdSense on GAS distribution pages.
-    $gas_pt = defined('ZDK_GAS_POST_TYPE') ? constant('ZDK_GAS_POST_TYPE') : 'gas_script';
-    if ($gas_pt && (is_singular($gas_pt) || is_post_type_archive($gas_pt))) return;
-    if (function_exists('get_query_var') && get_query_var('zdk_gas_download')) return;
-    if (is_singular() && has_tag('affiliate')) return;
+// Google AdSense loader → moved to inc/ads.php (zidooka_ads_page_allows + zidooka_adsense_client)
 
-    $client = '';
-    if (defined('ADSENSE_CLIENT')) {
-        $client = constant('ADSENSE_CLIENT');
-    }
-    // Default to previous client from base theme if not overridden
-    if (!$client) $client = 'ca-pub-5002038850592836';
-    $client = apply_filters('zidooka_adsense_client', $client);
-    if (!$client) return;
-
-    printf(
-        "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=%s\" crossorigin=\"anonymous\"></script>\n",
-        esc_attr($client)
-    );
-}, 25);
-
-// A/B experiment server-side assignment via body_class
-add_filter('body_class', function($classes) {
-    if (!is_singular('post') && !is_page()) return $classes;
-
-    // zdk_header_image: cookie-based 50/50 assignment
-    $cookie_key = 'zdk_header_image_variant';
-    $variant = '';
-    if (isset($_COOKIE[$cookie_key])) {
-        $variant = $_COOKIE[$cookie_key];
-    } else {
-        $variant = wp_rand(0, 1) ? 'small' : 'control';
-        setcookie($cookie_key, $variant, time() + 365 * 86400, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true);
-        $_COOKIE[$cookie_key] = $variant;
-    }
-    $classes[] = 'zdk-header-image-' . $variant;
-
-    return $classes;
-}, 20);
+// A/B assignments are controlled by active PostHog flags. Closed experiments must not leave body-class assignment behind.
 
 // PostHog experiments JS + experiment CSS
 add_action( 'wp_enqueue_scripts', function() {
@@ -539,7 +470,7 @@ function process_simple_like() {
 // 1) Fallback canonical/meta/OG/Twitter if no SEO plugin is active
 add_action('wp_head', function () {
     if (!is_singular('post')) return;
-    if (function_exists('wpseo_head') || defined('RANK_MATH_VERSION')) return; // Skip if major SEO plugin present
+    if (function_exists('aioseo') || defined('AIOSEO_VERSION') || function_exists('wpseo_head') || defined('RANK_MATH_VERSION')) return; // Skip if major SEO plugin present
 
     $post_id = get_the_ID();
     $title = get_the_title($post_id);
@@ -739,100 +670,8 @@ function save_english_bio_field( $user_id ) {
     update_user_meta( $user_id, 'description_en', isset($_POST['description_en']) ? $_POST['description_en'] : '' );
 }
 
-// ZIDOOKA!：xserverタグ付き投稿にA8バナー挿入
-function zidooka_insert_xserver_banner($content) {
-
-    if (!is_singular('post')) return $content; // 投稿のみ
-    if (!has_tag('xserver')) return $content;  // タグ xserver の記事のみ
-    
-    // 管理画面とフィードは除外
-    if (is_admin() || is_feed()) return $content;  
-
-    // ここに挿入するアフィリエイトタグ
-    $banner = '
-    <div class="zidooka-xserver-ad" style="margin:24px 0; text-align:center;">
-        <a href="https://px.a8.net/svt/ejp?a8mat=45K9KW+9QOC36+CO4+6K735" rel="nofollow">
-        <img border="0" width="336" height="280" alt="" src="https://www25.a8.net/svt/bgt?aid=251208320589&wid=001&eno=01&mid=s00000001642001102000&mc=1"></a>
-        <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=45K9KW+9QOC36+CO4+6K735" alt="">
-    </div>
-    ';
-
-    // 段落（<p>）ごとに分割
-    $paras = explode("</p>", $content);
-    $new_content = "";
-
-    // 何段落目かカウントしながら組み直す
-    foreach ($paras as $i => $para) {
-        if (trim($para) == "") continue;
-
-        $new_content .= $para . "</p>";
-
-        // 3段落目の後に挿入
-        if ($i == 2) {
-            $new_content .= $banner;
-        }
-        // 5段落目の後に挿入
-        if ($i == 4) {
-            $new_content .= $banner;
-        }
-    }
-
-    return $new_content;
-}
-add_filter('the_content', 'zidooka_insert_xserver_banner');
-
-/**
- * サイドバー用 A8 バナー出し分け
- * タグに応じて適切なバナーを返す（記事詳細ページ用）
- */
-function zidooka_get_sidebar_banner(): string {
-  if (!is_singular('post')) {
-    return zidooka_fp_cafe_banner();
-  }
-  $tags = wp_get_post_tags(get_queried_object_id(), ['fields' => 'slugs']);
-  $xserver_tags = ['xserver', 'server', 'hosting', 'wordpress', 'ドメイン', 'サーバー', 'レンタルサーバー'];
-  if (array_intersect($xserver_tags, $tags)) {
-    return zidooka_xserver_sidebar_banner();
-  }
-  return zidooka_fp_cafe_banner();
-}
-
-function zidooka_fp_cafe_banner(): string {
-  return zidooka_render_banner(
-    'FPカフェ',
-    'https://px.a8.net/svt/ejp?a8mat=4B7VKV+CXKZUA+5ULO+5YZ75',
-    'https://www29.a8.net/svt/bgt?aid=260707999782&wid=001&eno=01&mid=s00000027294001003000&mc=1',
-    300, 250,
-    'https://www12.a8.net/0.gif?a8mat=4B7VKV+CXKZUA+5ULO+5YZ75'
-  );
-}
-
-function zidooka_xserver_sidebar_banner(): string {
-  return zidooka_render_banner(
-    'Xserver',
-    'https://px.a8.net/svt/ejp?a8mat=45K9KW+9QOC36+CO4+6PRPD',
-    'https://www24.a8.net/svt/bgt?aid=251208320589&wid=001&eno=01&mid=s00000001642001128000&mc=1',
-    250, 250,
-    'https://www12.a8.net/0.gif?a8mat=45K9KW+9QOC36+CO4+6PRPD'
-  );
-}
-
-function zidooka_render_banner(string $name, string $click_url, string $img_src, int $w, int $h, string $pixel_src): string {
-  $e_click = esc_url($click_url);
-  $e_img   = esc_url($img_src);
-  $e_pixel = esc_url($pixel_src);
-  $e_name  = esc_js($name);
-  return <<<HTML
-<div class="zidooka-ad-banner">
-  <p class="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-400 mb-1.5">Sponsored</p>
-  <a href="{$e_click}" target="_blank" rel="nofollow sponsored" class="block no-underline" onclick="try{posthog?.capture('banner_click',{provider:'{$e_name}',location:'sidebar'})}catch(e){}">
-    <img width="{$w}" height="{$h}" alt="{$name}" src="{$e_img}" class="w-full h-auto rounded-lg border border-slate-200/60" loading="lazy" />
-    <img width="1" height="1" src="{$e_pixel}" alt="" aria-hidden class="pointer-events-none" />
-  </a>
-</div>
-<script>try{posthog?.capture('banner_exposure',{provider:'{$e_name}',location:'sidebar'})}catch(e){}</script>
-HTML;
-}
+// A8 本文内バナー / サイドバーバナー → inc/ads.php のプレースメント台帳へ移行
+// （post_in_content / sidebar プレースメント。案件は zidooka_ads_default_config() の a8_offers）
 
 
 /**
@@ -1235,7 +1074,27 @@ add_filter('wp_robots', function($robots) {
     }
     return $robots;
 });
-// 2.5) Preconnect hints for external hosts
+// 2.5b) robots.txt — Bing クロールエラー削減 (wp-json, search, attachment を disallow)
+add_filter('robots_txt', function($output, $public) {
+    if (!$public) return $output;
+    $site_url = get_site_url();
+    $lines = [
+        'User-agent: *',
+        'Disallow: /wp-admin/',
+        'Disallow: /wp-json/',
+        'Disallow: /xmlrpc.php',
+        'Disallow: /*?s=',
+        'Disallow: /*?amp=',
+        'Disallow: /archives/*/attachment/',
+        'Disallow: /archives/*/trackback/',
+        'Allow: /wp-admin/admin-ajax.php',
+        '',
+        "Sitemap: {$site_url}/sitemap.xml",
+        "Sitemap: {$site_url}/sitemap.rss",
+    ];
+    return implode("\n", $lines) . "\n";
+}, 10, 2);
+// 2.5c) Preconnect hints for external hosts
 add_action('wp_head', function(){
     $hosts = [
       'https://cdn.tailwindcss.com',
@@ -1437,6 +1296,9 @@ function zenn_get_related_posts($is_english_only = false) {
 }
 
 require_once get_stylesheet_directory() . '/inc/gas-dist.php';
+
+// 広告一元管理（AdSense + A8 台帳・レンダラ・計測・管理画面）
+require_once get_stylesheet_directory() . '/inc/ads.php';
 
 
 require_once get_stylesheet_directory() . '/inc/template-functions.php';

@@ -16,7 +16,7 @@ This repository uses GitHub Copilot (Chat/Agent). Always follow these rules befo
 - Introduce formatting that diverges from the emphasis snippets.
 
 ## Style & Scope
-- If present, align tone and structure with `ZIDOOKA_STYLE.md`.
+- Align tone and structure with `docs/ZIDOOKA-STYLE.md`.
 - Keep changes minimal and focused on the user’s request.
 
 ## Responses

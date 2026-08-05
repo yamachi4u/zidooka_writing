@@ -49,7 +49,7 @@
 
 | # | 実験名 | Flag Key | 開始日 | 判定予定日 | バリアント | KPI | ステータス |
 |---|--------|----------|--------|-----------|-----------|-----|-----------|
-| 4 | コードブロック折りたたみ | `zdk_code_fold` | 2026-06-22 | **2026-06-29** | control / folded | スクロール深度・折りたたみ展開率 | PostHog flag active |
+| 10 | サイドバー広告A/B (TechGo vs FPカフェ) | — (server-side PHP random) | 2026-07-09 | **2026-07-23** | fp_cafe / techgo_banner | ad_click率 (PostHog) | server-side active |
 
 ### 完了 (Completed)
 
@@ -64,6 +64,8 @@
 |---|--------|------|---------|
 | 2 | 行間 | 2026-06-10〜2026-06-16 | inconclusive — 全指標で有意差なし |
 | 3 | 関連記事レイアウト | 2026-06-16〜2026-06-22 | inconclusive — KPI（関連記事クリック）が0件のため判定不能。トラッキングセレクタ修正済み |
+| 4 | コードブロック折りたたみ | 2026-06-22〜2026-07-09 | inconclusive — 全指標で有意差なし。Read Depth +2.0%, Engaged 60s -0.3%。クローズ |
+| 5 | 記事ヘッダー画像サイズ | 2026-06-23〜2026-07-09 | inconclusive — 全指標で有意差なし。Read Depth -6.9%, Engaged 60s -9.1%。クローズ |
 
 ## アクティブなFeature Flags
 
@@ -75,8 +77,8 @@
 | `zdk_line_height` | 行間 | control(50%) / loose(50%) | 100% | inactive (2026-06-16 クローズ: inconclusive) |
 | `zdk_related_posts` | 関連記事 | control(50%) / grid4(50%) | 100% | inactive (2026-06-22 クローズ: inconclusive) |
 | `zdk_ad_position` | 広告位置 | control(50%) / early(50%) | 100% | inactive (2026-06-04 停止) |
-| `zdk_code_fold` | コードブロック折りたたみ | control(50%) / folded(50%) | 100% | **active** (2026-06-22 開始, server-side) |
-| `zdk_header_image` | 記事ヘッダー画像サイズ | control(50%) / small(50%) | 100% | **active** (2026-06-23, server-side body class) |
+| `zdk_code_fold` | コードブロック折りたたみ | control(50%) / folded(50%) | 100% | inactive (2026-07-09 クローズ: inconclusive) |
+| `zdk_header_image` | 記事ヘッダー画像サイズ | control(50%) / small(50%) | 100% | inactive (2026-07-09 クローズ: inconclusive) |
 | `zdk_author_pos` | 著者プロフィール位置 | control(50%) / compact(50%) | 100% | **active** (2026-06-23, server-side body class) |
 
 ## パイプライン（優先順位付き）
@@ -132,3 +134,12 @@
 - エージェントは週2回（月・木推奨）`npm run posthog:check` を実行し、判定可能になった実験をクローズする
 - 新しい実験案は随時このドキュメントの「パイプライン」セクションに追記し、優先度を検討する
 - 判定が「差なし」になった場合もクローズし、次の実験に進む（「何が効かないか」も知識）
+
+## Design Refactoring Queue — 2026-07-11
+
+- Production PostHog flags: no active `zdk_*` flag as of `npm run posthog:check` on 2026-07-11.
+- Server-side sidebar ad offer test remains active through 2026-07-23 and blocks readability/navigation experiments.
+- `zdk_header_density` was created in PostHog as inactive, 50% `control` / 50% `compact`.
+- Theme support and outcome attribution are deployed while inactive.
+- Activation gate: close the ad test, confirm no active experiment, then activate only `zdk_header_density` and set its dates in `scripts/posthog-check.mjs`.
+- Visual QA source of truth: `docs/THEME_VISUAL_QA.md`.

@@ -25,10 +25,16 @@
         <?php if ( $is_english_content ) : ?>
           <a class="px-2 text-gray-500 hover:text-gray-700" href="<?php echo esc_url( function_exists('get_privacy_policy_url') ? get_privacy_policy_url() : '' ); ?>">Privacy Policy</a>
           <a class="px-2 text-gray-500 hover:text-gray-700" href="https://www.zidooka.com/jigyo">Contact & Company Info</a>
+          <a class="px-2 text-gray-500 hover:text-gray-700" href="https://www.zidooka.com/">Zidooka Home</a>
+          <a class="px-2 text-gray-500 hover:text-gray-700" href="https://tools.zidooka.com">Tools</a>
+          <a class="px-2 text-gray-500 hover:text-gray-700" href="https://tools.zidooka.com/jp/calendar">Lucky-day Calendar</a>
           <a class="px-2 text-gray-500 hover:text-gray-700" href="<?php echo esc_url( ( $p = (int) get_option('page_for_posts') ) ? get_permalink( $p ) : home_url('/') ); ?>">View All Articles</a>
         <?php else : ?>
           <a class="px-2 text-gray-500 hover:text-gray-700" href="<?php echo esc_url( function_exists('get_privacy_policy_url') ? get_privacy_policy_url() : '' ); ?>">プライバシーポリシー / Privacy Policy</a>
           <a class="px-2 text-gray-500 hover:text-gray-700" href="https://www.zidooka.com/jigyo">お問い合わせ・事業/会社情報 / Contact & Company Info</a>
+          <a class="px-2 text-gray-500 hover:text-gray-700" href="https://www.zidooka.com/">Zidookaトップ</a>
+          <a class="px-2 text-gray-500 hover:text-gray-700" href="https://tools.zidooka.com">便利ツール / Tools</a>
+          <a class="px-2 text-gray-500 hover:text-gray-700" href="https://tools.zidooka.com/jp/calendar">吉日カレンダー</a>
           <a class="px-2 text-gray-500 hover:text-gray-700" href="<?php echo esc_url( ( $p = (int) get_option('page_for_posts') ) ? get_permalink( $p ) : home_url('/') ); ?>">全記事一覧を見る</a>
         <?php endif; ?>
       </nav>

@@ -1,0 +1,767 @@
+[
+  {
+    "pageName": "home",
+    "viewportName": "desktop-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 4393
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 833
+    },
+    "main": {
+      "x": 96,
+      "y": 961,
+      "width": 824,
+      "height": 3283
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 115,
+      "y": 1624,
+      "width": 363,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "home",
+    "viewportName": "desktop-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 4393
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 833
+    },
+    "main": {
+      "x": 96,
+      "y": 961,
+      "width": 824,
+      "height": 3283
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 115,
+      "y": 1624,
+      "width": 363,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "home",
+    "viewportName": "tablet-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 834,
+      "height": 1112
+    },
+    "document": {
+      "clientWidth": 834,
+      "scrollWidth": 834,
+      "scrollHeight": 6508
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 834,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 834,
+      "height": 492
+    },
+    "main": {
+      "x": 16,
+      "y": 620,
+      "width": 802,
+      "height": 2823
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 35,
+      "y": 1271,
+      "width": 352,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "home",
+    "viewportName": "mobile-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 9065
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 16,
+      "y": 370,
+      "width": 358,
+      "height": 5137
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 35,
+      "y": 986,
+      "width": 321,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "home",
+    "viewportName": "mobile-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/",
+    "errors": [],
+    "title": "メイン - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 9045
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 16,
+      "y": 370,
+      "width": 358,
+      "height": 5117
+    },
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": {
+      "x": 35,
+      "y": 986,
+      "width": 321,
+      "height": 36
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "desktop-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 9187
+    },
+    "overflowCount": 3,
+    "overflowing": [
+      {
+        "tag": "P",
+        "className": "zdk-hp-wrap",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      },
+      {
+        "tag": "LABEL",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9910,
+          "width": 89
+        }
+      },
+      {
+        "tag": "INPUT",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      }
+    ],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 833
+    },
+    "main": {
+      "x": 236,
+      "y": 969,
+      "width": 744,
+      "height": 7734
+    },
+    "sidebar": {
+      "x": 1020,
+      "y": 969,
+      "width": 280,
+      "height": 7734
+    },
+    "sidebarAd": {
+      "x": 1020,
+      "y": 1356,
+      "width": 280,
+      "height": 179
+    },
+    "footer": {
+      "x": 236,
+      "y": 6935,
+      "width": 744,
+      "height": 127
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "desktop-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 10187
+    },
+    "overflowCount": 3,
+    "overflowing": [
+      {
+        "tag": "P",
+        "className": "zdk-hp-wrap",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      },
+      {
+        "tag": "LABEL",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9910,
+          "width": 89
+        }
+      },
+      {
+        "tag": "INPUT",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      }
+    ],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 1440,
+      "height": 833
+    },
+    "main": {
+      "x": 236,
+      "y": 969,
+      "width": 744,
+      "height": 9062
+    },
+    "sidebar": {
+      "x": 1020,
+      "y": 969,
+      "width": 280,
+      "height": 9062
+    },
+    "sidebarAd": {
+      "x": 1020,
+      "y": 1356,
+      "width": 280,
+      "height": 179
+    },
+    "footer": {
+      "x": 236,
+      "y": 8163,
+      "width": 744,
+      "height": 127
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "tablet-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 834,
+      "height": 1112
+    },
+    "document": {
+      "clientWidth": 834,
+      "scrollWidth": 834,
+      "scrollHeight": 9675
+    },
+    "overflowCount": 3,
+    "overflowing": [
+      {
+        "tag": "P",
+        "className": "zdk-hp-wrap",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      },
+      {
+        "tag": "LABEL",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9910,
+          "width": 89
+        }
+      },
+      {
+        "tag": "INPUT",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      }
+    ],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 834,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 834,
+      "height": 492
+    },
+    "main": {
+      "x": 0,
+      "y": 588,
+      "width": 834,
+      "height": 8943
+    },
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "sidebarAd": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "footer": {
+      "x": 24,
+      "y": 7663,
+      "width": 786,
+      "height": 127
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "mobile-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 12433
+    },
+    "overflowCount": 3,
+    "overflowing": [
+      {
+        "tag": "P",
+        "className": "zdk-hp-wrap",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      },
+      {
+        "tag": "LABEL",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9910,
+          "width": 89
+        }
+      },
+      {
+        "tag": "INPUT",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      }
+    ],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 0,
+      "y": 338,
+      "width": 390,
+      "height": 11891
+    },
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "sidebarAd": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "footer": {
+      "x": 16,
+      "y": 9976,
+      "width": 358,
+      "height": 123
+    }
+  },
+  {
+    "pageName": "post-en",
+    "viewportName": "mobile-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/archives/4575",
+    "errors": [],
+    "title": "I Actually Tried codex-reset — Spending Codex Banked Rate-Limit Resets from the CLI - ZIDOOKA!",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 12433
+    },
+    "overflowCount": 3,
+    "overflowing": [
+      {
+        "tag": "P",
+        "className": "zdk-hp-wrap",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      },
+      {
+        "tag": "LABEL",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9910,
+          "width": 89
+        }
+      },
+      {
+        "tag": "INPUT",
+        "className": "",
+        "rect": {
+          "left": -9999,
+          "right": -9709,
+          "width": 290
+        }
+      }
+    ],
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 96
+    },
+    "campaign": {
+      "x": 0,
+      "y": 96,
+      "width": 390,
+      "height": 242
+    },
+    "main": {
+      "x": 0,
+      "y": 338,
+      "width": 390,
+      "height": 11891
+    },
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "sidebarAd": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "footer": {
+      "x": 16,
+      "y": 9976,
+      "width": 358,
+      "height": 123
+    }
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "desktop-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4574",
+    "errors": [],
+    "title": "2026-06-23-123333-3.jpg (1018×132)",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 900
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": null,
+    "campaign": null,
+    "main": null,
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": null
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "desktop-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/archives/4574",
+    "errors": [],
+    "title": "2026-06-23-123333-3.jpg (1018×132)",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 900
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": null,
+    "campaign": null,
+    "main": null,
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": null
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "tablet-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4574",
+    "errors": [],
+    "title": "2026-06-23-123333-3.jpg (1018×132)",
+    "viewport": {
+      "width": 834,
+      "height": 1112
+    },
+    "document": {
+      "clientWidth": 834,
+      "scrollWidth": 834,
+      "scrollHeight": 1112
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": null,
+    "campaign": null,
+    "main": null,
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": null
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "mobile-light",
+    "colorScheme": "light",
+    "url": "https://www.zidooka.com/archives/4574",
+    "errors": [],
+    "title": "2026-06-23-123333-3.jpg (1018×132)",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 844
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": null,
+    "campaign": null,
+    "main": null,
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": null
+  },
+  {
+    "pageName": "post-ja",
+    "viewportName": "mobile-dark",
+    "colorScheme": "dark",
+    "url": "https://www.zidooka.com/archives/4574",
+    "errors": [],
+    "title": "2026-06-23-123333-3.jpg (1018×132)",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "scrollHeight": 844
+    },
+    "overflowCount": 0,
+    "overflowing": [],
+    "header": null,
+    "campaign": null,
+    "main": null,
+    "sidebar": null,
+    "sidebarAd": null,
+    "footer": null
+  }
+]

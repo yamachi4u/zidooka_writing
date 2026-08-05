@@ -2,9 +2,10 @@
 type: concept
 description: zidooka.com 記事の文体ルール
 tags: [conventions, writing, style, japanese, english]
-updated: 2026-06-30
+updated: 2026-07-07
 links:
   - ../projects/zidooka-writing.md
+  - ../reference/links.md
 ---
 
 # Writing Style (zidooka)
@@ -14,6 +15,8 @@ links:
 - ですます調
 - Zidooka Blocks を使用（【】は使わない）
 - `docs/ZIDOOKA-STYLE.md` のセルフチェック通過必須
+- 記事制作ルール（PREP構成・EEAT・参照URLリスト形式）も同ファイル末尾に統合済み（旧 `docs/ZIDOOKA_STYLE.md` は2026-07-07に削除）
+- エラー系記事はエラーハブ記事へ内部リンクを張る（URL一覧: [../reference/links.md](../reference/links.md)）
 
 ### Zidooka Blocks
 

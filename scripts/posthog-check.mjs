@@ -11,6 +11,7 @@ const FLAGS = [
   { key:'zdk_code_fold',     label:'code_fold',     ui:'Code Block Fold',            startedAt:'2026-06-22', deadline:'2026-06-29' },
   { key:'zdk_header_image',  label:'header_image',  ui:'Header Image Size',          startedAt:'2026-06-23', deadline:'2026-07-07' },
   { key:'zdk_author_pos',    label:'author_pos',    ui:'Author Position',            startedAt:'2026-06-23', deadline:'2026-07-07' },
+  { key:'zdk_header_density',label:'header_density',ui:'Header Density',             startedAt:null,         deadline:null },
 ];
 
 const OUTCOMES = [
@@ -153,7 +154,7 @@ function parseVariantKey(variantsStr) {
   if (!variantsStr) return null;
   try {
     const obj = JSON.parse(variantsStr);
-    for (const k of ['font_size','line_height','toc_sticky','related_posts','ad_position']) {
+    for (const k of ['code_fold','header_image','author_pos','font_size','line_height','toc_sticky','related_posts','ad_position','header_density']) {
       if (typeof obj[k] === 'string') return obj[k];
     }
     return null;
@@ -686,7 +687,7 @@ function buildStatus(analysis, flags, metaRecs, today) {
   p('| Status | Experiment | Flag |');
   p('|--------|------------|------|');
   const allFlags = flags.map(f => ({ key: f.key, active: f.active }));
-  const defs = { zdk_code_fold: 'Code block fold', zdk_header_image: 'Header image', zdk_author_pos: 'Author position' };
+  const defs = { zdk_code_fold: 'Code block fold', zdk_header_image: 'Header image', zdk_author_pos: 'Author position', zdk_header_density: 'Header density' };
   for (const f of allFlags) {
     const name = defs[f.key] || f.key;
     const badge = f.active ? '**running**' : 'pending';

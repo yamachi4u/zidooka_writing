@@ -44,15 +44,11 @@ get_header();
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <?php $post_count = 0; while ($query->have_posts()) : $query->the_post(); $post_count++; ?>
                         <?php if ($post_count === 3) : ?>
-                        <div class="flex col-span-1 md:col-span-2 justify-center" style="min-height:100px">
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-format="fluid"
-                                 data-ad-layout-key="-66+c1+y-11+h7"
-                                 data-ad-client="ca-pub-5002038850592836"
-                                 data-ad-slot="1657762831"></ins>
-                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                        <?php $zdk_infeed = zidooka_render_ad('front_page_infeed'); if ($zdk_infeed) : ?>
+                        <div class="col-span-1 md:col-span-2 zdk-ad-slot">
+                            <?php echo $zdk_infeed; ?>
                         </div>
+                        <?php endif; ?>
                         <?php endif; ?>
                         <div class="flex">
                             <article id="post-<?php the_ID(); ?>" <?php post_class('post-card w-100'); ?>>
@@ -171,7 +167,8 @@ get_header();
         </main>
 
         <!-- サイドバー -->
-        <aside class="lg:col-span-4">
+        <?php // google-anno-skip: AdSenseインテント広告がサイドバーの見出し等をリンクに書き換えるのを防ぐ ?>
+        <aside class="lg:col-span-4 google-anno-skip">
             <!-- サイト紹介 -->
 <div class="sidebar about-site">
     <h3><i class="fas fa-info-circle"></i>このサイトについて</h3>
