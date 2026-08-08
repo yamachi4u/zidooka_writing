@@ -11,7 +11,7 @@ tags:
   - Memory
   - Subagents
   - Automation
-status: draft
+status: publish
 slug: hermes-agent-opencode-view-ja
 ---
 

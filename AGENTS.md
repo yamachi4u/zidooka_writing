@@ -62,7 +62,7 @@ gh issue list --repo yamachi4u/zidooka_writing --state open
 ### 処理の進め方
 
 1. 各 Issue を `gh issue view <N> --repo yamachi4u/zidooka_writing` で確認
-2. 執筆系（記事）は日英ペアの下書きを `drafts/` に作成し、`node src/index.js post-pair` で WordPress に下書き投稿 → 検証 → コミット → Issue クローズ
+2. 執筆系（記事）は日英ペアを `drafts/` に作成し、`node src/index.js post-pair` で WordPress に**公開投稿** → 検証 → コミット → Issue クローズ
 3. 設計/実装系は `docs/` に設計書・`.github/workflows/` や `scripts/` に実装 → 検証 → コミット → Issue クローズ
 4. クローズ時のコメントに成果物パスと補足を記す
 5. 処理完了後も `gh issue list` で残りを確認し、ゼロになったらユーザーへ報告
@@ -70,7 +70,7 @@ gh issue list --repo yamachi4u/zidooka_writing --state open
 ### 注意
 
 - タグ・カテゴリは `data/metadata.json` の既存のもののみ使用（存在しないタグは作らない）
-- 記事は `status: draft` で下書き投稿まで。公開可否はユーザーに確認してから
+- **Issue 由来の記事は基本公開する**（ユーザーは公開前提で Issue を作成している）。例外（下書きのまま）はユーザーが明示した場合のみ
 - Privacy First に従い、会話情報を無断で外部成果物に転記しない
 
 ---

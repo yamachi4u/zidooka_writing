@@ -9,7 +9,7 @@ tags:
   - Comparison
   - Coding
   - AI Tools
-status: draft
+status: publish
 slug: oss-ai-harness-comparison-2026-en
 ---
 

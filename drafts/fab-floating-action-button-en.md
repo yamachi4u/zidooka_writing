@@ -6,7 +6,7 @@ tags:
   - UX
   - デザイン
   - モバイル
-status: draft
+status: publish
 slug: fab-floating-action-button-en
 ---
 

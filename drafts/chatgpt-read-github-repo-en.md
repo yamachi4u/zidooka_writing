@@ -10,7 +10,7 @@ tags:
   - OpenCode
   - AI Agent
   - AGENTS.md
-status: draft
+status: publish
 slug: chatgpt-read-github-repo-en
 ---
 
