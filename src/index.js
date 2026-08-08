@@ -49,6 +49,29 @@ async function resolveBilingualPairPaths(inputPath) {
   throw new Error(`Pair draft not found for ${inputPath}. Expected one of: ${candidates.join(', ')}`);
 }
 
+async function postBilingualPair(inputPath, { requestedDate = '', forceNow = false } = {}) {
+  const [firstPath, secondPath] = await resolveBilingualPairPaths(inputPath);
+  const pairPoster = new PostService();
+  let overrides = forceNow
+    ? { status: 'publish', ignoreFrontmatterSchedule: true }
+    : {};
+
+  if (requestedDate) {
+    const scheduledDate = pairPoster.normalizeScheduleDate(requestedDate);
+    console.log(`Scheduling bilingual pair for: ${scheduledDate}`);
+    overrides = { status: 'future', date: scheduledDate };
+  }
+
+  const results = [];
+  for (const targetPath of [firstPath, secondPath]) {
+    const pairResult = await pairPoster.post(targetPath, overrides);
+    console.log(`Successfully posted: "${pairResult.title.raw}"`);
+    console.log(`Link: ${pairResult.link}`);
+    results.push(pairResult);
+  }
+  return results;
+}
+
 async function main() {
   try {
     switch (command) {
@@ -97,14 +120,20 @@ async function main() {
       case 'post-pair': {
         const pairPath = args[1];
         if (!pairPath) throw new Error('Please specify one Japanese or English draft path');
+        await postBilingualPair(pairPath, { forceNow: args.includes('--now') });
+        break;
+      }
 
-        const [firstPath, secondPath] = await resolveBilingualPairPaths(pairPath);
-        const pairPoster = new PostService();
-        for (const targetPath of [firstPath, secondPath]) {
-          const pairResult = await pairPoster.post(targetPath);
-          console.log(`Successfully posted: "${pairResult.title.raw}"`);
-          console.log(`Link: ${pairResult.link}`);
-        }
+      case 'schedule-pair': {
+        const pairPath = args[1];
+        if (!pairPath) throw new Error('Please specify one Japanese or English draft path');
+
+        const scheduler = new PostService();
+        const requestedDate = args.slice(2).join(' ').trim();
+        const scheduledDate = requestedDate
+          ? scheduler.normalizeScheduleDate(requestedDate)
+          : await scheduler.findNextScheduleSlot();
+        await postBilingualPair(pairPath, { requestedDate: scheduledDate });
         break;
       }
 
@@ -113,7 +142,8 @@ async function main() {
         if (!schedulePath) throw new Error('Please specify a file path');
 
         const scheduler = new PostService();
-        const scheduleResult = await scheduler.schedulePost(schedulePath);
+        const requestedDate = args.slice(2).join(' ').trim();
+        const scheduleResult = await scheduler.schedulePost(schedulePath, requestedDate);
         console.log(`Successfully scheduled: "${scheduleResult.title.raw}"`);
         console.log(`Link: ${scheduleResult.link}`);
         break;
@@ -141,8 +171,9 @@ Usage:
   node src/index.js sync             - Sync WP categories/tags
   node src/index.js list <type>      - List categories or tags (type: categories, tags)
   node src/index.js post <file>      - Post markdown file to WP
-  node src/index.js post-pair <file> - Post paired Japanese/English drafts together
-  node src/index.js schedule <file>  - Schedule post for next available morning
+  node src/index.js post-pair <file> [--now] - Post paired drafts; --now ignores publish_at
+  node src/index.js schedule <file> [date]      - Schedule one post (date optional)
+  node src/index.js schedule-pair <file> [date] - Schedule a bilingual pair together
   node src/index.js auth             - Check authentication
   node src/index.js thumbnail [opts] - Generate a branded thumbnail image
 
@@ -151,6 +182,7 @@ Thumbnail options (see --help):
 
 Frontmatter tips:
   - Custom post types: set \`post_type: gas_script\` (and \`gas:\` meta) to publish GAS distribution posts.
+  - Scheduled posts: set \`publish_at: "YYYY-MM-DD HH:mm"\` in the WordPress timezone.
         `);
     }
   } catch (error) {

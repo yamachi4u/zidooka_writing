@@ -158,7 +158,7 @@ export class WpClient {
       return all;
     } catch (error) {
       console.error('Failed to fetch future posts:', error.message);
-      return [];
+      throw error;
     }
   }
 

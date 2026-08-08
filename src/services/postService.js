@@ -28,6 +28,76 @@ export class PostService {
     return String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   }
 
+  normalizeScheduleDate(value) {
+    const raw = String(value || '').trim();
+    const match = raw.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/);
+    if (!match) {
+      throw new Error('Scheduled time must use `YYYY-MM-DD HH:mm` or `YYYY-MM-DD HH:mm:ss` in the WordPress timezone.');
+    }
+
+    const [, year, month, day, hour, minute, second = '00'] = match;
+    const parts = [year, month, day, hour, minute, second].map(Number);
+    const probe = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2], parts[3], parts[4], parts[5]));
+    const valid = probe.getUTCFullYear() === parts[0]
+      && probe.getUTCMonth() === parts[1] - 1
+      && probe.getUTCDate() === parts[2]
+      && probe.getUTCHours() === parts[3]
+      && probe.getUTCMinutes() === parts[4]
+      && probe.getUTCSeconds() === parts[5];
+    if (!valid) {
+      throw new Error(`Invalid scheduled time: ${raw}`);
+    }
+
+    return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+  }
+
+  getDatePartsInTimezone(date, timeZone = config.wp.timezone) {
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+    const parts = Object.fromEntries(
+      formatter.formatToParts(date)
+        .filter(part => part.type !== 'literal')
+        .map(part => [part.type, part.value])
+    );
+    return { year: Number(parts.year), month: Number(parts.month), day: Number(parts.day) };
+  }
+
+  addCalendarDays({ year, month, day }, days) {
+    const shifted = new Date(Date.UTC(year, month - 1, day + days));
+    return {
+      year: shifted.getUTCFullYear(),
+      month: shifted.getUTCMonth() + 1,
+      day: shifted.getUTCDate()
+    };
+  }
+
+  formatCalendarDate({ year, month, day }) {
+    return `${String(year).padStart(4, '0')}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  }
+
+  async findNextScheduleSlot() {
+    const futurePosts = await this.wp.getFuturePosts();
+    const occupiedDates = new Set(
+      futurePosts
+        .map(post => String(post.date || '').slice(0, 10))
+        .filter(Boolean)
+    );
+
+    const today = this.getDatePartsInTimezone(new Date());
+    for (let offset = 1; offset <= 365; offset++) {
+      const date = this.formatCalendarDate(this.addCalendarDays(today, offset));
+      if (!occupiedDates.has(date)) {
+        return `${date}T09:00:00`;
+      }
+    }
+
+    throw new Error('No available schedule slot found within 365 days.');
+  }
+
   async resolveTextPath(filePath, inputPath) {
     let decoded = String(inputPath || '');
     try {
@@ -163,7 +233,7 @@ export class PostService {
     return metadata;
   }
 
-  async processFile(filePath) {
+  async processFile(filePath, overrides = {}) {
     console.log(`Processing ${filePath}...`);
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const { data: frontmatter, content: markdownBody } = matter(fileContent);
@@ -279,13 +349,30 @@ export class PostService {
       }
     }
 
+    const ignoreFrontmatterSchedule = overrides.ignoreFrontmatterSchedule === true;
+    const frontmatterSchedule = ignoreFrontmatterSchedule
+      ? null
+      : frontmatter.publish_at || frontmatter.publishAt;
+    let scheduledDate = frontmatter.date;
+    if (ignoreFrontmatterSchedule) {
+      scheduledDate = undefined;
+    } else if (overrides.date) {
+      scheduledDate = this.normalizeScheduleDate(overrides.date);
+    } else if (frontmatterSchedule) {
+      scheduledDate = this.normalizeScheduleDate(frontmatterSchedule);
+    }
+    const scheduledStatus = overrides.status
+      || (overrides.date || frontmatterSchedule ? 'future' : null)
+      || frontmatter.status
+      || 'publish';
+
     const data = {
       title: frontmatter.title,
       content: htmlContent,
-      status: frontmatter.status || 'publish',
+      status: scheduledStatus,
       slug: finalSlug || frontmatter.slug,
       parent: parentId,
-      date: frontmatter.date,
+      date: scheduledDate,
       categories: categoryIds,
       tags: tagIds,
       featured_media: featuredMediaId,
@@ -306,8 +393,8 @@ export class PostService {
     return { type: postType, data };
   }
 
-  async post(filePath) {
-    const { type: postType, data: postData } = await this.processFile(filePath);
+  async post(filePath, overrides = {}) {
+    const { type: postType, data: postData } = await this.processFile(filePath, overrides);
     
     let existingPost = null;
     if (postData.id) {
@@ -384,66 +471,11 @@ export class PostService {
     return ids;
   }
 
-  async schedulePost(filePath) {
-    console.log('Finding next available schedule slot...');
-    
-    // 1. Get future posts
-    const futurePosts = await this.wp.getFuturePosts();
-    // Create a set of occupied dates (YYYY-MM-DD)
-    const occupiedDates = new Set(futurePosts.map(p => {
-      return new Date(p.date).toISOString().split('T')[0];
-    }));
-
-    // 2. Find next available slot (starting tomorrow)
-    let targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 1); // Start from tomorrow
-    
-    // Loop until we find a date that is NOT in occupiedDates
-    // Limit to 365 days to prevent infinite loop
-    for (let i = 0; i < 365; i++) {
-      const dateStr = targetDate.toISOString().split('T')[0];
-      if (!occupiedDates.has(dateStr)) {
-        break;
-      }
-      targetDate.setDate(targetDate.getDate() + 1);
-    }
-
-    // Set time to 09:00:00 (Morning)
-    targetDate.setHours(9, 0, 0, 0);
-    
-    // Format: YYYY-MM-DD HH:mm:ss
-    const year = targetDate.getFullYear();
-    const month = String(targetDate.getMonth() + 1).padStart(2, '0');
-    const day = String(targetDate.getDate()).padStart(2, '0');
-    const hours = String(targetDate.getHours()).padStart(2, '0');
-    const minutes = String(targetDate.getMinutes()).padStart(2, '0');
-    const seconds = String(targetDate.getSeconds()).padStart(2, '0');
-    
-    const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
-    console.log(`Scheduled for: ${formattedDate}`);
-
-    // 3. Update file frontmatter
-    let fileContent = await fs.readFile(filePath, 'utf-8');
-    
-    // Update date
-    if (fileContent.match(/^date:.*$/m)) {
-      fileContent = fileContent.replace(/^date:.*$/m, `date: ${formattedDate}`);
-    } else {
-      // Insert after title if date missing
-      fileContent = fileContent.replace(/^title:.*$/m, `$& \ndate: ${formattedDate}`);
-    }
-    
-    // Update status to future
-    if (fileContent.match(/^status:.*$/m)) {
-      fileContent = fileContent.replace(/^status:.*$/m, `status: future`);
-    } else {
-      fileContent = fileContent.replace(/^---/, `---\nstatus: future`);
-    }
-
-    await fs.writeFile(filePath, fileContent);
-    
-    // 4. Post
-    return await this.post(filePath);
+  async schedulePost(filePath, requestedDate = '') {
+    const scheduledDate = requestedDate
+      ? this.normalizeScheduleDate(requestedDate)
+      : await this.findNextScheduleSlot();
+    console.log(`Scheduled for: ${scheduledDate} (${config.wp.timezone})`);
+    return await this.post(filePath, { status: 'future', date: scheduledDate });
   }
 }
