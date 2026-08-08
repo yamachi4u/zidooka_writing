@@ -23,6 +23,8 @@ CLIツールは `src/index.js` を経由して実行します。
 | `list` | ローカルのカテゴリ・タグ一覧を表示します | `node src/index.js list categories` |
 | `post` | 指定したMarkdownファイルを投稿（または更新）します | `node src/index.js post drafts/article.md` |
 | `post-pair` | `-jp` / `-ja` と `-en` のペア記事をまとめて投稿（または更新）します | `node src/index.js post-pair drafts/article-jp.md` |
+| `schedule` | 単独記事を指定日時、または次の空き日の9時に予約します | `node src/index.js schedule drafts/article.md "2026-08-15 09:00"` |
+| `schedule-pair` | 日英ペアを同じ日時に予約します | `node src/index.js schedule-pair drafts/article-jp.md "2026-08-15 09:00"` |
 
 ---
 
@@ -57,7 +59,7 @@ ZIDOOKA の通常運用では、ユーザーから単言語指定がない限り
 ```markdown
 ---
 title: "記事のタイトル"
-date: 2025-02-10 20:00:00
+publish_at: "2026-08-15 09:00"
 categories: 
   - WordPress
 tags: 
@@ -78,7 +80,8 @@ featured_image: ../images/thumbnail.png # または thumbnail: ...
 
 **Frontmatter（ヘッダー設定）の仕様:**
 - `title`: 記事タイトル
-- `date`: 公開日時（未来の日付なら予約投稿になります）
+- `publish_at`: 予約日時。`"YYYY-MM-DD HH:mm"` 形式で、`WP_TIMEZONE`（既定値 `Asia/Tokyo`）のローカル時刻を引用符付きで指定します
+- `date`: WordPressの既存投稿日時を保持・更新するための互換フィールド。新規の予約指定には `publish_at` を使います
 - `categories`: カテゴリ名（配列）
 - `tags`: タグ名（配列）
 - `status`: `publish`（公開/予約）, `draft`（下書き）, `private`（非公開）
@@ -87,8 +90,18 @@ featured_image: ../images/thumbnail.png # または thumbnail: ...
 
 **ZIDOOKA運用メモ（重要）**
 - `status: publish` で**すぐ公開したい**場合は、`date` を入れないでください。
-- 現在の REST 投稿フローでは、`date` をローカル時刻のつもりで入れると、WordPress 側で `date_gmt` 扱いになって **9時間先の `future`** になることがあります。
-- **予約投稿したい**場合は、手書きで `date` を入れるより `node src/index.js schedule drafts/article.md` を優先してください。
+- **予約投稿したい**場合は、Frontmatterに `publish_at: "YYYY-MM-DD HH:mm"` を設定するか、`schedule` / `schedule-pair` を使ってください。`publish_at` がある記事は `status` の値にかかわらず `future` としてWordPressへ登録されます。
+- 日英ペアでは両ファイルの `publish_at` を同じ値にします。Actionsの手動実行で `schedule_at` または `next_available` を選ぶと、2本に同じ日時が強制適用されます。
+
+### GitHub Actionsから予約する
+
+`Publish Article (ZIDOOKA)` を手動実行し、`publish_mode` を選びます。
+
+- `publish_now`: Frontmatterの `publish_at` を無視して即時公開
+- `schedule_at`: `publish_at` に入力した日時で予約
+- `next_available`: WordPress上の予約済み記事を調べ、翌日以降で最初に空いている日の9時に予約
+
+予約はActionsを指定時刻まで待機させる方式ではありません。Actions実行時にWordPressへ `future` 投稿として登録し、実際の時刻管理はWordPressに任せます。
 
 #### GAS配布（カスタム投稿 `gas_script`）
 GASの配布ページを投稿する場合は、`post_type: gas_script` を指定し、配布用メタデータを `gas:` に設定します。

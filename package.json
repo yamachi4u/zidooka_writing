@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "test": "node --test test/*.test.mjs",
     "post": "node src/index.js",
     "remote:agent": "node scripts/remote-agent/index.js",
     "ga4": "node scripts/ga4-report.mjs",

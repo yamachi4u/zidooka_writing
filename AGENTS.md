@@ -32,7 +32,8 @@ Scope: Applies to the entire repository.
 - Publish: Stage changes, create a PR, and, once approved, merge and optionally move Drat drafts to public docs.
 - Publish: Use the CLI post command to publish drafts (e.g. `node src/index.js post --draft drafts/claude-status-20260303-ja.md`). Confirm frontmatter and categories; attach featured image if applicable.
 - Publish: For normal ZIDOOKA article work, prefer separate Japanese and English drafts and use the bilingual publish flow when both versions are ready.
-- Publish: For immediate publication on ZIDOOKA, omit `date` from frontmatter. If `date` is set manually, the current REST path can create a `future` post due to timezone conversion.
+- Publish: For immediate publication on ZIDOOKA, omit `date` and `publish_at` from frontmatter.
+- Publish: For scheduled publication, use quoted `publish_at: "YYYY-MM-DD HH:mm"` in the WordPress timezone. Keep the same value in both language drafts, or use the Actions `schedule_at` / `next_available` mode to force one shared time.
 - Trace: Link back to the corresponding Drat entry and the updated AGENTS.md section.
 
 ## Drafts Directory Structure
