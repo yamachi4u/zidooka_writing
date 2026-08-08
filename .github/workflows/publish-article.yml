@@ -17,14 +17,14 @@ on:
         type: boolean
         default: true
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, closed]
     paths:
       - 'drafts/**'
       - 'images/**'
 
 jobs:
   validate:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -58,10 +58,70 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## ✍️ Draft validation (dry-run)\n\nFound ${files.length} draft(s):\n${files.map(f => `- \`${f}\``).join('\n')}\n\nThis job only checks file structure and lint. Actual publishing happens via **workflow_dispatch** after merge.`
+              body: `## ✍️ Draft validation (dry-run)\n\nFound ${files.length} draft(s):\n${files.map(f => `- \`${f}\``).join('\n')}\n\nThis job only checks file structure and lint. Actual publishing happens on **merge** (auto) or via **workflow_dispatch** (manual).`
             });
 
-  publish:
+  publish-on-merge:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      WP_API_URL: ${{ secrets.WP_API_URL }}
+      WP_MEDIA_API_URL: ${{ secrets.WP_MEDIA_API_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      WP_TIMEZONE: ${{ secrets.WP_TIMEZONE || 'Asia/Tokyo' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - name: Get changed drafts in merged PR
+        id: changed
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const { data } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+            const drafts = data
+              .map(f => f.filename)
+              .filter(f => /^drafts\/.*-(jp|ja)\.md$/.test(f));
+            console.log('JP/EN lead drafts:', drafts);
+            return drafts.join(' ');
+      - name: Publish changed bilingual pairs
+        id: publish
+        run: |
+          for d in ${{ steps.changed.outputs.result }}; do
+            echo "== publishing $d =="
+            node src/index.js post-pair "$d"
+          done
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_SITE_URL: 'https://www.zidooka.com'
+      - name: Ping IndexNow
+        if: success()
+        run: |
+          echo "Articles published from PR #${{ github.event.pull_request.number }}."
+          echo "Run indexnow ping manually with published URLs if desired."
+      - name: Comment on PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request.number;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr,
+              body: `## 🚀 Merge published\n\nPR #${pr} merged. Drafts in \`drafts/**-jp.md\` / \`**-ja.md\` were published via post-pair. See the workflow run for links.`
+            });
+
+  publish-manual:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     env:
@@ -89,13 +149,12 @@ jobs:
         run: |
           node src/index.js post-pair "${{ github.event.inputs.draft }}"
         env:
-          # post-pair requires WP_* secrets; already set at job level
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_SITE_URL: 'https://www.zidooka.com'
       - name: Ping IndexNow
-        if: steps.publish.outcome == 'success' && github.event.inputs.indexnow == 'true'
+        if: success() && github.event.inputs.indexnow == 'true'
         run: |
-          # URL is printed by post-pair; extract last link and ping
-          echo "Publishing done — run ping manually if URL known."
+          echo "Publishing done. Manual IndexNow ping available in scripts/ping-indexnow.mjs."
       - name: Comment on PR
         if: success() && github.event.inputs.pr_number != ''
         uses: actions/github-script@v7
