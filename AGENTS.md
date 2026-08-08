@@ -2,6 +2,16 @@
 
 Scope: zidooka_writing repository.
 
+## Privacy First
+
+Never export information from conversations unless the user explicitly instructs you to create or update an external artifact (Issue, PR, article, documentation, etc.).
+
+When exporting information, include only what is necessary for that artifact.
+
+If there is any uncertainty about whether information should be exported, ask the user before proceeding.
+
+外部成果物（Issue / PR / 記事 / ドキュメント）に書く前に、会話中の個人情報・研究メモ・仕事上の機微・過去の文脈を無断で転記しない。判断に迷う場合は確認を優先する。
+
 ## Quick Index
 
 | 知りたいこと | 見るセクション |

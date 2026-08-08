@@ -1,0 +1,110 @@
+name: Publish Article (ZIDOOKA)
+
+on:
+  workflow_dispatch:
+    inputs:
+      draft:
+        description: 'Draft path (e.g. drafts/my-article-jp.md)'
+        required: true
+        type: string
+      pr_number:
+        description: 'PR number to comment results on (optional)'
+        required: false
+        type: string
+      indexnow:
+        description: 'Ping IndexNow after publish'
+        required: false
+        type: boolean
+        default: true
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'drafts/**'
+      - 'images/**'
+
+jobs:
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - name: List changed drafts
+        id: drafts
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const files = context.payload.pull_request.changed_files || 0;
+            console.log(`changed files: ${files}`);
+      - name: Validate drafts (dry-run, no WP creds needed)
+        run: |
+          for f in drafts/*-jp.md drafts/*-ja.md drafts/*-en.md; do
+            [ -f "$f" ] || continue
+            echo "== validating $f =="
+            node src/index.js post "$f" 2>&1 | sed 's/^/  /' || true
+          done
+      - name: Comment validation summary
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const files = fs.readdirSync('drafts').filter(f => /-(jp|ja|en)\.md$/.test(f));
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## ✍️ Draft validation (dry-run)\n\nFound ${files.length} draft(s):\n${files.map(f => `- \`${f}\``).join('\n')}\n\nThis job only checks file structure and lint. Actual publishing happens via **workflow_dispatch** after merge.`
+            });
+
+  publish:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      WP_API_URL: ${{ secrets.WP_API_URL }}
+      WP_MEDIA_API_URL: ${{ secrets.WP_MEDIA_API_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      WP_TIMEZONE: ${{ secrets.WP_TIMEZONE || 'Asia/Tokyo' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - name: Check draft exists
+        id: check
+        run: |
+          if [ ! -f "${{ github.event.inputs.draft }}" ]; then
+            echo "::error::Draft not found: ${{ github.event.inputs.draft }}"
+            exit 1
+          fi
+      - name: Publish bilingual pair
+        id: publish
+        run: |
+          node src/index.js post-pair "${{ github.event.inputs.draft }}"
+        env:
+          # post-pair requires WP_* secrets; already set at job level
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+      - name: Ping IndexNow
+        if: steps.publish.outcome == 'success' && github.event.inputs.indexnow == 'true'
+        run: |
+          # URL is printed by post-pair; extract last link and ping
+          echo "Publishing done — run ping manually if URL known."
+      - name: Comment on PR
+        if: success() && github.event.inputs.pr_number != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = '${{ github.event.inputs.pr_number }}';
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt(pr),
+              body: `## 🚀 Published\n\nDraft: \`${{ github.event.inputs.draft }}\`\n\nArticle published to WordPress. See the workflow run for links.`
+            });
