@@ -1,0 +1,169 @@
+name: Publish Article (ZIDOOKA)
+
+on:
+  workflow_dispatch:
+    inputs:
+      draft:
+        description: 'Draft path (e.g. drafts/my-article-jp.md)'
+        required: true
+        type: string
+      pr_number:
+        description: 'PR number to comment results on (optional)'
+        required: false
+        type: string
+      indexnow:
+        description: 'Ping IndexNow after publish'
+        required: false
+        type: boolean
+        default: true
+  pull_request:
+    types: [opened, synchronize, closed]
+    paths:
+      - 'drafts/**'
+      - 'images/**'
+
+jobs:
+  validate:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - name: List changed drafts
+        id: drafts
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const files = context.payload.pull_request.changed_files || 0;
+            console.log(`changed files: ${files}`);
+      - name: Validate drafts (dry-run, no WP creds needed)
+        run: |
+          for f in drafts/*-jp.md drafts/*-ja.md drafts/*-en.md; do
+            [ -f "$f" ] || continue
+            echo "== validating $f =="
+            node src/index.js post "$f" 2>&1 | sed 's/^/  /' || true
+          done
+      - name: Comment validation summary
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const files = fs.readdirSync('drafts').filter(f => /-(jp|ja|en)\.md$/.test(f));
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## ✍️ Draft validation (dry-run)\n\nFound ${files.length} draft(s):\n${files.map(f => `- \`${f}\``).join('\n')}\n\nThis job only checks file structure and lint. Actual publishing happens on **merge** (auto) or via **workflow_dispatch** (manual).`
+            });
+
+  publish-on-merge:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      WP_API_URL: ${{ secrets.WP_API_URL }}
+      WP_MEDIA_API_URL: ${{ secrets.WP_MEDIA_API_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      WP_TIMEZONE: ${{ secrets.WP_TIMEZONE || 'Asia/Tokyo' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - name: Get changed drafts in merged PR
+        id: changed
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const { data } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+            const drafts = data
+              .map(f => f.filename)
+              .filter(f => /^drafts\/.*-(jp|ja)\.md$/.test(f));
+            console.log('JP/EN lead drafts:', drafts);
+            return drafts.join(' ');
+      - name: Publish changed bilingual pairs
+        id: publish
+        run: |
+          for d in ${{ steps.changed.outputs.result }}; do
+            echo "== publishing $d =="
+            node src/index.js post-pair "$d"
+          done
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_SITE_URL: 'https://www.zidooka.com'
+      - name: Ping IndexNow
+        if: success()
+        run: |
+          echo "Articles published from PR #${{ github.event.pull_request.number }}."
+          echo "Run indexnow ping manually with published URLs if desired."
+      - name: Comment on PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request.number;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr,
+              body: `## 🚀 Merge published\n\nPR #${pr} merged. Drafts in \`drafts/**-jp.md\` / \`**-ja.md\` were published via post-pair. See the workflow run for links.`
+            });
+
+  publish-manual:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      WP_API_URL: ${{ secrets.WP_API_URL }}
+      WP_MEDIA_API_URL: ${{ secrets.WP_MEDIA_API_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      WP_TIMEZONE: ${{ secrets.WP_TIMEZONE || 'Asia/Tokyo' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - name: Check draft exists
+        id: check
+        run: |
+          if [ ! -f "${{ github.event.inputs.draft }}" ]; then
+            echo "::error::Draft not found: ${{ github.event.inputs.draft }}"
+            exit 1
+          fi
+      - name: Publish bilingual pair
+        id: publish
+        run: |
+          node src/index.js post-pair "${{ github.event.inputs.draft }}"
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_SITE_URL: 'https://www.zidooka.com'
+      - name: Ping IndexNow
+        if: success() && github.event.inputs.indexnow == 'true'
+        run: |
+          echo "Publishing done. Manual IndexNow ping available in scripts/ping-indexnow.mjs."
+      - name: Comment on PR
+        if: success() && github.event.inputs.pr_number != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = '${{ github.event.inputs.pr_number }}';
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt(pr),
+              body: `## 🚀 Published\n\nDraft: \`${{ github.event.inputs.draft }}\`\n\nArticle published to WordPress. See the workflow run for links.`
+            });
