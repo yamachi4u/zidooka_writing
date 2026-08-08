@@ -177,6 +177,21 @@ node src/index.js thumbnail --title "..." --output path.png
 - `--validate` checks: title length, slug presence, content length (300+ chars), no `【】` brackets.
 - **ChatGPT / 外部AIエージェント由来の記事は `drafts/chatgpt/` に置く**（手書き・Codex等のローカル作業は `drafts/` 直下）。GitHub Actions は両方を対象に自動公開する。
 
+### Drafts Directory Structure
+
+```text
+drafts/              # ローカル作業（手書き・Codex等）の記事
+  <slug>-ja.md
+  <slug>-en.md
+drafts/chatgpt/      # ChatGPT / 外部AIエージェント由来の記事
+  <slug>-ja.md
+  <slug>-en.md
+```
+
+- 日英ペアは同じディレクトリに置く（`post-pair` が相方を同じdir内から探すため）
+- **ゴミを置かない**: `test-*` / `tmp_*` / `tmp-*` / `raw-*` / URLエンコード名ファイル / 画像ファイルは drafts に置かない。一時ファイルは `tmp_*` 等を .gitignore 対象に
+- 記事は PR で提出し、マージで自動公開される（`publish-article.yml` の publish-on-merge）
+
 ### Post-Publish
 
 ```powershell
