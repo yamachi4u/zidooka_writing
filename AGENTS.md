@@ -175,6 +175,7 @@ node src/index.js thumbnail --title "..." --output path.png
 - Japanese + English paired publishing is the default unless user says single-language.
 - Omit `date` from frontmatter for immediate publish (timezone safety).
 - `--validate` checks: title length, slug presence, content length (300+ chars), no `【】` brackets.
+- **ChatGPT / 外部AIエージェント由来の記事は `drafts/chatgpt/` に置く**（手書き・Codex等のローカル作業は `drafts/` 直下）。GitHub Actions は両方を対象に自動公開する。
 
 ### Post-Publish
 

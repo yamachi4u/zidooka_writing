@@ -6,6 +6,9 @@ node_modules/
 # Generated daily report exports
 /daily/
 
+# Windows device name artifact
+nul
+
 # Temporary files
 tmp_*.html
 tmp_*.xml

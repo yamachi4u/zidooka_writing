@@ -38,16 +38,25 @@ jobs:
           node-version: 22
           cache: 'npm'
       - run: npm ci --ignore-scripts
-      - name: List changed drafts
-        id: drafts
+      - name: Get changed drafts in PR
+        id: changed
         uses: actions/github-script@v7
         with:
+          result-encoding: string
           script: |
-            const files = context.payload.pull_request.changed_files || 0;
-            console.log(`changed files: ${files}`);
-      - name: Validate drafts (dry-run, no WP creds needed)
+            const { data } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+            const drafts = data
+              .map(f => f.filename)
+              .filter(f => /^drafts\/.*\.md$/.test(f));
+            console.log('changed drafts:', drafts.join(', ') || '(none)');
+            return drafts.join(' ');
+      - name: Validate changed drafts (dry-run, no WP creds needed)
         run: |
-          for f in drafts/*-jp.md drafts/*-ja.md drafts/*-en.md; do
+          for f in ${{ steps.changed.outputs.result }}; do
             [ -f "$f" ] || continue
             echo "== validating $f =="
             node src/index.js post "$f" 2>&1 | sed 's/^/  /' || true
@@ -57,13 +66,13 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const fs = require('fs');
-            const files = fs.readdirSync('drafts').filter(f => /-(jp|ja|en)\.md$/.test(f));
+            const drafts = '${{ steps.changed.outputs.result }}'.trim();
+            const list = drafts ? drafts.split(' ').map(f => `- \`${f}\``).join('\n') : '- (no draft files changed)';
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## ✍️ Draft validation (dry-run)\n\nFound ${files.length} draft(s):\n${files.map(f => `- \`${f}\``).join('\n')}\n\nThis job only checks file structure and lint. Actual publishing happens on **merge** (auto) or via **workflow_dispatch** (manual).`
+              body: `## ✍️ Draft validation (dry-run)\n\nChanged drafts:\n${list}\n\nThis job only checks file structure and lint. Actual publishing happens on **merge** (auto) or via **workflow_dispatch** (manual).`
             });
 
   publish-on-merge:
@@ -96,7 +105,7 @@ jobs:
             const drafts = data
               .map(f => f.filename)
               .filter(f => /^drafts\/.*-(jp|ja)\.md$/.test(f));
-            console.log('JP/EN lead drafts:', drafts);
+            console.log('JP/EN lead drafts:', drafts.join(', ') || '(none)');
             return drafts.join(' ');
       - name: Publish changed bilingual pairs
         id: publish
