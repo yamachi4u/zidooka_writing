@@ -21,6 +21,7 @@ If there is any uncertainty about whether information should be exported, ask th
 | PostHog A/B実験の状況 | [PostHog A/B Operations](#posthog-ab-operations) |
 | 記事を公開する | [Publishing Pipeline](#publishing-pipeline) |
 | SEO/分析を回す | [Analytics & SEO](#analytics--seo) |
+| オープンIssueの処理 | [GitHub Issues](#github-issues) |
 | 広告(AdSense/A8)を触る | [Ads Management](#ads-management) |
 | 自己改善ループ | [Self-Improvement](#self-improvement) |
 | テーマをデプロイする | [Remote Theme Pipeline](#remote-theme-pipeline) |
@@ -36,9 +37,10 @@ If there is any uncertainty about whether information should be exported, ask th
 1. Read today's agent coordination log: `daily-agent/YYYYMMDD.md`
 2. Read current PostHog status: `drat/posthog-status.md`
 3. Check decision records: `docs/decisions/` (verification dates)
-4. If working on theme files: `docs/operations/README.md` and `docs/THEME_VISUAL_QA.md`
-5. Read self-improvement docs: `docs/SELF-IMPROVEMENT.md`, `docs/AGENT-TOOL-IMPROVEMENT.md`
-6. Read knowledge base: `knowledge/index.md`
+4. Check open GitHub Issues: `gh issue list --repo yamachi4u/zidooka_writing --state open`
+5. If working on theme files: `docs/operations/README.md` and `docs/THEME_VISUAL_QA.md`
+6. Read self-improvement docs: `docs/SELF-IMPROVEMENT.md`, `docs/AGENT-TOOL-IMPROVEMENT.md`
+7. Read knowledge base: `knowledge/index.md`
 
 ```powershell
 .\daily-agent.cmd --agent Codex --task "<task description>"
@@ -46,6 +48,30 @@ If there is any uncertainty about whether information should be exported, ask th
 
 Status words: `start`, `claim`, `doing`, `blocked`, `handoff`, `done`, `memo`.
 Append-only. Do not rewrite other agents' entries.
+
+---
+
+## GitHub Issues
+
+オープン Issue があれば、ユーザーへ「未処理の Issue が N 件あります。まとめて処理しますか？」とレコメンドする。ユーザーが承諾したら処理する。
+
+```powershell
+gh issue list --repo yamachi4u/zidooka_writing --state open
+```
+
+### 処理の進め方
+
+1. 各 Issue を `gh issue view <N> --repo yamachi4u/zidooka_writing` で確認
+2. 執筆系（記事）は日英ペアの下書きを `drafts/` に作成し、`node src/index.js post-pair` で WordPress に下書き投稿 → 検証 → コミット → Issue クローズ
+3. 設計/実装系は `docs/` に設計書・`.github/workflows/` や `scripts/` に実装 → 検証 → コミット → Issue クローズ
+4. クローズ時のコメントに成果物パスと補足を記す
+5. 処理完了後も `gh issue list` で残りを確認し、ゼロになったらユーザーへ報告
+
+### 注意
+
+- タグ・カテゴリは `data/metadata.json` の既存のもののみ使用（存在しないタグは作らない）
+- 記事は `status: draft` で下書き投稿まで。公開可否はユーザーに確認してから
+- Privacy First に従い、会話情報を無断で外部成果物に転記しない
 
 ---
 
