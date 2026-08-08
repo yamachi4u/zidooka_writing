@@ -35,6 +35,12 @@ Scope: Applies to the entire repository.
 - Publish: For immediate publication on ZIDOOKA, omit `date` from frontmatter. If `date` is set manually, the current REST path can create a `future` post due to timezone conversion.
 - Trace: Link back to the corresponding Drat entry and the updated AGENTS.md section.
 
+## Drafts Directory Structure
+- **ChatGPT / 外部AIエージェント由来の記事は `drafts/chatgpt/` に置く**。手書き・Codex等のローカル作業は `drafts/` 直下に置く。
+- 日英ペアは同じディレクトリに置く（`post-pair` が相方を同じdir内から探すため）。
+- **ゴミを置かない**: `test-*` / `tmp_*` / `tmp-*` / `raw-*` / URLエンコード名ファイル / 画像ファイルは drafts に置かない。一時ファイルは `.gitignore` 対象にする。
+- 記事は PR で提出し、マージで自動公開される（`.github/workflows/publish-article.yml` の publish-on-merge）。GitHub Actions は `drafts/**` と `drafts/chatgpt/**` の両方を対象に検証・公開する。
+
 ## Conventions
 - Use only the emphasis patterns defined in `docs/snippets/emphasis.md` for highlighting key takeaways, cautions, or conclusions.
 - Prefer concise, single-line emphasis where possible; avoid decorative emojis.
