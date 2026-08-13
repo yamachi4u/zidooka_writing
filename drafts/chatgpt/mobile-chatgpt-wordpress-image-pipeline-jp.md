@@ -120,3 +120,5 @@ POST /wp/v2/posts/4657
 :::conclusion
 今回わかったのは、ChatGPTを文章生成UIとして使うだけでなく、スマホから写真というバイナリ素材を渡し、その後のGitHub ActionsとREST APIを組み合わせれば、WordPressのメディア管理まで会話から操作できるということだ。ブログ投稿の入口をWordPress管理画面からChatGPTへ移せる。
 :::
+
+<!-- paired EN draft added; republish -->
