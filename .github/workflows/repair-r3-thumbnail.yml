@@ -1,0 +1,77 @@
+name: Repair R3 Thumbnail
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - 'ops/repair-r3-thumbnail.trigger'
+
+jobs:
+  repair:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      WP_API_URL: ${{ secrets.WP_API_URL }}
+      WP_MEDIA_API_URL: ${{ secrets.WP_MEDIA_API_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      WP_TIMEZONE: ${{ secrets.WP_TIMEZONE || 'Asia/Tokyo' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+
+      - name: Install Pillow
+        run: python3 -m pip install --break-system-packages pillow
+
+      - name: Rebuild thumbnail at 1440x810
+        run: |
+          python3 - <<'PY'
+          from io import BytesIO
+          from pathlib import Path
+          from urllib.request import urlopen
+          from PIL import Image, ImageFilter
+
+          url = 'https://www.zidooka.com/wp-content/uploads/2026/08/keychron-r3-impressions.jpg'
+          data = urlopen(url, timeout=30).read()
+          image = Image.open(BytesIO(data)).convert('RGB')
+          image = image.resize((1440, 810), Image.Resampling.LANCZOS)
+          image = image.filter(ImageFilter.UnsharpMask(radius=1.2, percent=115, threshold=3))
+          Path('images').mkdir(exist_ok=True)
+          image.save('images/keychron-r3-impressions-repaired.webp', 'WEBP', quality=90, method=6)
+          print('source:', len(data), 'bytes')
+          print('output:', Path('images/keychron-r3-impressions-repaired.webp').stat().st_size, 'bytes')
+          PY
+
+      - name: Publish repaired thumbnail
+        shell: bash
+        run: |
+          set -euo pipefail
+          image='images/keychron-r3-impressions-repaired.webp'
+          draft="$(find drafts -type f \( -name 'keychron-r3-impressions-jp.md' -o -name 'keychron-r3-impressions-ja.md' \) | head -n1)"
+          [ -n "$draft" ]
+          dir="$(dirname "$draft")"
+          stem="$(basename "$draft")"
+          if [[ "$stem" == *-jp.md ]]; then pair="$dir/${stem%-jp.md}-en.md"; else pair="$dir/${stem%-ja.md}-en.md"; fi
+          [ -f "$pair" ]
+
+          inject() {
+            local file="$1"
+            if grep -Eq '^(thumbnail|featured_image):' "$file"; then
+              sed -i -E "s#^(thumbnail|featured_image):.*#thumbnail: \"$image\"#" "$file"
+            else
+              awk -v image="$image" 'BEGIN{i=0} {print; if(!i && $0 ~ /^slug:/){print "thumbnail: \"" image "\""; i=1}}' "$file" > "$file.tmp"
+              mv "$file.tmp" "$file"
+            fi
+          }
+          inject "$draft"
+          inject "$pair"
+          node src/index.js post-pair "$draft" --now
