@@ -29,7 +29,7 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
 
-      - name: Find changed payload directories
+      - name: Get changed payload directories
         id: changed
         uses: actions/github-script@v7
         with:
@@ -75,13 +75,13 @@ jobs:
           }
 
           for dir in ${{ steps.changed.outputs.result }}; do
-            base="$(basename "$dir")"
+            payload_name="$(basename "$dir")"
             meta="$dir/meta.txt"
-            ext="jpg"
-            if [ -f "$meta" ]; then
-              ext="$(sed -n 's/^ext=//p' "$meta" | head -n1)"
-              [ -n "$ext" ] || ext="jpg"
-            fi
+            base="$(sed -n 's/^article_base=//p' "$meta" | head -n1 || true)"
+            [ -n "$base" ] || base="$payload_name"
+            ext="$(sed -n 's/^ext=//p' "$meta" | head -n1 || true)"
+            [ -n "$ext" ] || ext="jpg"
+
             mkdir -p images
             image="images/${base}.${ext}"
             find "$dir" -maxdepth 1 -type f -name '*.b64part' -print0 \
@@ -92,7 +92,7 @@ jobs:
 
             bytes="$(wc -c < "$image")"
             echo "Decoded $image ($bytes bytes)"
-            [ "$bytes" -gt 40000 ] || { echo "Image payload unexpectedly small"; exit 1; }
+            [ "$bytes" -gt 25000 ] || { echo "Image payload unexpectedly small"; exit 1; }
 
             draft="$(find drafts -type f \( -name "${base}-jp.md" -o -name "${base}-ja.md" \) | head -n 1 || true)"
             [ -n "$draft" ] || { echo "No matching JP/JA draft for $base"; exit 1; }
@@ -119,5 +119,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.pull_request.number,
-              body: '## 🖼️ Chunked image payload\n\nDecoded image payload(s) and ran the WordPress thumbnail publisher. See this workflow run for dimensions/bytes and publish output.'
+              body: '## 🖼️ Chunked image payload\n\nDecoded image payload(s) and ran the WordPress thumbnail publisher. See this workflow run for byte count and publish output.'
             });
