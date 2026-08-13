@@ -1,0 +1,5 @@
+article_base=keychron-r3-impressions
+ext=webp
+width=720
+height=405
+quality=75
