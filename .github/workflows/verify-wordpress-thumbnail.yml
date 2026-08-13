@@ -1,0 +1,37 @@
+name: Verify WordPress Thumbnail
+
+on:
+  workflow_dispatch:
+    inputs:
+      slugs:
+        description: 'Comma-separated WordPress slugs to verify'
+        required: true
+        default: 'keychron-r3-impressions-jp,keychron-r3-impressions-en'
+  push:
+    paths:
+      - '.github/workflows/verify-wordpress-thumbnail.yml'
+      - 'scripts/verify-wordpress-thumbnail.mjs'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      WP_API_URL: ${{ secrets.WP_API_URL }}
+      WP_MEDIA_API_URL: ${{ secrets.WP_MEDIA_API_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Verify featured media exists in WordPress
+        shell: bash
+        env:
+          INPUT_SLUGS: ${{ github.event.inputs.slugs }}
+        run: |
+          set -euo pipefail
+          slugs="${INPUT_SLUGS:-keychron-r3-impressions-jp,keychron-r3-impressions-en}"
+          node scripts/verify-wordpress-thumbnail.mjs "$slugs"
