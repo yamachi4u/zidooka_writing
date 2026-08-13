@@ -1,0 +1,80 @@
+name: Publish Hex Image Payload (ZIDOOKA)
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - 'image-hex/**'
+
+jobs:
+  publish:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      WP_API_URL: ${{ secrets.WP_API_URL }}
+      WP_MEDIA_API_URL: ${{ secrets.WP_MEDIA_API_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      WP_TIMEZONE: ${{ secrets.WP_TIMEZONE || 'Asia/Tokyo' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+
+      - name: Find changed image payloads
+        id: changed
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const { data } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+            const dirs = [...new Set(data.map(f => f.filename)
+              .filter(f => /^image-hex\/[^/]+\/\d+\.part$/.test(f))
+              .map(f => f.split('/').slice(0, 2).join('/')))];
+            return dirs.join(' ');
+
+      - name: Reconstruct and publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          inject_thumbnail() {
+            local file="$1" image="$2"
+            if grep -Eq '^(thumbnail|featured_image):' "$file"; then
+              sed -i -E "s#^(thumbnail|featured_image):.*#thumbnail: \"$image\"#" "$file"
+            else
+              awk -v image="$image" 'BEGIN{i=0} {print; if(!i && $0 ~ /^slug:/){print "thumbnail: \"" image "\""; i=1}}' "$file" > "$file.tmp"
+              mv "$file.tmp" "$file"
+            fi
+          }
+          for dir in ${{ steps.changed.outputs.result }}; do
+            meta="$dir/meta.txt"
+            base="$(sed -n 's/^article_base=//p' "$meta" | head -n1)"
+            ext="$(sed -n 's/^ext=//p' "$meta" | head -n1)"
+            [ -n "$base" ] && [ -n "$ext" ]
+            mkdir -p images
+            image="images/${base}.${ext}"
+            find "$dir" -maxdepth 1 -name '*.part' -type f -print0 | sort -z | xargs -0 cat | tr -d '\r\n ' | xxd -r -p > "$image"
+            bytes="$(wc -c < "$image")"
+            echo "reconstructed $image: $bytes bytes"
+            [ "$bytes" -gt 25000 ]
+            draft="$(find drafts -type f \( -name "${base}-jp.md" -o -name "${base}-ja.md" \) | head -n1)"
+            [ -n "$draft" ]
+            dir2="$(dirname "$draft")"; stem="$(basename "$draft")"
+            if [[ "$stem" == *-jp.md ]]; then pair="$dir2/${stem%-jp.md}-en.md"; else pair="$dir2/${stem%-ja.md}-en.md"; fi
+            [ -f "$pair" ]
+            inject_thumbnail "$draft" "$image"
+            inject_thumbnail "$pair" "$image"
+            node src/index.js post-pair "$draft" --now
+          done
