@@ -70,6 +70,18 @@ When the desktop app and Codex CLI run on the same Mac, use the same `CODEX_HOME
 For a terminal-only workflow, the available feature is local Memories generated from Codex CLI's own chats. It does not collect cross-application activity like Computer History.
 :::
 
+### The desktop app effectively needs to keep running in the background
+
+Turning Computer History on once does not mean you can quit the desktop app permanently and let Codex CLI continue collecting activity. The CLI can use local memories that have already been generated, but the desktop app is responsible for collecting new interaction events.
+
+OpenAI's documentation does not explicitly describe behavior after the app is fully quit. It does, however, place collection status, Pause, and Resume controls in the ChatGPT menu-bar process on macOS. In practice, this means the ChatGPT desktop app process needs to remain active in the background for ongoing collection.
+
+On macOS, closing a window is different from quitting an application. If the ChatGPT icon remains in the menu bar, the background process is still running. After a full `Quit`, Codex CLI does not become the collector for other applications. Existing memory files remain available, but it is safest to expect no new Computer History entries until the desktop app runs again.
+
+:::warning
+The effective background-process requirement is a drawback for users concerned about CPU, memory, or battery usage. A CLI-only setup avoids that resident desktop-app cost, but it is limited to local Memories derived from Codex CLI's own work rather than computer-wide activity history.
+:::
+
 ## Availability and requirements
 
 According to OpenAI's documentation as of August 15, 2026, Computer History requires:
