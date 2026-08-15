@@ -44,6 +44,32 @@ Computer History and Computer Use are separate features.
 
 Computer History requires Memories. However, it does not operate applications by itself in the way Computer Use does.
 
+## What if you only use Codex CLI in the terminal?
+
+Codex CLI alone cannot turn on Computer History or collect activity from other apps and websites. Starting collection, choosing source apps, and viewing the timeline are features of the ChatGPT desktop app on macOS.
+
+Codex CLI does have a separate local Memories feature. It can turn useful context from previous CLI sessions—such as a tech stack, workflow, or repository convention—into local memories and reuse them in future sessions. In an interactive CLI session, use `/memories` to control whether the current chat may use existing memories or contribute to future ones.
+
+If the feature is not enabled, add the following to `~/.codex/config.toml`:
+
+```toml
+[features]
+memories = true
+```
+
+| Setup | Computer History | Local Codex Memories |
+| --- | --- | --- |
+| Codex CLI only | Not available | Available |
+| macOS desktop app only | Available on an eligible plan | Available |
+| Desktop app and CLI on the same Mac | Desktop app collects activity | CLI can use the same local memory system |
+| Codex CLI on Windows or Linux | Not currently available | Available |
+
+When the desktop app and Codex CLI run on the same Mac, use the same `CODEX_HOME`—normally `~/.codex`—and have Memories enabled, the official documentation taken together indicates that the CLI can use local memories generated from Computer History as context. The desktop app is still required to start collection and manage the Computer History timeline.
+
+:::note
+For a terminal-only workflow, the available feature is local Memories generated from Codex CLI's own chats. It does not collect cross-application activity like Computer History.
+:::
+
 ## Availability and requirements
 
 According to OpenAI's documentation as of August 15, 2026, Computer History requires:
@@ -150,5 +176,5 @@ That convenience comes with sensitive context and prompt-injection risks. Limiti
 ## Official references
 
 - [Computer History documentation](https://learn.chatgpt.com/docs/customization/computer-history)
+- [Memories documentation](https://learn.chatgpt.com/docs/customization/memories)
 - [ChatGPT & Codex changelog](https://learn.chatgpt.com/docs/changelog)
-
