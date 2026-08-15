@@ -44,6 +44,32 @@ Computer Historyを有効にすると、許可したアプリやWebサイトで�
 
 Computer Historyの利用にはMemoriesが必要です。ただし、Computer History自体はComputer Useのように勝手にアプリを操作する機能ではありません。
 
+## Codex CLI（ターミナル版）しか使っていない人は？
+
+Codex CLIだけを使っている場合、Computer Historyそのものをオンにして、ほかのアプリやWebサイトの操作を記録することはできません。Computer Historyの記録開始・対象アプリの設定・タイムラインの閲覧は、macOS版ChatGPTデスクトップアプリの機能だからです。
+
+ただし、Codex CLIにも「ローカルMemories」という別の仕組みがあります。こちらは過去のCodex CLIセッションから、技術構成、作業手順、リポジトリの慣習などをローカルメモリとして残し、次回以降のセッションで再利用する機能です。対話モードでは`/memories`で現在のチャットがメモリを利用・生成するかを選べます。
+
+機能が有効になっていない場合は、`~/.codex/config.toml`に次の設定を追加します。
+
+```toml
+[features]
+memories = true
+```
+
+| 利用方法 | Computer History | Codex CLIのローカルMemories |
+| --- | --- | --- |
+| CLIだけを使う | 利用不可 | 利用可能 |
+| macOSデスクトップ版だけを使う | 対象プランなら利用可能 | 利用可能 |
+| 同じMacでデスクトップ版とCLIを使う | デスクトップ版が操作履歴を生成 | CLIも同じローカルメモリ基盤を利用できる |
+| Windows／LinuxでCLIを使う | 現時点では利用不可 | 利用可能 |
+
+同じMac上でChatGPTデスクトップアプリとCodex CLIが同じ`CODEX_HOME`（通常は`~/.codex`）を使い、Memoriesが有効なら、公式説明を合わせて読む限り、デスクトップ版のComputer Historyが生成したローカルメモリをCLI側でも文脈として利用できます。ただし、履歴の収集開始やタイムライン管理にはデスクトップアプリが必要です。
+
+:::note
+ターミナルだけで完結したい人が使えるのは、まずCodex CLI自身の会話から作るローカルMemoriesです。Computer Historyのように、ブラウザや別アプリをまたいだ作業履歴までは集めません。
+:::
+
 ## 対応環境と利用条件
 
 2026年8月15日時点の公式情報では、利用条件は次のとおりです。
@@ -152,5 +178,5 @@ Computer Historyは、単なるブラウザ履歴ではなく、PC上で行っ�
 ## 参考資料
 
 - [Computer History（OpenAI公式）](https://learn.chatgpt.com/docs/customization/computer-history)
+- [Memories（OpenAI公式）](https://learn.chatgpt.com/docs/customization/memories)
 - [ChatGPT & Codex changelog（OpenAI公式）](https://learn.chatgpt.com/docs/changelog)
-
