@@ -40,13 +40,16 @@ jobs:
           node -e "require('fs').writeFileSync('tmp/gsc-key.json', Buffer.from(process.env.KEY_B64, 'base64').toString('utf8'))"
       - name: Run weekly report
         run: |
+          mkdir -p daily/weekly
           if [ -f scripts/weekly-report.mjs ]; then
             npm run weekly
           else
-            echo "weekly-report.mjs not merged to main yet — running GA4 + GSC + SEO followup"
-            npm run ga4 -- --preset overview --limit 10
-            npm run gsc -- --preset top-queries --limit 30
-            npm run seo:followup || true
+            echo "weekly-report.mjs not merged to main yet — running GA4 + GSC"
+            npm run ga4 -- --preset overview --limit 10 > daily/weekly/ga4-overview.txt 2>&1 || true
+            npm run ga4 -- --preset acquisition --limit 10 > daily/weekly/ga4-acquisition.txt 2>&1 || true
+            START=$(date -d '28 days ago' +%F)
+            END=$(date -d 'yesterday' +%F)
+            npm run gsc -- --preset top-queries --limit 30 --start-date "$START" --end-date "$END" > daily/weekly/gsc-top-queries.txt 2>&1 || true
           fi
       - name: Upload report artifacts
         if: always()
