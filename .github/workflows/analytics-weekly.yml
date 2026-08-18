@@ -1,0 +1,59 @@
+name: Weekly Analytics (ZIDOOKA)
+
+on:
+  schedule:
+    # Sunday 15:30 UTC = Monday 00:30 JST
+    - cron: '30 15 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  weekly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GOOGLE_SERVICE_ACCOUNT_KEY_PATH: ./tmp/gsc-key.json
+      GOOGLE_GA4_PROPERTY_ID: ${{ secrets.GOOGLE_GA4_PROPERTY_ID }}
+      GOOGLE_GSC_SITE: ${{ secrets.GOOGLE_GSC_SITE }}
+      GOOGLE_ADSENSE_ACCOUNT_ID: ${{ secrets.GOOGLE_ADSENSE_ACCOUNT_ID }}
+      GOOGLE_ADSENSE_CLIENT_ID: ${{ secrets.GOOGLE_ADSENSE_CLIENT_ID }}
+      GOOGLE_ADSENSE_CLIENT_SECRET: ${{ secrets.GOOGLE_ADSENSE_CLIENT_SECRET }}
+      GOOGLE_ADSENSE_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADSENSE_REFRESH_TOKEN }}
+      BING_API_KEY: ${{ secrets.BING_API_KEY }}
+      POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
+      POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
+      POSTHOG_HOST: ${{ secrets.POSTHOG_HOST || 'https://us.posthog.com' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - name: Restore service account key
+        env:
+          KEY_B64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+        run: |
+          mkdir -p tmp
+          node -e "require('fs').writeFileSync('tmp/gsc-key.json', Buffer.from(process.env.KEY_B64, 'base64').toString('utf8'))"
+      - name: Run weekly report (GA4+GSC+AdSense+Bing+PostHog)
+        run: npm run weekly
+      - name: Upload report artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-report
+          path: |
+            daily/
+            drat/posthog-status.md
+          if-no-files-found: ignore
+      - name: Commit updated PostHog status
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add drat/posthog-status.md
+          git diff --staged --quiet || git commit -m "chore: update posthog status $(date +'%Y-%m-%d')"
+          git push
