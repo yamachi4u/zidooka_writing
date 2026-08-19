@@ -1,4 +1,10 @@
-# LINE公式アカウントの配信・ステップ配信はCodexから登録できるのか
+---
+title: "LINE公式アカウントの配信・ステップ配信はCodexから登録できるのか"
+categories: ["SNS"]
+tags: ["LINE", "LINE公式アカウント", "Messaging API", "Codex", "自動化"]
+status: publish
+slug: line-official-account-step-delivery-api
+---
 
 LINE公式アカウントの運用作業をCodexに任せられないか調べた。特にやりたかったのは、配信文を作らせることではなく、「この日時にこの内容を配信する」「友だち追加から数日後にこのメッセージを送る」といった配信設定そのものを登録させることだった。
 
