@@ -28,6 +28,8 @@ There is an explicit exception. In addition to a free Personal Account, GitHub a
 
 This should not be treated as an ordinary second personal identity. It is intended for automated activity, such as a bot or service account that needs its own GitHub identity.
 
+For a fuller explanation, see the separate article "What Is a GitHub Machine Account?".
+
 :::warning
 A machine account is not a general-purpose alternative personal account. Using it as a second everyday identity would not match the purpose described in GitHub's Terms.
 :::
