@@ -28,7 +28,7 @@ GitHub Terms of Service の Account Requirements では、1人または1法人�
 
 ただし、これは普通のサブアカウントとして使ってよい、という意味ではありません。規約上は「machineを動かすため」のアカウントです。
 
-GitHub Actions以外のボットやサービス連携などで専用ユーザーが必要になるケースを想定するとわかりやすいでしょう。
+machine account の仕組みや使いどころは、別記事「GitHubのmachine accountとは？無料で追加できる自動化専用アカウントを整理」で詳しく説明します。
 
 :::warning
 machine account を「仕事用のもう1つの自分」「別名義の個人アカウント」として日常的に使うのは、規約の趣旨とは異なります。
