@@ -108,6 +108,24 @@ Work can connect research, drafting, file creation, and GitHub actions. GitHub A
 
 Anything needed again should still be stored somewhere durable. Articles, code, settings, and analysis data should go to GitHub, ChatGPT Library, Google Drive, WordPress, or another persistent destination instead of remaining only in a temporary cloud workspace.
 
+## Why the same ChatGPT can appear to have different capabilities
+
+In practice, users may see one session update a site successfully while another session cannot. This usually does not mean that the model itself has suddenly become less capable. The available execution environment and management tools may simply be different.
+
+A regular Chat interface is centered on conversation and connected connectors. It may be able to read or create individual GitHub files, but it does not necessarily provide a checked-out repository, a command-line environment, site-management tools, or an end-to-end publishing pipeline.
+
+Work can, when the relevant tools are enabled, provide a temporary working environment in which the agent can check out a repository, run commands, inspect generated files, and connect the result to a site deployment workflow. That is why the same account and similar prompt can produce very different results.
+
+| Aspect | Chat | Work |
+| --- | --- | --- |
+| Center | Conversation and connectors | Conversation plus an execution environment |
+| GitHub | File-level operations | Repository-based work is easier |
+| Commands | Not always available | May run inside the working environment |
+| Site updates | Requires the relevant management tools | Can connect to site management and publishing |
+| Best use | Questions, discussion, limited file operations | Delegating research, implementation, and publication |
+
+The practical lesson is simple: check which mode is active, which GitHub and site tools are enabled, and whether a command-capable working environment is available. The interface is only the entry point; the actual capability depends on the tools and environment connected to it.
+
 ## Summary
 
 Work is neither a reduced version of Codex nor simply Codex with a credit system. It applies overlapping execution capabilities to research, documents, spreadsheets, external services, and everyday workflows.
