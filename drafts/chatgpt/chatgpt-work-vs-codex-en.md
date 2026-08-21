@@ -144,3 +144,4 @@ In one sentence: Work is a general-purpose agent for producing finished work, wh
 - [ChatGPT Work and Codex pricing and usage](https://learn.chatgpt.com/docs/pricing)
 - [Choosing Work or Codex for productivity tasks](https://learn.chatgpt.com/use-cases/collections/productivity-and-collaboration)
 
+<!-- automated-publish-trigger -->
