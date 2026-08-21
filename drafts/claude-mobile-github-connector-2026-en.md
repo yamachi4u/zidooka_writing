@@ -17,7 +17,7 @@ Using GitHub from the Claude mobile app is possible in 2026, but the product sur
 :::conclusion
 If you want Claude to manage GitHub issues, pull requests, commits, and repository searches, the main option is now the official GitHub MCP connector. Anthropic's Connectors Directory explicitly lists Claude Mobile support and Read & Write capabilities.
 
-However, some users do not see GitHub in the mobile app's Connectors list. In that case, connecting GitHub first from the web version of Claude and then using the remote connector from mobile is the most practical workaround.
+GitHub is a remote connector, so once connected it is designed to work across web, mobile, desktop, Cowork, and Claude Code. However, Anthropic's help documentation also says that installing connectors from mobile is currently in beta and that Claude Desktop and the web are the primary paths for adding custom connectors. If GitHub is missing from the mobile connector list, connect it from the web or desktop first.
 :::
 
 ## There are effectively three GitHub integrations in Claude
@@ -58,30 +58,28 @@ A useful distinction is that GitHub MCP focuses on GitHub API operations, while 
 
 ## Why might GitHub be missing from the mobile Connectors list?
 
-This is the confusing part.
+GitHub and similar cloud services use remote connectors. Anthropic says remote connectors work across the Claude web app, mobile apps, desktop, Cowork, and Claude Code, and once connected they are available everywhere without additional setup.
 
-Anthropic's documentation says remote connectors are available across web, mobile, desktop, Cowork, and Claude Code. GitHub is also explicitly used as an example of a remote connector, and the GitHub MCP directory page lists Claude Mobile as a supported surface.
+At the same time, Anthropic explicitly says that installing connectors from mobile is currently in beta, while Claude Desktop and the web are the primary routes for adding custom connectors.
 
-At the same time, community reports from August 2026 describe GitHub disappearing from the iOS or Android Connectors list while remaining available through the Claude web settings.
-
-That suggests a mismatch between the documented capability and the current mobile UI exposure.
+That distinction matters: “usable on mobile” does not necessarily mean “reliably installable from the mobile UI.” If GitHub is missing from the app's connector list, the safest interpretation is that the mobile setup surface is still evolving rather than that GitHub itself is unsupported.
 
 :::warning
-If GitHub does not appear in the mobile app's Connectors list, that does not necessarily mean Claude Mobile lacks GitHub support. Official documentation still lists it as supported. UI rollout, account state, or product-surface differences may be involved.
+If GitHub does not appear in the mobile app's Connectors list, that does not mean Claude Mobile lacks GitHub support. The official GitHub MCP connector lists Claude Mobile support, and remote connectors are designed to work across Claude surfaces. The initial connection is simply more reliable from the web or desktop while mobile installation remains in beta.
 :::
 
 ## The most reliable setup right now
 
 ### For GitHub MCP
 
-1. Open `claude.ai` in a desktop or mobile browser.
-2. Open Settings → Connectors.
-3. Find GitHub / GitHub MCP.
-4. Authenticate through GitHub OAuth.
+1. Open `claude.ai` on a PC browser.
+2. Open Connectors → Manage connectors, or Settings → Customize → Connectors.
+3. Find GitHub / GitHub MCP and select Connect.
+4. Approve access on GitHub's authorization screen.
 5. Reopen the Claude mobile app.
 6. Ask Claude to list issues, inspect a pull request, search a repository, and so on.
 
-Because remote connectors are account-level integrations, the key is to establish the connection on the web even if the mobile app does not expose the setup UI.
+Because remote connectors are shared across Claude surfaces once connected, the practical approach is to perform the initial setup on web or desktop and then use the same GitHub connection from mobile.
 
 ### For actual code changes
 
@@ -103,7 +101,9 @@ For the general request “control GitHub from the Claude app,” GitHub MCP or 
 
 Claude Mobile can work with GitHub, and the official GitHub MCP connector is listed as Read & Write capable.
 
-The current complication is that GitHub may not appear in the mobile app's connector picker. When that happens, connecting it first through the Claude web app is the most sensible workaround. It is also important to distinguish the older read-only-style repository import, the GitHub MCP tool layer, and the full Claude Code development workflow.
+The key detail is that GitHub is a remote connector that becomes available across web, mobile, desktop, Cowork, and Claude Code once connected, while installing connectors from mobile is still in beta. If GitHub is missing on mobile, establish the connection first from the web or desktop.
+
+It is also important to distinguish the older repository import feature, the GitHub MCP tool layer, and the full Claude Code development workflow.
 
 ## References
 
