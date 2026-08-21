@@ -156,4 +156,4 @@ Workは、単純な「劣化版Codex」でも「Codexにクレジット制を付
 - [ChatGPT WorkとCodexの料金・利用枠](https://learn.chatgpt.com/docs/pricing)
 - [生産性・共同作業でのWorkとCodexの使い分け](https://learn.chatgpt.com/use-cases/collections/productivity-and-collaboration)
 
-<!-- automated-publish-trigger -->
+<!-- automated-publish-trigger-v2 -->
