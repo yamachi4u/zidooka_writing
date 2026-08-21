@@ -19,7 +19,7 @@ ClaudeのスマホアプリからGitHubを触りたい。しかし、Android/iOS
 :::conclusion
 GitHubのIssue・PR・コード検索などをClaudeから操作したいなら、現在の本命は公式の「GitHub MCP」コネクタ。AnthropicのConnectors DirectoryではClaude Mobile対応、Read & Write対応と明記されている。
 
-ただし、モバイルアプリ側のConnectors一覧にGitHubが表示されないケースがある。その場合はWeb版のClaudeでGitHub MCPを先に接続し、その後モバイルアプリから使うのが現実的な回避策になる。
+GitHubは「リモートコネクタ」に分類され、本来はWeb・モバイル・デスクトップ・Cowork・Claude Codeから共通して利用できる。一方、Anthropic公式ヘルプは「モバイルへのコネクタのインストールは現在ベータ版」で、Claude DesktopとWebを主要な追加ルートとして案内している。したがって、スマホのConnectors一覧にGitHubが見えない場合は、PCまたはWeb版で先に接続するのが最も確実だ。
 :::
 
 ## ClaudeにはGitHub連携が3種類ある
@@ -62,28 +62,28 @@ GitHub MCPが「GitHub API上の操作」に強いのに対し、Claude Codeは�
 
 ここが今回の引っかかりどころ。
 
-Anthropic公式ドキュメント上では、remote connectorはClaude Mobileでも利用可能で、GitHubもremote connectorの例として挙げられている。さらにGitHub MCPの個別ページにもClaude Mobile対応と明記されている。
+GitHubのようなクラウドサービス向けのコネクタは「リモートコネクタ」で、Anthropic公式ヘルプではWeb、モバイル、Cowork、Desktop、Claude Codeの各環境で使えるとされている。一度接続すれば、追加のセットアップなしで各環境から利用できる。
 
-一方、2026年8月のコミュニティ報告では、iOS/AndroidのConnectors一覧にGitHubが表示されず、Web版から設定すると使える、という報告が出ている。
+ただし同じ公式ヘルプには、モバイルアプリからのコネクタのインストールは現在ベータ版であり、Claude DesktopとWebが主要な追加ルートであるとも明記されている。
 
-公式仕様とモバイルUIの表示が完全には一致していない状態に見える。
+つまり「モバイルで利用できる」と「モバイルから安定して新規追加できる」は別の話だ。スマホでGitHubが一覧に出ない場合、仕様上の非対応というより、モバイル側の追加UIがまだ不安定・発展途上である可能性が高い。
 
 :::warning
-モバイルアプリのConnectors一覧にGitHubがないからといって、「Claude MobileはGitHub非対応」とは言えない。公式には対応対象に入っている。UIの露出、アカウント状態、段階的ロールアウトなどの影響を疑うべき状況だ。
+モバイルアプリのConnectors一覧にGitHubがないからといって、「Claude MobileはGitHub非対応」とは言えない。公式GitHub MCPはClaude Mobile対応で、リモートコネクタ自体も全Claude環境で共通利用できる。一方、モバイルからの新規インストールはベータ版なので、最初の接続はWebまたはDesktopで行うのが安全だ。
 :::
 
 ## 現時点で一番確実な接続手順
 
 ### GitHub MCPを使いたい場合
 
-1. スマホのブラウザまたはPCで `claude.ai` を開く
-2. Settings → Connectors を開く
-3. GitHub / GitHub MCPを探す
-4. GitHub OAuthで認証する
+1. PCのブラウザで `claude.ai` を開く
+2. 左下の「+」または「/」から Connectors → Manage connectors を開く、または Settings → Customize → Connectors を開く
+3. GitHub / GitHub MCPを探して Connect を押す
+4. GitHub側の認証画面でアクセスを許可する
 5. 接続後、Claudeモバイルアプリを開く
 6. 「このリポジトリのIssueを一覧して」「PRをレビューして」などと指示する
 
-Remote connectorはアカウント単位で使う仕組みなので、Web側で接続したものをモバイルでも利用する、というのがポイントになる。
+リモートコネクタは一度接続すれば各Claude環境から使えるので、初回接続だけPC/Webで行えば、その後はスマホ側でも同じGitHub連携を利用できる。
 
 ### コードそのものを編集したい場合
 
@@ -105,7 +105,9 @@ GitHubアカウントが接続済みなら、repoとbranchを指定してClaude 
 
 Claude MobileからGitHubを使う手段は存在する。しかも公式GitHub MCPはRead & Write対応になっている。
 
-ただしモバイルアプリ上でGitHubコネクタが一覧に出ないケースがあり、その場合はWeb版Claudeで先にGitHubを接続する方法が有力。単にリポジトリをClaudeへ読み込む「Add from GitHub」と、GitHub APIを操作する「GitHub MCP」、実際の開発作業を行う「Claude Code」は別物なので、そこを分けて理解する必要がある。
+ポイントは、GitHubが「リモートコネクタ」なので一度接続すればWeb・Mobile・Desktop・Cowork・Claude Codeから共通利用できる一方、モバイルからの新規コネクタ追加は現在ベータ版であること。スマホでGitHubが見つからない場合は、PCまたはWeb版Claudeで最初の接続を済ませるのが確実だ。
+
+単にリポジトリをClaudeへ読み込む「Add from GitHub」と、GitHub APIを操作する「GitHub MCP」、実際の開発作業を行う「Claude Code」は別物なので、そこを分けて理解する必要がある。
 
 ## 参考
 
