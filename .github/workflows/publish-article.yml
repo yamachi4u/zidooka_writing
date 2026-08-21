@@ -6,6 +6,12 @@ permissions:
   issues: write
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'drafts/**'
+      - 'images/**'
   workflow_dispatch:
     inputs:
       draft:
@@ -147,6 +153,126 @@ jobs:
               issue_number: pr,
               body: `## 🚀 Merge processed\n\nPR #${pr} merged. Drafts in \`drafts/**-jp.md\` / \`**-ja.md\` were processed via post-pair. Drafts with \`publish_at\` are scheduled; other drafts are published immediately. See the workflow run for links.`
             });
+
+  publish-on-push:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      WP_API_URL: ${{ secrets.WP_API_URL }}
+      WP_MEDIA_API_URL: ${{ secrets.WP_MEDIA_API_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      WP_TIMEZONE: ${{ secrets.WP_TIMEZONE || 'Asia/Tokyo' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - name: Get changed bilingual drafts
+        id: changed
+        run: |
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^drafts/.*-(jp|ja)\.md
+    runs-on: ubuntu-latest
+    env:
+      WP_API_URL: ${{ secrets.WP_API_URL }}
+      WP_MEDIA_API_URL: ${{ secrets.WP_MEDIA_API_URL }}
+      WP_USER: ${{ secrets.WP_USER }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      WP_TIMEZONE: ${{ secrets.WP_TIMEZONE || 'Asia/Tokyo' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci --ignore-scripts
+      - name: Check draft exists
+        id: check
+        env:
+          DRAFT_PATH: ${{ github.event.inputs.draft }}
+        run: |
+          case "$DRAFT_PATH" in
+            drafts/*-jp.md|drafts/*-ja.md|drafts/*-en.md) ;;
+            *)
+              echo "::error::Draft must be a bilingual Markdown file under drafts/."
+              exit 1
+              ;;
+          esac
+          if [ ! -f "$DRAFT_PATH" ]; then
+            echo "::error::Draft not found: $DRAFT_PATH"
+            exit 1
+          fi
+      - name: Publish or schedule bilingual pair
+        id: publish
+        env:
+          DRAFT_PATH: ${{ github.event.inputs.draft }}
+          PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
+          PUBLISH_AT: ${{ github.event.inputs.publish_at }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_SITE_URL: 'https://www.zidooka.com'
+        run: |
+          case "$PUBLISH_MODE" in
+            publish_now)
+              node src/index.js post-pair "$DRAFT_PATH" --now
+              ;;
+            schedule_at)
+              if [ -z "$PUBLISH_AT" ]; then
+                echo "::error::publish_at is required when publish_mode=schedule_at."
+                exit 1
+              fi
+              node src/index.js schedule-pair "$DRAFT_PATH" "$PUBLISH_AT"
+              ;;
+            next_available)
+              node src/index.js schedule-pair "$DRAFT_PATH"
+              ;;
+            *)
+              echo "::error::Unknown publish_mode: $PUBLISH_MODE"
+              exit 1
+              ;;
+          esac
+      - name: Ping IndexNow
+        if: success() && github.event.inputs.indexnow == 'true' && github.event.inputs.publish_mode == 'publish_now'
+        run: |
+          echo "Publishing done. Manual IndexNow ping available in scripts/ping-indexnow.mjs."
+      - name: Comment on PR
+        if: success() && github.event.inputs.pr_number != ''
+        uses: actions/github-script@v7
+        env:
+          DRAFT_PATH: ${{ github.event.inputs.draft }}
+          PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
+          PUBLISH_AT: ${{ github.event.inputs.publish_at }}
+        with:
+          script: |
+            const pr = '${{ github.event.inputs.pr_number }}';
+            const mode = process.env.PUBLISH_MODE;
+            const detail = mode === 'publish_now'
+              ? 'published immediately'
+              : mode === 'schedule_at'
+                ? `scheduled for ${process.env.PUBLISH_AT} (${process.env.WP_TIMEZONE})`
+                : `scheduled for the next available 09:00 slot (${process.env.WP_TIMEZONE})`;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt(pr),
+              body: `## 🚀 WordPress updated\n\nDraft: \`${process.env.DRAFT_PATH}\`\n\nBilingual pair ${detail}. See the workflow run for links.`
+            });
+ > changed-drafts.txt || true
+          echo "Changed drafts:"
+          cat changed-drafts.txt || true
+      - name: Publish changed bilingual pairs
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_SITE_URL: 'https://www.zidooka.com'
+        run: |
+          while IFS= read -r d; do
+            [ -n "$d" ] || continue
+            echo "== publishing $d =="
+            node src/index.js post-pair "$d"
+          done < changed-drafts.txt
 
   publish-manual:
     if: github.event_name == 'workflow_dispatch'
