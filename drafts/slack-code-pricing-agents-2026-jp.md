@@ -11,6 +11,7 @@ tags:
   - Devin
 status: publish
 slug: slack-code-pricing-agents-api-2026
+# republish-trigger: 2026-08-21
 ---
 
 Slackが2026年8月20日に発表した「Slack Code」がかなり面白い。Slackの中にプロジェクト単位のコードチャンネルを作り、Claude CodeやDevinなどのコーディングエージェントを呼び出して、会話・コード差分・プレビュー・承認までチームで追える仕組みだ。
