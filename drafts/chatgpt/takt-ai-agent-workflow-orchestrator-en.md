@@ -25,6 +25,8 @@ I came across [nrslib/takt](https://github.com/nrslib/takt) on GitHub. Its name 
 TAKT does not merely prompt an AI to “remember to review the code.” It lets you define a workflow in YAML in which the task cannot complete until it passes the required review path. The AI writes code; TAKT decides which step runs next.
 :::
 
+![TAKT GitHub repository page](../../images-agent-browser/takt-github-repository-20260822.jpg)
+
 ## An execution engine for AI development processes
 
 A typical AI coding session asks one long-running agent to clarify requirements, implement a change, test it, review its own work, and fix any problems. As the session grows, early constraints can be forgotten, implementation and review responsibilities can blur, and a review step can disappear entirely.
