@@ -10,9 +10,10 @@ Scope: Applies to the entire repository.
 ## Must-Read
 - `PIPELINE_MANUAL.md` (overall workflow/pipeline manual)
 - `docs/snippets/emphasis.md` (standard emphasis patterns to use in outputs)
+- When operating as ChatGPT Work or editing `drafts/chatgpt/`, also read `GPTWORK.md`.
 
 ## Workflow
-- Read both Must-Read files before answering or editing.
+- Read the applicable Must-Read files before answering or editing.
 - Implement changes, then restate which sections you followed.
 - Self-check: confirm output conforms to emphasis snippet patterns.
 
@@ -77,6 +78,21 @@ Examples:
 ## Conflict Resolution
 - If guidance conflicts, follow the more specific rule.
 - Ask a clarifying question if uncertainty remains after reading the Must-Read files.
+
+---
+
+## Article Visuals And Rights
+
+- When a visual materially improves an article and its use is reasonably permitted by the source terms, license, or a limited quotation/review context, proactively capture and include a useful first-party visual without waiting for a separate request.
+- Treat this as conservative editorial guidance, not legal advice. If the right to reuse or display an image is unclear, omit it or create an original diagram/thumbnail instead of copying it.
+- Prefer public, first-party sources: official documentation or product pages, public GitHub/GitLab repository pages, and pages or tools operated by ZIDOOKA. Use signed-out public views when possible.
+- For an open-source explainer or review, the public repository landing page is the default screenshot candidate. Place a link to the original source near the image or in the surrounding section.
+- Capture only the portion needed to identify, explain, compare, or review the subject. Do not reproduce a whole page when a viewport or crop is sufficient.
+- Do not include private repositories, signed-in dashboards, emails, credentials, tokens, account IDs, notifications, analytics data, or unrelated personal information. Crop or redact incidental information before publication.
+- Do not reuse third-party promotional artwork, stock photography, illustrations, charts, paywalled pages, or substantial text excerpts when the license or quotation basis is unclear. Preserve required attribution and license notices when a licensed asset is used.
+- Avoid decorative-only screenshots. A visual should help the reader verify the source, understand the interface, or follow the explanation.
+- Save browser captures under `images-agent-browser/` with a descriptive, stable filename. Use the same asset for a Japanese/English pair when appropriate, with localized alt text in each draft.
+- Before merging, verify the Markdown path and image dimensions. After publication, verify that the WordPress-hosted image URL loads and reports non-zero natural dimensions.
 
 ---
 
