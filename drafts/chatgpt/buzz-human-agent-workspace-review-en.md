@@ -68,6 +68,42 @@ There are also practical questions around key management, backups, self-hosting,
 The project’s vision and its production readiness are different questions. Before moving core team communication to a self-hosted relay, test backup, key recovery, access control, audit-log retention, and search behavior.
 :::
 
+## A practical way to run it
+
+Buzz is best evaluated in stages rather than adopted as a production team platform immediately.
+
+:::step
+Start by cloning Buzz on a PC, installing Docker and Hermit, and running just setup, just build, and just dev. The relay normally starts at ws://localhost:3000.
+:::
+
+At first, use it alone. Test channel creation, threads, search, buzz-cli, agent integrations, and Git events. Then put one small real development task into a Buzz channel.
+
+The next step is to make the local relay reachable from outside. This does not mean hosting Buzz on Cloudflare Pages. Instead, the relay continues to run on the PC and is exposed through Cloudflare Tunnel.
+
+```text
+Buzz desktop / phone
+          ↓
+Cloudflare Tunnel
+          ↓
+Buzz relay on the home PC
+```
+
+Cloudflare Tunnel can connect an external hostname to a service running on the home PC without directly opening a router port. It is useful for a free trial, but the relay stops when the PC sleeps or shuts down.
+
+:::warning
+Cloudflare Pages alone cannot run Buzz’s relay. Buzz uses a Rust relay together with Postgres, Redis, and S3/MinIO-style storage, so it is a different kind of workload from a static website.
+:::
+
+For regular use, move the relay to Railway or a VPS. Cloudflare can then remain in front as the DNS, HTTPS, Tunnel, and access-control layer.
+
+:::conclusion
+The most practical path is: run it on a PC, expose it through Cloudflare Tunnel, and move it to Railway or a VPS only if it proves useful. The first question is whether keeping an AI agent in the same channel actually makes project history easier to understand.
+:::
+
+- [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)
+- [Buzz quick start](https://github.com/block/buzz#quick-start)
+- [Buzz hosted relay](https://github.com/block/buzz#i-want-my-own-hosted-relay)
+
 ## Is it a Slack replacement?
 
 Not exactly. Buzz is trying to connect the parts that currently surround Slack: Git hosting, CI, agent execution, workflow automation, project memory, and audit history.
