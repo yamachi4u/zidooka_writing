@@ -1,7 +1,7 @@
 ---
 title: "DeepSeek API Makes Weekends Off-Peak All Day: JST Schedule from August 23, 2026"
 status: publish
-slug: deepseek-api-weekend-off-peak-pricing-jst-2026
+slug: deepseek-api-weekend-off-peak-pricing-jst-2026-en
 categories:
   - AI
 tags:
