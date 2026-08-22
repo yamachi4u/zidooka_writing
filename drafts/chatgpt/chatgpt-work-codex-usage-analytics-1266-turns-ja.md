@@ -140,3 +140,5 @@ WorkとCodexの利用枠は別々ではなく、共有されています。そ�
 
 - [OpenAI公式：ChatGPT WorkとCodexの料金・利用上限](https://learn.chatgpt.com/docs/pricing)
 - [OpenAI公式：Codexの速度設定とクレジット消費](https://learn.chatgpt.com/docs/agent-configuration/speed)
+
+<!-- automated-publish-trigger-v2 -->
