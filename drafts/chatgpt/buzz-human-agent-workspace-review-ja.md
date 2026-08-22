@@ -74,6 +74,42 @@ README上では、リレー、チャンネル、スレッド、DM、キャンバ
 READMEに書かれたビジョンと、現時点で安定して使える機能は分けて見た方がよいです。組織の中核コミュニケーションを移す前に、バックアップ、鍵の紛失時対応、アクセス制御、検索の完全性、監査ログの保全を確認する必要があります。
 :::
 
+## どう動かすのがよさそうか
+
+Buzzは、いきなり本番のチーム基盤にするより、段階的に試すのがよさそうです。
+
+:::step
+まずPCにBuzzをクローンし、DockerとHermitを用意して、just setup、just build、just devを実行します。リレーは基本的に ws://localhost:3000 で起動します。
+:::
+
+最初は自分一人で、チャンネル作成、スレッド、検索、buzz-cli、エージェント連携、Gitイベントを確認します。そのうえで、実際の小さな開発作業を一つだけ載せてみるのがよさそうです。
+
+次の段階では、PC上のリレーを外部から使えるようにします。Cloudflare PagesにBuzz本体を置くのではなく、PC上で動いているリレーをCloudflare Tunnel経由で公開する形です。
+
+```text
+Buzz desktop / スマホ
+          ↓
+Cloudflare Tunnel
+          ↓
+自宅PCのBuzz relay
+```
+
+Cloudflare Tunnelなら、ルーターのポートを直接開けずに、自宅PCで動くサービスを外部へ接続できます。ただし、PCをスリープ・終了するとBuzzも止まります。無料で試すには便利ですが、常用サーバーとしては不安定です。
+
+:::warning
+Cloudflare PagesだけではBuzzのリレーは動きません。BuzzはRustのリレーに加えて、Postgres、Redis、S3／MinIOなどを使う構成なので、静的サイトのホスティングとは別物です。
+:::
+
+常用する段階になったら、Railwayのワンクリックデプロイ、またはVPSへリレーを移すのが現実的です。Cloudflareはその前段のDNS、HTTPS、Tunnel、アクセス制御に使う、という役割分担になります。
+
+:::conclusion
+最初は「PC内で試す → Cloudflare Tunnelで外から触る → 使い続けるならRailway／VPSへ移す」が一番無理のない進め方です。まず確認すべきなのは、AIエージェントをチャンネルのメンバーとして置いたときに、本当に作業履歴が見やすくなるかどうかです。
+:::
+
+- [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)
+- [Buzzのクイックスタート](https://github.com/block/buzz#quick-start)
+- [BuzzのRailwayデプロイ](https://github.com/block/buzz#i-want-my-own-hosted-relay)
+
 ## これはSlackの代替なのか
 
 単純なSlackクローンではありません。Slackのような会話の場に、Gitホスティング、CI、エージェント実行、ワークフロー、プロジェクト記憶を同じイベントモデルで接続しようとしています。
